@@ -118,18 +118,23 @@
 							<button type="submit"
 								class="btn btn-icon btn-primary glyphicons circle_ok"
 								onClick="reservation()">
-								<i></i>保       存
+								<i></i>提     交
 							</button>
 							</div>
 							<div class="span5">
-							
 							<button type="button"
 							  onclick="window.location.href='changePwdInfo.jsp'"
 								class="btn btn-icon btn-primary glyphicons circle_ok">
 								<i></i>暂     存
 							</button>
 						</div>
-
+							<div class="span5">
+							<button type="button"
+							  onclick="window.location.href='changePwdInfo.jsp'"
+								class="btn btn-icon btn-primary glyphicons circle_ok">
+								<i></i>取     消
+							</button>
+						</div>
 					</div>
 
 

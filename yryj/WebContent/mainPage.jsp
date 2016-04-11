@@ -98,7 +98,7 @@ pageEncoding="utf-8"%>
 				<div class="span2">
 					<button type="button"
 						class="btn btn-icon btn-primary glyphicons circle_ok"
-						onclick="window.location.href='typePage.jsp'">
+						onclick="window.location.href='mainPage.jsp'">
 						<i></i>所有
 					</button>
 				</div>
@@ -151,6 +151,7 @@ pageEncoding="utf-8"%>
 						<tbody>
 						<tr>
 						<td class="center"><a href="article.jsp">作品1</a></td>
+						<td class="center">小说</td>
 						<td class="center">排名1</td>
 						</tr>
 						</tbody>
