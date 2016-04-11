@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -9,8 +9,9 @@ pageEncoding="utf-8"%>
 <html>
 <!--<![endif]-->
 <head>
-<title>主页</title>
 
+
+<title>个人信息</title>
 <!-- Meta -->
 <meta charset="UTF-8" />
 <meta name="viewport"
@@ -79,111 +80,140 @@ pageEncoding="utf-8"%>
 							class="icon-bar"></span>
 					</button>
 					<ul id="menu" class="hidden-phone">
-						<li class="active"><a href="myInfo.jsp" class="menuToggle">我的信息</a></li>
+						<li class="active"><a href="mainPage.jsp" class="menuToggle">主界面</a></li>
+						<li class="active"><a href="changeSexInfo.jsp"
+							class="menuToggle">修改信息</a></li>
+						<li class="active"><a href="changePwdInfo.jsp"
+							class="menuToggle">修改密码</a></li>
 					</ul>
 				</div>
 				<div class="header-right">
-						<ul id="menu"  class="hidden-phone">
-							<li class="active"><a href="login.jsp" class="menuToggle">注销</a></li>
-						</ul>
+					<ul id="menu" class="hidden-phone">
+						<li class="active"><a href="login.jsp" class="menuToggle">注销</a></li>
+					</ul>
+				</div>
 			</div>
-			</div>
-			
+
 		</div>
 	</div>
 
+
 	<!-- Start Content -->
 	<div class="container-fluid fixed">
+		<div class="container-fluid fixed">
+			<div id="content">
 
-
-		<div id="content">
-
-			<div class="controls">
-				<div class="span2">
-					<button type="button"
-						class="btn btn-icon btn-primary glyphicons circle_ok"
-						onclick="window.location.href='mainPage.jsp'">
-						<i></i>所有
-					</button>
-				</div>
-				<div class="span2">
-					<button type="button"
-						class="btn btn-icon btn-primary glyphicons circle_ok"
-						onclick="window.location.href='typePage.jsp'">
-						<i></i>诗歌
-					</button>
-				</div>
-				<div class="span2">
-					<button type="button"
-						class="btn btn-icon btn-primary glyphicons circle_ok"
-						onclick="window.location.href='typePage.jsp'">
-						<i></i>散文
-					</button>
-				</div>
-				<div class="span2">
-					<button type="button"
-						class="btn btn-icon btn-primary glyphicons circle_ok"
-						onclick="window.location.href='typePage.jsp'">
-						<i></i>小说
-					</button>
-				</div>
-				<div class="span2">
-					<button type="button"
-						class="btn btn-icon btn-primary glyphicons circle_ok"
-						onclick="window.location.href='typePage.jsp'">
-						<i></i>戏剧
-					</button>
-				</div>
-			</div>
-			<h3 class="glyphicons show_thumbnails">
-				<i></i>所有文章
-			</h3>
-			<div class="widget widget-4 widget-body-white">
-				<div class="widget-head">
-					<h4 class="heading">按标题查找</h4>
-				</div>
-				<div class="widget-body" style="padding: 10px 0 0;">
-					<table
-						class="dynamicTable table table-striped table-bordered table-primary table-condensed">
-						<thead>
-							<tr>
-								<th class="center">作品列表</th>
-								<th class="center">作品类型</th>
-								<th class="center">作品排名</th>
-							</tr>
-						</thead>
-						<tbody>
-						<tr>
-						<td class="center"><a href="readArticle.jsp">作品1</a></td>
-						<td class="center">小说</td>
-						<td class="center">排名1</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<br />
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-							</button>
-							<h4 class="modal-title" id="myModalLabel">标题！！</h4>
-						</div>
-						<div class="modal-body">...</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save
-								changes</button>
+				<form name="newcase" id="newcase_id" method="post" action="">
+					<h3 class="glyphicons show_thumbnails_with_lines">
+						<i></i>个人信息
+					</h3>
+					<div class="separator bottom"></div>
+					<div class="row-fluid">
+						<div class="control-group">
+							<label for="name" class="control-label">用户名</label>
+							<div class="controls">
+								<input type="text" name="name" id="name" value=""
+									readOnly="readonly" class="span12">
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
+					<div class="row-fluid">
+						<div class="control-group">
+							<label class="control-label">性别</label>
+							<div class="controls">
+								<input type="text" name="sex" id="name" value=""
+									readOnly="readonly" class="span12">
+							</div>
+						</div>
+					</div>
 
+					<div class="row-fluid">
+						<div class="control-group">
+							<label for="sex" class="control-label">性别</label>
+							<div class="controls">
+								<input type="text" name="sex" id="name" value=""
+									readOnly="readonly" class="span12">
+							</div>
+						</div>
+					</div>
+
+
+					<div class="row-fluid">
+						<div class="control-group">
+							<label class="control-label">积分</label>
+							<div class="controls">
+								<input type="text" name="sex" id="name" value=""
+									readOnly="readonly" class="span12">
+							</div>
+						</div>
+					</div>
+
+					<div class="row-fluid">
+						<div class="control-group">
+							<label class="control-label">我的收藏</label>
+							<div class="widget widget-4 widget-body-white">
+								<div class="controls">
+									<select name="type" id="type" class="span12">
+										<option selected="selected">所有</option>
+										<option>作者</option>
+										<option>故事</option>
+										<option>章节</option>
+									</select>
+								</div>
+								<div class="widget-body" style="padding: 10px 0 0;">
+									<table
+										class="dynamicTable table table-striped table-bordered table-primary table-condensed">
+										<thead>
+											<tr>
+												<th class="center">收藏列表</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="center"><a href="readArticle.jsp">作品1</a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<br />
+						</div>
+					</div>
+
+					<hr />
+					
+					<div class="row-fluid">
+						<div class="control-group">
+							<label class="control-label">草稿箱</label>
+							<div class="widget widget-4 widget-body-white">
+								<div class="widget-body" style="padding: 10px 0 0;">
+
+									<table
+										class="dynamicTable table table-striped table-bordered table-primary table-condensed">
+										<thead>
+											<tr>
+												<th class="center">文章</th>
+												<th class="center">文章内容</th>
+												<th class="center">上次编辑时间</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="center"><a href="readArticle.jsp">作品1</a></td>
+												<td class="center"><a href="writeArticle.jsp">小李去了日本……</a></td>
+												<td class="center">2016-04-08</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<br />
+						</div>
+					</div>
+
+
+				</form>
+			</div>
 		</div>
 
 	</div>
@@ -191,11 +221,6 @@ pageEncoding="utf-8"%>
 	<!-- JQueryUI v1.9.2 -->
 	<script
 		src="theme/scripts/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>
-	<SCRIPT LANGUAGE="JavaScript">
-	function rePe() {
-		document.getElementById('oImg').style.display = "none";
-	}
-	</SCRIPT>
 	<!-- JQueryUI Touch Punch -->
 	<!-- small hack that enables the use of touch events on sites using the jQuery UI user interface library -->
 	<script
@@ -250,6 +275,12 @@ pageEncoding="utf-8"%>
 
 	<!-- Custom Onload Script -->
 	<script src="theme/scripts/load.js"></script>
+
+	<script type="text/javascript">
+		function reservation() {
+
+		}
+	</script>
 
 </body>
 </html>

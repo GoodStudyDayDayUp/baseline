@@ -11,7 +11,7 @@
 <head>
 
 
-<title>个人信息</title>
+<title>一人一句</title>
 <!-- Meta -->
 <meta charset="UTF-8" />
 <meta name="viewport"
@@ -80,15 +80,21 @@
 							class="icon-bar"></span>
 					</button>
 					<ul id="menu" class="hidden-phone">
+						<li class="active"><a href="myInfo.jsp" class="menuToggle">我的信息</a></li>
 						<li class="active"><a href="mainPage.jsp" class="menuToggle">主界面</a></li>
-						<li class="active"><a href="mainPage.jsp" class="menuToggle">我的信息</a></li>
+					</ul>
+				</div>
+				<div class="header-right">
+					<ul id="menu" class="hidden-phone">
 						<li class="active"><a href="login.jsp" class="menuToggle">注销</a></li>
 					</ul>
-
 				</div>
 			</div>
+
 		</div>
 	</div>
+
+
 
 	<!-- Start Content -->
 	<div class="container-fluid fixed">
@@ -99,48 +105,74 @@
 					<h3 class="glyphicons show_thumbnails_with_lines">
 						<i></i>作品1
 					</h3>
-					<div class="separator bottom"></div>
-					<div class="row-fluid">
-						<div class="control-group">
-							<label  for="key" class="control-label">关键字：</label>
-							
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="control-group">
-							<label for="article" class="control-label">正文</label>
-							<textarea rows="20" cols="60" ></textarea>
-						</div>
-					</div>
-
 					<div class="controls">
-						<div class="span5">
+						<label class="heading">类型：</label>
+						<div class="span2">
+							<button type="button"
+								class="btn btn-icon btn-primary glyphicons circle_ok"
+								onclick="window.location.href='mainPage.jsp'">
+								<i></i>小说
+							</button>
+						</div>
+						<div class="span2">
+							<button type="button"
+								class="btn btn-icon btn-primary glyphicons circle_ok"
+								onclick="window.location.href='typePage.jsp'">
+								<i></i>言情
+							</button>
+						</div>
+						<br /> <br /> <label class="heading">关键字：</label>
+						<div class="span2" style="margin-top: 1em">
+							<label class="btn btn-icon btn-primary glyphicons circle_ok">
+								<i></i>现代
+							</label>
+						</div>
+						<div class="span2" style="margin-top: 1em">
+							<label class="btn btn-icon btn-primary glyphicons circle_ok">
+								<i></i>幽默
+							</label>
+						</div>
+						<div class="span2" style="margin-top: 1em">
+							<label class="btn btn-icon btn-primary glyphicons circle_ok">
+								<i></i>校园
+							</label>
+						</div>
+					</div>
+					<br /> <br />
+					<hr />
+
+					<div class="control-group">
+					
+					<textarea rows="20" cols="60"></textarea>
+					
+						<div class="controls">
+						<div class="span3">
 							<button type="submit"
 								class="btn btn-icon btn-primary glyphicons circle_ok"
 								onClick="reservation()">
 								<i></i>提     交
 							</button>
 							</div>
-							<div class="span5">
+							<div class="span3">
+							
 							<button type="button"
 							  onclick="window.location.href='changePwdInfo.jsp'"
 								class="btn btn-icon btn-primary glyphicons circle_ok">
 								<i></i>暂     存
 							</button>
-						</div>
-							<div class="span5">
+							</div>
+							<div class="span3">
 							<button type="button"
-							  onclick="window.location.href='changePwdInfo.jsp'"
+							   onclick="window.location.href='changePwdInfo.jsp'"
 								class="btn btn-icon btn-primary glyphicons circle_ok">
-								<i></i>取     消
+								<i></i>取    消
 							</button>
 						</div>
+						</div>
 					</div>
-
-
-				</form>
-			</div>
-		</div>
+					</form>
+					</div>
+					</div>
 
 	</div>
 
@@ -204,7 +236,7 @@
 
 	<script type="text/javascript">
 		function reservation() {
-			
+
 		}
 	</script>
 

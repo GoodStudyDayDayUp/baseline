@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -9,8 +9,9 @@ pageEncoding="utf-8"%>
 <html>
 <!--<![endif]-->
 <head>
-<title>主页</title>
 
+
+<title>一人一句</title>
 <!-- Meta -->
 <meta charset="UTF-8" />
 <meta name="viewport"
@@ -80,110 +81,126 @@ pageEncoding="utf-8"%>
 					</button>
 					<ul id="menu" class="hidden-phone">
 						<li class="active"><a href="myInfo.jsp" class="menuToggle">我的信息</a></li>
+						<li class="active"><a href="mainPage.jsp" class="menuToggle">主界面</a></li>
 					</ul>
 				</div>
 				<div class="header-right">
-						<ul id="menu"  class="hidden-phone">
-							<li class="active"><a href="login.jsp" class="menuToggle">注销</a></li>
-						</ul>
+					<ul id="menu" class="hidden-phone">
+						<li class="active"><a href="login.jsp" class="menuToggle">注销</a></li>
+					</ul>
+				</div>
 			</div>
-			</div>
-			
+
 		</div>
 	</div>
 
+
+
 	<!-- Start Content -->
 	<div class="container-fluid fixed">
+		<div class="container-fluid fixed">
+			<div id="content">
 
-
-		<div id="content">
-
-			<div class="controls">
-				<div class="span2">
-					<button type="button"
-						class="btn btn-icon btn-primary glyphicons circle_ok"
-						onclick="window.location.href='mainPage.jsp'">
-						<i></i>所有
-					</button>
-				</div>
-				<div class="span2">
-					<button type="button"
-						class="btn btn-icon btn-primary glyphicons circle_ok"
-						onclick="window.location.href='typePage.jsp'">
-						<i></i>诗歌
-					</button>
-				</div>
-				<div class="span2">
-					<button type="button"
-						class="btn btn-icon btn-primary glyphicons circle_ok"
-						onclick="window.location.href='typePage.jsp'">
-						<i></i>散文
-					</button>
-				</div>
-				<div class="span2">
-					<button type="button"
-						class="btn btn-icon btn-primary glyphicons circle_ok"
-						onclick="window.location.href='typePage.jsp'">
-						<i></i>小说
-					</button>
-				</div>
-				<div class="span2">
-					<button type="button"
-						class="btn btn-icon btn-primary glyphicons circle_ok"
-						onclick="window.location.href='typePage.jsp'">
-						<i></i>戏剧
-					</button>
-				</div>
-			</div>
-			<h3 class="glyphicons show_thumbnails">
-				<i></i>所有文章
-			</h3>
-			<div class="widget widget-4 widget-body-white">
-				<div class="widget-head">
-					<h4 class="heading">按标题查找</h4>
-				</div>
-				<div class="widget-body" style="padding: 10px 0 0;">
-					<table
-						class="dynamicTable table table-striped table-bordered table-primary table-condensed">
-						<thead>
-							<tr>
-								<th class="center">作品列表</th>
-								<th class="center">作品类型</th>
-								<th class="center">作品排名</th>
-							</tr>
-						</thead>
-						<tbody>
-						<tr>
-						<td class="center"><a href="readArticle.jsp">作品1</a></td>
-						<td class="center">小说</td>
-						<td class="center">排名1</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<br />
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				<form name="newcase" id="newcase_id" method="post" action="">
+					<h3 class="glyphicons show_thumbnails_with_lines">
+						<i></i>作品1
+					</h3>
+					<div class="controls">
+						<label class="heading">类型：</label>
+						<div class="span2">
+							<button type="button"
+								class="btn btn-icon btn-primary glyphicons circle_ok"
+								onclick="window.location.href='mainPage.jsp'">
+								<i></i>小说
 							</button>
-							<h4 class="modal-title" id="myModalLabel">标题！！</h4>
 						</div>
-						<div class="modal-body">...</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save
-								changes</button>
+						<div class="span2">
+							<button type="button"
+								class="btn btn-icon btn-primary glyphicons circle_ok"
+								onclick="window.location.href='typePage.jsp'">
+								<i></i>言情
+							</button>
+						</div>
+						<br /> <br /> <label class="heading">关键字：</label>
+						<div class="span2" style="margin-top: 1em">
+							<label class="btn btn-icon btn-primary glyphicons circle_ok">
+								<i></i>现代
+							</label>
+						</div>
+						<div class="span2" style="margin-top: 1em">
+							<label class="btn btn-icon btn-primary glyphicons circle_ok">
+								<i></i>幽默
+							</label>
+						</div>
+						<div class="span2" style="margin-top: 1em">
+							<label class="btn btn-icon btn-primary glyphicons circle_ok">
+								<i></i>校园
+							</label>
 						</div>
 					</div>
-				</div>
-			</div>
+					<br /> <br />
+					<hr/>
+					<%
+						for (int i = 0; i < 3; i++) {
+					%>
 
+					<div class="row-fluid">
+						<div class="headline">
+							<div class="row-fluid">
+								<div class="span4" style="float: right">
+									<div class="dataTables_paginate paging_bootstrap pagination">
+										<ul>
+											<li class="prev disabled"><a class="a1" 
+												href="#">← Previous</a></li>
+											<li class="active"><a href="writeArticle.jsp">接一句</a></li>
+											<li class="next disabled"><a href="#" class="a1" >Next → </a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<label>作者：</label>
+
+
+
+						<div class="control-group">
+							<h4>This award-winning book, substantially updated to
+								reflect the latest developments in the field, introduces the
+								concepts and best practices of software architecture-how a
+								software system is structured and how that system's elements are
+								meant to interact. Distinct from the details of implementation,
+								algorithm, and data representation, an architecture holds the
+								key to achieving system quality, is a reusable asset that can be
+								applied to subsequent systems, and is crucial to a software
+								organization's business strategy. Drawing on their own extensive
+								experience, the authors cover the essential technical topics for
+								designing, specifying, and validating a system. They also
+								emphasize the importance of the business context in which large
+								systems are designed. Their aim is to present software
+								architecture in a real-world setting, reflecting both the
+								opportunities and constraints that companies encounter. To that
+								end, case studies that describe successful architectures
+								illustrate key points of both technical and organizational
+								discussions.</h4>
+						</div>
+
+						<div class="row-fluid">
+							<label>日期：</label>
+							<div class="span2" style="float: right">
+								<img class="img-icon" id="shou" alt="" src="images/shou.png" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<img class="img-icon" id="zan" alt="" src="images/zan.png" />
+							</div>
+						</div>
+
+
+					</div>
+					<%
+						};
+					%>
+					<hr />
+				</form>
+
+			</div>
 		</div>
 
 	</div>
@@ -191,11 +208,6 @@ pageEncoding="utf-8"%>
 	<!-- JQueryUI v1.9.2 -->
 	<script
 		src="theme/scripts/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>
-	<SCRIPT LANGUAGE="JavaScript">
-	function rePe() {
-		document.getElementById('oImg').style.display = "none";
-	}
-	</SCRIPT>
 	<!-- JQueryUI Touch Punch -->
 	<!-- small hack that enables the use of touch events on sites using the jQuery UI user interface library -->
 	<script
@@ -250,6 +262,12 @@ pageEncoding="utf-8"%>
 
 	<!-- Custom Onload Script -->
 	<script src="theme/scripts/load.js"></script>
+
+	<script type="text/javascript">
+		function reservation() {
+
+		}
+	</script>
 
 </body>
 </html>

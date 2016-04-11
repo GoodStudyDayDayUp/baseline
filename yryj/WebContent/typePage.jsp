@@ -9,7 +9,7 @@ pageEncoding="utf-8"%>
 <html>
 <!--<![endif]-->
 <head>
-<title>主页</title>
+<title>一人一句</title>
 
 <!-- Meta -->
 <meta charset="UTF-8" />
@@ -67,8 +67,7 @@ pageEncoding="utf-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
-
-	<div class="navbar main">
+<div class="navbar main">
 
 		<div class="container">
 			<div class="row">
@@ -80,13 +79,18 @@ pageEncoding="utf-8"%>
 					</button>
 					<ul id="menu" class="hidden-phone">
 						<li class="active"><a href="myInfo.jsp" class="menuToggle">我的信息</a></li>
-						<li class="active"><a href="login.jsp" class="menuToggle">注销</a></li>
 					</ul>
-
 				</div>
+				<div class="header-right">
+						<ul id="menu"  class="hidden-phone">
+							<li class="active"><a href="login.jsp" class="menuToggle">注销</a></li>
+						</ul>
 			</div>
+			</div>
+			
 		</div>
 	</div>
+
 
 	<!-- Start Content -->
 	<div class="container-fluid fixed">
@@ -149,8 +153,7 @@ pageEncoding="utf-8"%>
 						</thead>
 						<tbody>
 						<tr>
-						<td class="center"><a
-									onclick=<%="article.jsp"%>>作品1</a></td>
+						<td class="center"><a  href="readArticle.jsp">作品1</a></td>
 						<td class="center">排名1</td>
 						</tr>
 						</tbody>

@@ -80,14 +80,19 @@
 							class="icon-bar"></span>
 					</button>
 					<ul id="menu" class="hidden-phone">
-						<li class="active"><a href="mainPage.jsp" class="menuToggle">主界面</a></li>
-						<li class="active"><a href="login.jsp" class="menuToggle">注销</a></li>
+						<li class="active"><a href="myInfo.jsp" class="menuToggle">主界面</a></li>
 					</ul>
-
 				</div>
+				<div class="header-right">
+						<ul id="menu"  class="hidden-phone">
+							<li class="active"><a href="login.jsp" class="menuToggle">注销</a></li>
+						</ul>
 			</div>
+			</div>
+			
 		</div>
 	</div>
+
 
 	<!-- Start Content -->
 	<div class="container-fluid fixed">

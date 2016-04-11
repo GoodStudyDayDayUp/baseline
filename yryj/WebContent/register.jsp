@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-<title>登录</title> 
+<title>注册</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
 <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
@@ -48,7 +48,7 @@
     
             
 			<div class="login_form">
-				<form action="Choose.jsp" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post">
+				<form action="mainPage.jsp" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post">
                 <div class="uinArea" id="uinArea">
                 <label class="input-tips" for="u">用户:</label>
                 <div class="inputOuter" id="uArea">                   
@@ -64,7 +64,7 @@
                  <div class="pwdArea">
                  <label class="input-tips" for="u">确认密码:</label>
                 <div class="inputOuter" id="pArea">                   
-                    <input type="password" id="password" name="password" class="inputstyle"/>
+                    <input type="password" id="password2" name="password2" class="inputstyle"/>
                 </div>
                 </div>
                 <div class="inputOuter2" id="bArea"> 
