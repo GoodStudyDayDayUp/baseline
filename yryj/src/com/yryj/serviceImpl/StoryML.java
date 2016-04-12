@@ -17,9 +17,9 @@ private StoryDao storyDao=null;
 	}
 
 	@Override
-	public void delete(Story story) {
+	public void delete(int id) {
 		// TODO Auto-generated method stub
-		storyDao.delete(story);
+		storyDao.delete(id);
 	}
 
 	@Override
@@ -29,9 +29,9 @@ private StoryDao storyDao=null;
 	}
 
 	@Override
-	public Story find(Story story) {
+	public Story find(int id) {
 		// TODO Auto-generated method stub
-		return storyDao.find(story);
+		return storyDao.find(id);
 	}
 
 }

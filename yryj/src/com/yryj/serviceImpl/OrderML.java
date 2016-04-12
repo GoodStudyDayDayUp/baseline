@@ -17,9 +17,9 @@ private OrderDao orderDao=null;
 	}
 
 	@Override
-	public void delete(Order order) {
+	public void delete(int id) {
 		// TODO Auto-generated method stub
-		orderDao.delete(order);
+		orderDao.delete(id);
 	}
 
 	@Override
@@ -29,9 +29,9 @@ private OrderDao orderDao=null;
 	}
 
 	@Override
-	public Order find(Order order) {
+	public Order find(int id) {
 		// TODO Auto-generated method stub
-		return orderDao.find(order);
+		return orderDao.find(id);
 	}
 
 }

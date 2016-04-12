@@ -1,5 +1,9 @@
 package com.yryj.daoImpl;
 
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 import com.yryj.dao.TypeDao;
@@ -39,6 +43,7 @@ public class TypeDL extends HibernateDaoSupport implements TypeDao{
 	@Override
 	public Type find(int id) {
 		// TODO Auto-generated method stub
+		@SuppressWarnings("rawtypes")
 		List list=getHibernateTemplate().find("from Type where id=?",id);
 		if(list.size()>0)
 			return (Type) list.get(0);

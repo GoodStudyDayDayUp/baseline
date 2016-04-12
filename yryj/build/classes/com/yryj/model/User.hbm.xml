@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-4-9 12:39:50 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.yryj.model.User" table="user" catalog="opos">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="15" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="15" not-null="true" />
+        </property>
+        <property name="sex" type="boolean">
+            <column name="sex" not-null="true" />
+        </property>
+        <property name="point" type="int">
+            <column name="point" not-null="true" />
+        </property>
+        <set name="utusForFanId" table="utu" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fanId" not-null="true" />
+            </key>
+            <one-to-many class="com.yryj.model.Utu" />
+        </set>
+        <set name="utusForUid" table="utu" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="uId" not-null="true" />
+            </key>
+            <one-to-many class="com.yryj.model.Utu" />
+        </set>
+        <set name="utses" table="uts" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="uId" not-null="true" />
+            </key>
+            <one-to-many class="com.yryj.model.Uts" />
+        </set>
+        <set name="orders" table="order" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="uId" not-null="true" />
+            </key>
+            <one-to-many class="com.yryj.model.Order" />
+        </set>
+        <set name="drafts" table="draft" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="uId" not-null="true" />
+            </key>
+            <one-to-many class="com.yryj.model.Draft" />
+        </set>
+        <set name="chapters" table="chapter" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="uId" />
+            </key>
+            <one-to-many class="com.yryj.model.Chapter" />
+        </set>
+        <set name="utcs" table="utc" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="uId" not-null="true" />
+            </key>
+            <one-to-many class="com.yryj.model.Utc" />
+        </set>
+    </class>
+</hibernate-mapping>
