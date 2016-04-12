@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-4-9 12:39:50 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.yryj.model.Chapter" table="chapter" catalog="opos">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="chapter" class="com.yryj.model.Chapter" fetch="select">
+            <column name="parentId" />
+        </many-to-one>
+        <many-to-one name="user" class="com.yryj.model.User" fetch="select">
+            <column name="uId" />
+        </many-to-one>
+        <property name="praise" type="int">
+            <column name="praise" not-null="true" />
+        </property>
+        <property name="content" type="string">
+            <column name="content" length="1000" not-null="true" />
+        </property>
+        <property name="isEnd" type="boolean">
+            <column name="isEnd" not-null="true" />
+        </property>
+        <set name="drafts" table="draft" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="parentId" not-null="true" />
+            </key>
+            <one-to-many class="com.yryj.model.Draft" />
+        </set>
+        <set name="utcs" table="utc" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="chapterId" not-null="true" />
+            </key>
+            <one-to-many class="com.yryj.model.Utc" />
+        </set>
+        <set name="orders" table="order" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="chapterId" not-null="true" />
+            </key>
+            <one-to-many class="com.yryj.model.Order" />
+        </set>
+        <set name="chapters" table="chapter" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="parentId" />
+            </key>
+            <one-to-many class="com.yryj.model.Chapter" />
+        </set>
+        <set name="stories" table="story" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rootId" not-null="true" />
+            </key>
+            <one-to-many class="com.yryj.model.Story" />
+        </set>
+    </class>
+</hibernate-mapping>

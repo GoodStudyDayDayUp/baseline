@@ -20,13 +20,13 @@
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="jdbcUrl">
-			<value>jdbc:mysql://localhost:3306/db_yryj</value>
+			<value>jdbc:mysql://localhost:3306/opos?useUnicode=true&amp;characterEncoding=utf-8</value>
 		</property>
 		<property name="user">
 			<value>root</value>
 		</property>
 		<property name="password">
-			<value></value>
+			<value>root</value>
 		</property>
 		<property name="maxPoolSize">
 			<value>80</value>
@@ -73,6 +73,9 @@
        			<prop key="connection.autoReconnectForPools">true</prop>
      		    <prop key="connection.is-connection-validation-required">true</prop>
      		    <prop key="connection.autocommit">true</prop>
+				<prop key="hibernate.connection.username">root</prop>  
+				<prop key="hibernate.connection.password">123456</prop>  
+				<prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/opos</prop>  
 				
 			</props>
 		</property>
@@ -188,5 +191,10 @@
 	</bean>
 
 	<!-- 用户注册的Action -->
-
+	<bean id="userAction" class="com.yryj.action.UserAction">
+		<property name="userManager">
+			<ref bean="userManager" />
+		</property>
+	</bean>
+	
 </beans>
