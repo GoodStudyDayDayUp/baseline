@@ -1,7 +1,5 @@
 package com.yryj.sercvice;
 
-import java.util.List;
-
 import com.yryj.model.Uts;
 
 public interface UtsManager {
@@ -11,5 +9,5 @@ public interface UtsManager {
 
 	public void update(Uts uts);
 
-	public List<?>  find(int id);
+	public Uts find(Uts uts);
 }

@@ -1,7 +1,5 @@
 package com.yryj.serviceImpl;
 
-import java.util.List;
-
 import com.yryj.dao.UtuDao;
 import com.yryj.model.Utu;
 import com.yryj.sercvice.UtuManager;
@@ -29,11 +27,11 @@ private UtuDao utuDao=null;
 		// TODO Auto-generated method stub
 		utuDao.update(utu);
 	}
-	
+
 	@Override
-	public List<?> find(int id, boolean direct) {
+	public Utu find(Utu utu) {
 		// TODO Auto-generated method stub
-		return utuDao.find(id,direct);
+		return utuDao.find(utu);
 	}
 
 }
