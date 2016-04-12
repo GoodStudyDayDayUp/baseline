@@ -1,5 +1,8 @@
 package com.yryj.daoImpl;
+import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 import com.yryj.dao.DraftDao;

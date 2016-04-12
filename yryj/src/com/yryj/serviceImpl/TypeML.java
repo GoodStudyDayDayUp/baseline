@@ -17,9 +17,9 @@ private TypeDao typeDao=null;
 	}
 
 	@Override
-	public void delete(Type type) {
+	public void delete(int id) {
 		// TODO Auto-generated method stub
-		typeDao.delete(type);
+		typeDao.delete(id);
 	}
 
 	@Override
@@ -29,9 +29,9 @@ private TypeDao typeDao=null;
 	}
 
 	@Override
-	public Type find(Type type) {
+	public Type find(int id) {
 		// TODO Auto-generated method stub
-		return typeDao.find(type);
+		return typeDao.find(id);
 	}
 
 }

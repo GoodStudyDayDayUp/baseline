@@ -17,9 +17,9 @@ private DraftDao draftDao=null;
 	}
 
 	@Override
-	public void delete(Draft draft) {
+	public void delete(int id) {
 		// TODO Auto-generated method stub
-		draftDao.delete(draft);
+		draftDao.delete(id);
 	}
 
 	@Override
@@ -29,9 +29,9 @@ private DraftDao draftDao=null;
 	}
 
 	@Override
-	public Draft find(Draft draft) {
+	public Draft find(int id) {
 		// TODO Auto-generated method stub
-		return draftDao.find(draft);
+		return draftDao.find(id);
 	}
 
 }
