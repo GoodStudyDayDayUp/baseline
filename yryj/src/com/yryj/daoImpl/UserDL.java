@@ -10,7 +10,8 @@ public class UserDL extends HibernateDaoSupport implements UserDao{
 	@Override
 	public void save(User user) {
 		// TODO Auto-generated method stub
-		
+		getHibernateTemplate().setCheckWriteOperations(false);
+		getHibernateTemplate().save(user);
 	}
 
 	@Override

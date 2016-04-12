@@ -10,40 +10,25 @@ public class OrderDL extends HibernateDaoSupport implements OrderDao{
 	@Override
 	public void save(Order order) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().setCheckWriteOperations(false);
-		getHibernateTemplate().save(order);
+		
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(Order order) {
 		// TODO Auto-generated method stub
-		Order order=find(id);
-		try{
-			Session session=getHibernateTemplate().getSessionFactory().openSession();
-			Transaction ts=session.beginTransaction();
-			session.delete(order);
-			ts.commit();
-			session.close();
-			session=null;
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		
 	}
 
 	@Override
 	public void update(Order order) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().update(order);
+		
 	}
 
 	@Override
-	public Order find(int id) {
+	public Order find(Order order) {
 		// TODO Auto-generated method stub
-		List list=getHibernateTemplate().find("from Order where id=?",id);
-		if(list.size()>0)
-			return (Order) list.get(0);
-		else
-			return null;
+		return null;
 	}
 
 }
