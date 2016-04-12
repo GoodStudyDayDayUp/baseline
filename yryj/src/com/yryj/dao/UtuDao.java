@@ -1,5 +1,7 @@
 package com.yryj.dao;
 
+import java.util.List;
+
 import com.yryj.model.Utu;
 
 public interface UtuDao {
@@ -9,5 +11,5 @@ public interface UtuDao {
 
 	public void update(Utu utu);
 
-	public Utu find(Utu utu);
+	public List<?> find(int id, boolean direct);
 }
