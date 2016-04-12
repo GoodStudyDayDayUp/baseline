@@ -1,7 +1,5 @@
 package com.yryj.sercvice;
 
-import java.util.List;
-
 import com.yryj.model.Utu;
 
 public interface UtuManager {
@@ -11,5 +9,5 @@ public interface UtuManager {
 
 	public void update(Utu utu);
 
-	public List<?> find(int id, boolean direct) ;
+	public Utu find(Utu utu);
 }

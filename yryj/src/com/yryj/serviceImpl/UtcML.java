@@ -1,7 +1,5 @@
 package com.yryj.serviceImpl;
 
-import java.util.List;
-
 import com.yryj.dao.UtcDao;
 import com.yryj.model.Utc;
 import com.yryj.sercvice.UtcManager;
@@ -31,9 +29,9 @@ private UtcDao utcDao=null;
 	}
 
 	@Override
-	public List<?> find(int id) {
+	public Utc find(Utc utc) {
 		// TODO Auto-generated method stub
-		return utcDao.find(id);
+		return utcDao.find(utc);
 	}
 
 }

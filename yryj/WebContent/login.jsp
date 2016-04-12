@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -51,17 +51,17 @@
     
             
 			<div class="login_form">
-				<form action="mainPage.jsp" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post">
+				<form action="loginUser" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post">
                 <div class="uinArea" id="uinArea">
                 <label class="input-tips" for="u">用户:</label>
                 <div class="inputOuter" id="uArea">                   
-                    <input type="text" id="name" name="name" class="inputstyle"/>
+                    <input type="text" id="name" name="lf.username" class="inputstyle"/>
                 </div>
                 </div>
                 <div class="pwdArea">
                  <label class="input-tips" for="u">密码:</label>
                 <div class="inputOuter" id="pArea">                   
-                    <input type="password" id="password" name="password" class="inputstyle"/>
+                    <input type="password" id="password" name="lf.password" class="inputstyle"/>
                 </div>
                 </div>
                 <div class="inputOuter2" id="bArea"> 

@@ -17,9 +17,9 @@ private UserDao userDao=null;
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(User user) {
 		// TODO Auto-generated method stub
-		userDao.delete(id);
+		userDao.delete(user);
 	}
 
 	@Override
@@ -29,9 +29,9 @@ private UserDao userDao=null;
 	}
 
 	@Override
-	public User find(int id) {
+	public User find(User user) {
 		// TODO Auto-generated method stub
-		return userDao.find(id);
+		return userDao.find(user);
 	}
 
 }

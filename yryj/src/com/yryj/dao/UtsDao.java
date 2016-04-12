@@ -1,7 +1,5 @@
 package com.yryj.dao;
 
-import java.util.List;
-
 import com.yryj.model.Uts;
 
 public interface UtsDao {
@@ -11,5 +9,5 @@ public interface UtsDao {
 
 	public void update(Uts uts);
 
-	public List<?>  find(int id);
+	public Uts find(Uts uts);
 }
