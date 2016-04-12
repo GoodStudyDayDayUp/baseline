@@ -1,5 +1,7 @@
 package com.yryj.serviceImpl;
 
+import java.util.List;
+
 import com.yryj.dao.UtsDao;
 import com.yryj.model.Uts;
 import com.yryj.sercvice.UtsManager;
@@ -29,9 +31,9 @@ private UtsDao utsDao=null;
 	}
 
 	@Override
-	public Uts find(Uts uts) {
+	public List<?>  find(int id) {
 		// TODO Auto-generated method stub
-		return utsDao.find(uts);
+		return utsDao.find(id);
 	}
 
 }
