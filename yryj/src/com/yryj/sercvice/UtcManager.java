@@ -1,5 +1,7 @@
 package com.yryj.sercvice;
 
+import java.util.List;
+
 import com.yryj.model.Utc;
 
 public interface UtcManager {
@@ -9,5 +11,5 @@ public interface UtcManager {
 
 	public void update(Utc utc);
 
-	public Utc find(Utc utc);
+	public List<?> find(int id);
 }
