@@ -48,17 +48,17 @@
     
             
 			<div class="login_form">
-				<form action="mainPage.jsp" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post">
+				<form action="register.action" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post">
                 <div class="uinArea" id="uinArea">
                 <label class="input-tips" for="u">用户:</label>
                 <div class="inputOuter" id="uArea">                   
-                    <input type="text" id="name" name="name" class="inputstyle"/>
+                    <input type="text" id="name" name="user.name" class="inputstyle"/>
                 </div>
                 </div>
                 <div class="pwdArea">
                  <label class="input-tips" for="u">密码:</label>
                 <div class="inputOuter" id="pArea">                   
-                    <input type="password" id="password" name="password" class="inputstyle"/>
+                    <input type="password" id="password" name="user.password" class="inputstyle"/>
                 </div>
                 </div>
                  <div class="pwdArea">
