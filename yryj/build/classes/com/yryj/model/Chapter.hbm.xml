@@ -27,7 +27,7 @@
             <column name="viewNum" />
         </property>
         <property name="key" type="string">
-            <column name="key" length="15" />
+            <column name="`key`" length="15" />
         </property>
         <set name="drafts" table="draft" inverse="true" lazy="true" fetch="select">
             <key>

@@ -1,12 +1,20 @@
 package com.yryj.serviceImpl;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import com.yryj.action.ChapterAction;
 import com.yryj.dao.ChapterDao;
 import com.yryj.model.Chapter;
 import com.yryj.sercvice.ChapterManager;
 
 public class ChapterML implements ChapterManager{
-private ChapterDao chapterDao=null;
-	
+	private ChapterDao chapterDao=null;
+	private String filePath;	
 	public void setChapterDao(ChapterDao chapterDao) {
 		this.chapterDao = chapterDao;
 	}
@@ -34,4 +42,54 @@ private ChapterDao chapterDao=null;
 		return chapterDao.find(id);
 	}
 
+	@SuppressWarnings("resource")
+	@Override
+	public String write(String content) {
+		// TODO Auto-generated method stub
+			byte[] data = content.getBytes();
+			filePath = ChapterAction.class.getClassLoader().getResource("").getPath();
+			filePath = filePath.split("WEB-INF")[0];
+			filePath = filePath+"files/"+"1.txt";
+			filePath = filePath.replaceAll("\\\\", "/");
+			try {
+				File imageFile = new File(filePath);
+				FileOutputStream outStream = new FileOutputStream(imageFile);
+				outStream.write(data);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			return filePath;
+	}
+
+	@Override
+	public String read(int id) {
+		// TODO Auto-generated method stub
+		Chapter chapter = chapterDao.find(id);
+		filePath = chapter.getContent();
+		String content = "";
+		try {
+            String encoding="GBK";
+            File file=new File(filePath);
+            
+            if(file.isFile() && file.exists()){ //判断文件是否存在
+                InputStreamReader read = new InputStreamReader(
+                new FileInputStream(file),encoding);//考虑到编码格式
+                BufferedReader bufferedReader = new BufferedReader(read);
+                String lineTxt = null;
+                while((lineTxt = bufferedReader.readLine()) != null){
+                   content = content + lineTxt + "\n";
+                }
+                read.close();
+		    }else{
+		        content = "找不到指定的文件";
+		    }
+	    } catch (Exception e) {
+        	content = "读取文件内容出错";
+	        e.printStackTrace();
+	    }
+		return content;
+	}
+	
+	
 }
