@@ -40,4 +40,8 @@ private UserDao userDao=null;
 		return userDao.findByName(user.getName());
 	}
 
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 99c47623505d01555a6452803b78b43391d474ee
 }

@@ -68,7 +68,14 @@ public class UserAction extends ActionSupport {
 	{
 		
 		try {
+			HttpSession session1=ServletActionContext.getRequest().getSession();
+			session1.setAttribute("msg", "");
 			regUser=user;
+			if(userManager.checkLogin(user)!=null){
+				HttpSession session=ServletActionContext.getRequest().getSession();
+				session.setAttribute("msg", "用户已存在");
+				return ERROR;
+			}
 			if(regUser.getPassword().equals(password2))
 				userManager.save(regUser);
 			else 
