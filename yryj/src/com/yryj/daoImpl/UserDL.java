@@ -51,4 +51,13 @@ public class UserDL extends HibernateDaoSupport implements UserDao{
 			return null;
 	}
 
+	public User findByName(String name)
+	{
+		@SuppressWarnings("rawtypes")
+		List list=getHibernateTemplate().find("from User where name=?",name);
+		if(list.size()>0)
+			return (User) list.get(0);
+		else
+			return null;
+	}
 }

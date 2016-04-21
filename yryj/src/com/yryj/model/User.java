@@ -1,6 +1,6 @@
 package com.yryj.model;
 
-// Generated 2016-4-9 12:39:49 by Hibernate Tools 4.0.0
+// Generated 2016-4-21 8:56:52 by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +13,9 @@ public class User implements java.io.Serializable {
 	private Integer id;
 	private String name;
 	private String password;
-	private boolean sex;
+	private Boolean sex;
+	private String phone;
+	private String email;
 	private int point;
 	private Set utusForFanId = new HashSet(0);
 	private Set utusForUid = new HashSet(0);
@@ -26,19 +28,20 @@ public class User implements java.io.Serializable {
 	public User() {
 	}
 
-	public User(String name, String password, boolean sex, int point) {
+	public User(String name, String password, int point) {
 		this.name = name;
 		this.password = password;
-		this.sex = sex;
 		this.point = point;
 	}
 
-	public User(String name, String password, boolean sex, int point,
-			Set utusForFanId, Set utusForUid, Set utses, Set orders,
-			Set drafts, Set chapters, Set utcs) {
+	public User(String name, String password, Boolean sex, String phone,
+			String email, int point, Set utusForFanId, Set utusForUid,
+			Set utses, Set orders, Set drafts, Set chapters, Set utcs) {
 		this.name = name;
 		this.password = password;
 		this.sex = sex;
+		this.phone = phone;
+		this.email = email;
 		this.point = point;
 		this.utusForFanId = utusForFanId;
 		this.utusForUid = utusForUid;
@@ -73,12 +76,28 @@ public class User implements java.io.Serializable {
 		this.password = password;
 	}
 
-	public boolean isSex() {
+	public Boolean getSex() {
 		return this.sex;
 	}
 
-	public void setSex(boolean sex) {
+	public void setSex(Boolean sex) {
 		this.sex = sex;
+	}
+
+	public String getPhone() {
+		return this.phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public int getPoint() {

@@ -3,13 +3,13 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 2016-4-21 8:56:53 by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.yryj.model.Type" table="type" catalog="opos">
+    <class name="com.yryj.model.Style" table="style" catalog="opos">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="type" type="string">
-            <column name="type" length="15" not-null="true" />
+        <property name="style" type="string">
+            <column name="style" length="15" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

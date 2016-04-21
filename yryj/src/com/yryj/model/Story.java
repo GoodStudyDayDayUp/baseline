@@ -1,6 +1,6 @@
 package com.yryj.model;
 
-// Generated 2016-4-9 12:39:49 by Hibernate Tools 4.0.0
+// Generated 2016-4-21 8:56:52 by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -12,23 +12,23 @@ import java.util.Set;
 public class Story implements java.io.Serializable {
 
 	private Integer id;
-	private Type type;
 	private Chapter chapter;
+	private String type;
 	private Date date;
 	private Set utses = new HashSet(0);
 
 	public Story() {
 	}
 
-	public Story(Type type, Chapter chapter, Date date) {
-		this.type = type;
+	public Story(Chapter chapter, String type, Date date) {
 		this.chapter = chapter;
+		this.type = type;
 		this.date = date;
 	}
 
-	public Story(Type type, Chapter chapter, Date date, Set utses) {
-		this.type = type;
+	public Story(Chapter chapter, String type, Date date, Set utses) {
 		this.chapter = chapter;
+		this.type = type;
 		this.date = date;
 		this.utses = utses;
 	}
@@ -41,20 +41,20 @@ public class Story implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Type getType() {
-		return this.type;
-	}
-
-	public void setType(Type type) {
-		this.type = type;
-	}
-
 	public Chapter getChapter() {
 		return this.chapter;
 	}
 
 	public void setChapter(Chapter chapter) {
 		this.chapter = chapter;
+	}
+
+	public String getType() {
+		return this.type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Date getDate() {
