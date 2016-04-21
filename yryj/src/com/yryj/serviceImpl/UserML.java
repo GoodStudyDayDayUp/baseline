@@ -34,4 +34,11 @@ private UserDao userDao=null;
 		return userDao.find(id);
 	}
 
+	@Override
+	public User checkLogin(User user) {
+		// TODO Auto-generated method stub
+		return userDao.findByName(user.getName());
+	}
+
+	
 }

@@ -10,4 +10,6 @@ public interface UserManager {
 	public void update(User user);
 
 	public User find(int id);
+	
+	public User checkLogin(User user);
 }

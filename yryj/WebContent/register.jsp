@@ -84,6 +84,7 @@
 
   
 </div>
-<div class="jianyi">*推荐使用ie8或以上版本ie浏览器或Chrome内核浏览器访问本站</div>
+<div class="jianyi" id="msg">*推荐使用ie8或以上版本ie浏览器或Chrome内核浏览器访问本站</div>
+<h4 class="jianyi"  style="color: red"><%=session.getAttribute("msg")==null?"":session.getAttribute("msg") %></h4>
 <!-- <div id="animate" class="a-fadein">淡入</div> -->
 </body></html>
