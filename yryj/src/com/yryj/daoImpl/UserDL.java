@@ -60,4 +60,24 @@ public class UserDL extends HibernateDaoSupport implements UserDao{
 		else
 			return null;
 	}
+
+	@Override
+	public User findByEmail(String email) {
+		// TODO Auto-generated method stub
+		List list=getHibernateTemplate().find("from User where email=?",email);
+		if(list.size()>0)
+			return (User) list.get(0);
+		else
+			return null;
+	}
+
+	@Override
+	public User findByPhone(String phone) {
+		// TODO Auto-generated method stub
+		List list=getHibernateTemplate().find("from User where phone=?",phone);
+		if(list.size()>0)
+			return (User) list.get(0);
+		else
+			return null;
+	}
 }

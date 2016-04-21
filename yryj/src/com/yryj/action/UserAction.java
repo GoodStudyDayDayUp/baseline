@@ -17,7 +17,7 @@ public class UserAction extends ActionSupport {
 	private String password2;
 	private UserManager userManager;
 	private User thisUser;
-	
+
 	public User getThisUser() {
 		return thisUser;
 	}
@@ -66,15 +66,25 @@ public class UserAction extends ActionSupport {
 	}
 	public String registerUser()
 	{
-		
+		HttpSession session=ServletActionContext.getRequest().getSession();
+		session.setAttribute("msg", "");
 		try {
 			regUser=user;
+			if(userManager.checkLogin(user)!=null){
+				session.setAttribute("msg", "用户已存在");
+				return ERROR;
+			}
+			if(userManager.findUserByEmail(user)!=null){
+				session.setAttribute("msg", "邮箱已经被注册过");
+				return ERROR;
+			}
+
 			if(regUser.getPassword().equals(password2))
 				userManager.save(regUser);
 			else 
 				return ERROR;
 			return SUCCESS;
-		
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ERROR;
@@ -83,9 +93,10 @@ public class UserAction extends ActionSupport {
 	public String loginUser()
 	{
 		try {
+			HttpSession session=ServletActionContext.getRequest().getSession();
+			session.setAttribute("msg", "");
 			if(userManager.checkLogin(user)!=null)
 			{
-				HttpSession session=ServletActionContext.getRequest().getSession();
 				session.setAttribute("user", user);
 				return SUCCESS;
 			}
@@ -95,6 +106,35 @@ public class UserAction extends ActionSupport {
 			e.printStackTrace();
 			return ERROR;
 		}
+	}
+
+	public String logout(){
+		try {
+			HttpSession session=ServletActionContext.getRequest().getSession();
+			session.setAttribute("msg", "");
+			if(userManager.checkLogin(user)!=null)
+			{
+				session.setAttribute("user", null);
+				session.setAttribute("msg", "成功登出");
+				return SUCCESS;
+			}
+			else
+				return ERROR;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+
+	public String updateUser(){
+		try {
+			userManager.update(user);
+			return SUCCESS;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ERROR;
+		}
+
 	}
 
 }

@@ -40,4 +40,16 @@ private UserDao userDao=null;
 		return userDao.findByName(user.getName());
 	}
 
+	@Override
+	public User findUserByEmail(User user) {
+		// TODO Auto-generated method stub
+		return userDao.findByEmail(user.getEmail());
+	}
+
+	@Override
+	public User findUserByPhone(User user) {
+		// TODO Auto-generated method stub
+		return userDao.findByPhone(user.getPhone());
+	}
+
 }
