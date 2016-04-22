@@ -1,11 +1,7 @@
 package com.yryj.action;
 
-import javax.servlet.http.HttpSession;
-import org.apache.struts2.ServletActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import com.yryj.model.Type;
-import com.yryj.sercvice.TypeManager;
-import com.yryj.sercvice.UserManager;;
+import com.yryj.sercvice.TypeManager;;
 
 public class TypeAction {
 	Type Type=new Type();
