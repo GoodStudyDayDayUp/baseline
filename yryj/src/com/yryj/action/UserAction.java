@@ -12,11 +12,39 @@ public class UserAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 
+	private String name;
+	private String password;
+	private String email;
 	private User user;
 	private User regUser;
 	private String password2;
 	private UserManager userManager;
 	private User thisUser;
+
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public User getThisUser() {
 		return thisUser;
@@ -25,6 +53,7 @@ public class UserAction extends ActionSupport {
 	public void setThisUser(User thisUser) {
 		this.thisUser = thisUser;
 	}
+
 	public String getPassword2() {
 		return password2;
 	}
@@ -42,14 +71,17 @@ public class UserAction extends ActionSupport {
 	}
 
 	public User getUser() {
+		if(user==null)
+			user=new User();
+		user.setName(name);
+		user.setPassword(password);
+		user.setEmail(email);
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-
 
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;
@@ -64,25 +96,26 @@ public class UserAction extends ActionSupport {
 			return ERROR;
 		}
 	}
+
 	public String registerUser()
 	{
 		HttpSession session=ServletActionContext.getRequest().getSession();
-		session.setAttribute("msg", "");
+		session.setAttribute("regmsg", "");
+		user=this.getUser();
+		session.setAttribute("webreguser", user);
+		session.setAttribute("webpass2", password2);
 		try {
 			regUser=user;
-			if(userManager.checkLogin(user)!=null){
-				session.setAttribute("msg", "用户已存在");
+			User theUser =userManager.checkLogin(user);
+			if(theUser!=null){
+				session.setAttribute("regmsg", "用户已存在");
 				return ERROR;
 			}
 			if(userManager.findUserByEmail(user)!=null){
-				session.setAttribute("msg", "邮箱已经被注册过");
+				session.setAttribute("regmsg", "邮箱已经被注册过");
 				return ERROR;
 			}
-
-			if(regUser.getPassword().equals(password2))
-				userManager.save(regUser);
-			else 
-				return ERROR;
+			userManager.save(regUser);
 			return SUCCESS;
 
 		} catch (Exception e) {
@@ -95,13 +128,24 @@ public class UserAction extends ActionSupport {
 		try {
 			HttpSession session=ServletActionContext.getRequest().getSession();
 			session.setAttribute("msg", "");
-			if(userManager.checkLogin(user)!=null)
+			user=this.getUser();
+			session.setAttribute("webuser", user);
+			User theUser =userManager.checkLogin(user);
+			if(theUser!=null)
 			{
-				session.setAttribute("user", user);
-				return SUCCESS;
+				if(theUser.getPassword().equals(user.getPassword())){
+					session.setAttribute("user", user);
+					return SUCCESS;
+				}
+				else{
+					session.setAttribute("msg", "密码错误");
+					return ERROR;
+				}
 			}
-			else
+			else{
+				session.setAttribute("msg", "该用户不存在");
 				return ERROR;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ERROR;
