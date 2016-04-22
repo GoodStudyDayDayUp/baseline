@@ -39,15 +39,15 @@
 		
 
 			
-			<action name="addType" class="com.yryj.action.TypeAction" method="addType">
+			<action name="addType" class="typeAction" method="addType">
 				<result name="success">/success.jsp</result>
 				<result name="error">/error.jsp</result>
 			</action>
-			<action name="deleteType" class="com.yryj.action.TypeAction" method="deleteType">
+			<action name="deleteType" class="typeAction" method="deleteType">
 				<result name="success">/success.jsp</result>
 				<result name="error">/error.jsp</result>
 			</action>
-			<action name="searchType" class="com.yryj.action.TypeAction" method="searchType">
+			<action name="searchType" class="typeAction" method="searchType">
 				<result name="success">/success.jsp</result>
 				<result name="error">/error.jsp</result>
 			</action>

@@ -22,7 +22,7 @@
 			
 			<section>
 				<div class="col-lg-6 col-lg-offset-3" >
-					<form id="defaultForm" method="post" action="">
+					<form id="defaultForm" method="post" action="login.action">
 	            
 						<div class="form-group row" >
 							<div class="col-lg-8 col-lg-offset-1"> <input type="text" id="name" name="username" class="form-control col-lg-5" placeholder="用户名"/></div>
