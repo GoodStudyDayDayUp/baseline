@@ -1,0 +1,179 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/**
+* main.html
+*/
+ body{
+	 font-family: YouYuan;
+ }
+ 
+ /**
+* booklist.html
+*/
+ li{
+	 padding-bottom:8px;
+ }
+ 
+/*header*/
+/**
+* main.html &&& booklist.html
+*/
+#header{
+	height:30px;
+	line-height:30px;
+    margin: 0px 0px 0px 0px;
+	color:#ffffff;
+	background:#8295a2;
+}
+
+/**
+* main.html
+*/
+.picdiv{
+	background-image:url(images/main.jpg);
+	text-align:center;
+	margin-top:60px;
+}
+/**
+* main.html
+*/
+.alpha{
+	filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6
+}
+
+/**
+* main.html
+*/
+.classdiv{
+	padding-top:2px;
+	padding-bottom:2px;
+	padding-left:0px;
+	padding-right:0px;
+	color:#8295a2
+} 
+/**
+* main.html
+*/
+.fr{
+    float:right;
+}
+
+ /**
+* booklist.html
+*/
+.sort{
+	background-color:#f1f1f1;
+	border:1px solid #e1dede;
+	box-shadow: 0 0 3px #f1f1f1;
+	height:100px;
+	margin-top:2px;
+}
+
+ /**
+* booklist.html
+*/
+.nav-head{
+	background-color:#738c9d;
+	color:#fff;
+	border-bottom-style:dotted;
+	border-radius:5px;
+	text-align:center;
+	padding-top:1px;
+	padding-bottom:0px;
+	margin-left:0px;
+}
+ /**
+* booklist.html
+*/
+.level-one{
+	padding:5px 10px 5px 10px;
+	border-left:1px solid #738c9d;
+	border-right:1px solid #738c9d;
+	border-bottom:1px dotted #738c9d
+}
+
+.content{
+	background-color:#f1f1f1;
+	border:1px solid #e1dede;
+	box-shadow: 0 0 3px #f1f1f1;
+	height:200px;
+	margin-top:20px;
+}
+
+.recommend{
+	background-color:#f1f1f1;
+	border:1px solid #e1dede;
+	box-shadow: 0 0 3px #f1f1f1;
+	margin-top:20px;
+	margin-left:0px;
+	padding:10px 20px 10px 20px;
+}
+
+.recommend li{
+	list-style: none;	
+}
+
+/**
+* order.html
+*/
+.upper{
+	height:70px;
+}
+.upper-one{
+	margin-top:10px;
+	width:100px;
+	margin-left:10px;
+	float:left;
+}
+.upper-two{
+	margin-top:10px;
+	width:100px;
+	display:inline;
+	margin-left:10px;
+	float:left;
+}
+.upper-three{
+	margin-top:10px;
+	width:100px;
+	display:inline;
+	margin-left:10px;
+	float:left;
+}
+.upper-four{
+	margin-top:10px;
+	margin-right:10px;
+	display:inline;
+	float:right;
+}
+.upper p{
+	margin-bottom:0px;
+}
+
+.down{
+	background-color:#fff;
+	border:1px solid #e1dede;
+	box-shadow: 0 0 3px #f1f1f1;
+	height:130px;
+}
+.down-pic{
+	display:inline;
+	float:left;
+	margin-top:10px;
+	margin-left:20px;
+}
+.down-discp{
+	display:inline;
+	float:left;
+	margin-top:20px;
+	margin-left:20px;
+}
+.down-operation{
+	display:inline;
+	float:right;
+	margin-top:20px;
+	margin-right:20px;
+}
+
