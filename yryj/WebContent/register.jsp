@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +23,7 @@
 			
             <section>
                 <div class="col-lg-6 col-lg-offset-3" style="margin-top:-50px">
-                    <form id="defaultForm" method="post" action="">
+                    <form id="defaultForm" method="post" action="register.action">
                             
 							<div class="form-group row" >
 								<div class="col-lg-8 col-lg-offset-2"> <input type="text" id="name" name="username" class="form-control col-lg-5" placeholder="用户名"/></div>
@@ -41,7 +43,7 @@
 							
                         <div class="form-group row">
 								<button type="submit" class="btn btn-primary col-lg-offset-5">注册</button>	
-								<a href="login.html" class="col-lg-offset-1">已经有账号</a>
+								<a href="login.jsp" class="col-lg-offset-1">已经有账号</a>
                         </div>
 						
                     </form>
