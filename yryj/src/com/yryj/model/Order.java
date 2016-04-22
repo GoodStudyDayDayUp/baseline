@@ -1,6 +1,6 @@
 package com.yryj.model;
 
-// Generated 2016-4-9 12:39:49 by Hibernate Tools 4.0.0
+// Generated 2016-4-21 11:17:52 by Hibernate Tools 4.0.0
 
 import java.util.Date;
 

@@ -1,85 +1,78 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib uri="/struts-tags" prefix="s"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-
-<title>登录</title> 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
-<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
-<script type="text/javascript" src="js/login.js"></script>
-<link href="css/login2.css" rel="stylesheet" type="text/css" />
-<link href="css/personal.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-<div class="header">
-		<div class="header-top">
-			<div class="container">
-				<div class="logo">
-						<font class="login_font_title">一人一句</font>
-				</div>
-				<div class="header-right">
-					<div class="menu">
-						<ul class="navigatoin">
-							<li><a href="#" class="active">了解</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-<div class="login a-fadeinB" style="margin-top:100px;">
-    
-    <div class="header">
-        <div class="switch" id="switch">
-        <a class="switch_btn_focus" id="switch_qlogin" href="javascript:void(0);" tabindex="7">
-              欢迎登陆
-        </a>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+			<title>登陆</title>
+	        <meta charset="UTF-8">
+	        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<link rel="stylesheet" href="css/bootstrap.css"/>
+			<link rel="stylesheet" href="css/bootstrap.min.css"/>
+			<link rel="stylesheet" href="css/bootstrapValidator.min.css"/>
+			<script src="js/jquery.min.js"></script>
+			<script src="js/bootstrap.min.js"></script>
+			<script src="js/bootstrap.js"></script>
+			<script src="js/bootstrapValidator.min.js"></script>
+			<script src="js/bootstrapValidator_zh_CN.js"></script>
+	</head>
+	<body style="background-color:#EDEDED ">
+	    <div class="container">
+	        <div class="row">
+			<p style="text-align:center; margin:auto"><img src="pics\logopic.png" /></p>
 			
-        </div>
-    </div>    
-  
-    
-    <div class="web_qr_login" id="web_qr_login" style="display: block; height: 220px;">    
+			<section>
+				<div class="col-lg-6 col-lg-offset-3" >
+					<form id="defaultForm" method="post" action="login.action">
+	            
+						<div class="form-group row" >
+							<div class="col-lg-8 col-lg-offset-1"> <input type="text" id="name" name="username" class="form-control col-lg-5" placeholder="用户名"/></div>
+								<a href="register.html" >还没有账号？</a>
+						</div>
 
-            <!--登录-->
-            <div class="web_login" id="web_login">
-               
-               
-               <div class="login-box">
-    
-            
-			<div class="login_form">
-				<form action="loginUser" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post">
-                <div class="uinArea" id="uinArea">
-                <label class="input-tips" for="u">用户:</label>
-                <div class="inputOuter" id="uArea">                   
-                    <input type="text" id="name" name="lf.username" class="inputstyle"/>
-                </div>
-                </div>
-                <div class="pwdArea">
-                 <label class="input-tips" for="u">密码:</label>
-                <div class="inputOuter" id="pArea">                   
-                    <input type="password" id="password" name="lf.password" class="inputstyle"/>
-                </div>
-                </div>
-                <div class="inputOuter2" id="bArea"> 
-                <input type="submit" value="登  录" style="height:42px;width:100px; float:left" class="button_blue"/>
-                <input value="注  册" style="	height:42px;width:100px;float:right" class="button_blue" onClick="window.location.href='register.jsp'"/>
-                </div>
-              </form>
-              
-           </div>
-           
-            	</div>
-               
-            </div>
-            <!--登录end-->
-  </div>
+                    	<div class="form-group row">
+                         	<div class="col-lg-8 col-lg-offset-1"> <input type="password" id="password" name="password" class="form-control" placeholder="密码"/></div>
+								<a href="register.html" class="display:block">忘记密码</a>
+               			</div>
 
-  
-</div>
-<div class="jianyi">*推荐使用ie8或以上版本ie浏览器或Chrome内核浏览器访问本站</div>
-<!-- <div id="animate" class="a-fadein">淡入</div> -->
-</body></html>
+               			<div class="form-group ">
+							<p class="col-lg-offset-1"/>
+                       		<input type="checkbox" name="rememberme" class="col-lg-offset-1"/>记住我
+							<button type="submit" class="btn btn-primary col-lg-offset-3">登录</button>
+               			</div>
+	             </form>
+	             </div> 
+             </section> 
+           </div> 
+	    </div> 
+	
+		<script type="text/javascript">
+		$(document).ready(function() {
+		    $('#defaultForm').bootstrapValidator({
+		        message: 'This value is not valid',
+		        feedbackIcons: {
+		            valid: 'glyphicon glyphicon-ok',
+		            invalid: 'glyphicon glyphicon-remove',
+		            validating: 'glyphicon glyphicon-refresh'
+		        },
+				fields: {
+		            username: {
+		                message: 'The username is not valid',
+		                validators: {
+		                    notEmpty: {
+		                        message: '用户名不能为空'
+		                    }
+		                }
+		            }			,
+		            password: {
+		                validators: {
+		                    notEmpty: {
+		                        message: '密码不能为空'
+		                    }
+		                }
+		            }
+		        }
+		    });
+		});
+		</script>
+	</body>
+</html>

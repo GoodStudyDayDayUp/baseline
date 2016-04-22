@@ -101,7 +101,7 @@
 		<div class="container-fluid fixed">
 			<div id="content">
 
-				<form name="newcase" id="newcase_id" method="post" action="">
+				<form name="newcase" id="newcase_id" method="post" action="write.action">
 					<h3 class="glyphicons show_thumbnails_with_lines">
 						<i></i>作品1
 					</h3>
@@ -143,13 +143,12 @@
 
 					<div class="control-group">
 					
-					<textarea rows="20" cols="60"></textarea>
+					<textarea rows="20" cols="60" name="content"></textarea>
 					
 						<div class="controls">
 						<div class="span3">
 							<button type="submit"
-								class="btn btn-icon btn-primary glyphicons circle_ok"
-								onClick="reservation()">
+								class="btn btn-icon btn-primary glyphicons circle_ok">
 								<i></i>提     交
 							</button>
 							</div>

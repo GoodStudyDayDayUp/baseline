@@ -11,6 +11,7 @@ import com.yryj.model.Type;
 
 public class TypeDL extends HibernateDaoSupport implements TypeDao{
 
+	
 	@Override
 	public void save(Type type) {
 		// TODO Auto-generated method stub
@@ -50,5 +51,6 @@ public class TypeDL extends HibernateDaoSupport implements TypeDao{
 		else
 			return null;
 	}
-
+	
+	
 }
