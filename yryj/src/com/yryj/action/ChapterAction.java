@@ -1,7 +1,5 @@
 package com.yryj.action;
 
-import java.io.FileOutputStream;
-
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
