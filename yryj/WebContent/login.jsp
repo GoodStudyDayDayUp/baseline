@@ -40,7 +40,7 @@
 							<%}else{ %>
 							<input type="text" id="name" name="name" class="form-control col-lg-5" placeholder="用户名" onchange="changemsg(this)"/></div>
 							<%} %>
-								<a href="register.jsp" >还没有账号？</a>
+								<a href="beforeregister.action" >还没有账号？</a>
 						</div>
 
                     	<div class="form-group row">
@@ -50,7 +50,7 @@
                          	<%}else{ %>
                          	<input type="password"  id="password" name="password" class="form-control" placeholder="密码" onchange="changemsg(this)"/></div>
                          	<%} %>
-								<a href="register.jsp" class="display:block">忘记密码</a>
+								<a href="beforeregister.action" class="display:block">忘记密码</a>
                			</div>
 
 						<div class="form-group row">
