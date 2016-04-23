@@ -96,7 +96,16 @@ public class UserAction extends ActionSupport {
 			return ERROR;
 		}
 	}
-
+	
+	//在跳转到注册界面之前要进行的操作
+	public String beforeRegister(){
+		HttpSession session=ServletActionContext.getRequest().getSession();
+		session.setAttribute("regmsg", "");
+		session.setAttribute("webreguser", null);
+		session.setAttribute("webpass2", null);
+		return SUCCESS;
+	}
+	
 	public String registerUser()
 	{
 		HttpSession session=ServletActionContext.getRequest().getSession();
@@ -116,6 +125,8 @@ public class UserAction extends ActionSupport {
 				return ERROR;
 			}
 			userManager.save(regUser);
+			session.setAttribute("webuser", regUser);
+			session.setAttribute("msg", "");
 			return SUCCESS;
 
 		} catch (Exception e) {
@@ -123,6 +134,14 @@ public class UserAction extends ActionSupport {
 			return ERROR;
 		}
 	}
+	
+	public String beforeLogin(){
+		HttpSession session=ServletActionContext.getRequest().getSession();
+		session.setAttribute("msg", "");
+		session.setAttribute("webuser", null);
+		return SUCCESS;
+	}
+	
 	public String loginUser()
 	{
 		try {
