@@ -21,7 +21,7 @@ public class JsonServlet extends HttpServlet {
 	      throws ServletException, IOException {
 	  this.doPost(request, response);
 	    }
-	    @SuppressWarnings("rawtypes")
+	    @SuppressWarnings({ "rawtypes", "unchecked" })
 		public void doPost(HttpServletRequest request, HttpServletResponse response)
 	      throws ServletException, IOException {
 
