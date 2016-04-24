@@ -20,6 +20,7 @@ public class UserAction extends ActionSupport {
 	private String password2;
 	private UserManager userManager;
 	private User thisUser;
+	String WRONG = "wrong";
 
 
 	public String getName() {
@@ -93,7 +94,7 @@ public class UserAction extends ActionSupport {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ERROR;
+			return WRONG;
 		}
 	}
 	
@@ -131,7 +132,7 @@ public class UserAction extends ActionSupport {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ERROR;
+			return WRONG;
 		}
 	}
 	
@@ -163,11 +164,11 @@ public class UserAction extends ActionSupport {
 			}
 			else{
 				session.setAttribute("msg", "该用户不存在");
-				return ERROR;
+				return WRONG;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ERROR;
+			return WRONG;
 		}
 	}
 
@@ -185,7 +186,7 @@ public class UserAction extends ActionSupport {
 				return ERROR;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ERROR;
+			return WRONG;
 		}
 	}
 
@@ -195,7 +196,7 @@ public class UserAction extends ActionSupport {
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ERROR;
+			return WRONG;
 		}
 
 	}

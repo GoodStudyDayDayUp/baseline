@@ -1,3 +1,6 @@
 eclipse.preferences.version=1
+encoding//WebContent/errorPage/404error.jsp=UTF-8
+encoding//WebContent/errorPage/othererror.jsp=UTF-8
 encoding//WebContent/login.jsp=UTF-8
+encoding//WebContent/main.jsp=UTF-8
 encoding//WebContent/register.jsp=UTF-8

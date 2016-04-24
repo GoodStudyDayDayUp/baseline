@@ -5,6 +5,11 @@
 
 <struts>		
 		<package name="default" extends="struts-default">
+		    <global-results>
+				<result name="404">errorPage/404error.jsp</result>
+				<result name="wrong">errorPage/othererror.jsp</result>
+		    </global-results>
+		    
 		    <action name="beforeregister" class="userAction" method="beforeRegister">
 				<result name="success">/register.jsp</result>
 			</action>
