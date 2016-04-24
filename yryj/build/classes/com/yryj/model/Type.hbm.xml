@@ -8,8 +8,8 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="type" type="string">
-            <column name="type" length="15" not-null="true" />
+        <property name="format" type="string">
+            <column name="format" length="15" not-null="true" />
         </property>
         <property name="style" type="string">
             <column name="style" length="15" />

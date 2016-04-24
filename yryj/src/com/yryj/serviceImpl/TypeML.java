@@ -1,5 +1,7 @@
 package com.yryj.serviceImpl;
 
+import java.util.List;
+
 import com.yryj.dao.TypeDao;
 import com.yryj.model.Type;
 import com.yryj.sercvice.TypeManager;
@@ -34,4 +36,33 @@ private TypeDao typeDao=null;
 		return typeDao.find(id);
 	}
 
+	
+	public List<String> findAllFormat(){
+		return typeDao.findAllFormat();
+	}
+	
+	
+	public List<String> findAllStyle(String format){
+		return typeDao.findAllStyle(format);
+	}
+	
+	
+	public List<String> findAllLength(String style){
+		return typeDao.findAllLength(style);
+	}
+	
+	
+	public List<Type> findByFormat(String format){
+		return typeDao.findByFormat(format);
+	}
+	
+	
+	public List<Type> findByStyle(String format,String style){
+		return typeDao.findByStyle(format,style);
+	}
+	
+	
+	public List<Type> findByLength(String format,String style,String length){
+		return typeDao.findByLength(format,style,length);
+	}
 }

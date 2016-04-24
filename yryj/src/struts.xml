@@ -67,7 +67,34 @@
 				<result name="success">/success.jsp</result>
 				<result name="error">/error.jsp</result>
 			</action>
-
+			
+			
+			<action name="findAllFormat" class="typeAction" method="findAllFormatAction">
+				<result name="success">/success.jsp</result>
+				<result name="error">/error.jsp</result>
+			</action>
+			<action name="findAllStyle" class="typeAction" method="findAllStyleAction">
+				<result name="success">/success.jsp</result>
+				<result name="error">/error.jsp</result>
+			</action>
+			<action name="findAllLength" class="typeAction" method="findAllLengthAction">
+				<result name="success">/success.jsp</result>
+				<result name="error">/error.jsp</result>
+			</action>
+			
+			
+			<action name="findByFormat" class="typeAction" method="findByFormatAction">
+				<result name="success">/success.jsp</result>
+				<result name="error">/error.jsp</result>
+			</action>
+			<action name="findByStyle" class="typeAction" method="findByStyleAction">
+				<result name="success">/success.jsp</result>
+				<result name="error">/error.jsp</result>
+			</action>
+			<action name="findByLength" class="typeAction" method="findByLengthAction">
+				<result name="success">/success.jsp</result>
+				<result name="error">/error.jsp</result>
+			</action>
 		</package>
 
 </struts>
