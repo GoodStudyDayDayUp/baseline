@@ -76,7 +76,8 @@ public class UserAction extends ActionSupport {
 			user=new User();
 		user.setName(name);
 		user.setPassword(password);
-		user.setEmail(email);
+		if(email!=null)
+			user.setEmail(email);
 		return user;
 	}
 
@@ -164,7 +165,7 @@ public class UserAction extends ActionSupport {
 			}
 			else{
 				session.setAttribute("msg", "该用户不存在");
-				return WRONG;
+				return ERROR;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

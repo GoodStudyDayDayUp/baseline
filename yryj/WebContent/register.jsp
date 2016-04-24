@@ -153,6 +153,11 @@ if(webUser==null){
 		                validators: {
 		                    notEmpty: {
 		                        message: '密码不能为空'
+		                    },
+							stringLength: {
+		                        min: 6,
+		                        max: 18,
+		                        message: '用户名不能短于6位长于18位'
 		                    }
 		                }
 		            },
