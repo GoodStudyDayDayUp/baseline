@@ -7,6 +7,10 @@ package com.yryj.model;
  */
 public class Utc implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private UtcId id;
 	private Chapter chapter;
 	private User user;

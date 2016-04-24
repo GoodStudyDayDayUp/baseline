@@ -9,6 +9,10 @@ import java.util.Date;
  */
 public class Order implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Chapter chapter;
 	private User user;

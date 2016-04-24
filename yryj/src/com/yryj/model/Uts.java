@@ -9,7 +9,11 @@ package com.yryj.model;
 public class Uts  implements java.io.Serializable {
 
 
-     private UtsId id;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private UtsId id;
      private Story story;
      private User user;
 

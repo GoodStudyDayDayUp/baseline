@@ -7,6 +7,10 @@ package com.yryj.model;
  */
 public class Type implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String type;
 	private String style;

@@ -7,6 +7,10 @@ package com.yryj.model;
  */
 public class Utu implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private UtuId id;
 	private User userByFanId;
 	private User userByUid;
