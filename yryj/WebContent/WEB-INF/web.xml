@@ -7,8 +7,17 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<welcome-file-list>
     		<welcome-file>login.jsp</welcome-file>
   	</welcome-file-list>
+
+	<servlet>  
+		<servlet-name>JSONServlet</servlet-name>  
+		<servlet-class>com.yryj.JsonManager.JsonServlet</servlet-class>  
+	</servlet>  
+
+	<servlet-mapping>  
+	     <servlet-name>JSONServlet</servlet-name>  
+	     <url-pattern>*.do</url-pattern>  
+	 </servlet-mapping>  
   	<filter> 
-  	
 	   <filter-name>OpenSessionInViewFilter</filter-name> 
 		   <filter-class> 
 		    org.springframework.orm.hibernate4.support.OpenSessionInViewFilter 

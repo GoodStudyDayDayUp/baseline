@@ -41,6 +41,11 @@
 				<result name="success">/mainPage.jsp</result>
 				<result name="error">/login.jsp</result>
 			</action>
+			<action name="getJson" class="chapterAction" method="getJson">
+				<result name="input">/login.jsp</result>
+				<result name="success">login.jsp</result>
+				<result name="error">/login.jsp</result>
+			</action>
 
 		
 

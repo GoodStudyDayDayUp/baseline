@@ -44,16 +44,24 @@ public class ChapterML implements ChapterManager{
 
 	@SuppressWarnings("resource")
 	@Override
-	public String write(String content) {
+	public String write(String content,Chapter parent) {
 		// TODO Auto-generated method stub
 			byte[] data = content.getBytes();
-			filePath = ChapterAction.class.getClassLoader().getResource("").getPath();
-			filePath = filePath.split("WEB-INF")[0];
-			filePath = filePath+"files/"+"1.txt";
+			int numOfChild = chapterDao.getChildren(parent).size();
+			String leftName = numOfChild+".txt";
+			String fileName = numOfChild+1+".txt";
+			if(parent==null)
+			{
+				filePath = ChapterAction.class.getClassLoader().getResource("").getPath();
+				filePath = filePath.split("WEB-INF")[0];
+				filePath = filePath+"files/"+fileName;
+			}
+			else
+				filePath = filePath.replaceAll(leftName, fileName);
 			filePath = filePath.replaceAll("\\\\", "/");
 			try {
-				File imageFile = new File(filePath);
-				FileOutputStream outStream = new FileOutputStream(imageFile);
+				File file = new File(filePath);
+				FileOutputStream outStream = new FileOutputStream(file);
 				outStream.write(data);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
