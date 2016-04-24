@@ -46,7 +46,7 @@
                     	<div class="form-group row">
                          	<div class="col-lg-8 col-lg-offset-1"> 
                          	<%if(webUser.getPassword()!=null&&webUser.getPassword()!="") {%>
-                         	<input type="password" value=<%=webUser.getPassword() %>  id="password" name="user.password" class="form-control"  onchange="changemsg(this)"/></div>
+                         	<input type="password" value=<%=webUser.getPassword() %>  id="password" name="password" class="form-control"  onchange="changemsg(this)"/></div>
                          	<%}else{ %>
                          	<input type="password"  id="password" name="password" class="form-control" placeholder="密码" onchange="changemsg(this)"/></div>
                          	<%} %>
@@ -94,6 +94,15 @@
 		                validators: {
 		                    notEmpty: {
 		                        message: '用户名不能为空'
+		                    },
+							stringLength: {
+		                        min: 6,
+		                        max: 18,
+		                        message: '用户名不能短于6位长于18位'
+		                    },
+							regexp: {
+		                        regexp: /^[a-zA-Z0-9_\.]+$/,
+		                        message: '用户名只能包含数字，字母，下划线，英文句号'
 		                    }
 		                }
 		            }			,
@@ -101,6 +110,11 @@
 		                validators: {
 		                    notEmpty: {
 		                        message: '密码不能为空'
+		                    },
+		                    stringLength: {
+		                        min: 6,
+		                        max: 18,
+		                        message: '用户名不能短于6位长于18位'
 		                    }
 		                }
 		            }

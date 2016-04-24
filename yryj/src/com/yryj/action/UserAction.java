@@ -20,6 +20,7 @@ public class UserAction extends ActionSupport {
 	private String password2;
 	private UserManager userManager;
 	private User thisUser;
+	String WRONG = "wrong";
 
 
 	public String getName() {
@@ -75,7 +76,8 @@ public class UserAction extends ActionSupport {
 			user=new User();
 		user.setName(name);
 		user.setPassword(password);
-		user.setEmail(email);
+		if(email!=null)
+			user.setEmail(email);
 		return user;
 	}
 
@@ -93,7 +95,7 @@ public class UserAction extends ActionSupport {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ERROR;
+			return WRONG;
 		}
 	}
 	
@@ -131,7 +133,7 @@ public class UserAction extends ActionSupport {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ERROR;
+			return WRONG;
 		}
 	}
 	
@@ -167,7 +169,7 @@ public class UserAction extends ActionSupport {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ERROR;
+			return WRONG;
 		}
 	}
 
@@ -185,7 +187,7 @@ public class UserAction extends ActionSupport {
 				return ERROR;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ERROR;
+			return WRONG;
 		}
 	}
 
@@ -195,7 +197,7 @@ public class UserAction extends ActionSupport {
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ERROR;
+			return WRONG;
 		}
 
 	}
