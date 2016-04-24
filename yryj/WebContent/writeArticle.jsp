@@ -6,9 +6,9 @@
 <!--[if IE 7]>    <html class="lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>    <html class="lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <!--<![endif]-->
-<head>
+<head >
 
 
 <title>一人一句</title>

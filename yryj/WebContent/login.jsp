@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
+    import="com.yryj.model.User"
 	pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 			<title>登陆</title>
 	        <meta charset="UTF-8">
@@ -15,6 +16,14 @@
 			<script src="js/bootstrapValidator.min.js"></script>
 			<script src="js/bootstrapValidator_zh_CN.js"></script>
 	</head>
+	<%
+	User webUser=(User)session.getAttribute("webuser");
+	if(webUser==null){
+		webUser=new User();
+	}
+	String msg=(String)session.getAttribute("msg")==null?" ":(String)session.getAttribute("msg");
+	%>
+
 	<body style="background-color:#EDEDED ">
 	    <div class="container">
 	        <div class="row">
@@ -25,15 +34,31 @@
 					<form id="defaultForm" method="post" action="login.action">
 	            
 						<div class="form-group row" >
-							<div class="col-lg-8 col-lg-offset-1"> <input type="text" id="name" name="username" class="form-control col-lg-5" placeholder="用户名"/></div>
-								<a href="register.html" >还没有账号？</a>
+							<div class="col-lg-8 col-lg-offset-1"> 
+							<%if(webUser.getName()!=null&&webUser.getName()!="") {%>
+							<input type="text" value=<%=webUser.getName() %> id="name" name="name" class="form-control col-lg-5"  onchange="changemsg(this)"/></div>
+							<%}else{ %>
+							<input type="text" id="name" name="name" class="form-control col-lg-5" placeholder="用户名" onchange="changemsg(this)"/></div>
+							<%} %>
+								<a href="beforeregister.action" >还没有账号？</a>
 						</div>
 
                     	<div class="form-group row">
-                         	<div class="col-lg-8 col-lg-offset-1"> <input type="password" id="password" name="password" class="form-control" placeholder="密码"/></div>
-								<a href="register.html" class="display:block">忘记密码</a>
+                         	<div class="col-lg-8 col-lg-offset-1"> 
+                         	<%if(webUser.getPassword()!=null&&webUser.getPassword()!="") {%>
+                         	<input type="password" value=<%=webUser.getPassword() %>  id="password" name="user.password" class="form-control"  onchange="changemsg(this)"/></div>
+                         	<%}else{ %>
+                         	<input type="password"  id="password" name="password" class="form-control" placeholder="密码" onchange="changemsg(this)"/></div>
+                         	<%} %>
+								<a href="beforeregister.action" class="display:block">忘记密码</a>
                			</div>
 
+						<div class="form-group row">
+						<div class="col-lg-8 col-lg-offset-1"> 
+						<h5 style="color:red;" id="msgs"><%=msg %></h5>
+						</div>
+						</div>
+						
                			<div class="form-group ">
 							<p class="col-lg-offset-1"/>
                        		<input type="checkbox" name="rememberme" class="col-lg-offset-1"/>记住我
@@ -45,6 +70,15 @@
            </div> 
 	    </div> 
 	
+	<script type="text/javascript">
+	function changemsg(obj){
+		$("#msgs").html(" ");
+	}
+	window.onload =function onload(){
+		$("#msgs").html('<%=msg %>');
+	}
+	</script>
+	
 		<script type="text/javascript">
 		$(document).ready(function() {
 		    $('#defaultForm').bootstrapValidator({
@@ -55,7 +89,7 @@
 		            validating: 'glyphicon glyphicon-refresh'
 		        },
 				fields: {
-		            username: {
+		            name: {
 		                message: 'The username is not valid',
 		                validators: {
 		                    notEmpty: {
@@ -71,6 +105,7 @@
 		                }
 		            }
 		        }
+		       
 		    });
 		});
 		</script>
