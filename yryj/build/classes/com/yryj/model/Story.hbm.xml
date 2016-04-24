@@ -11,8 +11,8 @@
         <many-to-one name="chapter" class="com.yryj.model.Chapter" fetch="select">
             <column name="rootId" not-null="true" />
         </many-to-one>
-        <property name="type" type="string">
-            <column name="type" length="15" not-null="true" />
+        <property name="type" type="java.lang.Integer">
+            <column name="typeId" not-null="true" />
         </property>
         <property name="date" type="date">
             <column name="date" length="10" not-null="true" />

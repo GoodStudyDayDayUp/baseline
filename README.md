@@ -1,2 +1,2 @@
 # baseline
-a empty repository
+完善了type的其他方法

@@ -30,15 +30,15 @@ public class TestType {
 	public void testUpdate(){
 		TypeDL TypeDL=new TypeDL();
 		Type Type=TypeDL.find(13301084);
-		Type.setType("interesting story");;
+		Type.setFormat("interesting story");;
 		TypeDL.update(Type);
-		assertEquals("interesting story",TypeDL.find(13301084).getType());
+		assertEquals("interesting story",TypeDL.find(13301084).getFormat());
 	}
 	@Test
 	public void testFind(){
 		TypeDL TypeDL=new TypeDL();
 		Type Type=TypeDL.find(13301084);
-		assertEquals("interesting story",TypeDL.find(13301084).getType());
+		assertEquals("interesting story",TypeDL.find(13301084).getFormat());
 	}
 
 }

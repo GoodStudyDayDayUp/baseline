@@ -1,13 +1,18 @@
 package com.yryj.action;
 
 import com.yryj.model.Type;
-import com.yryj.sercvice.TypeManager;;
+
+import java.util.List;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.yryj.sercvice.TypeManager;
+import com.yryj.daoImpl.TypeDL;
 
 public class TypeAction {
 	Type Type=new Type();
 	Type searchType=new Type();
 	Integer id=null;
-	String type=null;
+	String format=null;
 	String style=null;
 	String length=null;
 	TypeManager typeManager;
@@ -17,10 +22,10 @@ public class TypeAction {
 	}
 	
 	public String addType(){
-		type=getType();
+		format=getFormat();
 		style=getStyle();
 		length=getLength();
-		Type.setType(type);
+		Type.setFormat(format);
 		Type.setStyle(style);
 		Type.setLength(length);
 		
@@ -44,6 +49,7 @@ public class TypeAction {
 		return "success";
 	}
 	
+	@SuppressWarnings("unchecked")
 	public String searchType(){
 		id=getId();
 		try {
@@ -52,9 +58,84 @@ public class TypeAction {
 			e.printStackTrace();
 			return "error";
 		}
+		ActionContext context=ActionContext.getContext();
+		context.getSession().put("searchType",searchType);
 		return "success";
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public String findAllFormatAction(){
+		List<String> list=typeManager.findAllFormat();
+		if(list.size()>0){
+			ActionContext context=ActionContext.getContext();
+			context.getSession().put("formatList",list);
+			return "success";
+		}else{
+			return "error";
+		}
+	}
+	
+	
+	public String findAllStyleAction(){
+		List<String> list=typeManager.findAllStyle(format);
+		if(list.size()>0){
+			ActionContext context=ActionContext.getContext();
+			context.getSession().put("styleList",list);
+			return "success";
+		}else{
+			return "error";
+		}
+	}
+	
+	
+	public String findAllLengthAction(){
+		List<String> list=typeManager.findAllLength(style);
+		if(list.size()>0){
+			ActionContext context=ActionContext.getContext();
+			context.getSession().put("lengthList",list);
+			return "success";
+		}else{
+			return "error";
+		}
+	}
 
+	
+	public String findByFormatAction(){
+		List<Type> list=typeManager.findByFormat(format);
+		if(list.size()>0){
+			ActionContext context=ActionContext.getContext();
+			context.getSession().put("typeListFoundByFormat",list);
+			return "success";
+		}else{
+			return "error";
+		}
+	}
+	
+	
+	public String findByStyleAction(){
+		List<Type> list=typeManager.findByStyle(format, style);
+		if(list.size()>0){
+			ActionContext context=ActionContext.getContext();
+			context.getSession().put("typeListFoundByStyle",list);
+			return "success";
+		}else{
+			return "error";
+		}
+	}
+	
+	
+	public String findByLengthAction(){
+		List<Type> list=typeManager.findByLength(format,style,length);
+		if(list.size()>0){
+			ActionContext context=ActionContext.getContext();
+			context.getSession().put("typeListFoundByLength",list);
+			return "success";
+		}else{
+			return "error";
+		}
+	}
+	
 	public Integer getId() {
 		return this.id;
 	}
@@ -63,12 +144,12 @@ public class TypeAction {
 		this.id = id;
 	}
 	
-	public String getType() {
-		return this.type;
+	public String getFormat() {
+		return this.format;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setFormat(String format) {
+		this.format = format;
 	}
 
 	public String getStyle() {
@@ -86,4 +167,5 @@ public class TypeAction {
 	public void setLength(String length) {
 		this.length = length;
 	}
+	
 }

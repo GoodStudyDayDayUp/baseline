@@ -13,20 +13,20 @@ public class Story implements java.io.Serializable {
 
 	private Integer id;
 	private Chapter chapter;
-	private String type;
+	private Integer type;
 	private Date date;
 	private Set utses = new HashSet(0);
 
 	public Story() {
 	}
 
-	public Story(Chapter chapter, String type, Date date) {
+	public Story(Chapter chapter, Integer type, Date date) {
 		this.chapter = chapter;
 		this.type = type;
 		this.date = date;
 	}
 
-	public Story(Chapter chapter, String type, Date date, Set utses) {
+	public Story(Chapter chapter, Integer type, Date date, Set utses) {
 		this.chapter = chapter;
 		this.type = type;
 		this.date = date;
@@ -49,11 +49,11 @@ public class Story implements java.io.Serializable {
 		this.chapter = chapter;
 	}
 
-	public String getType() {
+	public Integer getType() {
 		return this.type;
 	}
 
-	public void setType(String type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 

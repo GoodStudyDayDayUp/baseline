@@ -8,19 +8,19 @@ package com.yryj.model;
 public class Type implements java.io.Serializable {
 
 	private Integer id;
-	private String type;
+	private String format;
 	private String style;
 	private String length;
 
 	public Type() {
 	}
 
-	public Type(String type) {
-		this.type = type;
+	public Type(String format) {
+		this.format = format;
 	}
 
-	public Type(String type, String style, String length) {
-		this.type = type;
+	public Type(String format, String style, String length) {
+		this.format = format;
 		this.style = style;
 		this.length = length;
 	}
@@ -33,12 +33,12 @@ public class Type implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public String getType() {
-		return this.type;
+	public String getFormat() {
+		return this.format;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setFormat(String format) {
+		this.format = format;
 	}
 
 	public String getStyle() {
