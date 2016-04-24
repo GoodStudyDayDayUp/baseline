@@ -196,5 +196,14 @@
 			<ref bean="userManager" />
 		</property>
 	</bean>
-	
+	<bean id="chapterAction" class="com.yryj.action.ChapterAction">
+		<property name="chapterManager">
+			<ref bean="chapterManager" />
+		</property>
+	</bean>
+	<bean id="typeAction" class="com.yryj.action.TypeAction">
+		<property name="typeManager">
+			<ref bean="typeManager" />
+		</property>
+	</bean>
 </beans>

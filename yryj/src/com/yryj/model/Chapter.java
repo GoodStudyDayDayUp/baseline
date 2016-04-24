@@ -1,6 +1,6 @@
 package com.yryj.model;
 
-// Generated 2016-4-9 12:39:49 by Hibernate Tools 4.0.0
+// Generated 2016-4-21 11:17:52 by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +16,8 @@ public class Chapter implements java.io.Serializable {
 	private int praise;
 	private String content;
 	private boolean isEnd;
+	private Integer viewNum;
+	private String key;
 	private Set drafts = new HashSet(0);
 	private Set utcs = new HashSet(0);
 	private Set orders = new HashSet(0);
@@ -32,13 +34,15 @@ public class Chapter implements java.io.Serializable {
 	}
 
 	public Chapter(Chapter chapter, User user, int praise, String content,
-			boolean isEnd, Set drafts, Set utcs, Set orders, Set chapters,
-			Set stories) {
+			boolean isEnd, Integer viewNum, String key, Set drafts, Set utcs,
+			Set orders, Set chapters, Set stories) {
 		this.chapter = chapter;
 		this.user = user;
 		this.praise = praise;
 		this.content = content;
 		this.isEnd = isEnd;
+		this.viewNum = viewNum;
+		this.key = key;
 		this.drafts = drafts;
 		this.utcs = utcs;
 		this.orders = orders;
@@ -92,6 +96,22 @@ public class Chapter implements java.io.Serializable {
 
 	public void setIsEnd(boolean isEnd) {
 		this.isEnd = isEnd;
+	}
+
+	public Integer getViewNum() {
+		return this.viewNum;
+	}
+
+	public void setViewNum(Integer viewNum) {
+		this.viewNum = viewNum;
+	}
+
+	public String getKey() {
+		return this.key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 	public Set getDrafts() {

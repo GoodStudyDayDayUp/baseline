@@ -11,4 +11,7 @@ public interface ChapterManager {
 
 	public Chapter find(int id);
 
+	public String write(String content);
+	
+	public String read(int id);
 }
