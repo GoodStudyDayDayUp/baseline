@@ -4,3 +4,6 @@ encoding//WebContent/errorPage/othererror.jsp=UTF-8
 encoding//WebContent/login.jsp=UTF-8
 encoding//WebContent/main.jsp=UTF-8
 encoding//WebContent/register.jsp=UTF-8
+encoding//src/com/yryj/dao/TypeDao.java=UTF-8
+encoding//src/com/yryj/daoImpl/TypeDL.java=UTF-8
+encoding//src/com/yryj/sercvice/TypeManager.java=UTF-8

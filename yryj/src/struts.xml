@@ -52,6 +52,11 @@
 				<result name="error">/login.jsp</result>
 			</action>
 
+			<action name="writeJson" class="jsonAction" method="writeJson">
+				<result name="input">/login.jsp</result>
+				<result name="success">login.jsp</result>
+				<result name="error">/login.jsp</result>
+			</action>
 		
 
 			

@@ -1,5 +1,7 @@
 package com.yryj.serviceImpl;
 
+import java.util.List;
+
 import com.yryj.dao.StoryDao;
 import com.yryj.model.Story;
 import com.yryj.sercvice.StoryManager;
@@ -32,6 +34,13 @@ private StoryDao storyDao=null;
 	public Story find(int id) {
 		// TODO Auto-generated method stub
 		return storyDao.find(id);
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public List findAll() {
+		// TODO Auto-generated method stub
+		return storyDao.findAll();
 	}
 
 }

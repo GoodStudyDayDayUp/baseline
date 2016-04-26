@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,19 +14,23 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yryj.model.Chapter;
 import com.yryj.model.Story;
+import com.yryj.model.Type;
 import com.yryj.model.User;
 import com.yryj.sercvice.ChapterManager;
 import com.yryj.sercvice.StoryManager;
+import com.yryj.sercvice.TypeManager;
 
 public class ChapterAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 	private ChapterManager chapterManager;
 	private StoryManager storyManager;
+	private TypeManager typeManager;
 	private Chapter chapter;
 	private String filePath;
 	private String content;
-	private Story story;
+	private Story story=new Story();
+	private Type type = new Type();
 	public String execute() {
 		try {
 			return SUCCESS;
@@ -41,8 +46,9 @@ public class ChapterAction extends ActionSupport {
 			User user = (User)session.getAttribute("user");
 			Chapter parent = (Chapter)session.getAttribute("chapter");
 			String keyword = (String)session.getAttribute("keyword");
+			String f = "shuai",s="shuai",l="˧";
 			Chapter chapter = new Chapter();
-			filePath = chapterManager.write(content,parent);
+			filePath = chapterManager.write("123",parent);
 			chapter.setContent(filePath);
 			chapter.setPraise(0);
 			if(user!=null)
@@ -55,8 +61,14 @@ public class ChapterAction extends ActionSupport {
 			chapterManager.save(chapter);
 			if(chapter.getChapter()==null)
 			{
+				type.setFormat(f);
+				type.setStyle(s);
+				type.setLength(l);
+				typeManager.save(type);
+				type = (Type) typeManager.findByLength(f, s, l);
 				story.setChapter(chapter);
-				story.setType("type");
+				story.setType(type);
+				story.setDate(new Date(0));
 				storyManager.save(story);
 			}
 			return SUCCESS;
@@ -129,6 +141,12 @@ public class ChapterAction extends ActionSupport {
 	}
 	public void setStoryManager(StoryManager storyManager) {
 		this.storyManager = storyManager;
+	}
+	public TypeManager getTypeManager() {
+		return typeManager;
+	}
+	public void setTypeManager(TypeManager typeManager) {
+		this.typeManager = typeManager;
 	}
 
 }

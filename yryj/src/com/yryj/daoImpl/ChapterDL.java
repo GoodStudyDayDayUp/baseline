@@ -55,11 +55,12 @@ public class ChapterDL extends HibernateDaoSupport implements ChapterDao{
 	@Override
 	public List getChildren(Chapter parent) {
 		// TODO Auto-generated method stub
-		List list=getHibernateTemplate().find("from Chapter where parentId=?", parent.getId());
-		if(list.size()>0)
-			return list;
+		List list;
+		if(parent==null)
+			list=getHibernateTemplate().find("from Chapter where parentID is null");
 		else
-			return null;
+			list=getHibernateTemplate().find("from Chapter where parentID=?",parent.getId());
+		return list;
 	}
 
 }

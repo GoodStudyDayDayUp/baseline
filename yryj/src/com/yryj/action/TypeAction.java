@@ -6,8 +6,7 @@ import java.util.List;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.yryj.sercvice.TypeManager;
-import com.yryj.daoImpl.TypeDL;
-
+@SuppressWarnings("unchecked")
 public class TypeAction {
 	Type Type=new Type();
 	Type searchType=new Type();
@@ -49,7 +48,6 @@ public class TypeAction {
 		return "success";
 	}
 	
-	@SuppressWarnings("unchecked")
 	public String searchType(){
 		id=getId();
 		try {
@@ -64,7 +62,6 @@ public class TypeAction {
 	}
 	
 	
-	@SuppressWarnings("unchecked")
 	public String findAllFormatAction(){
 		List<String> list=typeManager.findAllFormat();
 		if(list.size()>0){
@@ -113,6 +110,7 @@ public class TypeAction {
 	}
 	
 	
+	
 	public String findByStyleAction(){
 		List<Type> list=typeManager.findByStyle(format, style);
 		if(list.size()>0){
@@ -126,10 +124,10 @@ public class TypeAction {
 	
 	
 	public String findByLengthAction(){
-		List<Type> list=typeManager.findByLength(format,style,length);
-		if(list.size()>0){
+		Type type=typeManager.findByLength(format,style,length);
+		if(type!=null){
 			ActionContext context=ActionContext.getContext();
-			context.getSession().put("typeListFoundByLength",list);
+			context.getSession().put("typeListFoundByLength",type);
 			return "success";
 		}else{
 			return "error";
