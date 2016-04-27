@@ -91,7 +91,7 @@ public class ChapterAction extends ActionSupport {
 
 	public String getJson() throws IOException
 	{
-		String urlPath="http://localhost:8080/yryj/JsonServlet.do";
+		String urlPath="getJSONList";
 
 		 //ServerFactory.getServer(8080).start();
 	    //列出原始数据
