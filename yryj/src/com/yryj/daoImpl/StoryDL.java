@@ -2,6 +2,7 @@ package com.yryj.daoImpl;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -51,4 +52,22 @@ public class StoryDL extends HibernateDaoSupport implements StoryDao{
 			return null;
 	}
 
+	@SuppressWarnings("rawtypes")
+	@Override
+	public List findAll() {
+		// TODO Auto-generated method stub
+		try{
+			Session session=getHibernateTemplate().getSessionFactory().openSession();
+			Transaction ts=session.beginTransaction();
+			Query query=session.createQuery("from Story order by id desc");
+			List list=query.list();
+			ts.commit();
+			session.close();
+			session=null;
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

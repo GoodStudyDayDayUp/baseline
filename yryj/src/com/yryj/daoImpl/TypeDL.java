@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
@@ -55,15 +54,16 @@ public class TypeDL extends HibernateDaoSupport implements TypeDao{
 			return null;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	//找到所有的format
+	//鎵惧埌鎵�湁鐨刦ormat
 	public List<String> findAllFormat() {
 		List<Type> list= (List<Type>)getHibernateTemplate().find("from Type");
 		List<String> formatList=new ArrayList<String>();
 		for(int i=0;i<list.size();i++){
 			formatList.add(((Type)list.get(i)).getFormat());
 		}
-		List<String> newList=removeDuplicate(formatList);    //删除相同名称
+		List<String> newList=removeDuplicate(formatList);    //鍒犻櫎鐩稿悓鍚嶇О
 		if(newList.size()>0)
 			return newList;
 		else
@@ -72,7 +72,7 @@ public class TypeDL extends HibernateDaoSupport implements TypeDao{
 	
 	
 	@Override
-	//找到当前format下的所有style
+	//鎵惧埌褰撳墠format涓嬬殑鎵�湁style
 	public List<String> findAllStyle(String format) {
 		@SuppressWarnings("unchecked")
 		List<Type> list=(List<Type>) getHibernateTemplate().find("from Type where format=?",format);
@@ -80,7 +80,7 @@ public class TypeDL extends HibernateDaoSupport implements TypeDao{
 		for(int i=0;i<list.size();i++){
 			styleList.add(((Type)list.get(i)).getStyle());
 		}
-		List<String> newList=removeDuplicate(styleList);    //删除相同名称
+		List<String> newList=removeDuplicate(styleList);    //鍒犻櫎鐩稿悓鍚嶇О
 		if(newList.size()>0)
 			return newList;
 		else
@@ -89,7 +89,7 @@ public class TypeDL extends HibernateDaoSupport implements TypeDao{
 	
 	
 	@Override
-	//找到当前style下的所有legnth
+	//鎵惧埌褰撳墠style涓嬬殑鎵�湁legnth
 	public List<String> findAllLength(String style) {
 		@SuppressWarnings("unchecked")
 		List<Type> list=(List<Type>) getHibernateTemplate().find("from Type where style=?",style);
@@ -97,7 +97,7 @@ public class TypeDL extends HibernateDaoSupport implements TypeDao{
 		for(int i=0;i<list.size();i++){
 			lengthList.add(((Type)list.get(i)).getLength());
 		}
-		List<String> newList=removeDuplicate(lengthList);    //删除相同名称
+		List<String> newList=removeDuplicate(lengthList);    //鍒犻櫎鐩稿悓鍚嶇О
 		if(newList.size()>0)
 			return newList;
 		else
@@ -113,7 +113,7 @@ public class TypeDL extends HibernateDaoSupport implements TypeDao{
 	}   
 	
 	
-	//找到format对应的type集合
+	//鎵惧埌format瀵瑰簲鐨則ype闆嗗悎
 	public List<Type> findByFormat(String format){
 		@SuppressWarnings("unchecked")
 		List<Type> list=(List<Type>) getHibernateTemplate().find("from Type where format=?",format);
@@ -124,7 +124,7 @@ public class TypeDL extends HibernateDaoSupport implements TypeDao{
 	}
 	
 	
-	//找到format和style对应的type集合
+	//鎵惧埌format鍜宻tyle瀵瑰簲鐨則ype闆嗗悎
 	public List<Type> findByStyle(String format,String style){
 		List<Type> list = new ArrayList<Type>();
 		List<Type> formatList=findByFormat(format);
@@ -139,17 +139,14 @@ public class TypeDL extends HibernateDaoSupport implements TypeDao{
 	}
 	
 	
-	//找到format、style和format唯一对应的type集合，此时type集合只有一个type
-	public List<Type> findByLength(String format,String style,String length){
+	//鎵惧埌format銆乻tyle鍜宖ormat鍞竴瀵瑰簲鐨則ype闆嗗悎锛屾鏃秚ype闆嗗悎鍙湁涓�釜type
+	public Type findByLength(String format,String style,String length){
 		List<Type> list = new ArrayList<Type>();
 		List<Type> styleList=findByStyle(format,style);
 		for(int i=0;i<styleList.size();i++){
 			if(((Type)styleList.get(i)).getLength().equals(length))
 				list.add((Type)styleList.get(i));
 		}
-		if(list.size()>0)
-			return list;
-		else
-			return null;
+		return list.get(0);
 	}
 }

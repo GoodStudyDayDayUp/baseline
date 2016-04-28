@@ -31,7 +31,7 @@
 			
 			<section>
 				<div class="col-lg-6 col-lg-offset-3" >
-					<form id="defaultForm" method="post" action="getJson.action">
+					<form id="defaultForm" method="post" action="login.action">
 	            
 						<div class="form-group row" >
 							<div class="col-lg-8 col-lg-offset-1"> 

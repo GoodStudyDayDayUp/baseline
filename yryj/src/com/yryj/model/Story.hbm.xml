@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016-4-21 11:17:52 by Hibernate Tools 4.0.0 -->
+<!-- Generated 2016-4-26 12:25:28 by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.yryj.model.Story" table="story" catalog="opos">
+    <class name="com.yryj.model.Story" table="story" catalog="opos" lazy="false">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
+        <many-to-one name="type" class="com.yryj.model.Type" fetch="select">
+            <column name="typeId" not-null="true" />
+        </many-to-one>
         <many-to-one name="chapter" class="com.yryj.model.Chapter" fetch="select">
             <column name="rootId" not-null="true" />
         </many-to-one>
-        <property name="type" type="java.lang.Integer">
-            <column name="typeId" not-null="true" />
-        </property>
         <property name="date" type="date">
             <column name="date" length="10" not-null="true" />
         </property>
-        <set name="utses" table="uts" inverse="true" lazy="true" fetch="select">
+        <set name="utses" table="uts" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="storyId" not-null="true" />
             </key>

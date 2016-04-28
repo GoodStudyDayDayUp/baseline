@@ -1,7 +1,10 @@
 package com.yryj.sercvice;
 
-import com.yryj.model.Chapter;
+import java.util.List;
 
+import com.yryj.model.Chapter;
+import com.yryj.model.Story;
+@SuppressWarnings("rawtypes")
 public interface ChapterManager {
 	public void save(Chapter chapter);
 
@@ -14,4 +17,8 @@ public interface ChapterManager {
 	public String write(String content,Chapter parent);
 	
 	public String read(int id);
+	
+	public List getTree(Story story);
+	
+	public List getChildren(Chapter chapter);
 }

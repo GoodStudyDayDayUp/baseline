@@ -200,10 +200,24 @@
 		<property name="chapterManager">
 			<ref bean="chapterManager" />
 		</property>
+		<property name="storyManager">
+			<ref bean="storyManager" />
+		</property>
+			<property name="typeManager">
+			<ref bean="typeManager" />
+		</property>
 	</bean>
 	<bean id="typeAction" class="com.yryj.action.TypeAction">
 		<property name="typeManager">
 			<ref bean="typeManager" />
+		</property>
+	</bean>
+	<bean id="jsonAction" class="com.yryj.action.JsonAction">
+		<property name="storyManager">
+			<ref bean="storyManager" />
+		</property>
+		<property name="chapterManager">
+			<ref bean="chapterManager" />
 		</property>
 	</bean>
 </beans>

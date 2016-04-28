@@ -1,6 +1,6 @@
 package com.yryj.model;
 
-// Generated 2016-4-21 11:17:52 by Hibernate Tools 4.0.0
+// Generated 2016-4-26 12:25:28 by Hibernate Tools 4.0.0
 
 import java.util.Date;
 
@@ -9,10 +9,6 @@ import java.util.Date;
  */
 public class Order implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Chapter chapter;
 	private User user;

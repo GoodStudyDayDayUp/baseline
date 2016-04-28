@@ -6,12 +6,15 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.yryj.action.ChapterAction;
 import com.yryj.dao.ChapterDao;
 import com.yryj.model.Chapter;
+import com.yryj.model.Story;
 import com.yryj.sercvice.ChapterManager;
-
+@SuppressWarnings("rawtypes")
 public class ChapterML implements ChapterManager{
 	private ChapterDao chapterDao=null;
 	private String filePath;	
@@ -41,7 +44,7 @@ public class ChapterML implements ChapterManager{
 		// TODO Auto-generated method stub
 		return chapterDao.find(id);
 	}
-
+	
 	@SuppressWarnings("resource")
 	@Override
 	public String write(String content,Chapter parent) {
@@ -99,5 +102,32 @@ public class ChapterML implements ChapterManager{
 		return content;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List getTree(Story story) {
+		// TODO Auto-generated method stub
+		Chapter rootChapter = chapterDao.find(story.getChapter().getId());
+		List list = new ArrayList();
+		list.add(rootChapter);
+		list.addAll(traversal(list));
+		return list;
+	}
+	@SuppressWarnings("unchecked")
+	private List traversal(List list)
+	{
+		List childList = new ArrayList<Chapter>();
+		for(int i=0;i<list.size();i++)
+		{
+			List cNode = traversal(chapterDao.getChildren((Chapter)list.get(i)));
+			childList.addAll(cNode);
+		}
+		return childList;
+	}
+
+	@Override
+	public List getChildren(Chapter parent) {
+		// TODO Auto-generated method stub
+		return chapterDao.getChildren(parent);
+	}
 	
 }

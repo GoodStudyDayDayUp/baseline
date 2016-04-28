@@ -62,7 +62,7 @@ private TypeDao typeDao=null;
 	}
 	
 	
-	public List<Type> findByLength(String format,String style,String length){
+	public Type findByLength(String format,String style,String length){
 		return typeDao.findByLength(format,style,length);
 	}
 }
