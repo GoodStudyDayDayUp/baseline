@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+import="com.yryj.model.*"
+%>
+<!DOCTYPE html>
+<html>
 <head>
 		<title>个人中心</title>
         <meta charset="UTF-8">
@@ -36,23 +38,26 @@ text-decoration: none;
 		</style>
 </head>
 <body>
+<%User user=(User)session.getAttribute("user");
+if(user==null)
+	user=new User();
+String phone = user.getPhone();
+String msg=(String)session.getAttribute("msg")==null?"":(String)session.getAttribute("msg");
+%>
+<script type="text/javascript">
+window.onload = function() {
+	var m="<%=msg%>";
+	if(m!="")
+		alert(m);
+	}
+</script>
+
 <nav class="navbar navbar-default" role="navigation" style=" margin:0px 0px 0px 0px;">
 	<div class="navbar-header">
       <a class="navbar-brand" href="main.jsp" style="font-family:SimHei;">一人一句</a>
    </div>
-		<div>
-			<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
-				<li class="dropdown" style="margin:0px 0px 0px 0px;font-family: SimHei  ;">
-					<a href="usercenter.jsp" class="dropdown-toggle" data-toggle="dropdown" >
-					用户名 <b class="caret"></b>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="usercenter.jsp">个人主页</a></li>
-						<li><a href="login.jsp">注销</a></li>
-					</ul>
-				</li>
-			</ul>
-			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事开头</a></p>
+      <div>
+			<p class="navbar-text navbar-right" style="font-family: SimHei;margin-right: 20px;" ><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事 </a></p>
 		</div>
 	</nav>
 
@@ -77,33 +82,119 @@ text-decoration: none;
 				</div>
 				<div class="panel-body" >
 					<table class="table">
-						<tr><td>用户名</td><td><span class="label label-default">robin_g</span></td></tr>
-						<tr><td>邮箱</td><td><span class="label label-default">842136912@qq.com</span></td></tr>
+						<tr><td>用户名</td><td><span class="label label-default"><%=user.getName()%></span></td></tr>
+						<tr><td>邮箱</td><td><span class="label label-default"><%=user.getEmail() %></span></td></tr>
 						<tr><td>联系方式</td>
+						
 						<td>
-							<input type="text" class="form-control" id="phone" value="18813039364"/>
-							<button type="button" class="btn btn-default" style="margin-top:5px;">更新联系方式</button>
+						<form action="updateUser.action" method="post"  onsubmit="return UpdatePhone()" >
+						    <%if(phone==null) {%>
+							<input type="text" class="form-control" id="phone" name="phone" value="" placeholder="绑定手机号"/>
+							<%}else{ %>
+							<input type="text" class="form-control" id="phone" name="phone" value=<%=user.getPhone()%>>
+							<%} %>
+							<p style="font-size:10px;color:red;display:none;" id="notphone">不是正确的格式</p>
+							<button type="submit" class="btn btn-default" style="margin-top:5px;" >更新联系方式</button>
+						</form>
 						</td>
+						
 						</tr>
 					</table>
 					<hr/>
+					<form action="updateUser.action" method="post" onsubmit="return Confirm()">
 					<p>原有密码</p>
-					<input type="text" class="form-control" id=oldpwd" />
+					<input type="password" class="form-control"  id="oldpwd"  />
+					<p style="font-size:10px;color:red;display:none;"  id="oldpwd_wrong">密码错误</p>
 					<p>新密码</p>
-					<input type="password" name="password" class="form-control" id=newpwd" />
+					<input type="password" name="password" class="form-control" id="newpwd" onClick="checkPass()"/>
+					<p style="font-size:10px;color:red;display:none;" id="newpwd_empty">不能为空</p>
+					<p style="font-size:10px;color:red;display:none;" id="newpwd_wrong">密码格式错误</p>
 					<p>确认新密码</p>
-					<input type="password" name="password" class="form-control" id=confirmpwd" />
-					<button type="button" class="btn btn-default" style="margin-top:5px;">更新密码</input>
+					<input type="password" name="password2" class="form-control" id="confirmpwd" onClick="checkPass()"/>
+					<p style="font-size:10px;color:red;display:none;" id="repwd_empty">不能为空</p>
+					<p style="font-size:10px;color:red;display:none;" id="notconsist">两次密码不一致</p>
+					<button type="submit" class="btn btn-default" style="margin-top:5px;" >更新密码</input>
+				</form>
+				
 				</div>
 			</div>
-			<div class="panel panel-danger">
-				<div class="panel-heading">
-					<h3 class="panel-title">删除当前用户</h3>
-				</div>
-				<div class="panel-body">
-					<button type="button" class="btn btn-danger">删除用户</button>
-				</div>
-			</div>
+			<script type="text/javascript">
+			function checkPass(){
+				var oldpwd = document.getElementById("oldpwd");
+				var w = document.getElementById("oldpwd_wrong");
+			    if(oldpwd.value!="<%=user.getPassword() %>"){
+					w.style.display = "block";
+			    }else{
+			    	w.style.display = "none";
+			    }
+			}
+			</script>
+			
+			<script language="javascript">	
+					function UpdatePhone(){
+						var myreg = /^[1][358][0-9]{9}$/; 
+						//验证130-139,150-159,180-189号码段的手机号码
+						if(!myreg.test($("#phone").val())) 
+						{ 
+							var w = document.getElementById("notphone");
+							w.style.display = "block";
+							return false;
+						} 
+						w.style.display = "none";
+						return true;
+					}
+					
+					
+					function Confirm(){
+						var oldpwd = document.getElementById("oldpwd");
+						var newpwd = document.getElementById("newpwd");
+						var repwd = document.getElementById("confirmpwd");
+						var m = /^[a-zA-Z0-9_\.]+$/;
+						if (oldpwd){//检验旧密码
+							var oldpwd = document.getElementById("oldpwd");
+							var w = document.getElementById("oldpwd_wrong");
+						    if(oldpwd.value!="<%=user.getPassword() %>"){
+								w.style.display = "block";
+								return false;
+						    }
+						}
+
+						if((newpwd.value)==""){
+							var w = document.getElementById("newpwd_empty");
+							w.style.display = "block";
+							return false;
+						}else{
+							var w = document.getElementById("newpwd_empty");
+							w.style.display = "none";
+						}
+						if(!m.test($("#newpwd").val()) | newpwd.value.length<6 | newpwd.value.length>18){
+							var w = document.getElementById("newpwd_wrong");
+							w.style.display = "block";
+							return false;
+						}else{
+							var w = document.getElementById("newpwd_wrong");
+							w.style.display = "none";
+						}
+						if ((repwd.value)==""){
+							var w = document.getElementById("repwd_empty");
+							w.style.display = "block";
+							return false;
+						}else{
+							var w = document.getElementById("repwd_empty");
+							w.style.display = "none";
+						}
+						if((newpwd.value)!=(repwd.value)){
+							var w = document.getElementById("notconsist");
+							w.style.display = "block";
+							return false;
+						}else{
+							var w = document.getElementById("notconsist");
+							w.style.display = "none";
+						}
+						return true;
+					}
+
+				</script>
 		</div>
 		<div id="chpts" style="display:none;">
 			<ul id="myTab" class="nav nav-tabs">

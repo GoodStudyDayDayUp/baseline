@@ -34,6 +34,10 @@
 				<result name="success">/login.jsp</result>
 				<result name="error">/login.jsp</result>
 			</action>
+			<action name="updateUser" class="userAction" method="updateUser">
+			    <result name="success">/usercenter.jsp</result>
+			    <result name="error">/usercenter.jsp</result>
+			</action>
 			
 			
 			<action name="write" class="chapterAction" method="write">

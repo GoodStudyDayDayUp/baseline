@@ -27,7 +27,7 @@
 	<body style="background-color:#EDEDED ">
 	    <div class="container">
 	        <div class="row">
-			<p style="text-align:center; margin:auto"><img src="pics\logopic.png" /></p>
+			<p style="text-align:center; margin:auto"><a href="main.jsp"><img src="pics\logopic.png" /></a></p>
 			
 			<section>
 				<div class="col-lg-6 col-lg-offset-3" >

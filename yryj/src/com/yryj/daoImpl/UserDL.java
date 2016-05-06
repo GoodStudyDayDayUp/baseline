@@ -37,7 +37,16 @@ public class UserDL extends HibernateDaoSupport implements UserDao{
 	@Override
 	public void update(User user) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().update(user);
+		try{
+			Session session=getHibernateTemplate().getSessionFactory().openSession();
+			Transaction ts=session.beginTransaction();
+			session.update(user);
+			ts.commit();
+			session.close();
+			session=null;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" import="com.yryj.model.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -64,6 +64,9 @@ text-decoration: none;
 }
 		</style>
 	</head>
+		<%
+	User user=(User)session.getAttribute("user"); 
+	%>
 <body ><!--onLoad="scrollTo(0,500)-->
 	<!--导航栏-->
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#ededed; margin:0px 0px 0px 0px;">
@@ -73,16 +76,22 @@ text-decoration: none;
 		<div>
 			<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
 				<li class="dropdown" style="margin:0px 0px 0px 0px;font-family: SimHei  ;">
+				<%if(user!=null){ %>
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" >
-					用户名 <b class="caret"></b>
+					<%=user.getName() %><b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="usercenter.jsp">个人主页</a></li>
-						<li><a href="login.jsp">注销</a></li>
+						<li><a href="logout.action">注销</a></li>
 					</ul>
+					<%}else{ %>
+					<a href="beforelogin.action"  >
+					登录
+					</a>
+					<%} %>
 				</li>
 			</ul>
-			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事开头</a></p>
+			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事</a></p>
 		</div>
 	</nav>
 	<div class="container" style="margin-top:50px;">
