@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <html>
 <head>
 		<title>阅读界面</title>
@@ -9,12 +11,26 @@
 		<link rel="stylesheet" href="css/bootstrap.min.css"/>
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.js"></script>
-		
+		<style>
+			a:link {
+text-decoration: none;
+color: #666666;
+}
+a:visited {
+text-decoration: none;
+}
+a:hover {
+text-decoration: none;
+}
+a:active {
+text-decoration: none;
+}
+		</style>
 </head>
 <body >
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" margin:0px 0px 0px 0px;">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="main.html">首页 /</a>
+			<a class="navbar-brand" href="main.jsp">首页 /</a>
 			<a class="navbar-brand" style="padding-left:0px;" href="#">小说 /</a>
 			<a class="navbar-brand" style="padding-left:0px;" href="#">玄幻 /</a>
 			<a class="navbar-brand" style="padding-left:0px;" href="#">长篇</a>
@@ -26,11 +42,12 @@
 					用户名 <b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="usercenter.html">个人主页</a></li>
-						<li><a href="login.html">注销</a></li>
+						<li><a href="usercenter.jsp">个人主页</a></li>
+						<li><a href="login.jsp">注销</a></li>
 					</ul>
 				</li>
 			</ul>
+			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事开头</a></p>
 		</div>
 	</nav>
 	
@@ -38,11 +55,7 @@
 	<div style="position:fixed; left:0px; top:50px; width:100%; height:100%">
 		<img src="pics\back.jpg" width=100% height="100%"/>
 	</div>
-	
-	<!--<div style="position:relative; right:10px; ">
-		<button class="btn btn-default"><img src="pics\setting.png"/></button>
-	</div>-->
-	
+
 
 	
 	<div class="container" style=" margin-top:50px;">
@@ -59,13 +72,13 @@
 				地点：神州浩土。</p>
 				<div class="row" >
 					<div class="user" id="chptuser">
-						<a href="x.html">萧乾</a>
+						<a href="x.jsp">萧乾</a>
 						<span>浏览数：10</span>
 					</div>
 					<div class="functs" id="funct">
 						<button type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;" id="a" value="0" onclick="LoveShow(this)"></button>
 						<button type="button" class="btn btn-default glyphicon glyphicon-star" style="border:none;padding:3px 7px 2px 7px;" id="b" value="0" onclick="CollectShow(this)"></button>
-						<a href="write.html"><button type="button" class="btn btn-default glyphicon glyphicon-plus" style="border:none;padding:3px 7px 2px 7px;" id="c" ></button></a>
+						<a href="write.jsp"><button type="button" class="btn btn-default glyphicon glyphicon-plus" style="border:none;padding:3px 7px 2px 7px;" id="c" ></button></a>
 					</div>
 				</div>
 			</div>
@@ -91,13 +104,13 @@
     这个故事，便是从“青云门”开始的。</p>
 				<div class="row" >
 					<div class="user" id="chptuser">
-						<a href="x.html">萧乾</a>
+						<a href="x.jsp">萧乾</a>
 						<span>浏览数：10</span>
 					</div>
 					<div class="functs" id="funct">
 						<button type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;" id="d" value="0" onclick="LoveShow(this)"></button>
 						<button type="button" class="btn btn-default glyphicon glyphicon-star" style="border:none;padding:3px 7px 2px 7px;" id="e" value="0" onclick="CollectShow(this)"></button>
-						<a href="write.html"><button type="button" class="btn btn-default glyphicon glyphicon-plus" style="border:none;padding:3px 7px 2px 7px;" id="f" ></button></a>
+						<a href="write.jsp"><button type="button" class="btn btn-default glyphicon glyphicon-plus" style="border:none;padding:3px 7px 2px 7px;" id="f" ></button></a>
 					</div>
 				</div>
 			</div>
@@ -133,13 +146,13 @@
     直到距今一千三百年前，情况才有了改变。</p>
 				<div class="row" >
 					<div class="user" id="chptuser">
-						<a href="x.html">萧乾</a>
+						<a href="x.jsp">萧乾</a>
 						<span>浏览数：10</span>
 					</div>
 					<div class="functs" id="funct">
 						<button type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;" id="d" value="0" onclick="LoveShow(this)"></button>
 						<button type="button" class="btn btn-default glyphicon glyphicon-star" style="border:none;padding:3px 7px 2px 7px;" id="e" value="0" onclick="CollectShow(this)"></button>
-						<a href="write.html"><button type="button" class="btn btn-default glyphicon glyphicon-plus" style="border:none;padding:3px 7px 2px 7px;" id="f" ></button></a>
+						<a href="write.jsp"><button type="button" class="btn btn-default glyphicon glyphicon-plus" style="border:none;padding:3px 7px 2px 7px;" id="f" ></button></a>
 					</div>
 				</div>
 			</div>
@@ -156,7 +169,7 @@
 	
 	function LeftChpt(){
 		var content = document.getElementById("b1");
-		content.innerHTML ="乌山镇，玉兰大陆第一山脉‘魔兽山脉’西方的芬莱王国中的一个普通小镇。";
+		content.innerjsp ="乌山镇，玉兰大陆第一山脉‘魔兽山脉’西方的芬莱王国中的一个普通小镇。";
 	}
 	function RightChpt(){
 		//按下向右的按钮更换p内容

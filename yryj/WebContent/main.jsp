@@ -1,4 +1,4 @@
-
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -23,7 +23,7 @@
    $(function(){
       // 初始化轮播
 	  $('.carousel').carousel({
-			interval: 2000
+			interval: 5000
 		});
 	});
 	</script>
@@ -57,9 +57,9 @@ function goTopEx() {
 <body "><!--onLoad="scrollTo(0,500)-->
 	<!--导航栏-->
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#ededed; margin:0px 0px 0px 0px;">
-		<!--<div class="navbar-header">
-			<a class="navbar-brand" href="main.html">一人一句</a>
-		</div>-->
+		<div class="navbar-header">
+      <a class="navbar-brand" href="main.jsp" style="font-family:SimHei;">一人一句</a>
+   </div>
 		<div>
 			<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
 				<li class="dropdown" style="margin:0px 0px 0px 0px;font-family: SimHei  ;">
@@ -67,8 +67,8 @@ function goTopEx() {
 					用户名 <b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="info.html">个人主页</a></li>
-						<li><a href="login.html">注销</a></li>
+						<li><a href="usercenter.jsp">个人主页</a></li>
+						<li><a href="login.jsp">注销</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -87,7 +87,7 @@ function goTopEx() {
 				<p style="text-align:center; margin:auto"><img src="pics\logopic.png" height="100%" alt="First slide"></p>
 			</div>
 			<div class="item">
-				<p style="text-align:center; margin:auto"><img src="pics\logopic.png" height="100%" alt="Second slide"></p>
+				<p style="text-align:center; margin:auto"><img src="pics\main_pic2.jpeg" height="100%" alt="Second slide"></p>
 			</div>
 		</div>
 	</div> 
@@ -98,23 +98,23 @@ function goTopEx() {
 		<table class="category">
 			<tr>
 				<td><div class="category-boxes">
-				<a href="xiaoshuo.html" >
+				<a href="main-tree.jsp" >
 					<img src="pics\xiaoshuo.jpg" class="blur"/>		
 					<span class="title" >小说</span>
 				</a></div>
 				</td>
 				
-				<td><div class="category-boxes"><a href="shige.html">
+				<td><div class="category-boxes"><a href="main-tree.jsp">
 					<img src="pics\shige.jpg" class="blur"/>
 					<span class="title" >诗歌</span>
 				</a></div></td>
 				
-				<td><div class="category-boxes"><a href="sanwen.html">
+				<td><div class="category-boxes"><a href="main-tree.jsp">
 					<img src="pics\sanwen.jpg" class="blur"/>
 					<span class="title" >散文</span>
 				</a></div></td>
 				
-				<td><div class="category-boxes"><a href="xiju.html">
+				<td><div class="category-boxes"><a href="main-tree.jsp">
 					<img src="pics\xiju.jpg" class="blur"/>
 					<span class="title" >戏剧</span>
 				</a></div></td>
@@ -128,45 +128,51 @@ function goTopEx() {
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 storyofmain" >
 				<div class="col-lg-4 storyclass storycenter" style="background-color:#191970" >
-					<h3 ><a href="x">小说</a></h3>
-					<h4 ><a href="x">武侠</a></h4>
-					<h5 ><a href="x">长篇</a></h5>
+					<h3 ><a href="main-tree.jsp">小说</a></h3>
+					<h4 ><a href="main-tree.jsp">武侠</a></h4>
+					<h5 ><a href="main-tree.jsp">长篇</a></h5>
 				</div>
 				<div class="col-lg-8 storybegin"><p class="storycenter">
-					<a href="x">这世间本是没有什么神仙的，但自太古以来，人类眼见周遭世界，诸般奇异之事，电闪雷鸣，狂风暴雨，又有天灾人祸，伤亡无数，哀鸿遍野，决非人力所能为，所能抵挡。遂以为九天之上，有诸般神灵，九幽之下，亦是阴魂归处，阎罗殿堂。于是神仙之说，流传于世。</a>
+					<a href="read.jsp">这世间本是没有什么神仙的，但自太古以来，人类眼见周遭世界，诸般奇异之事，电闪雷鸣，狂风暴雨，又有天灾人祸，伤亡无数，哀鸿遍野，决非人力所能为，所能抵挡。遂以为九天之上，有诸般神灵，九幽之下，亦是阴魂归处，阎罗殿堂。于是神仙之说，流传于世。</a>
 				</p></div>
 			</div>
 			<div class="col-lg-8 col-lg-offset-2 storyofmain" >
 				<div class="col-lg-8 storybegin"><p class="storycenter">
-					<a href="x">劳伦斯 ：在星期四吗，伯爵？时间未免太局促了。<br>
+					<a href="read.jsp">劳伦斯 ：在星期四吗，伯爵？时间未免太局促了。<br>
 					帕里斯 ：这是我的岳父凯普莱特的意思；他既然这样性急，我也不愿把时间延迟下去。<br></a>
 				</p></div>
 				<div class="col-lg-4 storyclass storycenter"style="background-color:#DC143C" >
-					<h3 ><a href="x">戏剧</a></h3>
-					<h4 ><a href="x">近代</a></h4>
-					<h5 ><a href="x">孟京辉</a></h5>
+					<h3 ><a href="main-tree.jsp">戏剧</a></h3>
+					<h4 ><a href="main-tree.jsp">近代</a></h4>
+					<h5 ><a href="main-tree.jsp">孟京辉</a></h5>
 				</div>
 			</div>
 			<div class="col-lg-8 col-lg-offset-2 storyofmain" >
 				<div class="col-lg-4 storyclass storycenter" style="background-color:#EEC900" >
-					<h3 ><a href="x">散文</a></h3>
-					<h4 ><a href="x">风景</a></h4>
-					<h5 ><a href="x">短篇</a></h5>
+					<h3 ><a href="main-tree.jsp">散文</a></h3>
+					<h4 ><a href="main-tree.jsp">风景</a></h4>
+					<h5 ><a href="main-tree.jsp">短篇</a></h5>
 				</div>
 				<div class="col-lg-8 storybegin"><p class="storycenter">
-					<a href="x">秋天，无论在什么地方的秋天，总是好的；可是啊，北国的秋，却特别地来得清，来得静，来得悲凉。我的不远千里，要从杭州赶上青岛，更要从青岛赶上北平来的理由，也不过想饱尝一尝这“秋”，这故都的秋味。</a>
+					<a href="read.jsp">秋天，无论在什么地方的秋天，总是好的；可是啊，北国的秋，却特别地来得清，来得静，来得悲凉。我的不远千里，要从杭州赶上青岛，更要从青岛赶上北平来的理由，也不过想饱尝一尝这“秋”，这故都的秋味。</a>
 				</p></div>
 			</div>
-			<div class="col-lg-8 col-lg-offset-2 storyofmain" >
-				<div class="col-lg-8 storybegin"><p class="storycenter">
-					<a href="x">在青麦地上跑着 <br/>
+			<div class="col-lg-8 col-lg-offset-2 storyofmain"  >
+				<div class="col-lg-8 storybegin" ><p class="storycenter">
+					<a href="read.jsp">在青麦地上跑着 <br/>
+					雪和太阳的光芒 <br/>
+					诗人，你无力偿还 <br/>
+					在青麦地上跑着 <br/>
+					雪和太阳的光芒 <br/>
+					诗人，你无力偿还 <br/>
+					在青麦地上跑着 <br/>
 					雪和太阳的光芒 <br/>
 					诗人，你无力偿还 <br/></a>
 				</p></div>
-				<div class="col-lg-4 storyclass storycenter" style="background-color:#458B74" >
-					<h3 ><a href="x">诗歌</a></h3>
-					<h4 ><a href="x">死亡</a></h4>
-					<h5 ><a href="x">太阳</a></h5>
+				<div class="col-lg-4 storyclass storycenter" style="background-color:#458B74;" >
+					<h3 ><a href="main-tree.jsp">诗歌</a></h3>
+					<h4 ><a href="main-tree.jsp">死亡</a></h4>
+					<h5 ><a href="main-tree.jsp">太阳</a></h5>
 				</div>
 			</div>
 		</div>

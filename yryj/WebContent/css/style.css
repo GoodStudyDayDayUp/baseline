@@ -8,6 +8,19 @@ textarea{
 	resize:none;
 }
 
+a:link {
+text-decoration: none;
+}
+a:visited {
+text-decoration: none;
+}
+a:hover {
+text-decoration: none;
+}
+a:active {
+text-decoration: none;
+}
+
 .category{
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -48,6 +61,7 @@ textarea{
 	height:150px;
 	margin:10px 10px 0px 0px;
 	font-family:SimHei;
+	overflow:hidden;
 }
 
 .storyclass{
@@ -65,15 +79,14 @@ textarea{
 .storybegin{
 	display:table;
 	height:100%;
-	border:1px solid #ededed;
 	text-overflow: ellipsis;
-	padding: 10px 15px 10px 15px;
+	padding: 10px 15px 10px 15px; margin-bottom:-9999px；padding-bottom:9999px;
 }
 .storybegin a:link {color: #000000}/* 未访问的链接 */
 .storybegin a:hover {color: #434343} /* 鼠标移动到链接上 */
 
 .storycenter{	
-	display:table-cell; vertical-align:middle;
+	display:table-cell; vertical-align:middle; margin-bottom:-9999px；padding-bottom:9999px;
 }
 
 .everychpt{

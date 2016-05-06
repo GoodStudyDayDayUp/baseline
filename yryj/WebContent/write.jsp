@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 		<title>新加一段文字</title>
         <meta charset="UTF-8">
@@ -9,13 +10,27 @@
 		<link rel="stylesheet" href="css/bootstrap.min.css"/>
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.js"></script>
-		
+		<style>
+			a:link {
+text-decoration: none;
+color: #666666;
+}
+a:visited {
+text-decoration: none;
+}
+a:hover {
+text-decoration: none;
+}
+a:active {
+text-decoration: none;
+}
+		</style>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" margin:0px 0px 0px 0px;">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="read.html" style="padding-top:17px;"><img src="pics\go_back.png"/></a>
-			<a class="navbar-brand" href="read.html" style="padding-left:0px">返回</a>
+			<a class="navbar-brand" href="read.jsp" style="padding-top:17px;"><img src="pics\go_back.png"/></a>
+			<a class="navbar-brand" href="read.jsp" style="padding-left:0px">返回</a>
 		</div>
 		<div>
 			<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
@@ -24,11 +39,12 @@
 					用户名 <b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="usercenter.html">个人主页</a></li>
-						<li><a href="login.html">注销</a></li>
+						<li><a href="usercenter.jsp">个人主页</a></li>
+						<li><a href="login.jsp">注销</a></li>
 					</ul>
 				</li>
 			</ul>
+			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事开头</a></p>
 		</div>
 	</nav>
 	
@@ -51,13 +67,12 @@
     </p>
 				<div class="row" >
 					<div class="user" id="chptuser">
-						<a href="x.html">萧乾</a>
+						<a href="x.jsp">萧乾</a>
 						<span>浏览数：10</span>
 					</div>
-					<div class="functs" id="funct">
+					<div class="functs" id="funct" style="margin-right: 10px;">
 						<button type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;" id="love" value="0" onclick="LoveShow(this)"></button>
 						<button type="button" class="btn btn-default glyphicon glyphicon-star" style="border:none;padding:3px 7px 2px 7px;" id="collect" value="0" onclick="CollectShow(this)"></button>
-						<a href="write.html"><button type="button" class="btn btn-default glyphicon glyphicon-plus" style="color:#428bca; border:none;padding:3px 7px 2px 7px;" id="write" ></button></a>
 					</div>
 				</div>
 			</div>
@@ -68,9 +83,6 @@
 				<div > <!--contenteditable=true-->
 					<textarea class="form-control" id="newchptcont" resize="none" autoHeight="true" style="overflow:hidden; min-height:80px; border-radius:0px;" placeholder="写文字..."></textarea>
 				</div>
-				<div >
-					 <input type="text" class="form-control" id="newchptkey" placeholder="用#分割，例：#美人鱼#邓超，最多三个" style="border-radius:0px; border-top-width:0px;"/>
-				</div>
 				<div style="float:right; margin-top:10px;">
 					<!--发布以后跳到一个新的界面上， 前面是他接的故事. 从此它上面的chapter的+号变成蓝色-->
 					<button class="btn btn-primary" data-toggle="modal" data-target="#publishModal" onclick="Publish()"/> 发布</button>
@@ -80,8 +92,32 @@
 				</div>
 			</div>
 		</div>
-		
 	</div>
+	
+	<div class="modal fade" id="publishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               添加关键字
+            </h4>
+         </div>
+         <div class="modal-body">
+            <input type="text" class="form-control" id="newchptkey" placeholder="用#分割，例：#美人鱼#邓超，最多三个" style="border-radius:0px; border-top-width:0px;"/>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+            </button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">
+               确认发布
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
 	
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
