@@ -52,6 +52,7 @@ window.onload = function() {
 	}
 </script>
 
+<%session.setAttribute("msg", ""); %>
 <nav class="navbar navbar-default" role="navigation" style=" margin:0px 0px 0px 0px;">
 	<div class="navbar-header">
       <a class="navbar-brand" href="main.jsp" style="font-family:SimHei;">一人一句</a>

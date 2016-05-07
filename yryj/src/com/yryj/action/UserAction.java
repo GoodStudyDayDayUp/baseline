@@ -227,7 +227,9 @@ public class UserAction extends ActionSupport {
 			//是否为更改密码操作
 			if(!user.getPassword().equals(lastUser.getPassword())||!user.getPhone().equals(lastUser.getPhone())){
 				userManager.update(user);
-				session.setAttribute("webuser", user);
+				lastUser.setPassword(user.getPassword());
+				lastUser.setPhone(user.getPhone());
+				session.setAttribute("webuser", lastUser);
 				session.setAttribute("user", user);
 				session.setAttribute("msg", "修改成功");
 				return SUCCESS;
