@@ -25,7 +25,6 @@
 				<result name="input">/login.jsp</result>
 				<result name="success">/main.jsp</result>
 				<result name="error">/login.jsp</result>
-				<result name="a">/a.jsp</result>
 			</action>
 				<action name="update" class="userAction" method="updateUser">
 				<result name="success">/main.jsp</result>

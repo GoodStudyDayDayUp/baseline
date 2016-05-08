@@ -174,22 +174,24 @@ text-decoration: none;
 			 }
 			},
 			{
+	            text: '短篇',
+	            href: '#duanpian',
+	          },
+	          {
+	              text: '中篇',
+	              href: '#zhongpian',
+	            },
+	            {
+	                text: '长篇',
+	                href: '#changpian',
+	              },
+			{
             text: '小说',
             href: '#xiaoshuo',
             nodes: [
               {
                 text: '科幻',
                 href: '#kehuan',
-                nodes: [
-                  {
-                    text: '长篇',
-                    href: '#long',
-                  },
-                  {
-                    text: '中篇',
-                    href: '#medium',
-                  }
-                ]
               },
               {
                 text: '传记',
@@ -204,16 +206,6 @@ text-decoration: none;
               {
                 text: '风景',
                 href: '#fengjing',
-                nodes: [
-                  {
-                    text: '长篇',
-                    href: '#changpian',
-                  },
-                  {
-                    text: '中篇',
-                    href: '#zhongpian',
-                  }
-                ]
               },
               {
                 text: '人物',

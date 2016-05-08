@@ -8,12 +8,12 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yryj.model.Draft;
-import com.yryj.model.Test;
+
 import com.yryj.model.User;
-import com.yryj.sercvice.TestManager;
+
 import com.yryj.sercvice.UserManager;
 import com.yryj.serviceImpl.DraftML;
-import com.yryj.serviceImpl.TestML;
+
 
 public class UserAction extends ActionSupport {
 
@@ -180,11 +180,6 @@ public class UserAction extends ActionSupport {
 						session.setAttribute("msg", "");
 						session.setAttribute("webuser", user);
 						
-						
-//						Test test=new Test();
-//						TestManager tm=new TestML();
-//						tm.addTest(test);
-//						return "a";
 						
 						return SUCCESS;
 					}
