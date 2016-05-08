@@ -1,6 +1,8 @@
 package com.yryj.model;
 
 import com.google.code.morphia.annotations.Id;
+import com.google.code.morphia.annotations.Indexed;
+import com.google.code.morphia.utils.IndexDirection;
 
 // Generated 2016-4-26 12:25:28 by Hibernate Tools 4.0.0
 
@@ -9,18 +11,19 @@ import com.google.code.morphia.annotations.Id;
  */
 public class Chapter implements java.io.Serializable {
 	@Id
+	@Indexed(value=IndexDirection.ASC, name="id", unique=true, dropDups=true) 
     private long id;
 	
-	private int parentId;
-	private int zan;
+	private long parentId;
+	private long zan;
 	private String userName;
 	private String content;
 	private boolean isEnd;
-	private int viewNum;
+	private long viewNum;
 	private String key;
 	private String style;
 	private String format;
-	private String length;
+	private long length;    //length: 0为短篇,1为中篇,2为长篇
 	private long date;
 	
 	public Chapter() {
@@ -33,7 +36,7 @@ public class Chapter implements java.io.Serializable {
 		 key="";
 		 style="";
 		 format="";
-		 length="";
+		 length=0;
 		 date=System.currentTimeMillis();
 	}
 
@@ -45,19 +48,19 @@ public class Chapter implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public int getParentId() {
+	public long getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(int parentId) {
+	public void setParentId(long parentId) {
 		this.parentId = parentId;
 	}
 
-	public int getZan() {
+	public long getZan() {
 		return zan;
 	}
 
-	public void setZan(int zan) {
+	public void setZan(long zan) {
 		this.zan = zan;
 	}
 
@@ -85,11 +88,11 @@ public class Chapter implements java.io.Serializable {
 		this.isEnd = isEnd;
 	}
 
-	public int getViewNum() {
+	public long getViewNum() {
 		return viewNum;
 	}
 
-	public void setViewNum(int viewNum) {
+	public void setViewNum(long viewNum) {
 		this.viewNum = viewNum;
 	}
 
@@ -117,11 +120,11 @@ public class Chapter implements java.io.Serializable {
 		this.format = format;
 	}
 
-	public String getLength() {
+	public long getLength() {
 		return length;
 	}
 
-	public void setLength(String length) {
+	public void setLength(long length) {
 		this.length = length;
 	}
 

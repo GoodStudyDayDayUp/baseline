@@ -20,7 +20,7 @@ public class ChapterDL implements ChapterDao{
 	String dbs;
 	
 	public ChapterDL(){
-		dbs="chapter";
+		dbs="yryj";
 	}
 	
 	@Override
@@ -31,6 +31,12 @@ public class ChapterDL implements ChapterDao{
 			Mongo mongo;
 			mongo = new Mongo();
 			Datastore ds=mor.createDatastore(mongo, dbs);
+			List<Chapter> chs=ds.createQuery(Chapter.class).order("-id").asList();
+			long id = 0;
+			if(chs.size()>0)
+				id=chs.get(chs.size()-1).getId()+1;
+			chapter.setId(id);
+			
 			return ds.save(chapter);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -49,7 +55,7 @@ public class ChapterDL implements ChapterDao{
 			Morphia mor=new Morphia();
 			Mongo mongo=new Mongo();
 			Datastore ds=mor.createDatastore(mongo, dbs);
-			ds.delete(ds.createQuery(Chapter.class).field("id").equals(id));
+			ds.delete(Chapter.class,id);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,7 +76,7 @@ public class ChapterDL implements ChapterDao{
 			UpdateOperations<Chapter> ch = ds.createUpdateOperations(Chapter.class);
 			//修改内容包含：点赞数,是否结束,浏览次数
 			ch.set("zan", chapter.getZan()).set("isEnd", chapter.isEnd()).set("viewNum", chapter.getViewNum());
-			ds.update(ds.find(Chapter.class, "id", chapter.getId()).getKey(), ch);
+			ds.update(ds.find(Chapter.class, "_id", chapter.getId()).getKey(), ch);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,7 +93,7 @@ public class ChapterDL implements ChapterDao{
 			Morphia mor=new Morphia();
 			Mongo mongo=new Mongo();
 			Datastore ds=mor.createDatastore(mongo, dbs);
-			return ds.find(Chapter.class,"id",id).get();
+			return ds.find(Chapter.class,"_id",id).get();
 			} catch (Exception e) {
 	            e.printStackTrace();
 	        }
@@ -97,13 +103,28 @@ public class ChapterDL implements ChapterDao{
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public List getChildren(Chapter parent) {
+	public List getChildren(long parentId) {
 		// TODO Auto-generated method stub
 		try {
 			Morphia mor=new Morphia();
 			Mongo mongo=new Mongo();
 			Datastore ds=mor.createDatastore(mongo, dbs);
-			return ds.find(Chapter.class,"parentId",parent.getId()).asList();
+			return ds.find(Chapter.class,"parentId",parentId).asList();
+			} catch (Exception e) {
+	            e.printStackTrace();
+	        }
+			  
+			return null;
+	}
+
+	@Override
+	public List getChapterByUName(String name) {
+		// TODO Auto-generated method stub
+		try {
+			Morphia mor=new Morphia();
+			Mongo mongo=new Mongo();
+			Datastore ds=mor.createDatastore(mongo, dbs);
+			return ds.find(Chapter.class,"userName",name).asList();
 			} catch (Exception e) {
 	            e.printStackTrace();
 	        }

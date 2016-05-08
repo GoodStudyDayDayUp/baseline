@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" import="com.yryj.model.*"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" import="com.yryj.model.*"
+import="java.util.*"
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -57,6 +59,7 @@ function goTopEx() {
 	
 	<%
 	User user=(User)session.getAttribute("user"); 
+	List<Chapter> storys=(List<Chapter>)session.getAttribute("storys");
 	%>
 <body "><!--onLoad="scrollTo(0,500)-->
 	<!--导航栏-->
@@ -137,55 +140,29 @@ function goTopEx() {
 	
 	<div class="container" >
 		<div class="row">
+		<%for(Chapter ch:storys){ %>
+		<%String length="短篇"; 
+		switch((int)ch.getLength()){
+		case 1:
+			length="中篇";
+			break;
+		case 2:
+			length="长篇";
+			break;
+		};
+		
+		%>
 			<div class="col-lg-8 col-lg-offset-2 storyofmain" >
 				<div class="col-lg-4 storyclass storycenter" style="background-color:#191970" >
-					<h3 ><a href="main-tree.jsp">小说</a></h3>
-					<h4 ><a href="main-tree.jsp">武侠</a></h4>
-					<h5 ><a href="main-tree.jsp">长篇</a></h5>
+					<h3 ><a href="main-tree.jsp"><%=ch.getFormat() %></a></h3>
+					<h4 ><a href="main-tree.jsp"><%=ch.getStyle() %></a></h4>
+					<h5 ><a href="main-tree.jsp"><%=length %></a></h5>
 				</div>
 				<div class="col-lg-8 storybegin"><p class="storycenter">
-					<a href="read.jsp">这世间本是没有什么神仙的，但自太古以来，人类眼见周遭世界，诸般奇异之事，电闪雷鸣，狂风暴雨，又有天灾人祸，伤亡无数，哀鸿遍野，决非人力所能为，所能抵挡。遂以为九天之上，有诸般神灵，九幽之下，亦是阴魂归处，阎罗殿堂。于是神仙之说，流传于世。</a>
+					<a href="readStory.action?index=<%=ch.getId() %>"><%=ch.getContent() %></a>
 				</p></div>
 			</div>
-			<div class="col-lg-8 col-lg-offset-2 storyofmain" >
-				<div class="col-lg-8 storybegin"><p class="storycenter">
-					<a href="read.jsp">劳伦斯 ：在星期四吗，伯爵？时间未免太局促了。<br>
-					帕里斯 ：这是我的岳父凯普莱特的意思；他既然这样性急，我也不愿把时间延迟下去。<br></a>
-				</p></div>
-				<div class="col-lg-4 storyclass storycenter"style="background-color:#DC143C" >
-					<h3 ><a href="main-tree.jsp">戏剧</a></h3>
-					<h4 ><a href="main-tree.jsp">近代</a></h4>
-					<h5 ><a href="main-tree.jsp">孟京辉</a></h5>
-				</div>
-			</div>
-			<div class="col-lg-8 col-lg-offset-2 storyofmain" >
-				<div class="col-lg-4 storyclass storycenter" style="background-color:#EEC900" >
-					<h3 ><a href="main-tree.jsp">散文</a></h3>
-					<h4 ><a href="main-tree.jsp">风景</a></h4>
-					<h5 ><a href="main-tree.jsp">短篇</a></h5>
-				</div>
-				<div class="col-lg-8 storybegin"><p class="storycenter">
-					<a href="read.jsp">秋天，无论在什么地方的秋天，总是好的；可是啊，北国的秋，却特别地来得清，来得静，来得悲凉。我的不远千里，要从杭州赶上青岛，更要从青岛赶上北平来的理由，也不过想饱尝一尝这“秋”，这故都的秋味。</a>
-				</p></div>
-			</div>
-			<div class="col-lg-8 col-lg-offset-2 storyofmain"  >
-				<div class="col-lg-8 storybegin" ><p class="storycenter">
-					<a href="read.jsp">在青麦地上跑着 <br/>
-					雪和太阳的光芒 <br/>
-					诗人，你无力偿还 <br/>
-					在青麦地上跑着 <br/>
-					雪和太阳的光芒 <br/>
-					诗人，你无力偿还 <br/>
-					在青麦地上跑着 <br/>
-					雪和太阳的光芒 <br/>
-					诗人，你无力偿还 <br/></a>
-				</p></div>
-				<div class="col-lg-4 storyclass storycenter" style="background-color:#458B74;" >
-					<h3 ><a href="main-tree.jsp">诗歌</a></h3>
-					<h4 ><a href="main-tree.jsp">死亡</a></h4>
-					<h5 ><a href="main-tree.jsp">太阳</a></h5>
-				</div>
-			</div>
+		<%} %>
 		</div>
 	</div>
 	

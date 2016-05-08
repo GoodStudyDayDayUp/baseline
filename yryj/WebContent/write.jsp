@@ -28,6 +28,9 @@ text-decoration: none;
 </head>
 <%
 	User user=(User)session.getAttribute("user"); 
+	Draft draft=(Draft)session.getAttribute("draft");
+	if(draft==null)
+		draft=new Draft();
 	%>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" margin:0px 0px 0px 0px;">
@@ -89,16 +92,28 @@ text-decoration: none;
 		
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2" id="newchpt" style="padding:0px 0px 0px 0px;">
+				<form action="draft.action">
 				<div > <!--contenteditable=true-->
-					<textarea class="form-control" id="newchptcont" resize="none" autoHeight="true" style="overflow:hidden; min-height:80px; border-radius:0px;" placeholder="写文字..."></textarea>
+				<%if(draft.getContent()==""){%>
+					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" placeholder="开启新篇章..."></textarea>
+				<%}else{ %>
+					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;"><%=draft.getContent() %></textarea>
+				<%} %>
 				</div>
 				<div style="float:right; margin-top:10px;">
-					<!--发布以后跳到一个新的界面上， 前面是他接的故事. 从此它上面的chapter的+号变成蓝色-->
-					<button class="btn btn-primary" data-toggle="modal" data-target="#publishModal" onclick="Publish()"/> 发布</button>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#saveModal" onclick="SaveDraft()"/>存草稿</button>
+					<!--
+					<button class="btn btn-primary" onclick="Confirm()"/>确定内容</button>-->
+					<%if(user==null){ %>
+					<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#saveModal" />存草稿</button>
+					<%}else{ %>
+					<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#saveModal" onclick="SaveDraft()"/>存草稿</button>
+					<%} %>
+					
+			
 					<!--确认取消返回读文章的页面，取消取消留在本页面上-->
-					<button class="btn btn-default"  data-toggle="modal" data-target="#myModal"/> 取消</button>
+					<button type="button" class="btn btn-default"  data-toggle="modal" data-target="#myModal"/> 取消</button>
 				</div>
+			</form>
 			</div>
 		</div>
 	</div>
@@ -135,10 +150,10 @@ text-decoration: none;
             确认放弃文字？
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-default"  data-dismiss="modal">
+            <button type="button" class="btn btn-default"  data-dismiss="modal" onclick="Cancel()">
                取消
             </button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="Cancel()">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick= "window.location.href= 'deleteDraft.action' ">
                确认
             </button>
          </div>

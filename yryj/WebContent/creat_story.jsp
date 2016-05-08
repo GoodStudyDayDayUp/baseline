@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    import="com.yryj.model.User"
+    import="com.yryj.model.*"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -31,11 +31,14 @@ text-decoration: none;
 <body>
 <%
 	User user=(User)session.getAttribute("user"); 
+	Draft draft=(Draft)session.getAttribute("draft");
+	if(draft==null)
+		draft=new Draft();
 	%>
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" margin:0px 0px 0px 0px;">
 		<div class="navbar-header">
-      <a class="navbar-brand" href="main.html" style="font-family:SimHei;">一人一句</a>
+      <a class="navbar-brand" href="main.jsp" style="font-family:SimHei;">一人一句</a>
    </div>
 		<div>
 			<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
@@ -66,24 +69,33 @@ text-decoration: none;
 	<div class="container" style=" margin-top:60px;">
 		
 		<div class="row">
-		<form action="draft.action">
+		
 			<div class="col-lg-8 col-lg-offset-2" id="newchpt" style="padding:0px 0px 0px 0px;">
+			<form action="draft.action">
 				<div > <!--contenteditable=true-->
+				<%if(draft.getContent()==""){%>
 					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" placeholder="写一个开头..."></textarea>
+				<%}else{ %>
+					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;"><%=draft.getContent() %></textarea>
+				<%} %>
 				</div>
 				<div style="float:right; margin-top:10px;">
 					<!--
 					<button class="btn btn-primary" onclick="Confirm()"/>确定内容</button>-->
 					<%if(user==null){ %>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#saveModal" />存草稿</button>
+					<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#saveModal"  />存草稿</button>
 					<%}else{ %>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#saveModal" onclick="SaveDraft()"/>存草稿</button>
+					<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#saveModal" onclick="SaveDraft()" "/>存草稿</button>
 					<%} %>
+					
+			
 					<!--确认取消返回读文章的页面，取消取消留在本页面上-->
-					<button class="btn btn-default"  data-toggle="modal" data-target="#myModal"/> 取消</button>
+					<button type="button" class="btn btn-default"  data-toggle="modal" data-target="#myModal"/> 取消</button>
 				</div>
+			</form>
+				
 			</div>
-		</form>
+		
 		</div>
 	</div>
 	<div class="container" id="addsth" style=" margin-top:10px; ">
@@ -130,7 +142,13 @@ text-decoration: none;
 			<div class="col-lg-8 col-lg-offset-2" id="newchpt" style="padding:0px 0px 0px 0px;">
 				<div style="float:right; margin-top:10px;">
 					<!--发布以后跳到一个新的界面上， 前面是他接的故事. 从此它上面的chapter的+号变成蓝色-->
-					<button class="btn btn-primary" id="publish" data-toggle="modal" data-target="#publishModal" onclick="Publish()" /> 发起</button>
+					<form action="write.action" onsubmit="return Publish()">
+					<textarea name="content" hidden="hidden" id="ctt"></textarea>
+					<input value="" hidden="hidden" name="format" id="format">
+					<input value="" hidden="hidden" name="style" id="style">
+					<input value="" hidden="hidden" name="key" id="key">
+					<button class="btn btn-primary" id="publish" data-toggle="modal" data-target="#publishModal"  /> 发起</button>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -144,12 +162,11 @@ text-decoration: none;
             确认放弃文字？
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-default"  data-dismiss="modal">
+            <button type="button" class="btn btn-default"  data-dismiss="modal" onclick="Cancel()">
                取消
             </button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="Cancel()">
-               确认
-            </button>
+  
+            <input type="button" onclick= "window.location.href= 'deleteDraft.action' " class="btn btn-primary" data-dismiss="modal" value="确认"/>
          </div>
       </div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
@@ -186,6 +203,14 @@ text-decoration: none;
 		else{ //如果用户输入的内容不包含#，则用户输入的文字当作一个标签处理
 			keywords[0] = fda;
 		}
+		var ctt=document.getElementById('ctt');
+		ctt.value=content;
+		var key=document.getElementById('key');
+		key.value=fda;
+		
+		var first=document.getElementById('format');
+		var second=document.getElementById('style');
+		
    }
 	function Cancel(){
 		var iwrite = document.getElementById("write");
@@ -252,7 +277,10 @@ text-decoration: none;
 	function Publish(){
 		if(l==0){
 			alert("请选择二级分类");
+			return false;
 		}
+		
+		SaveDraft();
    }
 </script>
 </html>

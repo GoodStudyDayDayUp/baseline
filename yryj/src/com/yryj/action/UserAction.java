@@ -7,11 +7,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yryj.model.Chapter;
 import com.yryj.model.Draft;
-
 import com.yryj.model.User;
-
 import com.yryj.sercvice.UserManager;
+import com.yryj.serviceImpl.ChapterML;
 import com.yryj.serviceImpl.DraftML;
 
 
@@ -261,6 +261,9 @@ public class UserAction extends ActionSupport {
 			user=(User) session.getAttribute("user");
 			List<Draft> dfs=new DraftML().findByUserId(user.getId());
 			session.setAttribute("drafts", dfs);
+			
+			List<Chapter> chs=new ChapterML().getChapterByUName(name);
+			session.setAttribute("chapters", chs);
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();

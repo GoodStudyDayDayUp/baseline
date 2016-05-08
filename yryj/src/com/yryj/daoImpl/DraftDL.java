@@ -13,14 +13,13 @@ import com.google.code.morphia.query.UpdateOperations;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 import com.yryj.dao.DraftDao;
-import com.yryj.model.Chapter;
 import com.yryj.model.Draft;
 
 public class DraftDL implements DraftDao{
 	String dbs;
 	
 	public DraftDL(){
-		dbs="draft";
+		dbs="yryj";
 	}
 	
 	@Override
@@ -31,6 +30,11 @@ public class DraftDL implements DraftDao{
 			Mongo mongo;
 			mongo = new Mongo();
 			Datastore ds=mor.createDatastore(mongo, dbs);
+			List<Draft> dfs=ds.createQuery(Draft.class).order("-id").asList();
+			long id = 0;
+			if(dfs.size()>0)
+				id=dfs.get(dfs.size()-1).getId()+1;
+			draft.setId(id);
 			return ds.save(draft);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -49,7 +53,7 @@ public class DraftDL implements DraftDao{
 			Morphia mor=new Morphia();
 			Mongo mongo=new Mongo();
 			Datastore ds=mor.createDatastore(mongo, dbs);
-			ds.delete(ds.createQuery(Chapter.class).field("id").equals(id));
+			ds.delete(Draft.class,id);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,10 +71,10 @@ public class DraftDL implements DraftDao{
 			Mongo mongo=new Mongo();
 			Datastore ds=mor.createDatastore(mongo, dbs);
 			
-			UpdateOperations<Chapter> ch = ds.createUpdateOperations(Chapter.class);
+			UpdateOperations<Draft> ch = ds.createUpdateOperations(Draft.class);
 			//ÐÞ¸ÄÄÚÈÝ
 			ch.set("content", draft.getContent());
-			ds.update(ds.find(Chapter.class, "id", draft.getId()).getKey(), ch);
+			ds.update(ds.find(Draft.class, "_id", draft.getId()).getKey(), ch);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,7 +91,7 @@ public class DraftDL implements DraftDao{
 			Morphia mor=new Morphia();
 			Mongo mongo=new Mongo();
 			Datastore ds=mor.createDatastore(mongo, dbs);
-			return ds.find(Draft.class,"id",id).get();
+			return ds.find(Draft.class,"_id",id).get();
 			} catch (Exception e) {
 	            e.printStackTrace();
 	        }

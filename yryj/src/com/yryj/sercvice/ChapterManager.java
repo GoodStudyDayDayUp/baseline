@@ -14,11 +14,13 @@ public interface ChapterManager {
 
 	public Chapter find(long id);
 
-	public String write(String content,Chapter parent);
+//	public String write(String content,Chapter parent);
 	
-	public String read(long id);
+//	public String read(long id);
 	
-	public List getTree(Story story);
+//	public List getTree(Story story);
 	
-	public List getChildren(Chapter chapter);
+	public List getChildren(long parentId);
+	
+	public List getChapterByUName(String name);
 }

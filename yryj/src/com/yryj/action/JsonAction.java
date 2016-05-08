@@ -39,7 +39,7 @@ public class JsonAction extends ActionSupport {
 		  List storyTree = new ArrayList();
 		  for(int i=0;i<storyList.size();i++)
 		  {
-			  storyTree = chapterManager.getTree((Story)storyList.get(i));
+			//  storyTree = chapterManager.getTree((Story)storyList.get(i));
 			  chapterList.addAll(storyTree);
 		  }
 		  JsonConfig jsonConfig = new JsonConfig();  //建立配置文件

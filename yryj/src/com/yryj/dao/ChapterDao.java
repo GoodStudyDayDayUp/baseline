@@ -14,5 +14,7 @@ public interface ChapterDao {
 	public Chapter find(long id);
 	//获取某父章节的所有子章节
 	@SuppressWarnings("rawtypes")
-	public List getChildren(Chapter parent);
+	public List getChildren(long parentId);
+	
+	public List getChapterByUName(String name);
 }
