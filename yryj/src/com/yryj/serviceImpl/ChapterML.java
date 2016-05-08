@@ -11,37 +11,39 @@ import java.util.List;
 
 import com.yryj.action.ChapterAction;
 import com.yryj.dao.ChapterDao;
+import com.yryj.daoImpl.ChapterDL;
 import com.yryj.model.Chapter;
 import com.yryj.model.Story;
 import com.yryj.sercvice.ChapterManager;
 @SuppressWarnings("rawtypes")
 public class ChapterML implements ChapterManager{
 	private ChapterDao chapterDao=null;
-	private String filePath;	
-	public void setChapterDao(ChapterDao chapterDao) {
-		this.chapterDao = chapterDao;
-	}
-
+	private String filePath;
+	
 	public void save(Chapter chapter) {
 		// TODO Auto-generated method stub
+		chapterDao = new ChapterDL();
 		chapterDao.save(chapter);
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(long id) {
 		// TODO Auto-generated method stub
+		chapterDao = new ChapterDL();
 		chapterDao.delete(id);
 	}
 
 	@Override
 	public void update(Chapter chapter) {
 		// TODO Auto-generated method stub
+		chapterDao = new ChapterDL();
 		chapterDao.update(chapter);
 	}
 
 	@Override
-	public Chapter find(int id) {
+	public Chapter find(long id) {
 		// TODO Auto-generated method stub
+		chapterDao = new ChapterDL();
 		return chapterDao.find(id);
 	}
 	
@@ -74,7 +76,7 @@ public class ChapterML implements ChapterManager{
 	}
 
 	@Override
-	public String read(int id) {
+	public String read(long id) {
 		// TODO Auto-generated method stub
 		Chapter chapter = chapterDao.find(id);
 		filePath = chapter.getContent();

@@ -50,18 +50,8 @@
             </key>
             <one-to-many class="com.yryj.model.Order" />
         </set>
-        <set name="drafts" table="draft" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="uId" not-null="true" />
-            </key>
-            <one-to-many class="com.yryj.model.Draft" />
-        </set>
-        <set name="chapters" table="chapter" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="uId" />
-            </key>
-            <one-to-many class="com.yryj.model.Chapter" />
-        </set>
+        
+
         <set name="utcs" table="utc" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="uId" not-null="true" />

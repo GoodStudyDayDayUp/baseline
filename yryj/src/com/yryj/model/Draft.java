@@ -7,50 +7,39 @@ package com.yryj.model;
  */
 public class Draft implements java.io.Serializable {
 
-	private Integer id;
-	private Chapter chapter;
-	private User user;
+	private long id;
+	
+	private int userId;
 	private String content;
 
 	public Draft() {
+		content="";
 	}
 
-	public Draft(Chapter chapter, User user, String content) {
-		this.chapter = chapter;
-		this.user = user;
-		this.content = content;
+	public long getId() {
+		return id;
 	}
 
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public Chapter getChapter() {
-		return this.chapter;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setChapter(Chapter chapter) {
-		this.chapter = chapter;
-	}
-
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getContent() {
-		return this.content;
+		return content;
 	}
 
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+	
 
 }

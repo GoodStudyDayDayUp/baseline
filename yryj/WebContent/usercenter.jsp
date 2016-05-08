@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 import="com.yryj.model.*"
+import="java.util.*"
 %>
 <!DOCTYPE html>
 <html>
@@ -38,11 +39,18 @@ text-decoration: none;
 		</style>
 </head>
 <body>
-<%User user=(User)session.getAttribute("user");
+<%
+//获取用户信息
+User user=(User)session.getAttribute("user");
 if(user==null)
 	user=new User();
 String phone = user.getPhone();
 String msg=(String)session.getAttribute("msg")==null?"":(String)session.getAttribute("msg");
+
+//获取草稿箱信息
+List<Draft> dfs=new ArrayList<Draft>();
+dfs=(List<Draft>)session.getAttribute("drafts");
+
 %>
 <script type="text/javascript">
 window.onload = function() {
@@ -251,11 +259,10 @@ window.onload = function() {
 				</div>
 				<div class="tab-pane fade" id="draft"> <!-- 草稿箱 --> 
 					<table class="table">
-						<tr><td>神州浩土，广瀚无边。唯有中原大地，最是丰美肥沃，天下人口十之八九聚居于此。</td><td><a href="write.jsp"><button type="button" class="btn btn-default" style="float:right;">查看</button></a></td></tr>
-						<tr><td>神州浩土，广瀚无边。唯有中原大地，最是丰美肥沃，天下人口十之八九聚居于此。</td><td><a href="write.jsp"><button type="button" class="btn btn-default" style="float:right;">查看</button></a></td></tr>
-						<tr><td>神州浩土，广瀚无边。唯有中原大地，最是丰美肥沃，天下人口十之八九聚居于此。</td><td><a href="write.jsp"><button type="button" class="btn btn-default" style="float:right;">查看</button></a></td></tr>
-						<tr><td>神州浩土，广瀚无边。唯有中原大地，最是丰美肥沃，天下人口十之八九聚居于此。</td><td><a href="write.jsp"><button type="button" class="btn btn-default" style="float:right;">查看</button></a></td></tr>
-						<tr><td>神州浩土，广瀚无边。唯有中原大地，最是丰美肥沃，天下人口十之八九聚居于此。</td><td><a href="write.jsp"><button type="button" class="btn btn-default" style="float:right;">查看</button></a></td></tr>
+					<%if(dfs.size()>0)
+					for(Draft df:dfs){ %>
+					<tr><td><%=df.getContent() %></td><td><a href=""><button type="button" class="btn btn-default" style="float:right;">查看</button></a></td></tr>
+					<%} %>
 					</table>
 				</div>
 			</div>

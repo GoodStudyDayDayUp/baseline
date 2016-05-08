@@ -8,15 +8,15 @@ import com.yryj.model.Story;
 public interface ChapterManager {
 	public void save(Chapter chapter);
 
-	public void delete(int id);
+	public void delete(long id);
 
 	public void update(Chapter chapter);
 
-	public Chapter find(int id);
+	public Chapter find(long id);
 
 	public String write(String content,Chapter parent);
 	
-	public String read(int id);
+	public String read(long id);
 	
 	public List getTree(Story story);
 	

@@ -52,8 +52,6 @@
 		</property>
 		<property name="mappingResources">
 			<list>
-				<value>com/yryj/model/Chapter.hbm.xml</value>
-				<value>com/yryj/model/Draft.hbm.xml</value>
 				<value>com/yryj/model/Order.hbm.xml</value>
 				<value>com/yryj/model/Story.hbm.xml</value>
 				<value>com/yryj/model/Type.hbm.xml</value>
@@ -98,16 +96,8 @@
 	</tx:advice>
 		
     <!--用户注册Dao层逻辑类 -->
-	<bean id="chapterDao" class="com.yryj.daoImpl.ChapterDL">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>	
-	<bean id="draftDao" class="com.yryj.daoImpl.DraftDL">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>	
+	
+	
 	<bean id="orderDao" class="com.yryj.daoImpl.OrderDL">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -144,16 +134,8 @@
 		</property>
 	</bean>	
 	<!--用户注册业务逻辑类 -->
-	<bean id="chapterManager" class="com.yryj.serviceImpl.ChapterML">
-		<property name="chapterDao">
-			<ref bean="chapterDao" />
-		</property>
-	</bean>
-	<bean id="draftManager" class="com.yryj.serviceImpl.DraftML">
-		<property name="draftDao">
-			<ref bean="draftDao" />
-		</property>
-	</bean>
+
+	
 	<bean id="orderManager" class="com.yryj.serviceImpl.OrderML">
 		<property name="orderDao">
 			<ref bean="orderDao" />
@@ -196,17 +178,7 @@
 			<ref bean="userManager" />
 		</property>
 	</bean>
-	<bean id="chapterAction" class="com.yryj.action.ChapterAction">
-		<property name="chapterManager">
-			<ref bean="chapterManager" />
-		</property>
-		<property name="storyManager">
-			<ref bean="storyManager" />
-		</property>
-			<property name="typeManager">
-			<ref bean="typeManager" />
-		</property>
-	</bean>
+	
 	<bean id="typeAction" class="com.yryj.action.TypeAction">
 		<property name="typeManager">
 			<ref bean="typeManager" />
@@ -215,9 +187,6 @@
 	<bean id="jsonAction" class="com.yryj.action.JsonAction">
 		<property name="storyManager">
 			<ref bean="storyManager" />
-		</property>
-		<property name="chapterManager">
-			<ref bean="chapterManager" />
 		</property>
 	</bean>
 </beans>

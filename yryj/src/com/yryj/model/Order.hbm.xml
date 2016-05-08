@@ -8,9 +8,7 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="chapter" class="com.yryj.model.Chapter" fetch="select">
-            <column name="chapterId" not-null="true" />
-        </many-to-one>
+
         <many-to-one name="user" class="com.yryj.model.User" fetch="select">
             <column name="uId" not-null="true" />
         </many-to-one>

@@ -12,9 +12,7 @@
                 <column name="chapterId" />
             </key-property>
         </composite-id>
-        <many-to-one name="chapter" class="com.yryj.model.Chapter" update="false" insert="false" fetch="select">
-            <column name="chapterId" not-null="true" />
-        </many-to-one>
+
         <many-to-one name="user" class="com.yryj.model.User" update="false" insert="false" fetch="select">
             <column name="uId" not-null="true" />
         </many-to-one>

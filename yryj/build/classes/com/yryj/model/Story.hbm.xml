@@ -11,9 +11,7 @@
         <many-to-one name="type" class="com.yryj.model.Type" fetch="select">
             <column name="typeId" not-null="true" />
         </many-to-one>
-        <many-to-one name="chapter" class="com.yryj.model.Chapter" fetch="select">
-            <column name="rootId" not-null="true" />
-        </many-to-one>
+
         <property name="date" type="date">
             <column name="date" length="10" not-null="true" />
         </property>

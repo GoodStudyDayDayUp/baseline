@@ -72,7 +72,7 @@ function goTopEx() {
 					<%=user.getName() %><b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="usercenter.jsp">个人主页</a></li>
+						<li><a href="getInfo.action">个人主页</a></li>
 						<li><a href="logout.action">注销</a></li>
 					</ul>
 					<%}else{ %>
@@ -82,6 +82,7 @@ function goTopEx() {
 					<%} %>
 				</li>
 			</ul>
+			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事</a></p>
 		</div>
 	</nav>
 	

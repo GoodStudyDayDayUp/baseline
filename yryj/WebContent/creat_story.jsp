@@ -29,6 +29,10 @@ text-decoration: none;
 		</style>
 </head>
 <body>
+<%
+	User user=(User)session.getAttribute("user"); 
+	%>
+
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" margin:0px 0px 0px 0px;">
 		<div class="navbar-header">
       <a class="navbar-brand" href="main.html" style="font-family:SimHei;">一人一句</a>
@@ -36,15 +40,22 @@ text-decoration: none;
 		<div>
 			<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
 				<li class="dropdown" style="margin:0px 0px 0px 0px;font-family: SimHei  ;">
+				<%if(user!=null){ %>
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" >
-					用户名 <b class="caret"></b>
+					<%=user.getName() %><b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="usercenter.html">个人主页</a></li>
-						<li><a href="login.html">注销</a></li>
+						<li><a href="getInfo.action">个人主页</a></li>
+						<li><a href="logout.action">注销</a></li>
 					</ul>
+					<%}else{ %>
+					<a href="beforelogin.action"  >
+					登录
+					</a>
+					<%} %>
 				</li>
 			</ul>
+			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事</a></p>
 		</div>
 	</nav>
 	
@@ -56,18 +67,24 @@ text-decoration: none;
 	<div class="container" style=" margin-top:60px;">
 		
 		<div class="row">
+		<form action="draft.action">
 			<div class="col-lg-8 col-lg-offset-2" id="newchpt" style="padding:0px 0px 0px 0px;">
 				<div > <!--contenteditable=true-->
-					<textarea class="form-control" id="newchptcont" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" placeholder="写一个开头..."></textarea>
+					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" placeholder="写一个开头..."></textarea>
 				</div>
 				<div style="float:right; margin-top:10px;">
 					<!--
 					<button class="btn btn-primary" onclick="Confirm()"/>确定内容</button>-->
+					<%if(user==null){ %>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#saveModal" />存草稿</button>
+					<%}else{ %>
 					<button class="btn btn-primary" data-toggle="modal" data-target="#saveModal" onclick="SaveDraft()"/>存草稿</button>
+					<%} %>
 					<!--确认取消返回读文章的页面，取消取消留在本页面上-->
 					<button class="btn btn-default"  data-toggle="modal" data-target="#myModal"/> 取消</button>
 				</div>
 			</div>
+		</form>
 		</div>
 	</div>
 	<div class="container" id="addsth" style=" margin-top:10px; ">

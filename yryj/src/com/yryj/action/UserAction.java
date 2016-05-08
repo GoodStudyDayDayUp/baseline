@@ -1,12 +1,19 @@
 package com.yryj.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yryj.model.Draft;
+import com.yryj.model.Test;
 import com.yryj.model.User;
+import com.yryj.sercvice.TestManager;
 import com.yryj.sercvice.UserManager;
+import com.yryj.serviceImpl.DraftML;
+import com.yryj.serviceImpl.TestML;
 
 public class UserAction extends ActionSupport {
 
@@ -172,6 +179,13 @@ public class UserAction extends ActionSupport {
 						session.setAttribute("user", theUser);
 						session.setAttribute("msg", "");
 						session.setAttribute("webuser", user);
+						
+						
+//						Test test=new Test();
+//						TestManager tm=new TestML();
+//						tm.addTest(test);
+//						return "a";
+						
 						return SUCCESS;
 					}
 					else{
@@ -242,6 +256,21 @@ public class UserAction extends ActionSupport {
 			return WRONG;
 		}
 
+	}
+	
+	//再跳转到用户中心之前，获取用户的所有信息
+	public String getAllUserData(){
+		try {
+			//获取用户草稿箱
+			HttpSession session=ServletActionContext.getRequest().getSession();
+			user=(User) session.getAttribute("user");
+			List<Draft> dfs=new DraftML().findByUserId(user.getId());
+			session.setAttribute("drafts", dfs);
+			return SUCCESS;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return WRONG;
+		}
 	}
 
 }

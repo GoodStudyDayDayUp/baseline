@@ -46,7 +46,7 @@ text-decoration: none;
 					<%=user.getName() %><b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="usercenter.jsp">个人主页</a></li>
+						<li><a href="getInfo。action">个人主页</a></li>
 						<li><a href="logout.action">注销</a></li>
 					</ul>
 					<%}else{ %>
@@ -56,7 +56,10 @@ text-decoration: none;
 					<%} %>
 				</li>
 			</ul>
-			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事开头</a></p>
+			
+			<%if(user!=null){ %>
+			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事</a></p>
+			<%} %>
 		</div>
 	</nav>
 	
