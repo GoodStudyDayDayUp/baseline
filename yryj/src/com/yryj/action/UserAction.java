@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.yryj.model.Chapter;
 import com.yryj.model.Draft;
 import com.yryj.model.User;
+import com.yryj.pub.Format;
 import com.yryj.sercvice.UserManager;
 import com.yryj.serviceImpl.ChapterML;
 import com.yryj.serviceImpl.DraftML;
@@ -28,7 +29,6 @@ public class UserAction extends ActionSupport {
 	private String password2;
 	private UserManager userManager;
 	private User thisUser;
-	String WRONG = "wrong";
 
 
 	public String getName() {
@@ -114,7 +114,7 @@ public class UserAction extends ActionSupport {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return WRONG;
+			return Format.WRONG;
 		}
 	}
 
@@ -153,7 +153,7 @@ public class UserAction extends ActionSupport {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return WRONG;
+			return Format.WRONG;
 		}
 	}
 
@@ -196,7 +196,7 @@ public class UserAction extends ActionSupport {
 			return ERROR;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return WRONG;
+			return Format.WRONG;
 		}
 	}
 
@@ -215,7 +215,7 @@ public class UserAction extends ActionSupport {
 				return ERROR;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return WRONG;
+			return Format.WRONG;
 		}
 	}
 
@@ -248,7 +248,7 @@ public class UserAction extends ActionSupport {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return WRONG;
+			return Format.WRONG;
 		}
 
 	}
@@ -267,7 +267,7 @@ public class UserAction extends ActionSupport {
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return WRONG;
+			return Format.WRONG;
 		}
 	}
 

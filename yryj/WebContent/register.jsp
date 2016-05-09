@@ -31,7 +31,7 @@ if(webUser==null){
 		<div class="row">
 
 			<p style="text-align: center; margin: auto">
-				<a href="main.jsp"><img src="pics\logopic.png" /></a>
+				<a href="readStart.action"><img src="pics\logopic.png" /></a>
 			</p>
 
 			<section>

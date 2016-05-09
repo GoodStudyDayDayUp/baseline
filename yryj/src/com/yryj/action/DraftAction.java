@@ -11,6 +11,7 @@ import org.springframework.http.HttpRequest;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yryj.model.Draft;
 import com.yryj.model.User;
+import com.yryj.pub.Format;
 import com.yryj.sercvice.DraftManager;
 import com.yryj.serviceImpl.ChapterML;
 import com.yryj.serviceImpl.DraftML;
@@ -48,12 +49,17 @@ public class DraftAction extends ActionSupport {
 				return ERROR;
 			}
 			
+			//¸üÐÂ²Ý¸åÏä
+			if(draft.getUserId()!=-1){
+				dm.update(draft);
+				return SUCCESS;
+			}
 			draft.setUserId(user.getId());
 			dm.save(draft);
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "wrong";
+			return Format.WRONG;
 		}
 	}
 	
@@ -74,7 +80,7 @@ public class DraftAction extends ActionSupport {
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "wrong";
+			return Format.WRONG;
 		}
 	}
 	
@@ -94,8 +100,9 @@ public class DraftAction extends ActionSupport {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "wrong";
+			return Format.WRONG;
 		}
 	}
+	
 
 }

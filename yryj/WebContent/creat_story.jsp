@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     import="com.yryj.model.*"
+    import="java.util.*"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -34,11 +35,12 @@ text-decoration: none;
 	Draft draft=(Draft)session.getAttribute("draft");
 	if(draft==null)
 		draft=new Draft();
+	ArrayList<ArrayList<Type>> types=(ArrayList<ArrayList<Type>>)session.getAttribute("types");
 	%>
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" margin:0px 0px 0px 0px;">
 		<div class="navbar-header">
-      <a class="navbar-brand" href="main.jsp" style="font-family:SimHei;">一人一句</a>
+      <a class="navbar-brand" href="readStart.action" style="font-family:SimHei;">一人一句</a>
    </div>
 		<div>
 			<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
@@ -104,37 +106,28 @@ text-decoration: none;
 			<div class="col-lg-8 col-lg-offset-2" style="background-color:#fff;">
 				<p style="margin-top:10px; font-family:SimHei;">请选择分类</p>
 				<div class="row" >
-				<div class="col-lg-2" ><div class=" xiaoshuo root_1l  " style=""><p style="display:table-cell; vertical-align:middle;">小说</p></div></div>
-				<div class="col-lg-2" ><div class=" shige root_1l  " style=""><p style="display:table-cell; vertical-align:middle;">诗歌</p></div></div>
-				<div class="col-lg-2" ><div class=" sanwen root_1l  " style=""><p style="display:table-cell; vertical-align:middle;">散文</p></div></div>
-				<div class="col-lg-2" ><div class=" xiju root_1l  " style=""><p style="display:table-cell; vertical-align:middle;">戏剧</p></div></div>
+				<%for(int i=0;i<types.get(0).size();i++){ 
+					Type a=types.get(0).get(i);
+				%>
+				<div class="col-lg-2" ><div class=" <%=i%> root_1l "><p style="display:table-cell; vertical-align:middle;"><%=a.getContent() %></p></div></div>
+				<%} %>
 				</div>
 			</div></a>
 			
 			<div class="col-lg-8 col-lg-offset-2 2level" style="background-color:#fff;display:none;">
 			<p style="margin-top:10px; font-family:SimHei;">请选择二级分类</p>
-			<div class="row" >
-			<div class="col-lg-2" ><div class=" root_2l kehuan " ><p style="display:table-cell; vertical-align:middle;">科幻</p></div></div>
-			<div class="col-lg-2" ><div class=" root_2l  " style=""><p style="display:table-cell; vertical-align:middle;">科幻</p></div></div>
-			<div class="col-lg-2" ><div class=" root_2l  " style=""><p style="display:table-cell; vertical-align:middle;">科幻</p></div></div>
-			<div class="col-lg-2" ><div class=" root_2l  " style=""><p style="display:table-cell; vertical-align:middle;">科幻</p></div></div>
-			<div class="col-lg-2" ><div class=" root_2l  " style=""><p style="display:table-cell; vertical-align:middle;">科幻</p></div></div>
-			<div class="col-lg-2" ><div class=" root_2l  " style=""><p style="display:table-cell; vertical-align:middle;">科幻</p></div></div>
-			</div>
-			<div class="row" >
-			<div class="col-lg-2" ><div class=" root_2l  " style=""><p style="display:table-cell; vertical-align:middle;">科幻</p></div></div>
-			<div class="col-lg-2" ><div class=" root_2l  " style=""><p style="display:table-cell; vertical-align:middle;">科幻</p></div></div>
-			<div class="col-lg-2" ><div class=" root_2l  " style=""><p style="display:table-cell; vertical-align:middle;">科幻</p></div></div>
-			<div class="col-lg-2" ><div class=" root_2l  " style=""><p style="display:table-cell; vertical-align:middle;">科幻</p></div></div>
-			<div class="col-lg-2" ><div class=" root_2l  " style=""><p style="display:table-cell; vertical-align:middle;">科幻</p></div></div>
-			<div class="col-lg-2" ><div class=" root_2l  " style=""><p style="display:table-cell; vertical-align:middle;">科幻</p></div></div>
-			</div>
 			
+			<div class="row" >
+			<%for(int i=0;i<types.get(1).size();i++){ %>
+			<div class="col-lg-2" ><div class=" <%=types.get(0).size()+i %> root_2l " style=""><p style="display:table-cell; vertical-align:middle;"><%=types.get(1).get(i).getContent() %></p></div></div>
+			<%} %>	
+			</div>
+				
 			</div>
 			
 			<div class="col-lg-8 col-lg-offset-2" style="background-color:#fff;">
 				<p style="margin-top:10px; font-family:SimHei;">添加关键字</p>
-				<input type="text" class="form-control" id="newchptkey" placeholder="用#分割，例：#美人鱼#邓超，最多三个" style="margin-bottom:10px;"/>
+				<input type="text" class="form-control" id="newchptkey" placeholder="用#分割，例：#美人鱼#邓超" style="margin-bottom:10px;"/>
 			</div>
 		</div>
 		
@@ -191,26 +184,13 @@ text-decoration: none;
    
    function SaveDraft(){
 		var content = document.getElementById('newchptcont').value;  // 存了文字内容
-		var keywords = [];  // 存了三个关键字
+		var keywords = [];  // 存关键字
 		var fda = document.getElementById('newchptkey').value;
-		if(fda.indexOf("#")>0){ // 如果用户输入的内容包含#，#后面的关键字才做关键字处理
-			fda = fda.split("#");
-			alert(fda);
-			for(var i=0; i<3; i++){
-				keywords.push(fda[i+1]);
-			}
-		}
-		else{ //如果用户输入的内容不包含#，则用户输入的文字当作一个标签处理
-			keywords[0] = fda;
-		}
+	
 		var ctt=document.getElementById('ctt');
 		ctt.value=content;
 		var key=document.getElementById('key');
-		key.value=fda;
-		
-		var first=document.getElementById('format');
-		var second=document.getElementById('style');
-		
+		key.value=fda;		
    }
 	function Cancel(){
 		var iwrite = document.getElementById("write");
@@ -238,41 +218,39 @@ text-decoration: none;
 	$('textarea[autoHeight]').autoHeight();
 	// textarea 结束
 </script>
+<%int num=types.get(0).size(); %>
+<%int num2=types.get(1).size(); %>
 <script type="text/javascript">
 	var l=0;
+	var num=<%=num%>;
+	var num2=<%=num2%>;
 	$(function(){
-		$(".xiaoshuo").click(function(){
+		
+		for(var m=0;m<num;m++){
+		$("."+m).click(function(){
 			$(".2level").show();
-			$(this).addClass("root_1lc");
 			$(".root_1l").siblings().removeClass("root_1lc");
-			$(".sanwen").removeClass("root_1lc");
-			$(".shige").removeClass("root_1lc");
-		});
-		$(".xiju").click(function(){
-			$(".2level").show();
+			for(var j=0;j<num;j++){
+				if(i!=j)
+					$("."+j).removeClass("root_1lc");
+			}
 			$(this).addClass("root_1lc");
-			$(".sanwen").removeClass("root_1lc");
-			$(".shige").removeClass("root_1lc");
-			$(".xiaoshuo").removeClass("root_1lc");
+			$("#format").val($(this).children("p").text());
 		});
-		$(".sanwen").click(function(){
-			$(".2level").show();
-			$(this).addClass("root_1lc");
-			$(".xiaoshuo").removeClass("root_1lc");
-			$(".shige").removeClass("root_1lc");
-			$(".xiju").removeClass("root_1lc");
-		});
-		$(".shige").click(function(){
-			$(".2level").show();
-			$(this).addClass("root_1lc");
-			$(".xiju").removeClass("root_1lc");
-			$(".sanwen").removeClass("root_1lc");
-			$(".xiaoshuo").removeClass("root_1lc");
-		});
-		$(".kehuan").click(function(){
+		}
+		
+		for(var i=num;i<num+num2;i++){
+		$("."+i).click(function(){
 			l=1;
+			$(".root_2l").siblings().removeClass("root_2lc");
+			for(var j=num;j<num+num2;j++){
+				if(i!=j)
+					$("."+j).removeClass("root_2lc");
+			}
 			$(this).addClass("root_2lc");
+			$("#style").val($(this).children("p").text());
 		});
+		}
 	});
 	function Publish(){
 		if(l==0){

@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,15 +18,14 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.yryj.daoImpl.ChapterDL;
 import com.yryj.model.Chapter;
 import com.yryj.model.Draft;
-import com.yryj.model.Story;
 import com.yryj.model.Type;
 import com.yryj.model.User;
+import com.yryj.pub.Format;
 import com.yryj.sercvice.ChapterManager;
-import com.yryj.sercvice.StoryManager;
 import com.yryj.sercvice.TypeManager;
 import com.yryj.serviceImpl.ChapterML;
 import com.yryj.serviceImpl.DraftML;
-import com.yryj.serviceImpl.StoryML;
+import com.yryj.serviceImpl.TypeML;
 
 public class ChapterAction extends ActionSupport {
 
@@ -36,6 +36,8 @@ public class ChapterAction extends ActionSupport {
 	private String key;
 	private String format;
 	private String style;
+	private int mood;
+
 
 	public ChapterManager getChapterManager() {
 		return chapterManager;
@@ -58,9 +60,38 @@ public class ChapterAction extends ActionSupport {
 		this.content = content;
 	}
 
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+	public String getFormat() {
+		return format;
+	}
+	public void setFormat(String format) {
+		this.format = format;
+	}
+	public String getStyle() {
+		return style;
+	}
+	public void setStyle(String style) {
+		this.style = style;
+	}
+	
+	
+	
+	public int getMood() {
+		return mood;
+	}
+	public void setMood(int mood) {
+		this.mood = mood;
+	}
 	void getWebChapter(){
 		chapter=new Chapter();
 		chapter.setContent(content);
+		chapter.setKey(key);
 	}
 
 	public String execute() {
@@ -68,7 +99,7 @@ public class ChapterAction extends ActionSupport {
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ERROR;
+			return Format.WRONG;
 		}
 	}
 	public String write()
@@ -76,52 +107,121 @@ public class ChapterAction extends ActionSupport {
 		try {
 			HttpSession session=ServletActionContext.getRequest().getSession();
 			User user =(User) session.getAttribute("user");
+			Chapter parent=(Chapter)session.getAttribute("parentChapter");
 			getWebChapter();
 			if(user==null){
 				Draft df=new Draft();
 				df.setContent(content);
 				session.setAttribute("draft", df);
+				session.setAttribute("msg", "登录之后才能发表文章~");
 				return "login";
 			}
-			
+
 			//如果是草稿箱里面的，从草稿箱中删除对应草稿
 			Draft df=(Draft) session.getAttribute("draft");
+			chapterManager=new ChapterML();
 			if(df!=null){
 				DraftML dm =new DraftML();
 				if(df.getId()>=0L){
 					dm.delete(df.getId());
 					chapter.setParentId(df.getParentId());
+					if(df.getParentId()!=-1)
+						chapter.setLevel(chapterManager.find(df.getParentId()).getLevel()+1);
 					session.setAttribute("draft", null);
 				}
 			}
 			chapter.setUserName(user.getName());
-			chapterManager=new ChapterML();
+			//设置父章节和章节的层次，并清空父章节
+			if(parent!=null){
+				chapter.setParentId(parent.getId());
+				chapter.setLevel(parent.getLevel()+1);
+				session.setAttribute("parentChapter", null);
+			}
+
+			//设置type和style
+			chapter.setFormat(format);
+			chapter.setStyle(style);
+			if(chapter.getParentId()==-1){
+				if(chapter.getFormat()==null||chapter.getFormat()=="")
+					return "main";
+			}
 			chapterManager.save(chapter);
-//			if(chapter.getParentId()==-1){
-//				StoryManager sm=new StoryML();
-//				Story story=new Story(new Type(format,style,"短篇"),chapter,new Date(chapter.getDate()));
-//				sm.save(story);
-//			}
+			if(parent!=null)
+				return SUCCESS;
+			else
+				return "main";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Format.WRONG;
+		}
+	}
+
+	public String prepareWrite(){
+		try {			
+			chapterManager=new ChapterML();
+			//获取开头
+			HttpServletRequest request=ServletActionContext.getRequest();
+			String is=request.getParameter("parentId");
+			//根节点ID号
+			long index=Long.valueOf(is);
+			HttpSession session=request.getSession();
+			Chapter parent=chapterManager.find(index);
+			session.setAttribute("parentChapter", parent);
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "wrong";
+			return Format.WRONG;
 		}
 	}
-	
-	
+
+	public String getStarts(){
+		chapterManager=new ChapterML();
+		HttpSession session=ServletActionContext.getRequest().getSession();	
+		List<Chapter> storys=new ArrayList<Chapter>();
+		if(format!=null&&format!=""){
+			storys=chapterManager.getStoryBySF(format, style);
+		}else
+			storys=chapterManager.getStoryByLength(mood);
+		session.setAttribute("storys", storys);
+		return SUCCESS;
+	}
+
+	//加载所有的故事开头
 	public String readStart()
 	{
 		try {			
 			chapterManager=new ChapterML();
+			HttpSession session=ServletActionContext.getRequest().getSession();	
 			//获取所有的开头
 			List<Chapter> storys=chapterManager.getChildren(-1);
-			HttpSession session=ServletActionContext.getRequest().getSession();
 			session.setAttribute("storys", storys);
+			//获取所有的类型
+			ArrayList<ArrayList<Type>> types = new ArrayList<ArrayList<Type>>();
+			ArrayList<Type> style=new ArrayList<Type>();
+			TypeManager typeManager=new TypeML();
+			//			
+			//			typeManager.save(new Type(0,1,"小说"));
+			//			typeManager.save(new Type(1,1,"散文"));
+			//			typeManager.save(new Type(2,1,"戏剧"));
+			//			typeManager.save(new Type(3,1,"诗歌"));
+			//			typeManager.save(new Type(4,1,"话剧"));
+			//			typeManager.save(new Type(5,2,"武侠"));
+			//			typeManager.save(new Type(6,2,"玄幻"));
+			//			typeManager.save(new Type(7,2,"神话"));
+			//			typeManager.save(new Type(8,2,"言情"));
+			//			typeManager.save(new Type(9,2,"现代"));
+
+
+			//加入一级和2级分类
+			style=(ArrayList<Type>) typeManager.getClassByMood(1);
+			types.add(style);
+			style=(ArrayList<Type>) typeManager.getClassByMood(2);
+			types.add(style);
+			session.setAttribute("types", types);
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ERROR;
+			return Format.WRONG;
 		}
 	}
 
@@ -130,15 +230,60 @@ public class ChapterAction extends ActionSupport {
 			chapterManager=new ChapterML();
 			//获取开头
 			HttpServletRequest request=ServletActionContext.getRequest();
+			HttpSession session=request.getSession();
+			List<Chapter> story=(List<Chapter>) session.getAttribute("story");
 			String is=request.getParameter("index");
-			long index=Long.valueOf(is);	
-			
-			
+			long index = 0;
+			if(is!=null)
+				//根节点ID号
+				index=Long.valueOf(is);
+			else
+				index=story.get(0).getId();
+			story=chapterManager.getAStoryByTop(index);
+			session.setAttribute("story", story);
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ERROR;
+			return Format.WRONG;
 		}
 	}
-	
+
+	public String  getLeftOrRight(){
+		try {			
+			chapterManager=new ChapterML();
+			//获取开头
+			HttpServletRequest request=ServletActionContext.getRequest();
+			String is=request.getParameter("index");
+			//根节点ID号
+			int index=Integer.valueOf(is);
+
+			//mood为0的时候为左，为1的时候为向右
+			String mood=request.getParameter("mood");
+			int left=Integer.valueOf(mood);
+			boolean isLeft=false;
+			if(left==0)
+				isLeft=true;
+			HttpSession session=request.getSession();
+			List<Chapter> lastStory=(List<Chapter>) session.getAttribute("story");
+			List<Chapter> leftstory=chapterManager.getStory(lastStory.get(index), isLeft);
+			List<Chapter> story=new ArrayList<Chapter>();
+
+			for(int i=0;i<index;i++){
+				story.add(lastStory.get(i));
+			}
+
+			if(leftstory!=null){
+				for(int i=0;i<leftstory.size();i++){
+					story.add(leftstory.get(i));
+				}
+				session.setAttribute("story", story);
+			}
+
+			return SUCCESS;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Format.WRONG;
+		}
+	}
+
 }

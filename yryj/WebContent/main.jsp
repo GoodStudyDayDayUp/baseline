@@ -60,6 +60,9 @@ function goTopEx() {
 	<%
 	User user=(User)session.getAttribute("user"); 
 	List<Chapter> storys=(List<Chapter>)session.getAttribute("storys");
+	if(storys==null)
+		storys=new ArrayList<Chapter>();
+	ArrayList<ArrayList<Type>> types=(ArrayList<ArrayList<Type>>)session.getAttribute("types");
 	%>
 <body "><!--onLoad="scrollTo(0,500)-->
 	<!--导航栏-->
@@ -114,23 +117,23 @@ function goTopEx() {
 				<td><div class="category-boxes">
 				<a href="main-tree.jsp" >
 					<img src="pics\xiaoshuo.jpg" class="blur"/>		
-					<span class="title" >小说</span>
+					<span class="title" ><%=types.get(0).get(0).getContent() %></span>
 				</a></div>
 				</td>
 				
 				<td><div class="category-boxes"><a href="main-tree.jsp">
 					<img src="pics\shige.jpg" class="blur"/>
-					<span class="title" >诗歌</span>
+					<span class="title" ><%=types.get(0).get(3).getContent() %></span>
 				</a></div></td>
 				
 				<td><div class="category-boxes"><a href="main-tree.jsp">
 					<img src="pics\sanwen.jpg" class="blur"/>
-					<span class="title" >散文</span>
+					<span class="title" ><%=types.get(0).get(1).getContent() %></span>
 				</a></div></td>
 				
 				<td><div class="category-boxes"><a href="main-tree.jsp">
 					<img src="pics\xiju.jpg" class="blur"/>
-					<span class="title" >戏剧</span>
+					<span class="title" ><%=types.get(0).get(2).getContent() %></span>
 				</a></div></td>
 			</tr>
 		</table>
@@ -140,8 +143,10 @@ function goTopEx() {
 	
 	<div class="container" >
 		<div class="row">
-		<%for(Chapter ch:storys){ %>
-		<%String length="短篇"; 
+		<%for(int i=0;i<storys.size();i++ ){ %>
+		<%
+		Chapter ch=storys.get(i);
+		String length="短篇"; 
 		switch((int)ch.getLength()){
 		case 1:
 			length="中篇";
@@ -151,18 +156,31 @@ function goTopEx() {
 			break;
 		};
 		
+		if(i%2==0){
+		
 		%>
 			<div class="col-lg-8 col-lg-offset-2 storyofmain" >
 				<div class="col-lg-4 storyclass storycenter" style="background-color:#191970" >
-					<h3 ><a href="main-tree.jsp"><%=ch.getFormat() %></a></h3>
-					<h4 ><a href="main-tree.jsp"><%=ch.getStyle() %></a></h4>
-					<h5 ><a href="main-tree.jsp"><%=length %></a></h5>
+					<h3 ><a href="main-tree.jsp" style="color:#ffffff"><%=ch.getFormat() %></a></h3>
+					<h4 ><a href="main-tree.jsp" style="color:#ffffff"><%=ch.getStyle() %></a></h4>
+					<h5 ><a href="main-tree.jsp" style="color:#ffffff"><%=length %></a></h5>
 				</div>
 				<div class="col-lg-8 storybegin"><p class="storycenter">
 					<a href="readStory.action?index=<%=ch.getId() %>"><%=ch.getContent() %></a>
 				</p></div>
 			</div>
-		<%} %>
+	<%}else{ %>		
+			<div class="col-lg-8 col-lg-offset-2 storyofmain" >
+				<div class="col-lg-8 storybegin"><p class="storycenter">
+					<a href="readStory.action?index=<%=ch.getId() %>" style="color:#000000"><%=ch.getContent() %></a>
+				</p></div>
+				<div class="col-lg-4 storyclass storycenter"style="background-color:#DC143C" >
+					<h3 ><a href="main-tree.jsp" style="color:#ffffff"><%=ch.getFormat() %></a></h3>
+					<h4 ><a href="main-tree.jsp" style="color:#ffffff"><%=ch.getStyle() %></a></h4>
+					<h5 ><a href="main-tree.jsp" style="color:#ffffff"><%=length %></a></h5>
+				</div>
+			</div>
+		<%} }%>
 		</div>
 	</div>
 	

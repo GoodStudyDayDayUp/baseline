@@ -13,12 +13,10 @@ import com.yryj.action.ChapterAction;
 import com.yryj.dao.ChapterDao;
 import com.yryj.daoImpl.ChapterDL;
 import com.yryj.model.Chapter;
-import com.yryj.model.Story;
 import com.yryj.sercvice.ChapterManager;
 @SuppressWarnings("rawtypes")
 public class ChapterML implements ChapterManager{
 	private ChapterDao chapterDao=null;
-	private String filePath;
 	
 	public void save(Chapter chapter) {
 		// TODO Auto-generated method stub
@@ -47,84 +45,6 @@ public class ChapterML implements ChapterManager{
 		return chapterDao.find(id);
 	}
 	
-//	@SuppressWarnings("resource")
-//	@Override
-//	public String write(String content,Chapter parent) {
-//		// TODO Auto-generated method stub
-//			byte[] data = content.getBytes();
-//			int numOfChild = chapterDao.getChildren(parent).size();
-//			String leftName = numOfChild+".txt";
-//			String fileName = numOfChild+1+".txt";
-//			if(parent==null)
-//			{
-//				filePath = ChapterAction.class.getClassLoader().getResource("").getPath();
-//				filePath = filePath.split("WEB-INF")[0];
-//				filePath = filePath+"files/"+fileName;
-//			}
-//			else
-//				filePath = filePath.replaceAll(leftName, fileName);
-//			filePath = filePath.replaceAll("\\\\", "/");
-//			try {
-//				File file = new File(filePath);
-//				FileOutputStream outStream = new FileOutputStream(file);
-//				outStream.write(data);
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} 
-//			return filePath;
-//	}
-//
-//	@Override
-//	public String read(long id) {
-//		// TODO Auto-generated method stub
-//		Chapter chapter = chapterDao.find(id);
-//		filePath = chapter.getContent();
-//		String content = "";
-//		try {
-//            String encoding="GBK";
-//            File file=new File(filePath);
-//            
-//            if(file.isFile() && file.exists()){ //判断文件是否存在
-//                InputStreamReader read = new InputStreamReader(
-//                new FileInputStream(file),encoding);//考虑到编码格式
-//                BufferedReader bufferedReader = new BufferedReader(read);
-//                String lineTxt = null;
-//                while((lineTxt = bufferedReader.readLine()) != null){
-//                   content = content + lineTxt + "\n";
-//                }
-//                read.close();
-//		    }else{
-//		        content = "找不到指定的文件";
-//		    }
-//	    } catch (Exception e) {
-//        	content = "读取文件内容出错";
-//	        e.printStackTrace();
-//	    }
-//		return content;
-//	}
-//	
-//	@SuppressWarnings("unchecked")
-//	@Override
-//	public List getTree(Story story) {
-//		// TODO Auto-generated method stub
-//		Chapter rootChapter = chapterDao.find(story.getChapter().getId());
-//		List list = new ArrayList();
-//		list.add(rootChapter);
-//		list.addAll(traversal(list));
-//		return list;
-//	}
-//	@SuppressWarnings("unchecked")
-//	private List traversal(List list)
-//	{
-//		List childList = new ArrayList<Chapter>();
-//		for(int i=0;i<list.size();i++)
-//		{
-//			List cNode = traversal(chapterDao.getChildren((Chapter)list.get(i)));
-//			childList.addAll(cNode);
-//		}
-//		return childList;
-//	}
 
 	@Override
 	public List getChildren(long parentId) {
@@ -138,6 +58,42 @@ public class ChapterML implements ChapterManager{
 		// TODO Auto-generated method stub
 		chapterDao = new ChapterDL();
 		return chapterDao.getChapterByUName(name);
+	}
+
+	@Override
+	public List getAStoryByTop(long id) {
+		// TODO Auto-generated method stub
+		chapterDao = new ChapterDL();
+		return chapterDao.getAStoryByTop(id);
+	}
+
+	@Override
+	public long getMaxLevel(long rootId) {
+		// TODO Auto-generated method stub
+		chapterDao = new ChapterDL();
+		return chapterDao.getMaxLevel(rootId);
+	}
+
+
+	@Override
+	public List getStory(Chapter chapter, boolean left) {
+		// TODO Auto-generated method stub
+		chapterDao = new ChapterDL();
+		return chapterDao.getStory(chapter, left);
+	}
+
+	@Override
+	public List getStoryBySF(String format, String style) {
+		// TODO Auto-generated method stub
+		chapterDao = new ChapterDL();
+		return chapterDao.getStoryBySF(format, style);
+	}
+
+	@Override
+	public List getStoryByLength(long mood) {
+		// TODO Auto-generated method stub
+		chapterDao = new ChapterDL();
+		return chapterDao.getStoryByLength(mood);
 	}
 	
 }

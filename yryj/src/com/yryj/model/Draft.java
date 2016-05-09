@@ -21,6 +21,7 @@ public class Draft implements java.io.Serializable {
 	public Draft() {
 		content="";
 		parentId=-1;
+		userId=-1;
 	}
 
 	public long getId() {

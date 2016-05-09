@@ -53,13 +53,9 @@
 		<property name="mappingResources">
 			<list>
 				<value>com/yryj/model/Order.hbm.xml</value>
-				<value>com/yryj/model/Story.hbm.xml</value>
-				<value>com/yryj/model/Type.hbm.xml</value>
 				<value>com/yryj/model/User.hbm.xml</value>
-				<value>com/yryj/model/Uts.hbm.xml</value>
 				<value>com/yryj/model/Utc.hbm.xml</value>
 				<value>com/yryj/model/Utu.hbm.xml</value>
-
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -103,16 +99,7 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>	
-	<bean id="storyDao" class="com.yryj.daoImpl.StoryDL">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>	
-	<bean id="typeDao" class="com.yryj.daoImpl.TypeDL">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>	
+	
 	<bean id="userDao" class="com.yryj.daoImpl.UserDL">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -123,11 +110,7 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>	
-	<bean id="utsDao" class="com.yryj.daoImpl.UtsDL">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>	
+	
 	<bean id="utuDao" class="com.yryj.daoImpl.UtuDL">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -141,16 +124,7 @@
 			<ref bean="orderDao" />
 		</property>
 	</bean>
-	<bean id="storyManager" class="com.yryj.serviceImpl.StoryML">
-		<property name="storyDao">
-			<ref bean="storyDao" />
-		</property>
-	</bean>
-	<bean id="typeManager" class="com.yryj.serviceImpl.TypeML">
-		<property name="typeDao">
-			<ref bean="typeDao" />
-		</property>
-	</bean>
+	
 	<bean id="userManager" class="com.yryj.serviceImpl.UserML">
 		<property name="userDao">
 			<ref bean="userDao" />
@@ -161,11 +135,7 @@
 			<ref bean="utcDao" />
 		</property>
 	</bean>
-	<bean id="utsManager" class="com.yryj.serviceImpl.UtsML">
-		<property name="utsDao">
-			<ref bean="utsDao" />
-		</property>
-	</bean>
+	
 	<bean id="utuManager" class="com.yryj.serviceImpl.UtuML">
 		<property name="utuDao">
 			<ref bean="utuDao" />
@@ -178,15 +148,6 @@
 			<ref bean="userManager" />
 		</property>
 	</bean>
+
 	
-	<bean id="typeAction" class="com.yryj.action.TypeAction">
-		<property name="typeManager">
-			<ref bean="typeManager" />
-		</property>
-	</bean>
-	<bean id="jsonAction" class="com.yryj.action.JsonAction">
-		<property name="storyManager">
-			<ref bean="storyManager" />
-		</property>
-	</bean>
 </beans>

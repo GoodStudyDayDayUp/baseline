@@ -60,70 +60,30 @@
 			
 			
 			<action name="write" class="com.yryj.action.ChapterAction" method="write">
-				<result name="success">/main.jsp</result>
+				<result name="success" type="chain">readStory</result>
+				<result name="main" type="chain">readStart</result>
 				<result name="login">/login.jsp</result>
 			</action>
 			<action name="readStart" class="com.yryj.action.ChapterAction" method="readStart">
 				<result name="success">/main.jsp</result>
-			</action>
+			</action>	
+			<action name="startTree"  class="com.yryj.action.ChapterAction" method="readStart">
+				<result name="success">/main-tree.jsp</result>
+			</action>	
+			<action name="getStart" class="com.yryj.action.ChapterAction" method="getStarts">
+				<result name="success">/main-tree.jsp</result>
+			</action>			
 			<action name="readStory" class="com.yryj.action.ChapterAction" method="readStory">
-				<result name="success">/main.jsp</result>
+				<result name="success">/read.jsp</result>
+			</action>
+			<action name="prepareWrite" class="com.yryj.action.ChapterAction" method="prepareWrite">
+				<result name="success">/write.jsp</result>
+			</action>
+			<action name="turnStory" class="com.yryj.action.ChapterAction" method="getLeftOrRight">
+				<result name="success">/read.jsp</result>
 			</action>
 			
 
-			<action name="writeJson" class="jsonAction" method="writeJson">
-
-			</action>
-
-			
-			<action name="addType" class="typeAction" method="addType">
-				<result name="success">/success.jsp</result>
-				<result name="error">/error.jsp</result>
-			</action>
-			<action name="deleteType" class="typeAction" method="deleteType">
-				<result name="success">/success.jsp</result>
-				<result name="error">/error.jsp</result>
-			</action>
-			<action name="searchType" class="typeAction" method="searchType">
-				<result name="success">/success.jsp</result>
-				<result name="error">/error.jsp</result>
-			</action>
-			
-			
-			<action name="findAllFormat" class="typeAction" method="findAllFormatAction">
-				<result name="success">/success.jsp</result>
-				<result name="error">/error.jsp</result>
-			</action>
-			<action name="findAllStyle" class="typeAction" method="findAllStyleAction">
-				<result name="success">/success.jsp</result>
-				<result name="error">/error.jsp</result>
-			</action>
-			<action name="findAllLength" class="typeAction" method="findAllLengthAction">
-				<result name="success">/success.jsp</result>
-				<result name="error">/error.jsp</result>
-			</action>
-			
-			
-			<action name="findByFormat" class="typeAction" method="findByFormatAction">
-				<result name="success">/success.jsp</result>
-				<result name="error">/error.jsp</result>
-			</action>
-			<action name="findByStyle" class="typeAction" method="findByStyleAction">
-				<result name="success">/success.jsp</result>
-				<result name="error">/error.jsp</result>
-			</action>
-			<action name="findByLength" class="typeAction" method="findByLengthAction">
-				<result name="success">/success.jsp</result>
-				<result name="error">/error.jsp</result>
-			</action>
 		</package>
-		
-		 <package name="json" extends="json-default" namespace="/">
-	  		<action name="writeJson" class="jsonAction" method="writeJson">
-   			 <result name="success" type="json">
-	    		 <param name="root">JSONList</param>
-	  		  </result>
-			</action>
-  		</package>
 		
 </struts>

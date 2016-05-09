@@ -1,5 +1,6 @@
 package com.yryj.daoImpl;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -8,31 +9,59 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
+import com.google.code.morphia.Datastore;
+import com.google.code.morphia.Morphia;
+import com.google.code.morphia.query.UpdateOperations;
+import com.mongodb.Mongo;
+import com.mongodb.MongoException;
 import com.yryj.dao.TypeDao;
+import com.yryj.model.Chapter;
 import com.yryj.model.Type;
 
-public class TypeDL extends HibernateDaoSupport implements TypeDao{
+public class TypeDL implements TypeDao{
+	String dbs;
 
-	
-	@Override
-	public void save(Type type) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().setCheckWriteOperations(false);
-		getHibernateTemplate().save(type);
+	public TypeDL(){
+		dbs="yryj";
 	}
 
 	@Override
-	public void delete(int id) {
+	public void save(Type type) {
 		// TODO Auto-generated method stub
-		Type type=find(id);
-		try{
-			Session session=getHibernateTemplate().getSessionFactory().openSession();
-			Transaction ts=session.beginTransaction();
-			session.delete(type);
-			ts.commit();
-			session.close();
-			session=null;
-		}catch(Exception e){
+		try {
+			Morphia mor=new Morphia();
+			Mongo mongo;
+			mongo = new Mongo();
+			Datastore ds=mor.createDatastore(mongo, dbs);
+			List<Type> ts=ds.createQuery(Type.class).order("-id").asList();
+			long id = 0;
+			if(ts.size()>0)
+				id=ts.get(ts.size()-1).getId()+1;
+			type.setId(id);
+
+			ds.save(type);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MongoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void delete(long id) {
+		// TODO Auto-generated method stub
+		try {
+			Morphia mor=new Morphia();
+			Mongo mongo=new Mongo();
+			Datastore ds=mor.createDatastore(mongo, dbs);
+			ds.delete(Type.class,id);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MongoException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -40,113 +69,53 @@ public class TypeDL extends HibernateDaoSupport implements TypeDao{
 	@Override
 	public void update(Type type) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().update(type);
+		try {
+			Morphia mor=new Morphia();
+			Mongo mongo=new Mongo();
+			Datastore ds=mor.createDatastore(mongo, dbs);
+
+			UpdateOperations<Chapter> ch = ds.createUpdateOperations(Chapter.class);
+			//修改内容
+			ch.set("content", type.getContent());
+			ds.update(ds.find(Chapter.class, "id", type.getId()).getKey(), ch);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MongoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public Type find(int id) {
+	public Type find(long id) {
 		// TODO Auto-generated method stub
-		@SuppressWarnings("rawtypes")
-		List list=getHibernateTemplate().find("from Type where id=?",id);
-		if(list.size()>0)
-			return (Type) list.get(0);
-		else
-			return null;
+		try {
+			Morphia mor=new Morphia();
+			Mongo mongo=new Mongo();
+			Datastore ds=mor.createDatastore(mongo, dbs);
+			return ds.find(Type.class,"id",id).get();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	@Override
-	//鎵惧埌鎵�湁鐨刦ormat
-	public List<String> findAllFormat() {
-		List<Type> list= (List<Type>)getHibernateTemplate().find("from Type");
-		List<String> formatList=new ArrayList<String>();
-		for(int i=0;i<list.size();i++){
-			formatList.add(((Type)list.get(i)).getFormat());
+	public List getClassByMood(long mood) {
+		// TODO Auto-generated method stub
+		try {
+			Morphia mor=new Morphia();
+			Mongo mongo=new Mongo();
+			Datastore ds=mor.createDatastore(mongo, dbs);
+			return ds.find(Type.class,"mood",mood).asList();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		List<String> newList=removeDuplicate(formatList);    //鍒犻櫎鐩稿悓鍚嶇О
-		if(newList.size()>0)
-			return newList;
-		else
-			return null;
+
+		return null;
 	}
+
 	
-	
-	@Override
-	//鎵惧埌褰撳墠format涓嬬殑鎵�湁style
-	public List<String> findAllStyle(String format) {
-		@SuppressWarnings("unchecked")
-		List<Type> list=(List<Type>) getHibernateTemplate().find("from Type where format=?",format);
-		List<String> styleList=new ArrayList<String>();
-		for(int i=0;i<list.size();i++){
-			styleList.add(((Type)list.get(i)).getStyle());
-		}
-		List<String> newList=removeDuplicate(styleList);    //鍒犻櫎鐩稿悓鍚嶇О
-		if(newList.size()>0)
-			return newList;
-		else
-			return null;
-	}
-	
-	
-	@Override
-	//鎵惧埌褰撳墠style涓嬬殑鎵�湁legnth
-	public List<String> findAllLength(String style) {
-		@SuppressWarnings("unchecked")
-		List<Type> list=(List<Type>) getHibernateTemplate().find("from Type where style=?",style);
-		List<String> lengthList=new ArrayList<String>();
-		for(int i=0;i<list.size();i++){
-			lengthList.add(((Type)list.get(i)).getLength());
-		}
-		List<String> newList=removeDuplicate(lengthList);    //鍒犻櫎鐩稿悓鍚嶇О
-		if(newList.size()>0)
-			return newList;
-		else
-			return null;
-	}
-	
-	
-	public List<String>  removeDuplicate(List<String> list)  {     
-	    HashSet<String> h  =   new  HashSet<String>(list);     
-	    list.clear();     
-	    list.addAll(h);     
-	    return list;     
-	}   
-	
-	
-	//鎵惧埌format瀵瑰簲鐨則ype闆嗗悎
-	public List<Type> findByFormat(String format){
-		@SuppressWarnings("unchecked")
-		List<Type> list=(List<Type>) getHibernateTemplate().find("from Type where format=?",format);
-		if(list.size()>0)
-			return list;
-		else
-			return null;
-	}
-	
-	
-	//鎵惧埌format鍜宻tyle瀵瑰簲鐨則ype闆嗗悎
-	public List<Type> findByStyle(String format,String style){
-		List<Type> list = new ArrayList<Type>();
-		List<Type> formatList=findByFormat(format);
-		for(int i=0;i<formatList.size();i++){
-			if(((Type)formatList.get(i)).getStyle().equals(style))
-				list.add((Type)formatList.get(i));
-		}
-		if(list.size()>0)
-			return list;
-		else
-			return null;
-	}
-	
-	
-	//鎵惧埌format銆乻tyle鍜宖ormat鍞竴瀵瑰簲鐨則ype闆嗗悎锛屾鏃秚ype闆嗗悎鍙湁涓�釜type
-	public Type findByLength(String format,String style,String length){
-		List<Type> list = new ArrayList<Type>();
-		List<Type> styleList=findByStyle(format,style);
-		for(int i=0;i<styleList.size();i++){
-			if(((Type)styleList.get(i)).getLength().equals(length))
-				list.add((Type)styleList.get(i));
-		}
-		return list.get(0);
-	}
 }

@@ -38,12 +38,7 @@
             </key>
             <one-to-many class="com.yryj.model.Utu" />
         </set>
-        <set name="utses" table="uts" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="uId" not-null="true" />
-            </key>
-            <one-to-many class="com.yryj.model.Uts" />
-        </set>
+       
         <set name="orders" table="order" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="uId" not-null="true" />

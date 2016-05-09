@@ -66,7 +66,7 @@ window.onload = function() {
 <%session.setAttribute("msg", ""); %>
 <nav class="navbar navbar-default" role="navigation" style=" margin:0px 0px 0px 0px;">
 	<div class="navbar-header">
-      <a class="navbar-brand" href="main.jsp" style="font-family:SimHei;">一人一句</a>
+      <a class="navbar-brand" href="readStart.action" style="font-family:SimHei;">一人一句</a>
    </div>
       <div>
 			<p class="navbar-text navbar-right" style="font-family: SimHei;margin-right: 20px;" ><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事 </a></p>
@@ -229,7 +229,7 @@ window.onload = function() {
 								<p class="everychpt"><%=chs.get(i).getContent() %></p>
 								<div class="row" >
 									<div class="user" >
-										<span>日期：<%=Format.sdf.format(new Date(chs.get(i).getDate())) %></span>
+										<span><%=Format.sdf.format(new Date(chs.get(i).getDate())) %></span>
 										<span>浏览数：<%=chs.get(i).getViewNum() %></span>
 									</div>
 									<div class="functs check">

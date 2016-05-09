@@ -72,21 +72,21 @@ text-decoration: none;
 	height:100%;
 }
 
-.storyclass a:link {color: #ffffff}/* 鏈闂殑閾炬帴 */
-.storyclass a:hover {color: #d9d9d9} /* 榧犳爣绉诲姩鍒伴摼鎺ヤ笂 */
- /* .storyclass a:active {color: #0000FF}閫夊畾鐨勯摼鎺�*/
+.storyclass a:link {color: #ffffff}/* 未访问的链接 */
+.storyclass a:hover {color: #d9d9d9} /* 鼠标移动到链接上 */
+ /* .storyclass a:active {color: #0000FF}选定的链接 */
 
 .storybegin{
 	display:table;
 	height:100%;
 	text-overflow: ellipsis;
-	padding: 10px 15px 10px 15px; margin-bottom:-9999px锛沺adding-bottom:9999px;
+	padding: 10px 15px 10px 15px; margin-bottom:-9999px；padding-bottom:9999px;
 }
-.storybegin a:link {color: #000000}/* 鏈闂殑閾炬帴 */
-.storybegin a:hover {color: #434343} /* 榧犳爣绉诲姩鍒伴摼鎺ヤ笂 */
+.storybegin a:link {color: #000000}/* 未访问的链接 */
+.storybegin a:hover {color: #434343} /* 鼠标移动到链接上 */
 
 .storycenter{	
-	display:table-cell; vertical-align:middle; margin-bottom:-9999px锛沺adding-bottom:9999px;
+	display:table-cell; vertical-align:middle; margin-bottom:-9999px；padding-bottom:9999px;
 }
 
 .everychpt{
@@ -103,8 +103,8 @@ text-decoration: none;
 	border-radius:5px;
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=3);/*ie*/
 	-moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-	-webkit-box-shadow: 2px 2px 10px #909090;/*safari鎴朿hrome*/
-	box-shadow:2px 2px 10px #909090;/*opera鎴杋e9*/
+	-webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
+	box-shadow:2px 2px 10px #909090;/*opera或ie9*/
 }
 
 
@@ -116,8 +116,8 @@ text-decoration: none;
 	color:#666666;
 	font-size:12px;
 }
-.user a:link {color: #666666}/* 鏈闂殑閾炬帴 */
-.user a:hover {color: #434343} /* 榧犳爣绉诲姩鍒伴摼鎺ヤ笂 */
+.user a:link {color: #666666}/* 未访问的链接 */
+.user a:hover {color: #434343} /* 鼠标移动到链接上 */
 
 .functs{
 	float:right;
@@ -143,8 +143,8 @@ text-decoration: none;
 .root_1l{
 	cursor:pointer;width:100px; height:50px;margin-bottom:10px;text-align:center; background-color:#fff;filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=90,strength=3);/*ie*/
 	-moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-	-webkit-box-shadow: 2px 2px 10px #909090;/*safari鎴朿hrome*/
-	box-shadow:2px 2px 10px #909090;/*opera鎴杋e9*/;border-radius:3px; display:table;font-family:SimHei;
+	-webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
+	box-shadow:2px 2px 10px #909090;/*opera或ie9*/;border-radius:3px; display:table;font-family:SimHei;
 }
 .root_1lc{
 	background-color:#eeeeee;
@@ -155,9 +155,67 @@ text-decoration: none;
 	cursor:pointer;width:100px; height:50px;margin-bottom:10px;text-align:center; background-color:#fff;border-radius:3px; display:table;font-family:SimHei;
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=0,strength=3);/*ie*/
 	-moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-	-webkit-box-shadow: 2px 2px 10px #909090;/*safari鎴朿hrome*/
-	box-shadow:2px 2px 10px #909090;/*opera鎴杋e9*/;
+	-webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
+	box-shadow:2px 2px 10px #909090;/*opera或ie9*/;
 }
 .root_2lc{
 	background-color:#eeeeee;
 }
+
+/********************************为左侧导航栏修改*************************************/
+		.sidebar-menu{
+			margin-top:10px;
+		}
+		/*一级菜单*/
+		.menu-first{
+			height:45px;
+			width:262px;
+			line-height:45px;
+			background-color: 	#C5C1AA;
+			border-top: 1px solid #efefef;
+			border-bottom: 1px solid #e1e1e1;
+			padding: 0;
+			color:#ffffff;
+			font-size: 20px;
+			font-weight: normal;
+			text-align: center;
+		}
+		/*一级菜单鼠标划过状态*/
+		.menu-first:hover{
+			text-decoration: none;
+			background-color: 	#BDB76B;
+			border-top: 1px solid #b7b7b7;
+			border-bottom: 1px solid #acacac;
+		}
+		/*二级菜单*/
+		.menu-second li a{
+			border-top: 1px solid #efefef;
+			border-bottom: 1px solid #efefef;
+			font-size: 18px;
+			text-align:center;
+		}
+		/*二级菜单鼠标划过样式*/
+		.menu-second li a:hover {
+			text-decoration: none;
+			background-color: #66c3ec;
+			border-top: 1px solid #83ceed;
+			border-bottom: 1px solid #83ceed;
+			border-right: 3px solid #f8881c;
+			border-left: 3px solid #66c3ec;
+		}
+		/*二级菜单选中状态*/
+		.menu-second-selected {
+			background-color: #66c3ec;
+			height:31px;
+			line-height:31px;
+			border-top: 1px solid #83ceed;
+			border-bottom: 1px solid #83ceed;
+			border-right: 3px solid #f8881c;
+			border-left: 3px solid #66c3ec;
+			text-align:center;
+		}
+		/*覆盖bootstrap的样式*/
+		.nav-list,.nav-list li a{
+			padding: 0px;
+			margin: 0px;
+		}
