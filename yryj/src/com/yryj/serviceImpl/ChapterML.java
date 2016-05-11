@@ -24,12 +24,12 @@ public class ChapterML implements ChapterManager{
 		chapterDao.save(chapter);
 	}
 
-	@Override
-	public void delete(long id) {
-		// TODO Auto-generated method stub
-		chapterDao = new ChapterDL();
-		chapterDao.delete(id);
-	}
+//	@Override
+//	public void delete(long id) {
+//		// TODO Auto-generated method stub
+//		chapterDao = new ChapterDL();
+//		chapterDao.delete(id);
+//	}
 
 	@Override
 	public void update(Chapter chapter) {

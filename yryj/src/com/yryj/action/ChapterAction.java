@@ -106,8 +106,7 @@ public class ChapterAction extends ActionSupport {
 	void getWebChapter(){
 		chapter=new Chapter();
 		chapter.setContent(content);
-		String[] keys=key.split("#");
-		chapter.setKey(key);
+		chapter.setKey(Format.formatString(key));
 	}
 
 	public String execute() {

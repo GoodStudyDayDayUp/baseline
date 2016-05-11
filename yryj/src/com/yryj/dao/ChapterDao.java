@@ -7,7 +7,7 @@ import com.yryj.model.Chapter;
 public interface ChapterDao {
 	public Key<Chapter> save(Chapter chapter);
 
-	public void delete(long id);
+//	public void delete(long id);
 
 	public void update(Chapter chapter);
 

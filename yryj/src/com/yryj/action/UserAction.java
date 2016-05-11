@@ -9,11 +9,13 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yryj.model.Chapter;
 import com.yryj.model.Draft;
+import com.yryj.model.Relations;
 import com.yryj.model.User;
 import com.yryj.pub.Format;
 import com.yryj.sercvice.UserManager;
 import com.yryj.serviceImpl.ChapterML;
 import com.yryj.serviceImpl.DraftML;
+import com.yryj.serviceImpl.RelationsML;
 import com.yryj.serviceImpl.UserML;
 
 
@@ -182,8 +184,6 @@ public class UserAction extends ActionSupport {
 						session.setAttribute("user", theUser);
 						session.setAttribute("msg", "");
 						session.setAttribute("webuser", user);
-						
-						
 						return SUCCESS;
 					}
 					else{
@@ -208,6 +208,7 @@ public class UserAction extends ActionSupport {
 			HttpSession session=ServletActionContext.getRequest().getSession();
 			session.setAttribute("msg", "");
 			userManager=new UserML();
+			user=(User) session.getAttribute("user");
 			if(userManager.checkLogin(user)!=null)
 			{
 				session.setAttribute("user", null);
@@ -267,8 +268,33 @@ public class UserAction extends ActionSupport {
 			List<Draft> dfs=new DraftML().findByUserId(user.getId());
 			session.setAttribute("drafts", dfs);
 			
+			//获得所有的章节
 			List<Chapter> chs=new ChapterML().getChapterByUName(name);
 			session.setAttribute("chapters", chs);
+			
+			//获得所有的关系
+			Relations re=new RelationsML().findByUserId(user.getId());
+			session.setAttribute("relation", re);
+			return SUCCESS;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Format.WRONG;
+		}
+	}
+	
+	public String viewOthers(){
+		try {
+			//获取用户草稿箱
+			HttpSession session=ServletActionContext.getRequest().getSession();
+			userManager=new UserML();
+			user=this.getUser();
+			User person=userManager.checkLogin(user);
+			
+			//作品信息
+			List<Chapter> chs=new ChapterML().getChapterByUName(person.getName());
+			session.setAttribute("chapters", chs);
+			
+			session.setAttribute("person", person);
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();

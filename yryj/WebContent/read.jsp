@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" import="com.yryj.model.*"
 import="java.util.*"
 import="com.yryj.pub.*"
+import="com.yryj.serviceImpl.*"
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -57,7 +58,13 @@ function goTopEx() {
 </head>
 <%
 	User user=(User)session.getAttribute("user"); 
-List<Chapter> story=(List<Chapter>) session.getAttribute("story");
+	List<Chapter> story=(List<Chapter>) session.getAttribute("story");
+	Relations relation=null;
+	if(user!=null){
+		//获得所有的关系
+		relation=new RelationsML().findByUserId(user.getId());
+		session.setAttribute("relation", relation);
+	}
 	
 	%>
 <body >
@@ -120,19 +127,34 @@ List<Chapter> story=(List<Chapter>) session.getAttribute("story");
 					  for(int i=0;i<keys.length;i++){
 				%>
 					<span class="label label-primary chptlabel" ><%=keys[i] %></span>
-				<%} }%>
+				<%} }else
+					  if(a!=""&&a!=null){
+				  %>
+				  <span class="label label-danger chptlabel" ><%=a %></span>
+				  <%} %>
 				</div>
 				<div class="everychpt">
 				<textarea class="form-control" readonly resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;border: 0px;background:#ffffff"><%=story.get(0).getContent() %></textarea></div>
 				<div class="row" >
 					<div class="user" id="chptuser">
-						<a href="main-tree.jsp"><%=story.get(0).getUserName() %></a>
+						<a href="viewPerson.action?name=<%=story.get(0).getUserName() %>"><%=story.get(0).getUserName() %></a>
 						<span><%=Format.sdf.format(new Date(story.get(0).getDate())) %></span>
 						<span>浏览数：<%=story.get(0).getViewNum() %></span>
+						<span>点赞数：<%=story.get(0).getZan() %></span>
 					</div>
 					<div class="functs" id="funct">
-						<button type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;" id="a" value="0" onclick="LoveShow(this)"></button>
-						<button type="button" class="btn btn-default glyphicon glyphicon-star" style="border:none;padding:3px 7px 2px 7px;" id="b" value="0" onclick="CollectShow(this)"></button>
+						<%
+					if(relation!=null){
+					String love=relation.getU2cZan();
+					if(Format.findInArray(love.split("#"), String.valueOf(story.get(0).getId()))){
+					%>
+						<button id=<%="zan"+story.get(0).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;color:red"  value="1" onclick="LoveShow(this)"></button>
+					<%} else{%>
+						<button id=<%="zan"+story.get(0).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="LoveShow(this)"></button>
+					<%}}else{%>
+						<a href="setLove.action"><button  type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="LoveShow(this)"></button></a>
+					<%} %>
+						<a href="setLove.action?id=<%=story.get(0).getId() %>"><button type="button" class="btn btn-default glyphicon glyphicon-star" style="border:none;padding:3px 7px 2px 7px;" id="b" value="0" onclick="CollectShow(this)"></button></a>
 						<a href="prepareWrite.action?parentId=<%=story.get(0).getId() %>"><button type="button" class="btn btn-default glyphicon glyphicon-plus" style="border:none;padding:3px 7px 2px 7px;" id="c" ></button></a>
 					</div>
 				</div>
@@ -157,18 +179,34 @@ List<Chapter> story=(List<Chapter>) session.getAttribute("story");
 					  for(int j=0;j<ks.length;j++){
 				%>
 					<span class="label label-danger chptlabel" ><%=ks[j] %></span>
-				<%}} %>
+				<%}}
+				  else
+					  if(a!=""&&a!=null){
+				  %>
+				  <span class="label label-danger chptlabel" ><%=a %></span>
+				  <%} %>
 				</div>
 				<div><textarea class="form-control" readonly id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;border: 0px;background:#ffffff"><%=story.get(i).getContent() %></textarea></div>
 				<div class="row" >
 					<div class="user" id="chptuser">
-						<a href="x.jsp"><%=story.get(i).getUserName() %></a>
+						<a href="viewPerson.action?name=<%=story.get(i).getUserName() %>"><%=story.get(i).getUserName() %></a>
 						<span><%=Format.sdf.format(new Date(story.get(i).getDate())) %></span>
 						<span>浏览数：<%=story.get(i).getViewNum() %></span>
+						<span>点赞数：<%=story.get(i).getZan() %></span>
 					</div>
 					<div class="functs" id="funct">
-						<button type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;" id="d" value="0" onclick="LoveShow(this)"></button>
-						<button type="button" class="btn btn-default glyphicon glyphicon-star" style="border:none;padding:3px 7px 2px 7px;" id="e" value="0" onclick="CollectShow(this)"></button>
+					<%
+					if(relation!=null){
+					String love=relation.getU2cZan();
+					if(Format.findInArray(love.split("#"), String.valueOf(story.get(i).getId()))){
+					%>
+						<button id=<%="zan"+story.get(i).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;color:red"  value="1" onclick="LoveShow(this)"></button>
+					<%} else{%>
+						<button id=<%="zan"+story.get(i).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="LoveShow(this)"></button>
+					<%}}else{%>
+						<a href="setLove.action"><button  type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="LoveShow(this)"></button></a>
+					<%} %>
+						<a href="setLove.action?id=<%=story.get(i).getId() %>"><button type="button" class="btn btn-default glyphicon glyphicon-star" style="border:none;padding:3px 7px 2px 7px;" id="e" value="0" onclick="CollectShow(this)"></button></a>
 						<a href="prepareWrite.action?parentId=<%=story.get(i).getId() %>"><button type="button" class="btn btn-default glyphicon glyphicon-plus" style="border:none;padding:3px 7px 2px 7px;" id="f" ></button></a>
 					</div>
 				</div>
@@ -192,6 +230,24 @@ List<Chapter> story=(List<Chapter>) session.getAttribute("story");
 	<hr width="100%"/>
 	
 </body>
+
+<script language="JavaScript">
+<%for(int i=0;i<story.size();i++){%>
+$("<%="#zan"+story.get(i).getId()%>").click(function(){
+	$.ajax({
+			url:"setLove.action?id=<%=story.get(i).getId() %>",
+			type:"POST",
+			data:{},
+			dataType:"json",
+			success:function(data){
+				
+			},
+			error:function(){
+			}
+ });
+ }); 
+ <%}%>
+</script>
 
 <script language="JavaScript">
 	

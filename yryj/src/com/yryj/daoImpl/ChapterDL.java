@@ -48,22 +48,22 @@ public class ChapterDL implements ChapterDao{
 		return null;
 	}
 
-	@Override
-	public void delete(long id) {
-		// TODO Auto-generated method stub
-		try {
-			Morphia mor=new Morphia();
-			Mongo mongo=new Mongo();
-			Datastore ds=mor.createDatastore(mongo, dbs);
-			ds.delete(Chapter.class,id);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MongoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	@Override
+//	public void delete(long id) {
+//		// TODO Auto-generated method stub
+//		try {
+//			Morphia mor=new Morphia();
+//			Mongo mongo=new Mongo();
+//			Datastore ds=mor.createDatastore(mongo, dbs);
+//			ds.delete(Chapter.class,id);
+//		} catch (UnknownHostException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (MongoException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 	@Override
 	public void update(Chapter chapter) {

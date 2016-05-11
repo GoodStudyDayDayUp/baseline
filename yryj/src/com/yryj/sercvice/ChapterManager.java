@@ -8,7 +8,7 @@ import com.yryj.model.Chapter;
 public interface ChapterManager {
 	public void save(Chapter chapter);
 
-	public void delete(long id);
+//	public void delete(long id);
 
 	public void update(Chapter chapter);
 

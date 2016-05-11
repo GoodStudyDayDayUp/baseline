@@ -28,8 +28,6 @@
 					key2[2]=length;
 					for(int index=0;index<key.length;index++){
 						String k=key[index];
-						if(keys.startsWith("#")&&index==0)
-							continue;
 						if(index==3)
 							break;
 						if((!k.equals(""))&&k!=null)

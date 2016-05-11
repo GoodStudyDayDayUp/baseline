@@ -41,6 +41,9 @@
 			<action name="getInfo" class="com.yryj.action.UserAction" method="getAllUserData">
 			    <result name="success">/usercenter.jsp</result>
 			</action>
+			<action name="viewPerson" class="com.yryj.action.UserAction" method="viewOthers">
+			    <result name="success">/people.jsp</result>
+			</action>
 			
 			
 			
@@ -83,6 +86,10 @@
 				<result name="success">/read.jsp</result>
 			</action>
 			
+			
+			<action name="setLove" class="com.yryj.action.RelationAction" method="setLove">
+			    <result name="login">/login.jsp</result>
+			</action>
 
 		</package>
 		
