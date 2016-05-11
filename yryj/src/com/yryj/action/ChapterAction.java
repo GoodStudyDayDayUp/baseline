@@ -36,7 +36,9 @@ public class ChapterAction extends ActionSupport {
 	private String key;
 	private String format;
 	private String style;
-	private int mood;
+	private int formatId=-1;//格式在types中的index
+	private int styleId=-1;//风格在types中的index
+	private int mood=-1;  //mood为篇章的长度类型 ： 0为短篇，1中篇，2长篇
 
 
 	public ChapterManager getChapterManager() {
@@ -60,6 +62,19 @@ public class ChapterAction extends ActionSupport {
 		this.content = content;
 	}
 
+
+	public int getFormatId() {
+		return formatId;
+	}
+	public void setFormatId(int formatId) {
+		this.formatId = formatId;
+	}
+	public int getStyleId() {
+		return styleId;
+	}
+	public void setStyleId(int styleId) {
+		this.styleId = styleId;
+	}
 	public String getKey() {
 		return key;
 	}
@@ -79,9 +94,9 @@ public class ChapterAction extends ActionSupport {
 	public void setStyle(String style) {
 		this.style = style;
 	}
-	
-	
-	
+
+
+
 	public int getMood() {
 		return mood;
 	}
@@ -91,6 +106,7 @@ public class ChapterAction extends ActionSupport {
 	void getWebChapter(){
 		chapter=new Chapter();
 		chapter.setContent(content);
+		String[] keys=key.split("#");
 		chapter.setKey(key);
 	}
 
@@ -146,6 +162,17 @@ public class ChapterAction extends ActionSupport {
 					return "main";
 			}
 			chapterManager.save(chapter);
+			//设置文章的长度为中篇长篇或者短篇
+			List<Chapter> story=(List<Chapter>) session.getAttribute("story");
+			if(chapter.getLevel()>Format.maxMiddle&&chapter.getLength()!=2){
+				story.get(0).setLength(2);
+				chapterManager.update(story.get(0));
+			}
+			if(chapter.getLevel()<=Format.maxMiddle&&chapter.getLevel()>Format.maxSmall&&chapter.getLength()==0){
+				story.get(0).setLength(1);
+				chapterManager.update(story.get(0));
+			}
+			//parent为父章节
 			if(parent!=null)
 				return SUCCESS;
 			else
@@ -178,10 +205,16 @@ public class ChapterAction extends ActionSupport {
 		chapterManager=new ChapterML();
 		HttpSession session=ServletActionContext.getRequest().getSession();	
 		List<Chapter> storys=new ArrayList<Chapter>();
-		if(format!=null&&format!=""){
+		ArrayList<ArrayList<Type>> types =(ArrayList<ArrayList<Type>>) session.getAttribute("types");
+
+		if(formatId!=-1){
+			System.out.println(formatId);
+			format=types.get(0).get(formatId).getContent();
+			style=types.get(1).get(styleId).getContent();
+			System.out.println(format+"##########"+style);
 			storys=chapterManager.getStoryBySF(format, style);
-		}else
-			storys=chapterManager.getStoryByLength(mood);
+		}			
+		System.out.println(storys.size());
 		session.setAttribute("storys", storys);
 		return SUCCESS;
 	}
@@ -193,31 +226,43 @@ public class ChapterAction extends ActionSupport {
 			chapterManager=new ChapterML();
 			HttpSession session=ServletActionContext.getRequest().getSession();	
 			//获取所有的开头
-			List<Chapter> storys=chapterManager.getChildren(-1);
+			List<Chapter> storys=new ArrayList<Chapter>();
+			//判断是否要根据长度来加载storys
+			if(mood!=-1){
+				storys=chapterManager.getStoryByLength(mood);
+			}else{
+				storys=chapterManager.getChildren(-1);
+			}
 			session.setAttribute("storys", storys);
-			//获取所有的类型
-			ArrayList<ArrayList<Type>> types = new ArrayList<ArrayList<Type>>();
-			ArrayList<Type> style=new ArrayList<Type>();
-			TypeManager typeManager=new TypeML();
-			//			
-			//			typeManager.save(new Type(0,1,"小说"));
-			//			typeManager.save(new Type(1,1,"散文"));
-			//			typeManager.save(new Type(2,1,"戏剧"));
-			//			typeManager.save(new Type(3,1,"诗歌"));
-			//			typeManager.save(new Type(4,1,"话剧"));
-			//			typeManager.save(new Type(5,2,"武侠"));
-			//			typeManager.save(new Type(6,2,"玄幻"));
-			//			typeManager.save(new Type(7,2,"神话"));
-			//			typeManager.save(new Type(8,2,"言情"));
-			//			typeManager.save(new Type(9,2,"现代"));
+
+			if(session.getAttribute("types")==null)
+			//判断是否已经加载了type类
+			{
+				//获取所有的类型
+				ArrayList<ArrayList<Type>> types = new ArrayList<ArrayList<Type>>();
+				ArrayList<Type> style=new ArrayList<Type>();
+				TypeManager typeManager=new TypeML();
+							
+				//			typeManager.save(new Type(0,1,"小说"));
+				//			typeManager.save(new Type(1,1,"散文"));
+				//			typeManager.save(new Type(2,1,"戏剧"));
+				//			typeManager.save(new Type(3,1,"诗歌"));
+				//			typeManager.save(new Type(4,1,"话剧"));
+				//			typeManager.save(new Type(5,2,"武侠"));
+				//			typeManager.save(new Type(6,2,"玄幻"));
+				//			typeManager.save(new Type(7,2,"神话"));
+				//			typeManager.save(new Type(8,2,"言情"));
+				//			typeManager.save(new Type(9,2,"现代"));
 
 
-			//加入一级和2级分类
-			style=(ArrayList<Type>) typeManager.getClassByMood(1);
-			types.add(style);
-			style=(ArrayList<Type>) typeManager.getClassByMood(2);
-			types.add(style);
-			session.setAttribute("types", types);
+				//加入一级和2级分类
+				style=(ArrayList<Type>) typeManager.getClassByMood(1);
+				types.add(style);
+				style=(ArrayList<Type>) typeManager.getClassByMood(2);
+				types.add(style);
+				session.setAttribute("types", types);
+			}
+
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();

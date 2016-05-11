@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
-import org.springframework.http.HttpRequest;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yryj.model.Draft;

@@ -128,14 +128,13 @@ if(webUser==null){
 		                    notEmpty: {
 		                        message: '用户名不能为空'
 		                    },
-							stringLength: {
-		                        min: 6,
-		                        max: 18,
-		                        message: '用户名不能短于6位长于18位'
+		                    stringLength: {
+		                        max: 20,
+		                        message: '用户名不能为超过20个'
 		                    },
 							regexp: {
-		                        regexp: /^[a-zA-Z0-9_\.]+$/,
-		                        message: '用户名只能包含数字，字母，下划线，英文句号'
+		                        regexp: /^[a-zA-Z0-9_\.\u4E00-\u9FA5]+$/,
+		                        message: '用户名只能包含数字，字母，下划线，英文句号，汉字'
 		                    }
 		                }
 		            },
@@ -155,9 +154,9 @@ if(webUser==null){
 		                        message: '密码不能为空'
 		                    },
 							stringLength: {
-		                        min: 6,
-		                        max: 18,
-		                        message: '用户名不能短于6位长于18位'
+		                        min: 3,
+		                        max: 10,
+		                        message: '用户名不能短于3位长于10位'
 		                    }
 		                }
 		            },

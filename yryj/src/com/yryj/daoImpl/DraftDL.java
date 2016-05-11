@@ -2,9 +2,6 @@ package com.yryj.daoImpl;
 import java.net.UnknownHostException;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Key;
@@ -14,12 +11,13 @@ import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 import com.yryj.dao.DraftDao;
 import com.yryj.model.Draft;
+import com.yryj.pub.Format;
 
 public class DraftDL implements DraftDao{
 	String dbs;
 	
 	public DraftDL(){
-		dbs="yryj";
+		dbs=Format.DATASTORE;
 	}
 	
 	@Override

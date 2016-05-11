@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" import="com.yryj.model.*"
 import="java.util.*"
+import="com.yryj.pub.*"
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -63,8 +64,21 @@ function goTopEx() {
 	if(storys==null)
 		storys=new ArrayList<Chapter>();
 	ArrayList<ArrayList<Type>> types=(ArrayList<ArrayList<Type>>)session.getAttribute("types");
+	if(types==null){
+		types=new ArrayList<ArrayList<Type>>();
+	}
 	%>
-<body "><!--onLoad="scrollTo(0,500)-->
+<body><!--onLoad="scrollTo(0,500)-->
+<script type="text/javascript">
+	window.onload =function onload(){
+		var a=<%=types.size() %>;
+		if(a==0){
+			window.location.href='readStart.action';
+		}
+	}
+	</script>
+	
+
 	<!--导航栏-->
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#ededed; margin:0px 0px 0px 0px;">
 		<div class="navbar-header">
@@ -114,27 +128,27 @@ function goTopEx() {
 	<center>
 		<table class="category">
 			<tr>
+			<%
+			if(types.size()>0)
+			for(int i=0;i<types.get(0).size();i++){ 
+			%>
 				<td><div class="category-boxes">
 				<a href="main-tree.jsp" >
-					<img src="pics\xiaoshuo.jpg" class="blur"/>		
-					<span class="title" ><%=types.get(0).get(0).getContent() %></span>
+				<%if(i==0){%>
+					<img src="pics\xiaoshuo.jpg" class="blur"/>	
+				<%}if(i==1){ %>	
+					<img src="pics\shige.jpg" class="blur"/>	
+				<%}if(i==2){%>	
+					<img src="pics\sanwen.jpg" class="blur"/>	
+				<%}if(i==3){%>	
+				<img src="pics\xiju.jpg" class="blur"/>	
+				<% } if(i<4){%>	
+				
+					<span class="title" ><%=types.get(0).get(i).getContent() %></span>
+					<%} %>
 				</a></div>
 				</td>
-				
-				<td><div class="category-boxes"><a href="main-tree.jsp">
-					<img src="pics\shige.jpg" class="blur"/>
-					<span class="title" ><%=types.get(0).get(3).getContent() %></span>
-				</a></div></td>
-				
-				<td><div class="category-boxes"><a href="main-tree.jsp">
-					<img src="pics\sanwen.jpg" class="blur"/>
-					<span class="title" ><%=types.get(0).get(1).getContent() %></span>
-				</a></div></td>
-				
-				<td><div class="category-boxes"><a href="main-tree.jsp">
-					<img src="pics\xiju.jpg" class="blur"/>
-					<span class="title" ><%=types.get(0).get(2).getContent() %></span>
-				</a></div></td>
+			<%} %>
 			</tr>
 		</table>
 	</center>

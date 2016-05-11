@@ -14,6 +14,7 @@ import com.yryj.pub.Format;
 import com.yryj.sercvice.UserManager;
 import com.yryj.serviceImpl.ChapterML;
 import com.yryj.serviceImpl.DraftML;
+import com.yryj.serviceImpl.UserML;
 
 
 public class UserAction extends ActionSupport {
@@ -104,8 +105,8 @@ public class UserAction extends ActionSupport {
 		this.user = user;
 	}
 
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
+	public void setUserManager() {
+		userManager=new UserML();
 	}
 
 	public String execute() {
@@ -136,6 +137,7 @@ public class UserAction extends ActionSupport {
 		session.setAttribute("webpass2", password2);
 		try {
 			regUser=user;
+			userManager=new UserML();
 			User theUser =userManager.checkLogin(user);
 			if(theUser!=null){
 				session.setAttribute("regmsg", "用户已存在");
@@ -172,6 +174,7 @@ public class UserAction extends ActionSupport {
 				HttpSession session=ServletActionContext.getRequest().getSession();
 				session.setAttribute("msg", "");
 				session.setAttribute("webuser", user);
+				userManager=new UserML();
 				User theUser =userManager.checkLogin(user);
 				if(theUser!=null)
 				{
@@ -204,6 +207,7 @@ public class UserAction extends ActionSupport {
 		try {
 			HttpSession session=ServletActionContext.getRequest().getSession();
 			session.setAttribute("msg", "");
+			userManager=new UserML();
 			if(userManager.checkLogin(user)!=null)
 			{
 				session.setAttribute("user", null);
@@ -235,6 +239,7 @@ public class UserAction extends ActionSupport {
 			}
 			//是否为更改密码操作
 			if(!user.getPassword().equals(lastUser.getPassword())||!user.getPhone().equals(lastUser.getPhone())){
+				userManager=new UserML();
 				userManager.update(user);
 				lastUser.setPassword(user.getPassword());
 				lastUser.setPhone(user.getPhone());

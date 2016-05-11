@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Morphia;

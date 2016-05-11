@@ -4,8 +4,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
-
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Key;
 import com.google.code.morphia.Morphia;
@@ -15,13 +13,14 @@ import com.mongodb.MongoException;
 import com.mongodb.WriteResult;
 import com.yryj.dao.ChapterDao;
 import com.yryj.model.Chapter;
+import com.yryj.pub.Format;
 
 
 public class ChapterDL implements ChapterDao{
 	String dbs;
 
 	public ChapterDL(){
-		dbs="yryj";
+		dbs=Format.DATASTORE;
 	}
 
 	@Override
@@ -76,7 +75,7 @@ public class ChapterDL implements ChapterDao{
 
 			UpdateOperations<Chapter> ch = ds.createUpdateOperations(Chapter.class);
 			//修改内容包含：点赞数,是否结束,浏览次数
-			ch.set("zan", chapter.getZan()).set("isEnd", chapter.isEnd()).set("viewNum", chapter.getViewNum());
+			ch.set("zan", chapter.getZan()).set("isEnd", chapter.isEnd()).set("viewNum", chapter.getViewNum()).set("length", chapter.getLength());
 			ds.update(ds.find(Chapter.class, "_id", chapter.getId()).getKey(), ch);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
