@@ -90,6 +90,10 @@
 			<action name="setLove" class="com.yryj.action.RelationAction" method="setLove">
 			    <result name="login">/login.jsp</result>
 			</action>
+			
+			<action name="setStore" class="com.yryj.action.RelationAction" method="setStore">
+			    <result name="login">/login.jsp</result>
+			</action>
 
 		</package>
 		

@@ -28,13 +28,13 @@ public class RelationAction extends ActionSupport {
 
 			HttpSession session=ServletActionContext.getRequest().getSession();
 			User user =(User) session.getAttribute("user");
-			if(user==null)
+			if(user==null){
+				session.setAttribute("msg", "请先登录");
 				return Format.LOGIN;
+			}
 
 			HttpServletRequest request=ServletActionContext.getRequest();
 			String is=request.getParameter("id");
-			if(is==null)
-				return Format.LOGIN;
 			String relations="";
 			long chapterId=Integer.valueOf(is);		
 
@@ -47,7 +47,11 @@ public class RelationAction extends ActionSupport {
 			if(relation==null){
 				relation=new Relations();
 				relation.setU2cZan(is);
+				relation.setuId(user.getId());
 				relationManager.save(relation);
+				Chapter chapter=cm.find(chapterId);
+				chapter.setZan(chapter.getZan()+1);
+				cm.update(chapter);
 				return null;
 			}
 
@@ -95,5 +99,66 @@ public class RelationAction extends ActionSupport {
 		}
 	}
 
-	
+	//点赞操作
+		public String setStore(){
+			try {
+
+				HttpSession session=ServletActionContext.getRequest().getSession();
+				User user =(User) session.getAttribute("user");
+				if(user==null){
+					session.setAttribute("msg", "请先登录");
+					return Format.LOGIN;
+				}
+
+				HttpServletRequest request=ServletActionContext.getRequest();
+				String is=request.getParameter("id");
+				String relations="";	
+
+				relationManager=new RelationsML();
+
+				Relations relation=relationManager.findByUserId(user.getId());
+
+				//新用户，还没有建立关系
+				if(relation==null){
+					relation=new Relations();
+					relation.setU2cStore(is);
+					relation.setuId(user.getId());
+					relationManager.save(relation);
+					return null;
+				}
+
+				relations=relation.getU2cStore();
+
+				if(relations!=""){
+					//已经用#连接起来了，至少两个
+					if(relations.indexOf("#")!=-1){
+						String [] rs=relations.split("#");
+						String rs2String = Format.getFromArray(rs,is);
+						relation.setU2cStore(rs2String);
+
+					}else{
+						if(relation.getU2cStore().equals(is))
+							relation.setU2cStore("");
+						else{
+							relations+=("#"+is);
+							relation.setU2cStore(relations);
+						}
+
+					}
+				}else{
+
+					relation.setU2cStore(is);
+
+				}
+				
+				relationManager.update(relation);
+
+			
+				return null;			
+			} catch (Exception e) {
+				e.printStackTrace();
+				return Format.WRONG;
+			}
+		}
+
 }

@@ -1,5 +1,6 @@
 package com.yryj.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import com.yryj.model.Draft;
 import com.yryj.model.Relations;
 import com.yryj.model.User;
 import com.yryj.pub.Format;
+import com.yryj.sercvice.ChapterManager;
 import com.yryj.sercvice.UserManager;
 import com.yryj.serviceImpl.ChapterML;
 import com.yryj.serviceImpl.DraftML;
@@ -258,7 +260,7 @@ public class UserAction extends ActionSupport {
 		}
 
 	}
-	
+
 	//再跳转到用户中心之前，获取用户的所有信息
 	public String getAllUserData(){
 		try {
@@ -267,21 +269,39 @@ public class UserAction extends ActionSupport {
 			user=(User) session.getAttribute("user");
 			List<Draft> dfs=new DraftML().findByUserId(user.getId());
 			session.setAttribute("drafts", dfs);
-			
+
 			//获得所有的章节
-			List<Chapter> chs=new ChapterML().getChapterByUName(name);
+			List<Chapter> chs=new ChapterML().getChapterByUName(user.getName());
 			session.setAttribute("chapters", chs);
-			
+
 			//获得所有的关系
 			Relations re=new RelationsML().findByUserId(user.getId());
-			session.setAttribute("relation", re);
+			ArrayList<Chapter> store=new ArrayList<Chapter>();
+			if(re!=null){
+				String rs=re.getU2cStore();
+				String[] relations=null;
+				ChapterManager cm=new ChapterML();
+				if(rs.indexOf("#")!=-1){
+					relations=rs.split("#");
+				}else{
+					relations=new String[1];
+					relations[0]=rs;
+				}
+
+				for(int i=0;i<relations.length;i++){
+					if(relations[i]!="")
+					store.add(cm.find(Long.valueOf(relations[i])));
+				}
+			}
+			
+			session.setAttribute("store", store);
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Format.WRONG;
 		}
 	}
-	
+
 	public String viewOthers(){
 		try {
 			//获取用户草稿箱
@@ -289,10 +309,11 @@ public class UserAction extends ActionSupport {
 			userManager=new UserML();
 			user=this.getUser();
 			User person=userManager.checkLogin(user);
-			
+
 			//作品信息
 			List<Chapter> chs=new ChapterML().getChapterByUName(person.getName());
 			session.setAttribute("chapters", chs);
+			
 			
 			session.setAttribute("person", person);
 			return SUCCESS;

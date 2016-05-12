@@ -110,7 +110,7 @@ a:active {
 					class="caret"></b>
 			</a>
 				<ul class="dropdown-menu">
-					<li><a href="usercenter.jsp">个人主页</a></li>
+					<li><a href="getInfo.action">个人主页</a></li>
 					<li><a href="logout.action">注销</a></li>
 				</ul> <%
  	}else{

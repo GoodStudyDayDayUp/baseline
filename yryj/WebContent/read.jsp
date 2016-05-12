@@ -93,7 +93,7 @@ function goTopEx() {
 						<li><a href="logout.action">注销</a></li>
 					</ul>
 					<%}else{ %>
-					<a href="beforelogin.action"  >
+					<a href="beforelogin.action">
 					登录
 					</a>
 					<%} %>
@@ -139,22 +139,43 @@ function goTopEx() {
 					<div class="user" id="chptuser">
 						<a href="viewPerson.action?name=<%=story.get(0).getUserName() %>"><%=story.get(0).getUserName() %></a>
 						<span><%=Format.sdf.format(new Date(story.get(0).getDate())) %></span>
-						<span>浏览数：<%=story.get(0).getViewNum() %></span>
+						
 						<span>点赞数：<%=story.get(0).getZan() %></span>
 					</div>
 					<div class="functs" id="funct">
 						<%
+					if(user!=null){
+					boolean isFind=false;
 					if(relation!=null){
-					String love=relation.getU2cZan();
-					if(Format.findInArray(love.split("#"), String.valueOf(story.get(0).getId()))){
+						String love=relation.getU2cZan();
+						isFind=Format.findInArray(love.split("#"), String.valueOf(story.get(0).getId()));
+					}
+					if(isFind){
 					%>
 						<button id=<%="zan"+story.get(0).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;color:red"  value="1" onclick="LoveShow(this)"></button>
 					<%} else{%>
 						<button id=<%="zan"+story.get(0).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="LoveShow(this)"></button>
-					<%}}else{%>
+					<%}
+					}else{%>
 						<a href="setLove.action"><button  type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="LoveShow(this)"></button></a>
 					<%} %>
-						<a href="setLove.action?id=<%=story.get(0).getId() %>"><button type="button" class="btn btn-default glyphicon glyphicon-star" style="border:none;padding:3px 7px 2px 7px;" id="b" value="0" onclick="CollectShow(this)"></button></a>
+					
+					<%
+					if(user!=null){
+					boolean isFind=false;
+					if(relation!=null){
+						String love=relation.getU2cStore();
+						isFind=Format.findInArray(love.split("#"), String.valueOf(story.get(0).getId()));
+					}
+					if(isFind){
+					%>
+						<button id=<%="store"+story.get(0).getId()%> type="button" class="btn btn-default glyphicon glyphicon-star"  style="border:none;padding:3px 7px 2px 7px;color:#f1c232"  value="1" onclick="CollectShow(this)"></button>
+					<%} else{%>
+						<button id=<%="store"+story.get(0).getId()%> type="button" class="btn btn-default glyphicon glyphicon-star" style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="CollectShow(this)"></button>
+					<%}
+					}else{%>
+						<a href="setStore.action"><button type="button" class="btn btn-default glyphicon glyphicon-star" style="border:none;padding:3px 7px 2px 7px;" id="b" value="0" onclick="CollectShow(this)"></button></a>
+						<%} %>
 						<a href="prepareWrite.action?parentId=<%=story.get(0).getId() %>"><button type="button" class="btn btn-default glyphicon glyphicon-plus" style="border:none;padding:3px 7px 2px 7px;" id="c" ></button></a>
 					</div>
 				</div>
@@ -191,22 +212,45 @@ function goTopEx() {
 					<div class="user" id="chptuser">
 						<a href="viewPerson.action?name=<%=story.get(i).getUserName() %>"><%=story.get(i).getUserName() %></a>
 						<span><%=Format.sdf.format(new Date(story.get(i).getDate())) %></span>
-						<span>浏览数：<%=story.get(i).getViewNum() %></span>
+						
 						<span>点赞数：<%=story.get(i).getZan() %></span>
 					</div>
 					<div class="functs" id="funct">
 					<%
+					if(user!=null){
+					boolean isFind=false;
 					if(relation!=null){
-					String love=relation.getU2cZan();
-					if(Format.findInArray(love.split("#"), String.valueOf(story.get(i).getId()))){
+						String love=relation.getU2cZan();
+						isFind=Format.findInArray(love.split("#"), String.valueOf(story.get(i).getId()));
+					}
+					if(isFind){
 					%>
 						<button id=<%="zan"+story.get(i).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;color:red"  value="1" onclick="LoveShow(this)"></button>
 					<%} else{%>
 						<button id=<%="zan"+story.get(i).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="LoveShow(this)"></button>
-					<%}}else{%>
+					<%}
+					}else{%>
 						<a href="setLove.action"><button  type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="LoveShow(this)"></button></a>
 					<%} %>
-						<a href="setLove.action?id=<%=story.get(i).getId() %>"><button type="button" class="btn btn-default glyphicon glyphicon-star" style="border:none;padding:3px 7px 2px 7px;" id="e" value="0" onclick="CollectShow(this)"></button></a>
+					
+					<%
+					if(user!=null){
+					boolean isFind=false;
+					if(relation!=null){
+						String love=relation.getU2cStore();
+						isFind=Format.findInArray(love.split("#"), String.valueOf(story.get(i).getId()));
+					}
+					if(isFind){
+					%>
+						<button id=<%="store"+story.get(i).getId()%> type="button" class="btn btn-default glyphicon glyphicon-star"  style="border:none;padding:3px 7px 2px 7px;color:#f1c232"  value="1" onclick="CollectShow(this)"></button>
+					<%} else{%>
+						<button id=<%="store"+story.get(i).getId()%> type="button" class="btn btn-default glyphicon glyphicon-star"  style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="CollectShow(this)"></button>
+					<%}
+					}else{%>
+						<a href="setStore.action"><button type="button" class="btn btn-default glyphicon glyphicon-star" style="border:none;padding:3px 7px 2px 7px;" id="e" value="0" onclick="CollectShow(this)"></button></a>
+						
+					<%} %>	
+						
 						<a href="prepareWrite.action?parentId=<%=story.get(i).getId() %>"><button type="button" class="btn btn-default glyphicon glyphicon-plus" style="border:none;padding:3px 7px 2px 7px;" id="f" ></button></a>
 					</div>
 				</div>
@@ -246,6 +290,21 @@ $("<%="#zan"+story.get(i).getId()%>").click(function(){
 			}
  });
  }); 
+$("<%="#store"+story.get(i).getId()%>").click(function(){
+	$.ajax({
+			url:"setStore.action?id=<%=story.get(i).getId() %>",
+			type:"POST",
+			data:{},
+			dataType:"json",
+			success:function(data){
+				
+			},
+			error:function(){
+			}
+ });
+ }); 
+ 
+ 
  <%}%>
 </script>
 
