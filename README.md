@@ -1,2 +1,2 @@
 # baseline
-a empty repository
+一人一句
