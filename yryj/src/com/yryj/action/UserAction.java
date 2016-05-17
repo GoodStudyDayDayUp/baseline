@@ -3,6 +3,7 @@ package com.yryj.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
@@ -14,6 +15,7 @@ import com.yryj.model.Relations;
 import com.yryj.model.User;
 import com.yryj.pub.Format;
 import com.yryj.sercvice.ChapterManager;
+import com.yryj.sercvice.RelationsManager;
 import com.yryj.sercvice.UserManager;
 import com.yryj.serviceImpl.ChapterML;
 import com.yryj.serviceImpl.DraftML;
@@ -232,28 +234,47 @@ public class UserAction extends ActionSupport {
 			HttpSession session=ServletActionContext.getRequest().getSession();
 			User lastUser=(User) session.getAttribute("webuser");
 			user=(User) session.getAttribute("user");
-			//修改密码
-			if(user.getPassword()!=password&&password!=null&&password!=""){
-				user.setPassword(password);
+
+			HttpServletRequest request=ServletActionContext.getRequest();
+			String mood=request.getParameter("mood");
+			int updateItem=Integer.valueOf(mood);
+
+			userManager=new UserML();
+			switch(updateItem){
+			case 1:
+				//修改电话
+				if(user.getPhone()!=phone){
+					user.setPhone(phone);
+				}
+				if(!user.getPhone().equals(lastUser.getPhone())){
+					userManager.update(user);
+					lastUser.setPhone(user.getPhone());
+					session.setAttribute("webuser", lastUser);
+					session.setAttribute("user", user);
+					session.setAttribute("msg", "修改成功");
+					return SUCCESS;
+				}
+				break;
+			case 2:
+				//修改密码
+				if(user.getPassword()!=password&&password!=null&&password!=""){
+					user.setPassword(password);
+				}
+
+				if(!user.getPassword().equals(lastUser.getPassword())){
+					userManager.update(user);
+					lastUser.setPassword(user.getPassword());
+					session.setAttribute("webuser", lastUser);
+					session.setAttribute("user", user);
+					session.setAttribute("msg", "修改成功");
+					return SUCCESS;
+				}
+				break;
 			}
-			//修改电话
-			if(user.getPhone()!=phone&&phone!=null&&phone!=""){
-				user.setPhone(phone);
-			}
-			//是否为更改密码操作
-			if(!user.getPassword().equals(lastUser.getPassword())||!user.getPhone().equals(lastUser.getPhone())){
-				userManager=new UserML();
-				userManager.update(user);
-				lastUser.setPassword(user.getPassword());
-				lastUser.setPhone(user.getPhone());
-				session.setAttribute("webuser", lastUser);
-				session.setAttribute("user", user);
-				session.setAttribute("msg", "修改成功");
-				return SUCCESS;
-			}else{
-				session.setAttribute("msg", "修改项修改前后相同");
-				return ERROR;
-			}
+
+
+			session.setAttribute("msg", "修改项修改前后相同");
+			return ERROR;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Format.WRONG;
@@ -275,26 +296,11 @@ public class UserAction extends ActionSupport {
 			session.setAttribute("chapters", chs);
 
 			//获得所有的关系
-			Relations re=new RelationsML().findByUserId(user.getId());
-			ArrayList<Chapter> store=new ArrayList<Chapter>();
-			if(re!=null){
-				String rs=re.getU2cStore();
-				String[] relations=null;
-				ChapterManager cm=new ChapterML();
-				if(rs.indexOf("#")!=-1){
-					relations=rs.split("#");
-				}else{
-					relations=new String[1];
-					relations[0]=rs;
-				}
-
-				for(int i=0;i<relations.length;i++){
-					if(relations[i]!="")
-					store.add(cm.find(Long.valueOf(relations[i])));
-				}
-			}
-			
+			RelationsManager rm=new RelationsML();
+			ArrayList<Chapter> store=(ArrayList<Chapter>) rm.getStoreChapter(user.getId());
 			session.setAttribute("store", store);
+
+
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -313,9 +319,15 @@ public class UserAction extends ActionSupport {
 			//作品信息
 			List<Chapter> chs=new ChapterML().getChapterByUName(person.getName());
 			session.setAttribute("chapters", chs);
-			
-			
+
 			session.setAttribute("person", person);
+
+			//获得所有的关系
+			RelationsManager rm=new RelationsML();
+			ArrayList<Chapter> store=(ArrayList<Chapter>) rm.getStoreChapter(person.getId());
+			session.setAttribute("store", store);
+
+
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();

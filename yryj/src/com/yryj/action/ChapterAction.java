@@ -278,9 +278,11 @@ public class ChapterAction extends ActionSupport {
 			List<Chapter> story=(List<Chapter>) session.getAttribute("story");
 			String is=request.getParameter("index");
 			long index = 0;
-			if(is!=null)
+			if(is!=null){
 				//¸ù½ÚµãIDºÅ
 				index=Long.valueOf(is);
+				index=chapterManager.getRootChapter(index);
+			}
 			else
 				index=story.get(0).getId();
 			story=chapterManager.getAStoryByTop(index);

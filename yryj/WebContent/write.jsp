@@ -12,7 +12,9 @@ pageEncoding="utf-8"
 		<link rel="stylesheet" href="css/bootstrap.css"/>
 		<link rel="stylesheet" href="css/style.css"/>
 		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="dist/css/wangEditor.min.css"/>
 		<script src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="dist/js/wangEditor.min.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<style>
 			a:link {
@@ -179,6 +181,47 @@ text-decoration: none;
 	</div><!-- /.modal -->
 	
 </body>
+
+<!--这里引用jquery和wangEditor.js-->
+<script type="text/javascript">
+    var editor = new wangEditor('newchptcont');
+	editor.config.menus = [
+        'bold',
+        'underline',
+        'italic',
+        'strikethrough',
+        'eraser',
+        'forecolor',
+        'bgcolor',
+        '|',
+        'quote',
+        'fontfamily',
+        'fontsize',
+        'head',
+        'unorderlist',
+        'orderlist',
+        'alignleft',
+        'aligncenter',
+        'alignright',
+        '|',
+        'undo',
+        'redo',
+        'fullscreen'
+     ];
+    editor.create();
+	$('#publ').click(function () {
+        // 获取编辑器区域完整html代码
+        var html = editor.$txt.html();
+		alert(html);
+        // 获取编辑器纯文本内容
+        var text = editor.$txt.text();
+		alert(text);
+        // 获取格式化后的纯文本
+        var formatText = editor.$txt.formatText();
+		alert(formatText);
+    });
+</script>
+
 <script language="JavaScript">
 	function LoveShow(obj){
 		var love = document.getElementById(obj.id);

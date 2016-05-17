@@ -95,5 +95,16 @@ public class ChapterML implements ChapterManager{
 		chapterDao = new ChapterDL();
 		return chapterDao.getStoryByLength(mood);
 	}
+
+	@Override
+	public long getRootChapter(long id) {
+		// TODO Auto-generated method stub
+		chapterDao = new ChapterDL();
+		Chapter chapter=chapterDao.find(id);
+		while(chapter.getParentId()!=-1){
+			chapter=chapterDao.find(chapter.getParentId());
+		}
+		return chapter.getId();
+	}
 	
 }

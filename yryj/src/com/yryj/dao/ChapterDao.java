@@ -25,6 +25,7 @@ public interface ChapterDao {
 	//获取章节的最大高度
 	public long getMaxLevel(long rootId);
 	
+	
 	//获取左边或右边的故事
 	public List getStory(Chapter chapter,boolean left);
 	

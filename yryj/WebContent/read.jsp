@@ -54,7 +54,12 @@ function goTopEx() {
         }
     }
 }
+
+$(function(){
+	$(document).tooltip();
+});
 </script>
+
 </head>
 <%
 	User user=(User)session.getAttribute("user"); 
@@ -134,7 +139,7 @@ function goTopEx() {
 				  <%} %>
 				</div>
 				<div class="everychpt">
-				<textarea class="form-control" readonly resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;border: 0px;background:#ffffff"><%=story.get(0).getContent() %></textarea></div>
+				<p class="everychpt"><%=story.get(0).getContent() %></p></div>
 				<div class="row" >
 					<div class="user" id="chptuser">
 						<a href="viewPerson.action?name=<%=story.get(0).getUserName() %>"><%=story.get(0).getUserName() %></a>
@@ -188,7 +193,7 @@ function goTopEx() {
 		<div class="row " > <!--onmouseover="DivShow()" onmouseout="DivHide()" -->
 			<div class="col-lg-1 col-lg-offset-1" style="display:table;position:relative;">
 				<div style="margin-top:50px;display:table-cell;vertical-align:middle; position:absolute;height:100%; top:0px;bottom:0px;right:10px;">
-					<a href="turnStory.action?mood=0&index=<%=i %>" id="ToLeft" onclick="LeftChpt();" > <span class="glyphicon glyphicon-chevron-left"/></a>
+					<a href="turnStory.action?mood=0&index=<%=i %>" id="ToLeft" onclick="LeftChpt();" title="可以查看 条内容"> <span class="glyphicon glyphicon-chevron-left"/></a>
 				</div>
 			</div>
 			<div class="col-lg-8  chptbox" >
@@ -207,7 +212,8 @@ function goTopEx() {
 				  <span class="label label-danger chptlabel" ><%=a %></span>
 				  <%} %>
 				</div>
-				<div><textarea class="form-control" readonly id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;border: 0px;background:#ffffff"><%=story.get(i).getContent() %></textarea></div>
+				<div>
+				<p class="everychpt"><%=story.get(i).getContent() %></p></div>
 				<div class="row" >
 					<div class="user" id="chptuser">
 						<a href="viewPerson.action?name=<%=story.get(i).getUserName() %>"><%=story.get(i).getUserName() %></a>
@@ -257,7 +263,7 @@ function goTopEx() {
 			</div>
 			<div class="col-lg-1" style="display:table;position:relative;">
 				<div style="margin-top:50px;display:table-cell;vertical-align:middle; position:absolute;height:100%; top:0px;bottom:0px;left:10px;">
-					<a href="turnStory.action?mood=1&index=<%=i %>" id="ToRight" > <span class="glyphicon glyphicon-chevron-right"/></a>
+					<a href="turnStory.action?mood=1&index=<%=i %>" id="ToRight" title="还可以查看2条内容" > <span class="glyphicon glyphicon-chevron-right"/></a>
 				</div>
 			</div>
 		</div>

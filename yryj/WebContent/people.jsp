@@ -3,6 +3,7 @@ import="com.yryj.model.*"
 import="java.util.*"
 import="com.yryj.pub.*"
 import="java.util.Date"
+import="com.yryj.serviceImpl.*"
 %>
 <html>
 <head>
@@ -43,6 +44,16 @@ text-decoration: none;
 	User user=(User)session.getAttribute("user"); 
 	User person=(User)session.getAttribute("person");
 	List<Chapter> chs=(List<Chapter>)session.getAttribute("chapters");
+	List<Chapter>  store=(List<Chapter>)session.getAttribute("store");
+	if(chs==null)
+		chs=new ArrayList<Chapter>();
+	
+	Relations relation=null;
+	if(person!=null){
+		//获得所有的关系
+		relation=new RelationsML().findByUserId(person.getId());
+		session.setAttribute("relation", relation);
+	}
 %>
 <body >
 <script type="text/javascript">
@@ -83,8 +94,8 @@ text-decoration: none;
 		<div class="col-lg-2" style="margin-top:20px;">
 		<ul class="nav nav-pills nav-stacked">
 			<li class="active na"><a href="#" id="info"><%=person.getName() %></a></li>
-			<li class="na" ><a href="#" id="mychpts">作品&nbsp;&nbsp;&nbsp;<span class="label label-default">100</span></a></li>
-			<li class="na"><a href="#" id="mycol">收藏&nbsp;&nbsp;&nbsp;<span class="label label-default">20</span></a></li>
+			<li class="na" ><a href="#" id="mychpts">作品&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=chs.size() %></span></a></li>
+			<li class="na"><a href="#" id="mycol">收藏&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=store.size() %></span></a></li>
 			<li class="na"><a href="#" id="myfol">关注&nbsp;&nbsp;&nbsp;<span class="label label-default">3</span></a></li>
 			<li class="na"><a href="#" id="myfans">粉丝&nbsp;&nbsp;&nbsp;<span class="label label-default">123</span></a></li>
 		</ul>
@@ -103,7 +114,7 @@ text-decoration: none;
 				</div>
 			</div>
 			<% for(int i=0;i<chs.size();i++){ 
-				if(i==3) break;
+				if(i==2) break;
 					String a[]=chs.get(i).getKey().split("#"); %>
 					<div class="panel panel-default" style="margin-top:-25px;">
 								<div class="panel-body">
@@ -119,7 +130,7 @@ text-decoration: none;
 										<span>浏览数：<%=chs.get(i).getViewNum() %></span>
 									</div>
 									<div class="functs check">
-										<a href="read.jsp">查看前后文</a>
+										<a href="readStory.action?index=<%=chs.get(i).getId()%>">查看前后文</a>
 									</div>
 								</div>
 								</div>
@@ -132,30 +143,29 @@ text-decoration: none;
 					<h3 class="panel-title">精选收藏</h3>
 				</div>
 			</div>
+					<% for(int i=0;i<store.size();i++){ 
+				if(i==2) break;
+					String a[]=store.get(i).getKey().split("#"); %>
 					<div class="panel panel-default" style="margin-top:-25px;">
 								<div class="panel-body">
-								<p class="everychpt">天地不仁，以万物为诌狗！
-    这世间本是没有什么神仙的，但自太古以来，人类眼见周遭世界，诸般奇异之事，电闪雷鸣，狂风暴雨，又有天灾人祸，伤亡无数，哀鸿遍野，决非人力所能为，所能抵挡。遂以为九天之上，有诸般神灵，九幽之下，亦是阴魂归处，阎罗殿堂。
-    于是神仙之说，流传于世。无数人类子民，诚心叩拜，向着自己臆想创造出的各种神明顶礼膜拜，祈福诉苦，香火鼎盛。
-    自古以来，凡人无不有一死。但世人皆恶死爱生，更有地府阎罗之说，平添了几分苦惧，在此之下，遂有长生不死之说。
-    相比与其他生灵物种，人类或在体质上处于劣势，但万物灵长，却是绝无虚言。在追求长生的原动力下，一代代聪明才智之士，前赴后继，投入毕生精力，苦苦钻研。至今为止，虽然真正意义上的长生不死仍未找到，却有一些修真炼道之士，参透些天地造化，以凡人之身，掌握强横力量，借助各般秘宝法器之力，竟可震撼天地，有雷霆之威。而一些得到高深的前辈，更传说已活上千年之久而不死。世上之人以为得道成仙，便有更多人投入修真炼道之路。
-    神州浩土，广瀚无边。唯有中原大地，最是丰美肥沃，天下人口十之八九聚居于此。而东南西北边荒之地，山险水恶，多凶兽猛禽，多恶瘴毒物，亦多蛮族夷民，虏毛饮血，是以人迹罕至。而人间自古相传，有洪荒遗种，残存人世，藏于深山密谷，寿逾万年，却是无人得见。
-    时至今日，人间修真炼道之人，多如过江之鲫，数不胜数。又以神州浩土之广阔，人间奇人异士之多，故修炼之法道林林总总，俱不相同。长生之法还未找到，彼此间却逐渐有了门派之分，正邪之别。由之而起的门户之见，勾心斗角乃至争伐杀戮，在所多有。
-    当长生不死看起来那般遥远而不可捉摸，修炼中所带来的力量，便逐渐成了许多人的目标。
-    方今之世，正道大昌，邪魔退避。中原大地山灵水秀，人气鼎盛，物产丰富，为正派诸家牢牢占据。其中尤以“青云门”、“天音寺”、和“焚香谷”为三大支柱，是为领袖。
-    这个故事，便是从“青云门”开始的。</p>
+								<div style="display:inline;">
+								<%for(String s:a){ %>
+									<span class="label label-primary chptlabel" ><%=s%></span>
+									<%} %>
+								</div>
+								<p class="everychpt"><%=store.get(i).getContent() %></p>
 								<div class="row" >
 									<div class="user" >
-										<a href="x.html">萧乾</a>&nbsp;&nbsp;&nbsp;&nbsp;
-										浏览数：<span>10 </span>&nbsp;&nbsp;&nbsp;&nbsp;
-										点赞数：<span>10000 </span>
+										<span><%=Format.sdf.format(new Date(store.get(i).getDate())) %></span>
+										<span>浏览数：<%=store.get(i).getViewNum() %></span>
 									</div>
 									<div class="functs check">
-										<a href="read.html">查看前后文</a>
+										<a href="readStory.action?index=<%=store.get(i).getId()%>">查看前后文</a>
 									</div>
 								</div>
 								</div>
 							</div>
+							<%} %>
 		</div>
 		<div id="chpts" style="display:none;"><!--作品-->
 			<div class="panel panel-default">
@@ -186,7 +196,7 @@ text-decoration: none;
 										<span>浏览数：<%=chs.get(i).getViewNum() %></span>
 									</div>
 									<div class="functs check">
-										<a href="read.jsp">查看前后文</a>
+										<a href="readStory.action?index=<%=chs.get(i).getId()%>">查看前后文</a>
 									</div>
 								</div>
 								</div>
@@ -203,30 +213,41 @@ text-decoration: none;
 					排序方式：&nbsp;&nbsp;<a href="#">赞同数</a>&nbsp;&nbsp;<span style="width:1px; height:30px; ">|</span>&nbsp;&nbsp;<a href="#">发布时间</a>
 				</div>
 			</div>
+			<% for(int i=0;i<store.size();i++){ %>	
+		<%String a[]=store.get(i).getKey().split("#"); %>
 			<div class="panel panel-default">
 								<div class="panel-body">
-								<p class="everychpt">天地不仁，以万物为诌狗！
-    这世间本是没有什么神仙的，但自太古以来，人类眼见周遭世界，诸般奇异之事，电闪雷鸣，狂风暴雨，又有天灾人祸，伤亡无数，哀鸿遍野，决非人力所能为，所能抵挡。遂以为九天之上，有诸般神灵，九幽之下，亦是阴魂归处，阎罗殿堂。
-    于是神仙之说，流传于世。无数人类子民，诚心叩拜，向着自己臆想创造出的各种神明顶礼膜拜，祈福诉苦，香火鼎盛。
-    自古以来，凡人无不有一死。但世人皆恶死爱生，更有地府阎罗之说，平添了几分苦惧，在此之下，遂有长生不死之说。
-    相比与其他生灵物种，人类或在体质上处于劣势，但万物灵长，却是绝无虚言。在追求长生的原动力下，一代代聪明才智之士，前赴后继，投入毕生精力，苦苦钻研。至今为止，虽然真正意义上的长生不死仍未找到，却有一些修真炼道之士，参透些天地造化，以凡人之身，掌握强横力量，借助各般秘宝法器之力，竟可震撼天地，有雷霆之威。而一些得到高深的前辈，更传说已活上千年之久而不死。世上之人以为得道成仙，便有更多人投入修真炼道之路。
-    神州浩土，广瀚无边。唯有中原大地，最是丰美肥沃，天下人口十之八九聚居于此。而东南西北边荒之地，山险水恶，多凶兽猛禽，多恶瘴毒物，亦多蛮族夷民，虏毛饮血，是以人迹罕至。而人间自古相传，有洪荒遗种，残存人世，藏于深山密谷，寿逾万年，却是无人得见。
-    时至今日，人间修真炼道之人，多如过江之鲫，数不胜数。又以神州浩土之广阔，人间奇人异士之多，故修炼之法道林林总总，俱不相同。长生之法还未找到，彼此间却逐渐有了门派之分，正邪之别。由之而起的门户之见，勾心斗角乃至争伐杀戮，在所多有。
-    当长生不死看起来那般遥远而不可捉摸，修炼中所带来的力量，便逐渐成了许多人的目标。
-    方今之世，正道大昌，邪魔退避。中原大地山灵水秀，人气鼎盛，物产丰富，为正派诸家牢牢占据。其中尤以“青云门”、“天音寺”、和“焚香谷”为三大支柱，是为领袖。
-    这个故事，便是从“青云门”开始的。</p>
+								<div style="display:inline;">
+								<%for(String s:a){ %>
+									<span class="label label-primary chptlabel" ><%=s%></span>
+									<%} %>
+								</div>
+								<p class="everychpt"><%=store.get(i).getContent() %></p>
 								<div class="row" >
 									<div class="user" >
-										<a href="x.html">萧乾</a>&nbsp;&nbsp;&nbsp;&nbsp;
-										浏览数：<span>10 </span>&nbsp;&nbsp;&nbsp;&nbsp;
-										点赞数：<span>10000 </span>
+										<a href="viewPerson.action?name=<%=store.get(i).getUserName() %>"><%=store.get(i).getUserName() %></a>
+										<span><%=Format.sdf.format(new Date(store.get(i).getDate())) %></span>
+										<span>点赞数：<%=store.get(i).getZan() %></span>
 									</div>
 									<div class="functs check">
-										<a href="read.html">查看前后文</a>
+										<%
+					boolean isFind=false;
+					if(relation!=null){
+						String love=relation.getU2cZan();
+						isFind=Format.findInArray(love.split("#"), String.valueOf(store.get(i).getId()));
+					}
+					if(isFind){
+					%>
+						<button id=<%="zan"+store.get(i).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;color:red"  value="1" onclick="LoveShow(this)"></button>
+					<%} else{%>
+						<button id=<%="zan"+store.get(i).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="LoveShow(this)"></button>
+					<%}%>
+										<a href="readStory.action?index=<%=store.get(i).getId()%>">查看前后文</a>
 									</div>
 								</div>
 								</div>
 							</div>
+		<%} %>
 		</div>
 		<div id="follow" style="display:none">
 			<div class="panel panel-default">
@@ -313,6 +334,52 @@ text-decoration: none;
 		});
 	});
 </script>
+
+<script language="JavaScript">
+<%for(int i=0;i<store.size();i++){%>
+$("<%="#zan"+store.get(i).getId()%>").click(function(){
+	$.ajax({
+			url:"setLove.action?id=<%=store.get(i).getId() %>",
+			type:"POST",
+			data:{},
+			dataType:"json",
+			success:function(data){
+				
+			},
+			error:function(){
+			}
+ });
+ }); 
+<%}%>
+</script>
+<script language="JavaScript">
+	
+	function LoveShow(obj){
+		var love = document.getElementById(obj.id);
+		
+		if(obj.value=="0"){
+			obj.value="1";
+			love.style.color = "#ff0033";
+			}
+		else if(obj.value=="1"){
+			obj.value="0";
+			love.style.color = "#000000";
+		}
+	}
+	function CollectShow(obj){
+		var collect = document.getElementById(obj.id);
+		
+		if(obj.value=="0"){
+			obj.value="1";
+			collect.style.color = "#f1c232";
+			}
+		else if(obj.value=="1"){
+			obj.value="0";
+			collect.style.color = "#000000";
+		}
+	}
+</script>
+
 <script type="text/javascript">
 $("#info").on("click",function(){
 $("#basicInfo").show();//显示

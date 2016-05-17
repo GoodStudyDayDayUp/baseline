@@ -24,6 +24,8 @@ public interface ChapterManager {
 	//获取章节的最大高度
 	public long getMaxLevel(long rootId);
 	
+	public long getRootChapter(long id);
+	
 	//获取左边或右边的故事
 	public List getStory(Chapter chapter,boolean left);
 	

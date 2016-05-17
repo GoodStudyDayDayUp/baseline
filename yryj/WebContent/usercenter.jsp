@@ -107,11 +107,11 @@ window.onload = function() {
 						<tr><td>联系方式</td>
 						
 						<td>
-						<form action="updateUser.action" method="post"  onsubmit="return UpdatePhone()" >
-						    <%if(phone==null) {%>
-							<input type="text" class="form-control" id="phone" name="phone" value="" placeholder="绑定手机号"/>
+						<form action="updateUser.action?mood=1" method="post" onsubmit="return updatePhone()">
+						    <%if(phone==null||phone=="") {%>
+							<input type="text" class="form-control" id="phone" name="phone"  placeholder="绑定手机号 （格式为以13、15、18开头的11位电话号码）" onchange="changemsg(this)"/>
 							<%}else{ %>
-							<input type="text" class="form-control" id="phone" name="phone" value=<%=user.getPhone()%>>
+							<input type="text" class="form-control" id="phone" name="phone" value="<%=user.getPhone()%>" placeholder="绑定手机号 （格式为以13、15、18开头的11位电话号码）" onchange="changemsg(this)">
 							<%} %>
 							<p style="font-size:10px;color:red;display:none;" id="notphone">不是正确的格式</p>
 							<button type="submit" class="btn btn-default" style="margin-top:5px;" >更新联系方式</button>
@@ -121,16 +121,16 @@ window.onload = function() {
 						</tr>
 					</table>
 					<hr/>
-					<form action="updateUser.action" method="post" onsubmit="return Confirm()">
+					<form action="updateUser.action?mood=2" method="post" onsubmit="return Confirm()">
 					<p>原有密码</p>
-					<input type="password" class="form-control"  id="oldpwd"  />
+					<input type="password" class="form-control"  id="oldpwd" placeholder="当前密码 " onchange="checkPass(this)"/>
 					<p style="font-size:10px;color:red;display:none;"  id="oldpwd_wrong">密码错误</p>
 					<p>新密码</p>
-					<input type="password" name="password" class="form-control" id="newpwd" onClick="checkPass()"/>
+					<input type="password" name="password" class="form-control" id="newpwd" onchange="changepass(this)"  placeholder="3~10位"/>
 					<p style="font-size:10px;color:red;display:none;" id="newpwd_empty">不能为空</p>
-					<p style="font-size:10px;color:red;display:none;" id="newpwd_wrong">密码格式错误</p>
+					<p style="font-size:10px;color:red;display:none;" id="newpwd_wrong">密码的长度应为3~10位</p>
 					<p>确认新密码</p>
-					<input type="password" name="password2" class="form-control" id="confirmpwd" onClick="checkPass()"/>
+					<input type="password" name="password2" class="form-control" id="confirmpwd" onchange="changepass2(this)"  placeholder="3~10位"/>
 					<p style="font-size:10px;color:red;display:none;" id="repwd_empty">不能为空</p>
 					<p style="font-size:10px;color:red;display:none;" id="notconsist">两次密码不一致</p>
 					<button type="submit" class="btn btn-default" style="margin-top:5px;" >更新密码</input>
@@ -139,32 +139,73 @@ window.onload = function() {
 				</div>
 			</div>
 			<script type="text/javascript">
-			function checkPass(){
-				var oldpwd = document.getElementById("oldpwd");
+			function checkPass(obj){
 				var w = document.getElementById("oldpwd_wrong");
-			    if(oldpwd.value!="<%=user.getPassword() %>"){
+			    if(obj.value!="<%=user.getPassword() %>"){
 					w.style.display = "block";
 			    }else{
 			    	w.style.display = "none";
 			    }
 			}
+			
+			function changemsg(obj){
+				var myreg = /^[1][358][0-9]{9}$/; 
+				var w = document.getElementById("notphone");
+				//验证130-139,150-159,180-189号码段的手机号码
+				if(!myreg.test($("#phone").val())) 
+				{ 
+					w.style.display = "block";
+				} else
+					w.style.display = "none";
+			}
+			
+			function changepass2(obj){
+				var value=obj.value;
+				var w = document.getElementById("notconsist");
+				var n = document.getElementById("repwd_empty");
+				var p=document.getElementById("newpwd");
+				if(value.length==0)
+					n.style.dispaly="block";
+				else{
+					n.style.dispaly="none";
+					if(value!=p.value){
+						w.style.dispaly="block";
+					}else
+						w.style.dispaly="none";
+				}
+			}
+			
+			function changepass(obj){
+				var value=obj.value;
+				var w = document.getElementById("newpwd_wrong");
+				var n = document.getElementById("newpwd_empty");
+				if(value.length==0)
+					n.style.dispaly="block";
+				else{
+					n.style.dispaly="none";
+					if(value.length<3||value.length>10 ){
+						w.style.dispaly="block";
+					}else
+						w.style.dispaly="none";
+				}
+			}
 			</script>
 			
 			<script language="javascript">	
-					function UpdatePhone(){
-						var myreg = /^[1][358][0-9]{9}$/; 
-						//验证130-139,150-159,180-189号码段的手机号码
-						if(!myreg.test($("#phone").val())) 
-						{ 
-							var w = document.getElementById("notphone");
-							w.style.display = "block";
-							return false;
-						} 
-						w.style.display = "none";
-						return true;
-					}
-					
-					
+			
+			function updatePhone(){
+				var myreg = /^[1][358][0-9]{9}$/; 
+				var w = document.getElementById("notphone");
+				//验证130-139,150-159,180-189号码段的手机号码
+				if(!myreg.test($("#phone").val())) 
+				{ 
+					w.style.display = "block";
+					return false;
+				} else
+					w.style.display = "none";
+				return true;
+			}
+			
 					function Confirm(){
 						var oldpwd = document.getElementById("oldpwd");
 						var newpwd = document.getElementById("newpwd");
@@ -242,7 +283,7 @@ window.onload = function() {
 										<span>点赞数：<%=chs.get(i).getZan() %></span>
 									</div>
 									<div class="functs check">
-										<a href="read.jsp">查看前后文</a>
+										<a href="readStory.action?index=<%=chs.get(i).getId()%>">查看前后文</a>
 									</div>
 								</div>
 								</div>
@@ -292,7 +333,7 @@ window.onload = function() {
 					<%} else{%>
 						<button id=<%="zan"+store.get(i).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="LoveShow(this)"></button>
 					<%}%>
-										<a href="read.jsp">查看前后文</a>
+										<a href="readStory.action?index=<%=store.get(i).getId()%>">查看前后文</a>
 									</div>
 								</div>
 								</div>
@@ -333,7 +374,7 @@ window.onload = function() {
 			<div class="panel panel-default">
 				<div class="panel-heading">积分</div>
 				<div class="panel-body">
-					积分余额<span class="label label-default" style="margin-left:20px;">102</span>
+					积分余额<span class="label label-default" style="margin-left:20px;"><%=user.getPoint() %></span>
 				</div>
 				<table class="table">
 					<th>时间</th><th>积分</th>
@@ -370,6 +411,35 @@ $("<%="#zan"+store.get(i).getId()%>").click(function(){
  }); 
 <%}%>
 </script>
+
+<script language="JavaScript">
+	
+	function LoveShow(obj){
+		var love = document.getElementById(obj.id);
+		
+		if(obj.value=="0"){
+			obj.value="1";
+			love.style.color = "#ff0033";
+			}
+		else if(obj.value=="1"){
+			obj.value="0";
+			love.style.color = "#000000";
+		}
+	}
+	function CollectShow(obj){
+		var collect = document.getElementById(obj.id);
+		
+		if(obj.value=="0"){
+			obj.value="1";
+			collect.style.color = "#f1c232";
+			}
+		else if(obj.value=="1"){
+			obj.value="0";
+			collect.style.color = "#000000";
+		}
+	}
+</script>
+
 
 <script type="text/javascript">
 $("#info").on("click",function(){
