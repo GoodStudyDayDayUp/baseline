@@ -15,6 +15,7 @@ public class Chapter implements java.io.Serializable {
     private long id;
 	
 	private long parentId;
+	private long leftStory;
 	private long level;
 	private long zan;
 	private String userName;
@@ -29,6 +30,7 @@ public class Chapter implements java.io.Serializable {
 	
 	public Chapter() {
 		 parentId=-1;
+		 leftStory=0;
 		 level=1;
 		 zan=0;
 		 userName="";
@@ -57,6 +59,15 @@ public class Chapter implements java.io.Serializable {
 	public void setParentId(long parentId) {
 		this.parentId = parentId;
 	}
+	
+	public long getLeftStory() {
+		return leftStory;
+	}
+
+	public void setLeftStory(long leftStory) {
+		this.leftStory = leftStory;
+	}
+
 
 	public long getLevel() {
 		return level;

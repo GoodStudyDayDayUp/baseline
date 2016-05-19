@@ -66,7 +66,7 @@ text-decoration: none;
 	</script>
 	<nav class="navbar navbar-default" role="navigation" style=" margin:0px 0px 0px 0px;">
 	<div class="navbar-header">
-      <a class="navbar-brand" href="main.html" style="font-family:SimHei;">一人一句</a>
+      <a class="navbar-brand" href="readStart.action" style="font-family:SimHei;">一人一句</a>
    </div>
 		<div>
 			<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">

@@ -150,6 +150,8 @@ public class ChapterAction extends ActionSupport {
 			if(parent!=null){
 				chapter.setParentId(parent.getId());
 				chapter.setLevel(parent.getLevel()+1);
+				List<Chapter> siblings=chapterManager.getChildren(parent.getId());
+			    chapter.setLeftStory(siblings.size());
 				session.setAttribute("parentChapter", null);
 			}
 

@@ -81,12 +81,9 @@ text-decoration: none;
 					<div class="user" id="chptuser">
 						<a href="x.jsp"><%=parent.getUserName() %></a>
 						<span><%=Format.sdf.format(new Date(parent.getDate())) %></span>
-						<span>浏览数：<%=parent.getViewNum() %></span>
+						<span>点赞数：<%=parent.getZan() %></span>
 					</div>
-					<div class="functs" id="funct" style="margin-right: 10px;">
-						<button type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;" id="love" value="0" onclick="LoveShow(this)"></button>
-						<button type="button" class="btn btn-default glyphicon glyphicon-star" style="border:none;padding:3px 7px 2px 7px;" id="collect" value="0" onclick="CollectShow(this)"></button>
-					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -96,9 +93,9 @@ text-decoration: none;
 				<form action="draft.action">
 				<div > <!--contenteditable=true-->
 				<%if(draft.getContent()==""){%>
-					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" placeholder="开启新篇章..."></textarea>
-				<%}else{ %>
-					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;"><%=draft.getContent() %></textarea>
+					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;">请输入内容...</textarea>
+				<%}else{%>
+					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" placeholder="开启新篇章..."><%=draft.getContent() %></textarea>
 				<%} %>
 				</div>
 				<div style="float:right; margin-top:10px;">

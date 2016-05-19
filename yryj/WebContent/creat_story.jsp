@@ -6,12 +6,14 @@
 <html>
 <head>
 		<title>发起一个故事</title>
-        <meta charset="UTF-8">
+         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="css/bootstrap.css"/>
 		<link rel="stylesheet" href="css/style.css"/>
 		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="dist/css/wangEditor.min.css"/>
 		<script src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="dist/js/wangEditor.min.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<style>
 			a:link {
@@ -78,7 +80,7 @@ text-decoration: none;
 				<%if(draft.getContent()==""){%>
 					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" placeholder="写一个开头..."></textarea>
 				<%}else{ %>
-					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;"><%=draft.getContent() %></textarea>
+					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;"  placeholder="写一个开头..."><%=draft.getContent() %></textarea>
 				<%} %>
 				</div>
 				<div style="float:right; margin-top:10px;">
@@ -176,6 +178,47 @@ text-decoration: none;
 	</div><!-- /.modal -->
 	
 </body>
+
+<!--这里引用jquery和wangEditor.js-->
+<script type="text/javascript">
+    var editor = new wangEditor('newchptcont');
+	editor.config.menus = [
+        'bold',
+        'underline',
+        'italic',
+        'strikethrough',
+        'eraser',
+        'forecolor',
+        'bgcolor',
+        '|',
+        'quote',
+        'fontfamily',
+        'fontsize',
+        'head',
+        'unorderlist',
+        'orderlist',
+        'alignleft',
+        'aligncenter',
+        'alignright',
+        '|',
+        'undo',
+        'redo',
+        'fullscreen'
+     ];
+    editor.create();
+	$('#publ').click(function () {
+        // 获取编辑器区域完整html代码
+        var html = editor.$txt.html();
+		alert(html);
+        // 获取编辑器纯文本内容
+        var text = editor.$txt.text();
+		alert(text);
+        // 获取格式化后的纯文本
+        var formatText = editor.$txt.formatText();
+		alert(formatText);
+    });
+</script>
+
  <script language="JavaScript">
    //function Confirm(){
 	//	var iwrite = document.getElementById("addsth");

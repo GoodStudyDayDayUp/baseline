@@ -26,6 +26,7 @@ public interface ChapterDao {
 	public long getMaxLevel(long rootId);
 	
 	
+	
 	//获取左边或右边的故事
 	public List getStory(Chapter chapter,boolean left);
 	

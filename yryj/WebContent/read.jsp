@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" import="com.yryj.model.*"
 import="java.util.*"
 import="com.yryj.pub.*"
+import="com.yryj.sercvice.*"
 import="com.yryj.serviceImpl.*"
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -70,7 +71,7 @@ $(function(){
 		relation=new RelationsML().findByUserId(user.getId());
 		session.setAttribute("relation", relation);
 	}
-	
+	ChapterManager cm=new ChapterML();
 	%>
 <body >
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" margin:0px 0px 0px 0px;">
@@ -189,11 +190,13 @@ $(function(){
 		
 		
 		<!-- 正文 -->
-		<%for(int i=1;i<story.size();i++){ %>
+		<%for(int i=1;i<story.size();i++){ 
+			long left=story.get(i).getLeftStory();
+		%>
 		<div class="row " > <!--onmouseover="DivShow()" onmouseout="DivHide()" -->
 			<div class="col-lg-1 col-lg-offset-1" style="display:table;position:relative;">
 				<div style="margin-top:50px;display:table-cell;vertical-align:middle; position:absolute;height:100%; top:0px;bottom:0px;right:10px;">
-					<a href="turnStory.action?mood=0&index=<%=i %>" id="ToLeft" onclick="LeftChpt();" title="可以查看 条内容"> <span class="glyphicon glyphicon-chevron-left"/></a>
+					<a href="turnStory.action?mood=0&index=<%=i %>" id="ToLeft" onclick="LeftChpt();" title="可以查看<%=left %> 条内容"> <span class="glyphicon glyphicon-chevron-left"/></a>
 				</div>
 			</div>
 			<div class="col-lg-8  chptbox" >
@@ -261,9 +264,14 @@ $(function(){
 					</div>
 				</div>
 			</div>
+			<%
+			List<Chapter> siblings=cm.getChildren(story.get(i).getParentId());
+		    long total=siblings.size();
+		    long right=total-left-1;
+			%>
 			<div class="col-lg-1" style="display:table;position:relative;">
 				<div style="margin-top:50px;display:table-cell;vertical-align:middle; position:absolute;height:100%; top:0px;bottom:0px;left:10px;">
-					<a href="turnStory.action?mood=1&index=<%=i %>" id="ToRight" title="还可以查看2条内容" > <span class="glyphicon glyphicon-chevron-right"/></a>
+					<a href="turnStory.action?mood=1&index=<%=i %>" id="ToRight" title="还可以查看<%=right %>条内容" > <span class="glyphicon glyphicon-chevron-right"/></a>
 				</div>
 			</div>
 		</div>
