@@ -78,9 +78,9 @@ text-decoration: none;
 			<form action="draft.action">
 				<div > <!--contenteditable=true-->
 				<%if(draft.getContent()==""){%>
-					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" placeholder="写一个开头..."></textarea>
+					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" >写一个开头...</textarea>
 				<%}else{ %>
-					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;"  placeholder="写一个开头..."><%=draft.getContent() %></textarea>
+					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" ><%=draft.getContent() %></textarea>
 				<%} %>
 				</div>
 				<div style="float:right; margin-top:10px;">

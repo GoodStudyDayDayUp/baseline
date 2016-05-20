@@ -7,6 +7,7 @@ public class Format {
 	public static String WRONG="wrong";
 	public static String LOGIN="login";
 	public static String DATASTORE="yryj";
+	public static boolean headerDraft=false;
 	
 	//定义篇章长度的划分点
 	public static int maxSmall=3;
