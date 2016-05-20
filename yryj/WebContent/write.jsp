@@ -35,7 +35,7 @@ text-decoration: none;
 <%
 	User user=(User)session.getAttribute("user"); 
 	Draft draft=(Draft)session.getAttribute("draft");
-	if(draft==null)
+	if(draft==null||draft.getParentId()==-1)
 		draft=new Draft();
 	Chapter parent =(Chapter) session.getAttribute("parentChapter");
 	%>
@@ -92,7 +92,7 @@ text-decoration: none;
 			<div class="col-lg-8 col-lg-offset-2" id="newchpt" style="padding:0px 0px 0px 0px;">
 				<form action="draft.action">
 				<div > <!--contenteditable=true-->
-				<%if(draft.getContent()==""){%>
+				<%if(draft.getContent()==""||draft.getParentId()!=parent.getId()){%>
 					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;">请输入内容...</textarea>
 				<%}else{%>
 					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" placeholder="开启新篇章..."><%=draft.getContent() %></textarea>

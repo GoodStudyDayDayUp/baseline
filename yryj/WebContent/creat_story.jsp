@@ -35,7 +35,7 @@ text-decoration: none;
 <%
 	User user=(User)session.getAttribute("user"); 
 	Draft draft=(Draft)session.getAttribute("draft");
-	if(draft==null)
+	if(draft==null||draft.getParentId()!=-1)
 		draft=new Draft();
 	ArrayList<ArrayList<Type>> types=(ArrayList<ArrayList<Type>>)session.getAttribute("types");
 	%>

@@ -127,6 +127,8 @@ public class ChapterAction extends ActionSupport {
 			if(user==null){
 				Draft df=new Draft();
 				df.setContent(content);
+				if(parent!=null)
+					df.setParentId(parent.getId());
 				session.setAttribute("draft", df);
 				session.setAttribute("msg", "登录之后才能发表文章~");
 				return "login";
