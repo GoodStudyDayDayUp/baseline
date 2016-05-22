@@ -188,7 +188,15 @@ public class UserAction extends ActionSupport {
 						session.setAttribute("user", theUser);
 						session.setAttribute("msg", "");
 						session.setAttribute("webuser", user);
-						return SUCCESS;
+						switch(Format.initPage){
+						case 0:
+							return SUCCESS;
+						case 2:
+							return "write";
+						case 1:
+							return "create";
+						}
+						
 					}
 					else{
 						session.setAttribute("msg", "ÃÜÂë´íÎó");

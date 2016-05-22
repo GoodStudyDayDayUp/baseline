@@ -16,8 +16,8 @@ public class Chapter implements java.io.Serializable {
 	
 	private long parentId;
 	private long leftStory;
-	private long level;
-	private long zan;
+	private long level;   //第几层
+	private long zan;     //点赞数
 	private String userName;
 	private String content;
 	private boolean isEnd;
@@ -42,6 +42,21 @@ public class Chapter implements java.io.Serializable {
 		 format="";
 		 length=0;
 		 date=System.currentTimeMillis();
+	}
+	
+	public Chapter(long id,long parentId,long leftStory,long level,long zan,String userName,String content,boolean isEnd,long viewNum,String key,long length,long date){
+		this.id=id;
+		this.parentId=parentId;
+		this.leftStory=leftStory;
+		this.level=level;
+		this.zan=zan;
+		this.userName=userName;
+		this.content=content;
+		this.isEnd=isEnd;
+		this.viewNum=viewNum;
+		this.key=key;
+		this.length=length;
+		this.date=date;
 	}
 
 	public long getId() {
@@ -155,5 +170,20 @@ public class Chapter implements java.io.Serializable {
 
 	public void setDate(long date) {
 		this.date = date;
+	}
+	
+	public String toString(){
+		return "#id="+this.id
+				+";parentId="+this.parentId
+				+";leftStory="+this.leftStory
+				+";level="+this.level
+				+";zan="+this.zan
+				+";userName="+this.userName
+				+";content="+this.content
+				+";isEnd="+this.isEnd
+				+";viewNum="+this.viewNum
+				+";key="+this.key
+				+";length="+this.length
+				+";date="+this.date;
 	}
 }

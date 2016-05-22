@@ -137,12 +137,12 @@ text-decoration: none;
 			<div class="col-lg-8 col-lg-offset-2" id="newchpt" style="padding:0px 0px 0px 0px;">
 				<div style="float:right; margin-top:10px;">
 					<!--发布以后跳到一个新的界面上， 前面是他接的故事. 从此它上面的chapter的+号变成蓝色-->
-					<form action="write.action" onsubmit="return Publish()">
+					<form action="write.action?he=1" onsubmit="return Publish()">
 					<textarea name="content" hidden="hidden" id="ctt"></textarea>
 					<input value="" hidden="hidden" name="format" id="format">
 					<input value="" hidden="hidden" name="style" id="style">
 					<input value="" hidden="hidden" name="key" id="key">
-					<button class="btn btn-primary" id="publish" data-toggle="modal" data-target="#publishModal"  /> 发起</button>
+					<button type="submit" class="btn btn-primary" id="publish" data-toggle="modal" data-target="#publishModal"  /> 发起</button>
 					</form>
 				</div>
 			</div>

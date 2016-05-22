@@ -95,7 +95,7 @@ text-decoration: none;
 				<%if(draft.getContent()==""||draft.getParentId()!=parent.getId()){%>
 					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;">请输入内容...</textarea>
 				<%}else{%>
-					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" placeholder="开启新篇章..."><%=draft.getContent() %></textarea>
+					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;"><%=draft.getContent() %></textarea>
 				<%} %>
 				</div>
 				<div style="float:right; margin-top:10px;">
@@ -147,8 +147,10 @@ text-decoration: none;
          </div>
          </form>
       </div><!-- /.modal-content -->
-</div><!-- /.modal -->
-	
+	</div><!-- /.modal -->
+</div>
+
+
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
       <div class="modal-content">
@@ -159,9 +161,8 @@ text-decoration: none;
             <button type="button" class="btn btn-default"  data-dismiss="modal" onclick="Cancel()">
                取消
             </button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick= "window.location.href= 'deleteDraft.action' ">
-               确认
-            </button>
+  
+            <input type="button" onclick= "window.location.href= 'deleteDraft.action' " class="btn btn-primary" data-dismiss="modal" value="确认"/>
          </div>
       </div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->

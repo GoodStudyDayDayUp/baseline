@@ -7,6 +7,10 @@ public class Format {
 	public static String WRONG="wrong";
 	public static String LOGIN="login";
 	public static String DATASTORE="yryj";
+	//initPage为登录后要跳转的界面，为0的时候跳转到主界面，
+	//为1的时候跳转到write.jsp
+	//为2的时候跳转到creat_story.jsp
+	public static int initPage=0;
 	
 	//定义篇章长度的划分点
 	public static int maxSmall=3;

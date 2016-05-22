@@ -94,14 +94,6 @@ public class RelationAction extends ActionSupport {
 				chapter.setZan(chapter.getZan()+1);
 			cm.update(chapter);
 
-			List<Chapter> story=(List<Chapter>) session.getAttribute("story");
-			for(Chapter c:story){
-				if(c.getId()==chapterId){
-					c.setZan(chapter.getZan());
-					break;
-				}
-			}
-			session.setAttribute("story", story);
 			return null;			
 		} catch (Exception e) {
 			e.printStackTrace();
