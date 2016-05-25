@@ -294,6 +294,8 @@ public class ChapterAction extends ActionSupport {
 				//¸ù½ÚµãIDºÅ
 				index=Long.valueOf(is);
 				index=chapterManager.getRootChapter(index);
+				if(index==-1)
+					return Format.NF;
 			}
 			else
 				index=story.get(0).getId();

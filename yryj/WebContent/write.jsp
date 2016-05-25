@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" import="com.yryj.model.*"
 import="com.yryj.pub.*"
 import="java.util.Date"
+import="java.util.*"
 pageEncoding="utf-8"
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -38,8 +39,18 @@ text-decoration: none;
 	if(draft==null||draft.getParentId()==-1)
 		draft=new Draft();
 	Chapter parent =(Chapter) session.getAttribute("parentChapter");
+	if(parent==null)
+		parent=new Chapter();
 	%>
 <body>
+<script type="text/javascript">
+	window.onload =function onload(){
+		<%if(parent.getContent()==""){%>
+			window.location.href='404error.jsp';
+		<%}%>
+	}
+	</script>
+
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" margin:0px 0px 0px 0px;">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="read.jsp" style="padding-top:17px;"><img src="pics\go_back.png"/></a>
@@ -54,6 +65,9 @@ text-decoration: none;
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="usercenter.jsp">个人主页</a></li>
+						<%if(user.getName().equals(Format.managerName)){ %>
+						<li><a href="manage.jsp">管理</a></li>
+						<%} %>
 						<li><a href="logout.action">注销</a></li>
 					</ul>
 					<%}else{ %>

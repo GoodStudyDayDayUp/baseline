@@ -6,7 +6,12 @@ public class Format {
 	public static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	public static String WRONG="wrong";
 	public static String LOGIN="login";
+	public static String NF="404";
 	public static String DATASTORE="yryj";
+	public static String managerName="000";
+	public static String managerPass="000";
+	
+	
 	//initPage为登录后要跳转的界面，为0的时候跳转到主界面，
 	//为1的时候跳转到write.jsp
 	//为2的时候跳转到creat_story.jsp

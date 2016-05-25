@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     import="com.yryj.model.*"
     import="java.util.*"
+    import="com.yryj.pub.*"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -53,6 +54,9 @@ text-decoration: none;
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="getInfo.action">个人主页</a></li>
+						<%if(user.getName().equals(Format.managerName)){ %>
+						<li><a href="manage.jsp">管理</a></li>
+						<%} %>
 						<li><a href="logout.action">注销</a></li>
 					</ul>
 					<%}else{ %>
