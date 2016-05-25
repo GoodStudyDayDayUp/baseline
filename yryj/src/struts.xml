@@ -6,8 +6,8 @@
 <struts>		
 		<package name="default" extends="struts-default" >
 		    <global-results>
-				<result name="404">/404error.jsp</result>
-				<result name="wrong">/othererror.jsp</result>
+				<result name="404">errorPage/404error.jsp</result>
+				<result name="wrong">errorPage/othererror.jsp</result>
 		    </global-results>
 		    
 		    <action name="beforeregister" class="com.yryj.action.UserAction" method="beforeRegister">
@@ -25,8 +25,6 @@
 				<result name="input">/login.jsp</result>
 				<result name="success" type="chain">readStart</result>
 				<result name="error">/login.jsp</result>
-				<result name="create">/creat_story.jsp</result>
-				<result name="write">/write.jsp</result>
 			</action>
 				<action name="update" class="com.yryj.action.UserAction" method="updateUser">
 				<result name="success">/main.jsp</result>
@@ -95,6 +93,11 @@
 			
 			<action name="setStore" class="com.yryj.action.RelationAction" method="setStore">
 			    <result name="login">/login.jsp</result>
+			</action>
+			
+			<action name="setAttention" class="com.yryj.action.RelationAction" method="setAttention">
+			    <result name="login">/login.jsp</result>
+			    <result name="success" type="chain">getInfo</result>
 			</action>
 
 		</package>

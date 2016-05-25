@@ -45,6 +45,8 @@ text-decoration: none;
 	User person=(User)session.getAttribute("person");
 	List<Chapter> chs=(List<Chapter>)session.getAttribute("chapters");
 	List<Chapter>  store=(List<Chapter>)session.getAttribute("store");
+	String[][] i2uDArray=(String[][])session.getAttribute("i2uDArray");       //我关注的用户列表，id字符串
+	String[][] u2iDArray=(String[][])session.getAttribute("u2iDArray");		//关注我的用户列表，id字符串
 	if(chs==null)
 		chs=new ArrayList<Chapter>();
 	
@@ -77,9 +79,6 @@ text-decoration: none;
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="getInfo.action">个人主页</a></li>
-					<%if(user.getName().equals(Format.managerName)){ %>
-						<li><a href="manage.jsp">管理</a></li>
-						<%} %>
 						<li><a href="logout.action">注销</a></li>
 					</ul>
 					<%}else{ %>
@@ -99,8 +98,8 @@ text-decoration: none;
 			<li class="active na"><a href="#" id="info"><%=person.getName() %></a></li>
 			<li class="na" ><a href="#" id="mychpts">作品&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=chs.size() %></span></a></li>
 			<li class="na"><a href="#" id="mycol">收藏&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=store.size() %></span></a></li>
-			<li class="na"><a href="#" id="myfol">关注&nbsp;&nbsp;&nbsp;<span class="label label-default">3</span></a></li>
-			<li class="na"><a href="#" id="myfans">粉丝&nbsp;&nbsp;&nbsp;<span class="label label-default">123</span></a></li>
+			<li class="na"><a href="#" id="myfol">关注&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(i2uDArray[0][0].equals("无"))%>0<%else %><%=i2uDArray.length %></span></a></li>
+			<li class="na"><a href="#" id="myfans">粉丝&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(u2iDArray[0][0].equals("无"))%>0<%else %><%=u2iDArray.length %></span></a></li>
 		</ul>
 		</div>
 		<div class="col-lg-10" style="margin-top:20px;">
@@ -257,35 +256,23 @@ text-decoration: none;
 				<div class="panel-heading">我关注的人</div>
 					<ul class="list-group">
 						<li class="list-group-item" ">
-							<table><tr>
-							<td style="width:100px;"><a href="#" ><b>张兵</b></a></td>
-							<td><p style="font-size:12px;padding-bottom:-10px;margin-bottom:-10px;">粉丝数：<span>100</span>&nbsp;&nbsp;&nbsp;&nbsp;章节数：<span>300</span></p></td>
-							</tr></table>
-							<button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button>
+							<%if(i2uDArray[0][0].equals("无")) {%>
+							<table>
+							<tr>
+							<td style="width:100px;"><b>无</b></td>
+							</tr>
+							</table>
+							<%}else{ %>
+							<%for(int i=0;i<i2uDArray.length;i++){ %>
+							<table>
+							<tr>
+							<td style="width:100px;"><a href="viewPerson.action?name=<%=i2uDArray[i][1]%>"><b><%=i2uDArray[i][1] %></b></a></td>
+							<td><p style="font-size:12px;padding-bottom:-10px;margin-bottom:-10px;">粉丝数：<span><%=i2uDArray[i][2] %></span>&nbsp;&nbsp;&nbsp;&nbsp;章节数：<span><%=i2uDArray[i][3] %></span></p></td>
+							</tr>
+							</table>
+							<a href=setAttention.action?id=<%=i2uDArray[i][0] %>><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a>
+							<%} }%>
 						</li>
-						
-						<li class="list-group-item" ">
-							<table><tr>
-							<td style="width:100px;"><a href="x"><b>何明</b></a></td>
-							<td><p style="font-size:12px;padding-bottom:-10px;margin-bottom:-10px;">粉丝数：<span>100</span>&nbsp;&nbsp;&nbsp;&nbsp;章节数：<span>300</span></p></td>
-							</tr></table>
-							<button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button>
-						</li>
-						<li class="list-group-item" ">
-							<table><tr>
-							<td style="width:100px;"><a href="x"><b>交大吴彦祖</b></a></td>
-							<td><p style="font-size:12px;padding-bottom:-10px;margin-bottom:-10px;">粉丝数：<span>100</span>&nbsp;&nbsp;&nbsp;&nbsp;章节数：<span>300</span></p></td>
-							</tr></table>
-							<button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button>
-						</li>
-						<li class="list-group-item" ">
-							<table><tr>
-							<td style="width:100px;"><a href="x"><b>李子康</b></a></td>
-							<td><p style="font-size:12px;padding-bottom:-10px;margin-bottom:-10px;">粉丝数：<span>100</span>&nbsp;&nbsp;&nbsp;&nbsp;章节数：<span>300</span></p></td>
-							</tr></table>
-							<button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button>
-						</li>
-						
 					</ul>
 				</div>
 		</div>
@@ -294,34 +281,23 @@ text-decoration: none;
 				<div class="panel-heading">关注我的人</div>
 					<ul class="list-group">
 						<li class="list-group-item" ">
-							<table><tr>
-							<td style="width:100px;"><a href="x"><b>张兵</b></a></td>
-							<td><p style="font-size:12px;padding-bottom:-10px;margin-bottom:-10px;">粉丝数：<span>100</span>&nbsp;&nbsp;&nbsp;&nbsp;章节数：<span>300</span></p></td>
-							</tr></table>
-							<button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button>
+							<%if(u2iDArray[0][0].equals("无")) {%>
+							<table>
+							<tr>
+							<td style="width:100px;"><b>无</b></td>
+							</tr>
+							</table>
+							<%}else{ %>
+							<%for(int i=0;i<u2iDArray.length;i++){ %>
+							<table>
+							<tr>
+							<td style="width:100px;"><a href="viewPerson.action?name=<%=u2iDArray[i][1]%>"><b><%=u2iDArray[i][1] %></b></a></td>
+							<td><p style="font-size:12px;padding-bottom:-10px;margin-bottom:-10px;">粉丝数：<span><%=u2iDArray[i][2] %></span>&nbsp;&nbsp;&nbsp;&nbsp;章节数：<span><%=u2iDArray[i][3] %></span></p></td>
+							</tr>
+							</table>
+							<a href=setAttention.action?id=<%=u2iDArray[i][0] %>><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a>
+							<%} }%>
 						</li>
-						<li class="list-group-item" ">
-							<table><tr>
-							<td style="width:100px;"><a href="x"><b>何明</b></a></td>
-							<td><p style="font-size:12px;padding-bottom:-10px;margin-bottom:-10px;">粉丝数：<span>100</span>&nbsp;&nbsp;&nbsp;&nbsp;章节数：<span>300</span></p></td>
-							</tr></table>
-							<button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button>
-						</li>
-						<li class="list-group-item" ">
-							<table><tr>
-							<td style="width:100px;"><a href="x"><b>交大吴彦祖</b></a></td>
-							<td><p style="font-size:12px;padding-bottom:-10px;margin-bottom:-10px;">粉丝数：<span>100</span>&nbsp;&nbsp;&nbsp;&nbsp;章节数：<span>300</span></p></td>
-							</tr></table>
-							<button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button>
-						</li>
-						<li class="list-group-item" ">
-							<table><tr>
-							<td style="width:100px;"><a href="x"><b>李子康</b></a></td>
-							<td><p style="font-size:12px;padding-bottom:-10px;margin-bottom:-10px;">粉丝数：<span>100</span>&nbsp;&nbsp;&nbsp;&nbsp;章节数：<span>300</span></p></td>
-							</tr></table>
-							<button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button>
-						</li>
-						
 					</ul>
 				</div>
 		</div>

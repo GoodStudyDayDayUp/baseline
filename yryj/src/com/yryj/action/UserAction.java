@@ -188,15 +188,7 @@ public class UserAction extends ActionSupport {
 						session.setAttribute("user", theUser);
 						session.setAttribute("msg", "");
 						session.setAttribute("webuser", user);
-						switch(Format.initPage){
-						case 0:
-							return SUCCESS;
-						case 2:
-							return "write";
-						case 1:
-							return "create";
-						}
-						
+						return SUCCESS;
 					}
 					else{
 						session.setAttribute("msg", "密码错误");
@@ -305,9 +297,30 @@ public class UserAction extends ActionSupport {
 
 			//获得所有的关系
 			RelationsManager rm=new RelationsML();
+			UserManager um=new UserML();
 			ArrayList<Chapter> store=(ArrayList<Chapter>) rm.getStoreChapter(user.getId());
 			session.setAttribute("store", store);
-
+			Relations relation=rm.findByUserId(user.getId());
+			String i2u=relation.getI2u();
+			String u2i=relation.getU2i();
+			String[] i2uId=i2u.split("#");
+			String[] u2iId=u2i.split("#");
+			String[] i2uArray=new String[i2uId.length];
+			String[] u2iArray=new String[u2iId.length];
+			for(int i=0;i<i2uId.length;i++){
+				if(i2uId[i].equals(""))
+					i2uArray[i]="无";
+				else
+					i2uArray[i]=um.find(Integer.parseInt(i2uId[i])).getName();
+			}
+			for(int i=0;i<u2iId.length;i++){
+				if(u2iId[i].equals(""))
+					u2iArray[i]="无";
+				else
+					u2iArray[i]=um.find(Integer.parseInt(u2iId[i])).getName();
+			}
+			session.setAttribute("i2uArray", i2uArray);
+			session.setAttribute("u2iArray", u2iArray);
 
 			return SUCCESS;
 		} catch (Exception e) {
@@ -332,9 +345,56 @@ public class UserAction extends ActionSupport {
 
 			//获得所有的关系
 			RelationsManager rm=new RelationsML();
+			UserManager um=new UserML();
 			ArrayList<Chapter> store=(ArrayList<Chapter>) rm.getStoreChapter(person.getId());
 			session.setAttribute("store", store);
-
+			Relations relation=rm.findByUserId(person.getId());
+			String i2u=relation.getI2u();
+			String u2i=relation.getU2i();
+			String[] i2uArray=i2u.split("#");
+			String[] u2iArray=u2i.split("#");
+			String i2uDArray[][]=new String[i2uArray.length][4];
+			String u2iDArray[][]=new String[u2iArray.length][4];
+			for(int i=0;i<i2uArray.length;i++){
+				if(i2uArray[i].equals("")){
+					i2uDArray[i][0]="无";
+					i2uDArray[i][1]="";
+					i2uDArray[i][2]="";
+					i2uDArray[i][3]="";
+				}
+				else{
+					i2uDArray[i][0]=i2uArray[i];
+					i2uDArray[i][1]=um.find(Integer.parseInt(i2uArray[i])).getName();   //姓名
+					if(rm.findByUserId(Integer.parseInt(i2uArray[i])).getU2i().equals("")){
+						i2uDArray[i][2]="0";
+					}
+					else{
+						i2uDArray[i][2]=String.valueOf(rm.findByUserId(Integer.parseInt(i2uArray[i])).getU2i().split("#").length);   //粉丝数
+					}
+					i2uDArray[i][3]="10";
+				}
+			}
+			for(int i=0;i<u2iArray.length;i++){
+				if(u2iArray[i].equals("")){
+					u2iDArray[i][0]="无";
+					u2iDArray[i][1]="";
+					u2iDArray[i][2]="";
+					u2iDArray[i][3]="";
+				}
+				else{
+					u2iDArray[i][0]=u2iArray[i];
+					u2iDArray[i][1]=um.find(Integer.parseInt(u2iArray[i])).getName();   //姓名	
+					if(rm.findByUserId(Integer.parseInt(u2iArray[i])).getU2i().equals("")){
+						u2iDArray[i][2]="";
+					}
+					else{
+						u2iDArray[i][2]=String.valueOf(rm.findByUserId(Integer.parseInt(u2iArray[i])).getU2i().split("#").length);   //粉丝数
+					}
+					u2iDArray[i][3]="10";
+				}
+			}
+			session.setAttribute("i2uDArray", i2uDArray);
+			session.setAttribute("u2iDArray", u2iDArray);
 
 			return SUCCESS;
 		} catch (Exception e) {

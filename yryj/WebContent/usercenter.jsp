@@ -56,6 +56,8 @@ dfs=(List<Draft>)session.getAttribute("drafts");
 
 List<Chapter> chs=(List<Chapter>)session.getAttribute("chapters");
 List<Chapter> store=(List<Chapter>)session.getAttribute("store");
+String[] i2uArray=(String[])session.getAttribute("i2uArray");
+String[] u2iArray=(String[])session.getAttribute("u2iArray");
 Relations relation=null;
 if(user!=null){
 	//获得所有的关系
@@ -344,18 +346,8 @@ window.onload = function() {
 			<div class="panel panel-default">
 				<div class="panel-heading">我关注的人</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a href="x">张兵</a></li>
-						<li class="list-group-item"><a href="x">何明</a></li>
-						<li class="list-group-item"><a href="x">李子康</a></li>
-						<li class="list-group-item"><a href="x">交大吴彦祖</a></li>
-						<li class="list-group-item"><a href="x">刘烨</a></li>
-						<li class="list-group-item"><a href="x">bear4515</a></li>
-						<li class="list-group-item"><a href="x">vegetchichen</a></li>
-						<li class="list-group-item"><a href="x">炸炸</a></li>
-						<li class="list-group-item"><a href="x">TaylorSwift</a></li>
-						<li class="list-group-item"><a href="x">LadyGaga</a></li>
-						<li class="list-group-item"><a href="x">CharseDikense</a></li>
-						<li class="list-group-item"><a href="x">MarkTowan</a></li>
+						<%for(int i=0;i<i2uArray.length;i++){ %>
+						<li class="list-group-item"><a href="viewPerson.action?name=<%=i2uArray[i]%>"><%=i2uArray[i] %></a></li><%} %>
 					</ul>
 				</div>
 		</div>
@@ -363,10 +355,8 @@ window.onload = function() {
 			<div class="panel panel-default">
 				<div class="panel-heading">关注我的人</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a href="x">张兵</a></li>
-						<li class="list-group-item"><a href="x">何明</a></li>
-						<li class="list-group-item"><a href="x">李子康</a></li>
-						<li class="list-group-item"><a href="x">交大吴彦祖</a></li>
+						<%for(int i=0;i<u2iArray.length;i++){ %>
+						<li class="list-group-item"><a href="viewPerson.action?name=<%=u2iArray[i]%>"><%=u2iArray[i] %></a></li><%} %>
 					</ul>
 				</div>
 		</div>
