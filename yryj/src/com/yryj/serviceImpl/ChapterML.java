@@ -101,12 +101,8 @@ public class ChapterML implements ChapterManager{
 		// TODO Auto-generated method stub
 		chapterDao = new ChapterDL();
 		Chapter chapter=chapterDao.find(id);
-		if(chapter==null)
-			return -1;
 		while(chapter.getParentId()!=-1){
 			chapter=chapterDao.find(chapter.getParentId());
-			if(chapter==null)
-				return -1;
 		}
 		return chapter.getId();
 	}

@@ -143,10 +143,10 @@ $(function(){
 				<p class="everychpt"><%=story.get(0).getContent() %></p></div>
 				<div class="row" >
 					<div class="user" id="chptuser">
-						<a href="viewPerson.action?name=<%=story.get(0).getUserName() %>"><%=story.get(0).getUserName() %></a>&nbsp;&nbsp;
-						<span><%=Format.sdf.format(new Date(story.get(0).getDate())) %></span>&nbsp;&nbsp;
+						<a href="viewPerson.action?name=<%=story.get(0).getUserName() %>"><%=story.get(0).getUserName() %></a>
+						<span><%=Format.sdf.format(new Date(story.get(0).getDate())) %></span>
 						
-						<span>点赞数：<span id=<%="zanNum"+story.get(0).getId()%>><%=story.get(0).getZan() %></span></span>
+						<span>点赞数：<%=story.get(0).getZan() %></span>
 					</div>
 					<div class="functs" id="funct">
 						<%
@@ -193,10 +193,10 @@ $(function(){
 		<%for(int i=1;i<story.size();i++){ 
 			long left=story.get(i).getLeftStory();
 		%>
-		<div class="row " id="contents" > <!--onmouseover="DivShow()" onmouseout="DivHide()" -->
+		<div class="row " > <!--onmouseover="DivShow()" onmouseout="DivHide()" -->
 			<div class="col-lg-1 col-lg-offset-1" style="display:table;position:relative;">
 				<div style="margin-top:50px;display:table-cell;vertical-align:middle; position:absolute;height:100%; top:0px;bottom:0px;right:10px;">
-					<a href="turnStory.action?mood=0&index=<%=i %>" id=<%="ToLeft"+story.get(i).getId()%> onclick="LeftChpt();" title="可以查看<%=left %> 条内容"> <span class="glyphicon glyphicon-chevron-left"/></a>
+					<a href="turnStory.action?mood=0&index=<%=i %>" id="ToLeft" onclick="LeftChpt();" title="可以查看<%=left %> 条内容"> <span class="glyphicon glyphicon-chevron-left"/></a>
 				</div>
 			</div>
 			<div class="col-lg-8  chptbox" >
@@ -216,13 +216,13 @@ $(function(){
 				  <%} %>
 				</div>
 				<div>
-				<p class="everychpt" id=<%="content"+story.get(i).getId() %>><%=story.get(i).getContent() %></p></div>
+				<p class="everychpt"><%=story.get(i).getContent() %></p></div>
 				<div class="row" >
 					<div class="user" id="chptuser">
-						<a href="viewPerson.action?name=<%=story.get(i).getUserName() %>"><%=story.get(i).getUserName() %></a>&nbsp;&nbsp;
-						<span><%=Format.sdf.format(new Date(story.get(i).getDate())) %></span>&nbsp;&nbsp;
+						<a href="viewPerson.action?name=<%=story.get(i).getUserName() %>"><%=story.get(i).getUserName() %></a>
+						<span><%=Format.sdf.format(new Date(story.get(i).getDate())) %></span>
 						
-						<span>点赞数：</span><span id=<%="zanNum"+story.get(i).getId()%>><%=story.get(i).getZan() %></span>
+						<span>点赞数：<%=story.get(i).getZan() %></span>
 					</div>
 					<div class="functs" id="funct">
 					<%
@@ -271,7 +271,7 @@ $(function(){
 			%>
 			<div class="col-lg-1" style="display:table;position:relative;">
 				<div style="margin-top:50px;display:table-cell;vertical-align:middle; position:absolute;height:100%; top:0px;bottom:0px;left:10px;">
-					<a href="turnStory.action?mood=1&index=<%=i %>" id=<%="ToRight"+story.get(i).getId()%> title="还可以查看<%=right %>条内容" > <span class="glyphicon glyphicon-chevron-right"/></a>
+					<a href="turnStory.action?mood=1&index=<%=i %>" id="ToRight" title="还可以查看<%=right %>条内容" > <span class="glyphicon glyphicon-chevron-right"/></a>
 				</div>
 			</div>
 		</div>
@@ -295,8 +295,10 @@ $("<%="#zan"+story.get(i).getId()%>").click(function(){
 	$.ajax({
 			url:"setLove.action?id=<%=story.get(i).getId() %>",
 			type:"POST",
-			async:true,
-			success:function(data){	
+			data:{},
+			dataType:"json",
+			success:function(data){
+				
 			},
 			error:function(){
 			}
@@ -306,33 +308,8 @@ $("<%="#store"+story.get(i).getId()%>").click(function(){
 	$.ajax({
 			url:"setStore.action?id=<%=story.get(i).getId() %>",
 			type:"POST",
-			async:true,
-			success:function(data){
-			},
-			error:function(){
-			}
- });
- }); 
- 
-$("<%="#ToLeft"+story.get(i).getId()%>").click(function(){
-	$.ajax({
-			url:"turnStory.action?mood=0&index=<%=i %>",
-			type:"POST",
-			async:true,
-			success:function(data){
-				$("#contents").html(aStory.jsp);
-			},
-			error:function(){
-			}
- });
- }); 
- 
-
-$("<%="#ToRight"+story.get(i).getId()%>").click(function(){
-	$.ajax({
-			url:"turnStory.action?mood=1&index=<%=i %>",
-			type:"POST",
-			async:true,
+			data:{},
+			dataType:"json",
 			success:function(data){
 				
 			},
@@ -348,19 +325,15 @@ $("<%="#ToRight"+story.get(i).getId()%>").click(function(){
 <script language="JavaScript">
 	
 	function LoveShow(obj){
-		var id=obj.id;
-		var num="#zanNum"+id.substring(3);
 		var love = document.getElementById(obj.id);
-		var zanNum=$(num).text();
+		
 		if(obj.value=="0"){
 			obj.value="1";
 			love.style.color = "#ff0033";
-			$(num).html(++zanNum);
 			}
 		else if(obj.value=="1"){
 			obj.value="0";
 			love.style.color = "#000000";
-			$(num).html(--zanNum);
 		}
 	}
 	function CollectShow(obj){
@@ -395,32 +368,6 @@ $("<%="#ToRight"+story.get(i).getId()%>").click(function(){
  	}	
 	$('textarea[autoHeight]').autoHeight();
 	// textarea 结束
-</script>
-<script type="text/javascript">
-window.onbeforeunload = function(){
-    var scrollPos;    
-    if (typeof window.pageYOffset != 'undefined') {
-        scrollPos = window.pageYOffset;
-    }
-    else if (typeof document.compatMode != 'undefined' &&
-        document.compatMode != 'BackCompat') {
-        scrollPos = document.documentElement.scrollTop;
-    }
-    else if (typeof document.body != 'undefined') {
-        scrollPos = document.body.scrollTop;
-    }
-    document.cookie="scrollTop="+scrollPos; //存储滚动条位置到cookies中
-}
-
-window.onload = function()
-{ 
-    if(document.cookie.match(/scrollTop=([^;]+)(;|$)/)!=null){
-        var arr=document.cookie.match(/scrollTop=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
-        document.documentElement.scrollTop=parseInt(arr[1]);
-        document.body.scrollTop=parseInt(arr[1]);
-    }
-}
-
 </script>
 
 </html>

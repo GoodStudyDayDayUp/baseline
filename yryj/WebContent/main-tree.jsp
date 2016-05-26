@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-import="com.yryj.pub.*"
 	import="com.yryj.model.*" import="java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -112,9 +111,6 @@ a:active {
 			</a>
 				<ul class="dropdown-menu">
 					<li><a href="getInfo.action">个人主页</a></li>
-					<%if(user.getName().equals(Format.managerName)){ %>
-						<li><a href="manage.jsp">管理</a></li>
-						<%} %>
 					<li><a href="logout.action">注销</a></li>
 				</ul> <%
  	}else{
