@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yryj.model.Chapter;
 import com.yryj.model.Draft;
 import com.yryj.model.User;
 import com.yryj.pub.Format;
@@ -40,13 +39,10 @@ public class DraftAction extends ActionSupport {
 		try {
 			HttpSession session=ServletActionContext.getRequest().getSession();
 			User user =(User) session.getAttribute("user");
-			Chapter parent=(Chapter) session.getAttribute("parentChapter");
 			
 			dm =new DraftML();
 			draft=new Draft();
-			draft.setContent(content);
-			if(parent!=null)
-				draft.setParentId(parent.getId());				
+			draft.setContent(content);			
 			if(user==null){
 				session.setAttribute("draft", draft);
 				return ERROR;

@@ -1,8 +1,6 @@
 package com.yryj.action;
 
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -101,7 +99,7 @@ public class RelationAction extends ActionSupport {
 		}
 	}
 
-	//点赞操作
+	//收藏操作
 		public String setStore(){
 			try {
 
@@ -162,5 +160,104 @@ public class RelationAction extends ActionSupport {
 				return Format.WRONG;
 			}
 		}
+		
+		
+		//关注操作
+			public String setAttention(){
+				try {
+
+					HttpSession session=ServletActionContext.getRequest().getSession();
+					User user =(User) session.getAttribute("user");
+					if(user==null){
+						session.setAttribute("msg", "请先登录");
+						return Format.LOGIN;
+					}
+
+					//获取要关注的用户的id
+					HttpServletRequest request=ServletActionContext.getRequest();
+					String i2uId=request.getParameter("id");
+					
+					String relations="";	// 当前用户关注列表
+					String relations1="";	//被关注的用户的粉丝列表
+
+					relationManager=new RelationsML();
+
+					Relations relation=relationManager.findByUserId(user.getId());     //新增我的关注
+					Relations relation1=relationManager.findByUserId(Integer.parseInt(i2uId));    //新增我的粉丝
+
+					//新用户，还没有建立关系
+					if(relation==null){
+						relation=new Relations();
+						relation.setI2u(i2uId);
+						relation.setuId(user.getId());
+						relationManager.save(relation);
+						
+					}
+					if(relation1==null){
+						relation1=new Relations();
+						relation1.setU2i(String.valueOf(user.getId()));
+						relation1.setuId(Integer.parseInt(i2uId));
+						relationManager.save(relation1);
+						
+					}
+					
+
+					relations=relation.getI2u();
+					relations1=relation1.getU2i();
+
+					if(relations!=""){
+						//已经用#连接起来了，至少两个
+						if(relations.indexOf("#")!=-1){
+							String [] rs=relations.split("#");
+							String rs2String = Format.getFromArray(rs,i2uId);
+							relation.setU2cStore(rs2String);
+
+						}else{
+							if(relation.getI2u().equals(i2uId))
+								relation.setI2u("");
+							else{
+								relations+=("#"+i2uId);
+								relation.setI2u(relations);
+							}
+
+						}
+					}else{
+
+						relation.setI2u(i2uId);
+
+					}
+					
+					if(relations1!=""){
+						//已经用#连接起来了，至少两个
+						if(relations1.indexOf("#")!=-1){
+							String [] rs=relations1.split("#");
+							String rs2String = Format.getFromArray(rs,String.valueOf(user.getId()));
+							relation1.setU2cStore(rs2String);
+
+						}else{
+							if(relation1.getU2i().equals(String.valueOf(user.getId())))
+								relation1.setU2i("");
+							else{
+								relations1+=("#"+String.valueOf(user.getId()));
+								relation1.setU2i(relations1);
+							}
+
+						}
+					}else{
+
+						relation1.setU2i(String.valueOf(user.getId()));
+
+					}
+					
+					relationManager.update(relation);
+					relationManager.update(relation1);
+
+				
+					return "success";			
+				} catch (Exception e) {
+					e.printStackTrace();
+					return Format.WRONG;
+				}
+			}
 
 }
