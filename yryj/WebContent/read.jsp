@@ -143,8 +143,8 @@ $(function(){
 				<p class="everychpt"><%=story.get(0).getContent() %></p></div>
 				<div class="row" >
 					<div class="user" id="chptuser">
-						<a href="viewPerson.action?name=<%=story.get(0).getUserName() %>"><%=story.get(0).getUserName() %></a>
-						<span><%=Format.sdf.format(new Date(story.get(0).getDate())) %></span>
+						<a href="viewPerson.action?name=<%=story.get(0).getUserName() %>"><%=story.get(0).getUserName() %></a>&nbsp;&nbsp;
+						<span><%=Format.sdf.format(new Date(story.get(0).getDate())) %></span>&nbsp;&nbsp;
 						
 						<span>点赞数：<%=story.get(0).getZan() %></span>
 					</div>
@@ -219,8 +219,8 @@ $(function(){
 				<p class="everychpt"><%=story.get(i).getContent() %></p></div>
 				<div class="row" >
 					<div class="user" id="chptuser">
-						<a href="viewPerson.action?name=<%=story.get(i).getUserName() %>"><%=story.get(i).getUserName() %></a>
-						<span><%=Format.sdf.format(new Date(story.get(i).getDate())) %></span>
+						<a href="viewPerson.action?name=<%=story.get(i).getUserName() %>"><%=story.get(i).getUserName() %></a>&nbsp;&nbsp;
+						<span><%=Format.sdf.format(new Date(story.get(i).getDate())) %></span>&nbsp;&nbsp;
 						
 						<span>点赞数：<%=story.get(i).getZan() %></span>
 					</div>
@@ -368,6 +368,32 @@ $("<%="#store"+story.get(i).getId()%>").click(function(){
  	}	
 	$('textarea[autoHeight]').autoHeight();
 	// textarea 结束
+</script>
+<script type="text/javascript">
+window.onbeforeunload = function(){
+    var scrollPos;    
+    if (typeof window.pageYOffset != 'undefined') {
+        scrollPos = window.pageYOffset;
+    }
+    else if (typeof document.compatMode != 'undefined' &&
+        document.compatMode != 'BackCompat') {
+        scrollPos = document.documentElement.scrollTop;
+    }
+    else if (typeof document.body != 'undefined') {
+        scrollPos = document.body.scrollTop;
+    }
+    document.cookie="scrollTop="+scrollPos; //存储滚动条位置到cookies中
+}
+
+window.onload = function()
+{ 
+    if(document.cookie.match(/scrollTop=([^;]+)(;|$)/)!=null){
+        var arr=document.cookie.match(/scrollTop=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
+        document.documentElement.scrollTop=parseInt(arr[1]);
+        document.body.scrollTop=parseInt(arr[1]);
+    }
+}
+
 </script>
 
 </html>
