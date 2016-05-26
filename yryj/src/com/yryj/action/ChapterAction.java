@@ -18,13 +18,16 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yryj.daoImpl.ChapterDL;
+import com.yryj.model.Activity;
 import com.yryj.model.Chapter;
 import com.yryj.model.Draft;
 import com.yryj.model.Type;
 import com.yryj.model.User;
 import com.yryj.pub.Format;
+import com.yryj.sercvice.ActivityManager;
 import com.yryj.sercvice.ChapterManager;
 import com.yryj.sercvice.TypeManager;
+import com.yryj.serviceImpl.ActivityML;
 import com.yryj.serviceImpl.ChapterML;
 import com.yryj.serviceImpl.DraftML;
 import com.yryj.serviceImpl.TypeML;
@@ -272,6 +275,17 @@ public class ChapterAction extends ActionSupport {
 				style=(ArrayList<Type>) typeManager.getClassByMood(2);
 				types.add(style);
 				session.setAttribute("types", types);
+				
+				
+				//ÃÌº”Õº∆¨ ≤‚ ‘
+//				Activity act=new Activity();
+//				act.setName("123");
+//				act.setOwner("abc");
+//				act.setPic("C:\Users\15871\Desktop\shenyeshitang\∫Ïœ„≥¶.jpg");
+//				act.setState(1);
+//				act.setUrl("www.baidu.com");
+//				ActivityManager am=new ActivityML();
+//				am.save(act);
 			}
 
 			return SUCCESS;
