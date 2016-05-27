@@ -6,8 +6,8 @@
 <struts>		
 		<package name="default" extends="struts-default" >
 		    <global-results>
-				<result name="404">/404error.jsp</result>
-				<result name="wrong">/othererror.jsp</result>
+				<result name="404">404error.jsp</result>
+				<result name="wrong">othererror.jsp</result>
 		    </global-results>
 		    
 		    <action name="beforeregister" class="com.yryj.action.UserAction" method="beforeRegister">

@@ -56,13 +56,21 @@ text-decoration: none;
 		relation=new RelationsML().findByUserId(person.getId());
 		session.setAttribute("relation", relation);
 	}
+	
+	if(i2uDArray==null){
+		i2uDArray=new String[0][0];
+	}
+	if(u2iDArray==null){
+		u2iDArray=new String[0][0];
+	}
+	
 %>
 <body >
 <script type="text/javascript">
 	window.onload =function onload(){
 		var a=<%=person %>;
 		if(a==null){
-			window.location.href='errorPage/404error.jsp';
+			window.location.href='404error.jsp';
 		}
 	}
 	</script>
