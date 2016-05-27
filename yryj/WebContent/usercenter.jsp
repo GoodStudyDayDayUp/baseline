@@ -79,6 +79,25 @@ window.onload = function() {
       <a class="navbar-brand" href="readStart.action" style="font-family:SimHei;">一人一句</a>
    </div>
       <div>
+      <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
+				<li class="dropdown" style="margin:0px 0px 0px 0px;font-family: SimHei  ;">
+				<%if(user!=null){ %>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+					<%=user.getName() %><b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<%if(user.getName().equals(Format.managerName)){ %>
+						<li><a href="manage.jsp">管理</a></li>
+						<%} %>
+						<li><a href="logout.action">注销</a></li>
+					</ul>
+					<%}else{ %>
+					<a href="beforelogin.action"  >
+					登录
+					</a>
+					<%} %>
+				</li>
+			</ul>
 			<p class="navbar-text navbar-right" style="font-family: SimHei;margin-right: 20px;" ><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事 </a></p>
 		</div>
 	</nav>

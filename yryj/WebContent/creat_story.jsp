@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     import="com.yryj.model.*"
     import="java.util.*"
+    import="com.yryj.pub.*"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,7 +36,7 @@ text-decoration: none;
 <%
 	User user=(User)session.getAttribute("user"); 
 	Draft draft=(Draft)session.getAttribute("draft");
-	if(draft==null)
+	if(draft==null||draft.getParentId()!=-1)
 		draft=new Draft();
 	ArrayList<ArrayList<Type>> types=(ArrayList<ArrayList<Type>>)session.getAttribute("types");
 	%>
@@ -53,6 +54,9 @@ text-decoration: none;
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="getInfo.action">个人主页</a></li>
+						<%if(user.getName().equals(Format.managerName)){ %>
+						<li><a href="manage.jsp">管理</a></li>
+						<%} %>
 						<li><a href="logout.action">注销</a></li>
 					</ul>
 					<%}else{ %>
@@ -78,9 +82,9 @@ text-decoration: none;
 			<form action="draft.action">
 				<div > <!--contenteditable=true-->
 				<%if(draft.getContent()==""){%>
-					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" placeholder="写一个开头..."></textarea>
+					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" >写一个开头...</textarea>
 				<%}else{ %>
-					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;"  placeholder="写一个开头..."><%=draft.getContent() %></textarea>
+					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" ><%=draft.getContent() %></textarea>
 				<%} %>
 				</div>
 				<div style="float:right; margin-top:10px;">
@@ -137,12 +141,12 @@ text-decoration: none;
 			<div class="col-lg-8 col-lg-offset-2" id="newchpt" style="padding:0px 0px 0px 0px;">
 				<div style="float:right; margin-top:10px;">
 					<!--发布以后跳到一个新的界面上， 前面是他接的故事. 从此它上面的chapter的+号变成蓝色-->
-					<form action="write.action" onsubmit="return Publish()">
+					<form action="write.action?he=1" onsubmit="return Publish()">
 					<textarea name="content" hidden="hidden" id="ctt"></textarea>
 					<input value="" hidden="hidden" name="format" id="format">
 					<input value="" hidden="hidden" name="style" id="style">
 					<input value="" hidden="hidden" name="key" id="key">
-					<button class="btn btn-primary" id="publish" data-toggle="modal" data-target="#publishModal"  /> 发起</button>
+					<button type="submit" class="btn btn-primary" id="publish" data-toggle="modal" data-target="#publishModal"  /> 发起</button>
 					</form>
 				</div>
 			</div>

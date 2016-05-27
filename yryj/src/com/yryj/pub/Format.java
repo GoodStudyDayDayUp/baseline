@@ -7,7 +7,7 @@ public class Format {
 	public static String WRONG="wrong";
 	public static String LOGIN="login";
 	public static String DATASTORE="yryj";
-
+	public static String NF="404";
 	public static String PICSTORE="Photo";
 	public static String managerName="000";
 	public static String managerPass="000";

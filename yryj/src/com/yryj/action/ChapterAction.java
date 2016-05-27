@@ -3,6 +3,7 @@ package com.yryj.action;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Date;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
@@ -125,13 +127,22 @@ public class ChapterAction extends ActionSupport {
 		try {
 			HttpSession session=ServletActionContext.getRequest().getSession();
 			User user =(User) session.getAttribute("user");
+			HttpServletRequest request=ServletActionContext.getRequest();
+			String header=request.getParameter("he");
+			if(header!=null)
+				session.setAttribute("parentChapter", null);
 			Chapter parent=(Chapter)session.getAttribute("parentChapter");
 			getWebChapter();
 			if(user==null){
 				Draft df=new Draft();
 				df.setContent(content);
+				if(parent!=null&&header==null){
+					df.setParentId(parent.getId());					
+					Format.initPage=1;
+				}
 				session.setAttribute("draft", df);
 				session.setAttribute("msg", "登录之后才能发表文章~");
+				Format.initPage=2;
 				return "login";
 			}
 
@@ -215,7 +226,6 @@ public class ChapterAction extends ActionSupport {
 			System.out.println(formatId);
 			format=types.get(0).get(formatId).getContent();
 			style=types.get(1).get(styleId).getContent();
-			System.out.println(format+"##########"+style);
 			storys=chapterManager.getStoryBySF(format, style);
 		}			
 		System.out.println(storys.size());
@@ -247,16 +257,16 @@ public class ChapterAction extends ActionSupport {
 				ArrayList<Type> style=new ArrayList<Type>();
 				TypeManager typeManager=new TypeML();
 							
-				typeManager.save(new Type(0,1,"小说"));
-				typeManager.save(new Type(1,1,"散文"));
-				typeManager.save(new Type(2,1,"戏剧"));
-				typeManager.save(new Type(3,1,"诗歌"));
-				typeManager.save(new Type(4,1,"话剧"));
-				typeManager.save(new Type(5,2,"武侠"));
-				typeManager.save(new Type(6,2,"玄幻"));
-				typeManager.save(new Type(7,2,"神话"));
-				typeManager.save(new Type(8,2,"言情"));
-				typeManager.save(new Type(9,2,"现代"));
+				//			typeManager.save(new Type(0,1,"小说"));
+				//			typeManager.save(new Type(1,1,"散文"));
+				//			typeManager.save(new Type(2,1,"戏剧"));
+				//			typeManager.save(new Type(3,1,"诗歌"));
+				//			typeManager.save(new Type(4,1,"话剧"));
+				//			typeManager.save(new Type(5,2,"武侠"));
+				//			typeManager.save(new Type(6,2,"玄幻"));
+				//			typeManager.save(new Type(7,2,"神话"));
+				//			typeManager.save(new Type(8,2,"言情"));
+				//			typeManager.save(new Type(9,2,"现代"));
 
 
 				//加入一级和2级分类
@@ -298,6 +308,8 @@ public class ChapterAction extends ActionSupport {
 				//根节点ID号
 				index=Long.valueOf(is);
 				index=chapterManager.getRootChapter(index);
+				if(index==-1)
+					return Format.NF;
 			}
 			else
 				index=story.get(0).getId();
@@ -329,7 +341,6 @@ public class ChapterAction extends ActionSupport {
 			List<Chapter> lastStory=(List<Chapter>) session.getAttribute("story");
 			List<Chapter> leftstory=chapterManager.getStory(lastStory.get(index), isLeft);
 			List<Chapter> story=new ArrayList<Chapter>();
-
 			for(int i=0;i<index;i++){
 				story.add(lastStory.get(i));
 			}
@@ -340,7 +351,13 @@ public class ChapterAction extends ActionSupport {
 				}
 				session.setAttribute("story", story);
 			}
-
+			
+//			HttpServletResponse response=ServletActionContext.getResponse();
+//			PrintWriter writer=response.getWriter();
+			
+//			writer.print(story);
+//			writer.close();
+			
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" import="com.yryj.model.*"
 import="com.yryj.pub.*"
 import="java.util.Date"
+import="java.util.*"
 pageEncoding="utf-8"
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -35,11 +36,21 @@ text-decoration: none;
 <%
 	User user=(User)session.getAttribute("user"); 
 	Draft draft=(Draft)session.getAttribute("draft");
-	if(draft==null)
+	if(draft==null||draft.getParentId()==-1)
 		draft=new Draft();
 	Chapter parent =(Chapter) session.getAttribute("parentChapter");
+	if(parent==null)
+		parent=new Chapter();
 	%>
 <body>
+<script type="text/javascript">
+	window.onload =function onload(){
+		<%if(parent.getContent()==""){%>
+			window.location.href='404error.jsp';
+		<%}%>
+	}
+	</script>
+
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" margin:0px 0px 0px 0px;">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="read.jsp" style="padding-top:17px;"><img src="pics\go_back.png"/></a>
@@ -54,6 +65,9 @@ text-decoration: none;
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="usercenter.jsp">个人主页</a></li>
+						<%if(user.getName().equals(Format.managerName)){ %>
+						<li><a href="manage.jsp">管理</a></li>
+						<%} %>
 						<li><a href="logout.action">注销</a></li>
 					</ul>
 					<%}else{ %>
@@ -92,10 +106,10 @@ text-decoration: none;
 			<div class="col-lg-8 col-lg-offset-2" id="newchpt" style="padding:0px 0px 0px 0px;">
 				<form action="draft.action">
 				<div > <!--contenteditable=true-->
-				<%if(draft.getContent()==""){%>
+				<%if(draft.getContent()==""||draft.getParentId()!=parent.getId()){%>
 					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;">请输入内容...</textarea>
 				<%}else{%>
-					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;" placeholder="开启新篇章..."><%=draft.getContent() %></textarea>
+					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;"><%=draft.getContent() %></textarea>
 				<%} %>
 				</div>
 				<div style="float:right; margin-top:10px;">
@@ -147,8 +161,10 @@ text-decoration: none;
          </div>
          </form>
       </div><!-- /.modal-content -->
-</div><!-- /.modal -->
-	
+	</div><!-- /.modal -->
+</div>
+
+
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
       <div class="modal-content">
@@ -159,9 +175,8 @@ text-decoration: none;
             <button type="button" class="btn btn-default"  data-dismiss="modal" onclick="Cancel()">
                取消
             </button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick= "window.location.href= 'deleteDraft.action' ">
-               确认
-            </button>
+  
+            <input type="button" onclick= "window.location.href= 'deleteDraft.action' " class="btn btn-primary" data-dismiss="modal" value="确认"/>
          </div>
       </div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->

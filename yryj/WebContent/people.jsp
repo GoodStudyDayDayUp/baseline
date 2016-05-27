@@ -79,6 +79,9 @@ text-decoration: none;
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="getInfo.action">个人主页</a></li>
+						<%if(user.getName().equals(Format.managerName)){ %>
+						<li><a href="manage.jsp">管理</a></li>
+						<%} %>
 						<li><a href="logout.action">注销</a></li>
 					</ul>
 					<%}else{ %>
@@ -95,7 +98,9 @@ text-decoration: none;
 	<div class="container">
 		<div class="col-lg-2" style="margin-top:20px;">
 		<ul class="nav nav-pills nav-stacked">
-			<li class="active na"><a href="#" id="info"><%=person.getName() %></a></li>
+			<li class="active na"><a href="#" id="info"><%=person.getName() %></a>
+			<a href=setAttention.action?id=<%=person.getId() %>><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a>
+			</li>
 			<li class="na" ><a href="#" id="mychpts">作品&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=chs.size() %></span></a></li>
 			<li class="na"><a href="#" id="mycol">收藏&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=store.size() %></span></a></li>
 			<li class="na"><a href="#" id="myfol">关注&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(i2uDArray[0][0].equals("无"))%>0<%else %><%=i2uDArray.length %></span></a></li>
