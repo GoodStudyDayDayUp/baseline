@@ -14,4 +14,6 @@ public interface TypeDao {
 	public Type find(long id);
 	
 	public List getClassByMood(long mood);
+	
+	public Type findByMoodAndIndex(long mood,int index);
 }

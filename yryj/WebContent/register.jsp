@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-import = "com.yryj.model.User"
-	pageEncoding="utf-8"%>
+	import="com.yryj.model.User" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -40,56 +39,64 @@ if(webUser==null){
 
 						<div class="form-group row">
 							<div class="col-lg-8 col-lg-offset-2">
-							<%if(webUser.getName()!=null&&webUser.getName()!="") {%>
-								<input type="text" id="name" name="name" onchange="changemsg(this)" value=<%=webUser.getName() %>
+								<%if(webUser.getName()!=null&&webUser.getName()!="") {%>
+								<input type="text" id="name" name="name"
+									onchange="changemsg(this)" value=<%=webUser.getName() %>
 									class="form-control col-lg-5" />
-									<%}else{ %>
-									<input type="text" id="name" name="name" onchange="changemsg(this)" 
-									class="form-control col-lg-5" placeholder="用户名" />
-									<%} %>
+								<%}else{ %>
+								<input type="text" id="name" name="name"
+									onchange="changemsg(this)" class="form-control col-lg-5"
+									placeholder="用户名" />
+								<%} %>
 							</div>
 						</div>
 
 						<div class="form-group row">
 							<div class="col-lg-8 col-lg-offset-2">
-							<%if(webUser.getEmail()!=null&&webUser.getEmail()!="") {%>
-								<input type="text" id="email" name="email" onchange="changemsg(this)" value=<%=webUser.getEmail() %>
+								<%if(webUser.getEmail()!=null&&webUser.getEmail()!="") {%>
+								<input type="text" id="email" name="email"
+									onchange="changemsg(this)" value=<%=webUser.getEmail() %>
 									class="form-control col-lg-5" placeholder="邮箱" />
-									<%}else{ %>
-									<input type="text" id="email" name="email" onchange="changemsg(this)" 
-									class="form-control col-lg-5" placeholder="邮箱" />
-									<%} %>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<div class="col-lg-8 col-lg-offset-2"> 	
-								<%if(webUser.getPassword()!=null&&webUser.getPassword()!="") {%>	
-								<input type="password" id="password" name="password" onchange="changemsg(this)"  value=<%=webUser.getPassword() %>
-									class="form-control" placeholder="密码" />
-									<%}else{ %>
-									<input type="password" id="password" name="password" onchange="changemsg(this)"  
-									class="form-control" placeholder="密码" />
-									<%} %>
+								<%}else{ %>
+								<input type="text" id="email" name="email"
+									onchange="changemsg(this)" class="form-control col-lg-5"
+									placeholder="邮箱" />
+								<%} %>
 							</div>
 						</div>
 
 						<div class="form-group row">
 							<div class="col-lg-8 col-lg-offset-2">
-							<%if(pass2!=null&&pass2!="") {%>	
-								<input type="password" id="repassword" name="password2" onchange="changemsg(this)" value=<%=pass2%>
-									class="form-control" placeholder="确认密码" />
-									<%}else{ %>
-									<input type="password" id="repassword" name="password2" onchange="changemsg(this)" 
-									class="form-control" placeholder="确认密码" />
-									<%} %>
+								<%if(webUser.getPassword()!=null&&webUser.getPassword()!="") {%>
+								<input type="password" id="password" name="password"
+									onchange="changemsg(this)" value=<%=webUser.getPassword() %>
+									class="form-control" placeholder="密码" />
+								<%}else{ %>
+								<input type="password" id="password" name="password"
+									onchange="changemsg(this)" class="form-control"
+									placeholder="密码" />
+								<%} %>
 							</div>
 						</div>
 
 						<div class="form-group row">
-						<div class="col-lg-8 col-lg-offset-2"> 
-						<h5 style="color:red;" id="msgs"><%=msg%></h5>
+							<div class="col-lg-8 col-lg-offset-2">
+								<%if(pass2!=null&&pass2!="") {%>
+								<input type="password" id="repassword" name="password2"
+									onchange="changemsg(this)" value=<%=pass2%>
+									class="form-control" placeholder="确认密码" />
+								<%}else{ %>
+								<input type="password" id="repassword" name="password2"
+									onchange="changemsg(this)" class="form-control"
+									placeholder="确认密码" />
+								<%} %>
+							</div>
 						</div>
+
+						<div class="form-group row">
+							<div class="col-lg-8 col-lg-offset-2">
+								<h5 style="color: red;" id="msgs"><%=msg%></h5>
+							</div>
 						</div>
 
 						<div class="form-group row">

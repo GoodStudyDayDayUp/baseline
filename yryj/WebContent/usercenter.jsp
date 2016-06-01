@@ -1,48 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-import="com.yryj.model.*"
-import="java.util.*"
-import="com.yryj.pub.*"
-import="java.util.Date"
-import="com.yryj.serviceImpl.*"
-%>
+	import="com.yryj.model.*" import="java.util.*" import="com.yryj.pub.*"
+	import="java.util.Date" import="com.yryj.serviceImpl.*"%>
 <!DOCTYPE html>
 <html>
 <head>
-		<title>个人中心</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="css/bootstrap.css"/>
-		<link rel="stylesheet" href="css/style.css"/>
-		<link rel="stylesheet" href="css/bootstrap.min.css"/>
-		<link rel="stylesheet" href="css/bootstrapValidator.min.css"/>
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/bootstrap.js"></script>
-		<script src="js/bootstrapValidator.min.js"></script>
-		<script src="js/bootstrapValidator_zh_CN.js"></script>
-		<script type="text/javascript">
+<title>个人中心</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/bootstrap.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/bootstrapValidator.min.css" />
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/bootstrapValidator.min.js"></script>
+<script src="js/bootstrapValidator_zh_CN.js"></script>
+<script type="text/javascript">
         $(document).ready(function () {
             $('.dropdown-toggle').dropdown();
         });
 		</script>
-		<style>
-			a:link {
-text-decoration: none;
-color: #666666;
+<style>
+a:link {
+	text-decoration: none;
+	color: #666666;
 }
+
 a:visited {
-text-decoration: none;
+	text-decoration: none;
 }
+
 a:hover {
-text-decoration: none;
+	text-decoration: none;
 }
+
 a:active {
-text-decoration: none;
+	text-decoration: none;
 }
-		</style>
+</style>
 </head>
 <body>
-<%
+	<%
 //获取用户信息
 User user=(User)session.getAttribute("user");
 if(user==null)
@@ -65,7 +64,7 @@ if(user!=null){
 	session.setAttribute("relation", relation);
 }
 %>
-<script type="text/javascript">
+	<script type="text/javascript">
 window.onload = function() {
 	var m="<%=msg%>";
 	if(m!="")
@@ -73,93 +72,118 @@ window.onload = function() {
 	}
 </script>
 
-<%session.setAttribute("msg", ""); %>
-<nav class="navbar navbar-default" role="navigation" style=" margin:0px 0px 0px 0px;">
-	<div class="navbar-header">
-      <a class="navbar-brand" href="readStart.action" style="font-family:SimHei;">一人一句</a>
-   </div>
-      <div>
-      <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
-				<li class="dropdown" style="margin:0px 0px 0px 0px;font-family: SimHei  ;">
-				<%if(user!=null){ %>
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" >
-					<%=user.getName() %><b class="caret"></b>
-					</a>
+	<%session.setAttribute("msg", ""); %>
+	<nav class="navbar navbar-default" role="navigation"
+		style="margin: 0px 0px 0px 0px;">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="readStart.action"
+				style="font-family: SimHei;">一人一句</a>
+		</div>
+		<div>
+			<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
+				<li class="dropdown"
+					style="margin: 0px 0px 0px 0px; font-family: SimHei;">
+					<%if(user!=null){ %> <a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"> <%=user.getName() %><b class="caret"></b>
+				</a>
 					<ul class="dropdown-menu">
 						<%if(user.getName().equals(Format.managerName)){ %>
 						<li><a href="manage.jsp">管理</a></li>
 						<%} %>
 						<li><a href="logout.action">注销</a></li>
-					</ul>
-					<%}else{ %>
-					<a href="beforelogin.action"  >
-					登录
-					</a>
-					<%} %>
+					</ul> <%}else{ %> <a href="beforelogin.action"> 登录 </a> <%} %>
 				</li>
 			</ul>
-			<p class="navbar-text navbar-right" style="font-family: SimHei;margin-right: 20px;" ><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事 </a></p>
+			<p class="navbar-text navbar-right"
+				style="font-family: SimHei; margin-right: 20px;">
+				<a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事
+				</a>
+			</p>
 		</div>
 	</nav>
 
 	<div class="container">
-	<div class="col-lg-2" style="margin-top:20px;">
-	<ul class="nav nav-pills nav-stacked">
-	<li class="active na"><a href="#" id="info">基本信息</a></li>
-	<li class="na"><a href="#" id="mychpts">我的作品</a></li>
-	<li class="na"><a href="#" id="mycol">我的收藏</a></li>
-	<li class="na"><a href="#" id="myfol">关注</a></li>
-	<li class="na"><a href="#" id="myfans">粉丝</a></li>
-	<li class="na"><a href="#" id="mypoints">积分</a></li>
-	</ul>
-	</div>
-	<div class="col-lg-10" style="margin-top:20px;">
-		<div id="basicInfo">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						基本信息
-					</h3>
-				</div>
-				<div class="panel-body" >
-					<table class="table">
-						<tr><td>用户名</td><td><span class="label label-default"><%=user.getName()%></span></td></tr>
-						<tr><td>邮箱</td><td><span class="label label-default"><%=user.getEmail() %></span></td></tr>
-						<tr><td>联系方式</td>
-						
-						<td>
-						<form action="updateUser.action?mood=1" method="post" onsubmit="return updatePhone()">
-						    <%if(phone==null||phone=="") {%>
-							<input type="text" class="form-control" id="phone" name="phone"  placeholder="绑定手机号 （格式为以13、15、18开头的11位电话号码）" onchange="changemsg(this)"/>
-							<%}else{ %>
-							<input type="text" class="form-control" id="phone" name="phone" value="<%=user.getPhone()%>" placeholder="绑定手机号 （格式为以13、15、18开头的11位电话号码）" onchange="changemsg(this)">
-							<%} %>
-							<p style="font-size:10px;color:red;display:none;" id="notphone">不是正确的格式</p>
-							<button type="submit" class="btn btn-default" style="margin-top:5px;" >更新联系方式</button>
+		<div class="col-lg-2" style="margin-top: 20px;">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active na"><a href="#" id="info">基本信息</a></li>
+				<li class="na"><a href="#" id="mychpts">我的作品</a></li>
+				<li class="na"><a href="#" id="mycol">我的收藏</a></li>
+				<li class="na"><a href="#" id="myfol">关注</a></li>
+				<li class="na"><a href="#" id="myfans">粉丝</a></li>
+				<li class="na"><a href="#" id="mypoints">积分</a></li>
+			</ul>
+		</div>
+		<div class="col-lg-10" style="margin-top: 20px;">
+			<div id="basicInfo">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">基本信息</h3>
+					</div>
+					<div class="panel-body">
+						<table class="table">
+							<tr>
+								<td>用户名</td>
+								<td><span class="label label-default"><%=user.getName()%></span></td>
+							</tr>
+							<tr>
+								<td>邮箱</td>
+								<td><span class="label label-default"><%=user.getEmail() %></span></td>
+							</tr>
+							<tr>
+								<td>联系方式</td>
+
+								<td>
+									<form action="updateUser.action?mood=1" method="post"
+										onsubmit="return updatePhone()">
+										<%if(phone==null||phone=="") {%>
+										<input type="text" class="form-control" id="phone"
+											name="phone" placeholder="绑定手机号 （格式为以13、15、18开头的11位电话号码）"
+											onchange="changemsg(this)" />
+										<%}else{ %>
+										<input type="text" class="form-control" id="phone"
+											name="phone" value="<%=user.getPhone()%>"
+											placeholder="绑定手机号 （格式为以13、15、18开头的11位电话号码）"
+											onchange="changemsg(this)">
+										<%} %>
+										<p style="font-size: 10px; color: red; display: none;"
+											id="notphone">不是正确的格式</p>
+										<button type="submit" class="btn btn-default"
+											style="margin-top: 5px;">更新联系方式</button>
+									</form>
+								</td>
+
+							</tr>
+						</table>
+						<hr />
+						<form action="updateUser.action?mood=2" method="post"
+							onsubmit="return Confirm()">
+							<p>原有密码</p>
+							<input type="password" class="form-control" id="oldpwd"
+								placeholder="当前密码 " onchange="checkPass(this)" />
+							<p style="font-size: 10px; color: red; display: none;"
+								id="oldpwd_wrong">密码错误</p>
+							<p>新密码</p>
+							<input type="password" name="password" class="form-control"
+								id="newpwd" onchange="changepass(this)" placeholder="3~10位" />
+							<p style="font-size: 10px; color: red; display: none;"
+								id="newpwd_empty">不能为空</p>
+							<p style="font-size: 10px; color: red; display: none;"
+								id="newpwd_wrong">密码的长度应为3~10位</p>
+							<p>确认新密码</p>
+							<input type="password" name="password2" class="form-control"
+								id="confirmpwd" onchange="changepass2(this)" placeholder="3~10位" />
+							<p style="font-size: 10px; color: red; display: none;"
+								id="repwd_empty">不能为空</p>
+							<p style="font-size: 10px; color: red; display: none;"
+								id="notconsist">两次密码不一致</p>
+							<button type="submit" class="btn btn-default"
+								style="margin-top: 5px;">
+								更新密码</input>
 						</form>
-						</td>
-						
-						</tr>
-					</table>
-					<hr/>
-					<form action="updateUser.action?mood=2" method="post" onsubmit="return Confirm()">
-					<p>原有密码</p>
-					<input type="password" class="form-control"  id="oldpwd" placeholder="当前密码 " onchange="checkPass(this)"/>
-					<p style="font-size:10px;color:red;display:none;"  id="oldpwd_wrong">密码错误</p>
-					<p>新密码</p>
-					<input type="password" name="password" class="form-control" id="newpwd" onchange="changepass(this)"  placeholder="3~10位"/>
-					<p style="font-size:10px;color:red;display:none;" id="newpwd_empty">不能为空</p>
-					<p style="font-size:10px;color:red;display:none;" id="newpwd_wrong">密码的长度应为3~10位</p>
-					<p>确认新密码</p>
-					<input type="password" name="password2" class="form-control" id="confirmpwd" onchange="changepass2(this)"  placeholder="3~10位"/>
-					<p style="font-size:10px;color:red;display:none;" id="repwd_empty">不能为空</p>
-					<p style="font-size:10px;color:red;display:none;" id="notconsist">两次密码不一致</p>
-					<button type="submit" class="btn btn-default" style="margin-top:5px;" >更新密码</input>
-				</form>
-				
+
+					</div>
 				</div>
-			</div>
-			<script type="text/javascript">
+				<script type="text/javascript">
 			function checkPass(obj){
 				var w = document.getElementById("oldpwd_wrong");
 			    if(obj.value!="<%=user.getPassword() %>"){
@@ -211,8 +235,8 @@ window.onload = function() {
 				}
 			}
 			</script>
-			
-			<script language="javascript">	
+
+				<script language="javascript">	
 			
 			function updatePhone(){
 				var myreg = /^[1][358][0-9]{9}$/; 
@@ -277,29 +301,29 @@ window.onload = function() {
 					}
 
 				</script>
-		</div>
-		<div id="chpts" style="display:none;">
-			<ul id="myTab" class="nav nav-tabs">
-				<li class="active">
-					<a href="#pub" data-toggle="tab">已发布的 </a>
-				</li>
-				<li><a href="#draft" data-toggle="tab">草稿箱</a></li>
-			</ul>
-			<div id="myTabContent" class="tab-content">
-				<div class="tab-pane fade in active" id="pub">
-						<% for(int i=0;i<chs.size();i++){ %>	
+			</div>
+			<div id="chpts" style="display: none;">
+				<ul id="myTab" class="nav nav-tabs">
+					<li class="active"><a href="#pub" data-toggle="tab">已发布的 </a>
+					</li>
+					<li><a href="#draft" data-toggle="tab">草稿箱</a></li>
+				</ul>
+				<div id="myTabContent" class="tab-content">
+					<div class="tab-pane fade in active" id="pub">
+						<% for(int i=0;i<chs.size();i++){ %>
 						<%String a[]=chs.get(i).getKey().split("#"); %>
-					<div class="panel panel-default">
-								<div class="panel-body">
-								<div style="display:inline;">
-								<%for(String s:a){ %>
-									<span class="label label-primary chptlabel" ><%=s%></span>
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div style="display: inline;">
+									<%for(String s:a){ %>
+									<span class="label label-primary chptlabel"><%=s%></span>
 									<%} %>
 								</div>
 								<p class="everychpt"><%=chs.get(i).getContent() %></p>
-								<div class="row" >
-									<div class="user" >
-									<a href="viewPerson.action?name=<%=chs.get(i).getUserName() %>"><%=chs.get(i).getUserName() %></a>
+								<div class="row">
+									<div class="user">
+										<a
+											href="viewPerson.action?name=<%=chs.get(i).getUserName() %>"><%=chs.get(i).getUserName() %></a>
 										<span><%=Format.sdf.format(new Date(chs.get(i).getDate())) %></span>
 										<span>点赞数：<%=chs.get(i).getZan() %></span>
 									</div>
@@ -307,42 +331,48 @@ window.onload = function() {
 										<a href="readStory.action?index=<%=chs.get(i).getId()%>">查看前后文</a>
 									</div>
 								</div>
-								</div>
 							</div>
-							<%} %>
-				</div>
-				
-				<div class="tab-pane fade" id="draft"> <!-- 草稿箱 --> 
-					<table class="table">
-					<%if(dfs.size()>0)
+						</div>
+						<%} %>
+					</div>
+
+					<div class="tab-pane fade" id="draft">
+						<!-- 草稿箱 -->
+						<table class="table">
+							<%if(dfs.size()>0)
 					for(int i=0;i<dfs.size();i++){ %>
-					<tr><td><%=dfs.get(i).getContent() %></td><td><a href="readDraft.action?index=<%=i%>"><button type="button" class="btn btn-default" style="float:right;">查看</button></a></td></tr>
-					<%} %>
-					</table>
+							<tr>
+								<td><%=dfs.get(i).getContent() %></td>
+								<td><a href="readDraft.action?index=<%=i%>"><button
+											type="button" class="btn btn-default" style="float: right;">查看</button></a></td>
+							</tr>
+							<%} %>
+						</table>
+					</div>
 				</div>
 			</div>
-		</div>
-		
-		
-		<div id="collects" style="display:none;">
-		<% for(int i=0;i<store.size();i++){ %>	
-		<%String a[]=store.get(i).getKey().split("#"); %>
-			<div class="panel panel-default">
-								<div class="panel-body">
-								<div style="display:inline;">
-								<%for(String s:a){ %>
-									<span class="label label-primary chptlabel" ><%=s%></span>
-									<%} %>
-								</div>
-								<p class="everychpt"><%=store.get(i).getContent() %></p>
-								<div class="row" >
-									<div class="user" >
-										<a href="viewPerson.action?name=<%=store.get(i).getUserName() %>"><%=store.get(i).getUserName() %></a>
-										<span><%=Format.sdf.format(new Date(store.get(i).getDate())) %></span>
-										<span>点赞数：<%=store.get(i).getZan() %></span>
-									</div>
-									<div class="functs check">
-										<%
+
+
+			<div id="collects" style="display: none;">
+				<% for(int i=0;i<store.size();i++){ %>
+				<%String a[]=store.get(i).getKey().split("#"); %>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div style="display: inline;">
+							<%for(String s:a){ %>
+							<span class="label label-primary chptlabel"><%=s%></span>
+							<%} %>
+						</div>
+						<p class="everychpt"><%=store.get(i).getContent() %></p>
+						<div class="row">
+							<div class="user">
+								<a
+									href="viewPerson.action?name=<%=store.get(i).getUserName() %>"><%=store.get(i).getUserName() %></a>
+								<span><%=Format.sdf.format(new Date(store.get(i).getDate())) %></span>
+								<span>点赞数：<%=store.get(i).getZan() %></span>
+							</div>
+							<div class="functs check">
+								<%
 					boolean isFind=false;
 					if(relation!=null){
 						String love=relation.getU2cZan();
@@ -350,49 +380,66 @@ window.onload = function() {
 					}
 					if(isFind){
 					%>
-						<button id=<%="zan"+store.get(i).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;color:red"  value="1" onclick="LoveShow(this)"></button>
-					<%} else{%>
-						<button id=<%="zan"+store.get(i).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="LoveShow(this)"></button>
-					<%}%>
-										<a href="readStory.action?index=<%=store.get(i).getId()%>">查看前后文</a>
-									</div>
-								</div>
-								</div>
+								<button id=<%="zan"+store.get(i).getId()%> type="button"
+									class="btn btn-default chptbtn glyphicon glyphicon-heart"
+									style="border: none; padding: 3px 7px 2px 7px; color: red"
+									value="1" onclick="LoveShow(this)"></button>
+								<%} else{%>
+								<button id=<%="zan"+store.get(i).getId()%> type="button"
+									class="btn btn-default chptbtn glyphicon glyphicon-heart"
+									style="border: none; padding: 3px 7px 2px 7px;" value="0"
+									onclick="LoveShow(this)"></button>
+								<%}%>
+								<a href="readStory.action?index=<%=store.get(i).getId()%>">查看前后文</a>
 							</div>
-		<%} %>
-		</div>
-		<div id="follow" style="display:none">
-			<div class="panel panel-default">
-				<div class="panel-heading">我关注的人</div>
+						</div>
+					</div>
+				</div>
+				<%} %>
+			</div>
+			<div id="follow" style="display: none">
+				<div class="panel panel-default">
+					<div class="panel-heading">我关注的人</div>
 					<ul class="list-group">
 						<%for(int i=0;i<i2uArray.length;i++){ %>
-						<li class="list-group-item"><a href="viewPerson.action?name=<%=i2uArray[i]%>"><%=i2uArray[i] %></a></li><%} %>
+						<li class="list-group-item"><a
+							href="viewPerson.action?name=<%=i2uArray[i]%>"><%=i2uArray[i] %></a></li>
+						<%} %>
 					</ul>
 				</div>
-		</div>
-		<div id="fans" style="display:none">
-			<div class="panel panel-default">
-				<div class="panel-heading">关注我的人</div>
+			</div>
+			<div id="fans" style="display: none">
+				<div class="panel panel-default">
+					<div class="panel-heading">关注我的人</div>
 					<ul class="list-group">
 						<%for(int i=0;i<u2iArray.length;i++){ %>
-						<li class="list-group-item"><a href="viewPerson.action?name=<%=u2iArray[i]%>"><%=u2iArray[i] %></a></li><%} %>
+						<li class="list-group-item"><a
+							href="viewPerson.action?name=<%=u2iArray[i]%>"><%=u2iArray[i] %></a></li>
+						<%} %>
 					</ul>
 				</div>
-		</div>
-		<div id="points" style="display:none">
-			<div class="panel panel-default">
-				<div class="panel-heading">积分</div>
-				<div class="panel-body">
-					积分余额<span class="label label-default" style="margin-left:20px;"><%=user.getPoint() %></span>
+			</div>
+			<div id="points" style="display: none">
+				<div class="panel panel-default">
+					<div class="panel-heading">积分</div>
+					<div class="panel-body">
+						积分余额<span class="label label-default" style="margin-left: 20px;"><%=user.getPoint() %></span>
+					</div>
+					<table class="table">
+						<th>时间</th>
+						<th>积分</th>
+						<tr>
+							<td>2016-04-12</td>
+							<td>200</td>
+						</tr>
+						<tr>
+							<td>2016-03-12</td>
+							<td>400</td>
+						</tr>
+					</table>
 				</div>
-				<table class="table">
-					<th>时间</th><th>积分</th>
-					<tr><td>2016-04-12</td><td>200</td></tr>
-					<tr><td>2016-03-12</td><td>400</td></tr>
-				</table>
 			</div>
 		</div>
-	</div>
 </body>
 <script type="text/javascript">
 	$(function(){

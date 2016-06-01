@@ -114,5 +114,12 @@ public class TypeDL implements TypeDao{
 		return null;
 	}
 
+	@Override
+	public Type findByMoodAndIndex(long mood, int index) {
+		// TODO Auto-generated method stub
+		ArrayList<Type> types = (ArrayList<Type>) getClassByMood(mood);
+		return types.get(index+1);
+	}
+
 	
 }

@@ -3,215 +3,253 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-
-textarea{
-	resize:none;
+textarea {
+	resize: none;
 }
 
 a:link {
-text-decoration: none;
-}
-a:visited {
-text-decoration: none;
-}
-a:hover {
-text-decoration: none;
-}
-a:active {
-text-decoration: none;
+	text-decoration: none;
 }
 
-.category{
+a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+a:active {
+	text-decoration: none;
+}
+
+.category {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
-.category-boxes{
-	margin:0px 30px 0px 30px ;
-	position:relative;
-	display:block;
+.category-boxes {
+	margin: 0px 30px 0px 30px;
+	position: relative;
+	display: block;
 }
 
-.blur{
-	height:100px;
+.blur {
+	height: 100px;
 	border-radius: 9px;
 	-webkit-border-radius: 9px;
 	-moz-border-radius: 9px;
 	filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */
-    -webkit-filter: blur(4px); /* Chrome, Opera */
-    -moz-filter: blur(4px);
-	-ms-filter: blur(4px);   
+	-webkit-filter: blur(4px); /* Chrome, Opera */
+	-moz-filter: blur(4px);
+	-ms-filter: blur(4px);
 	filter: blur(4px);
-    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); /* IE6~IE9 */
-}
-.title{
-	position:absolute;
-	bottom:17px;
-	left:30px;
-	padding: 10px 10px 10px 10px ;
-	font-family: SimHei  ;
-	font-size:36px;
-	color:#fff;
+	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10,
+		MakeShadow=false); /* IE6~IE9 */
 }
 
-.storyofmain{
-	height:150px;
-	margin:10px 10px 0px 0px;
-	font-family:SimHei;
-	overflow:hidden;
+.title {
+	position: absolute;
+	bottom: 17px;
+	left: 30px;
+	padding: 10px 10px 10px 10px;
+	font-family: SimHei;
+	font-size: 36px;
+	color: #fff;
 }
 
-.storyclass{
-	margin:0px 0px 0px 0px;
-	padding:10px 0px 0px 0px;
-	text-align:center;
-	color:#fff;
-	height:100%;
+.storyofmain {
+	height: 150px;
+	margin: 10px 10px 0px 0px;
+	font-family: SimHei;
+	overflow: hidden;
 }
 
-.storyclass a:link {color: #ffffff}/* 未访问的链接 */
-.storyclass a:hover {color: #d9d9d9} /* 鼠标移动到链接上 */
- /* .storyclass a:active {color: #0000FF}选定的链接 */
+.storyclass {
+	margin: 0px 0px 0px 0px;
+	padding: 10px 0px 0px 0px;
+	text-align: center;
+	color: #fff;
+	height: 100%;
+}
 
-.storybegin{
-	display:table;
-	height:100%;
+.storyclass a:link {
+	color: #ffffff
+} /* 未访问的链接 */
+.storyclass a:hover {
+	color: #d9d9d9
+} /* 鼠标移动到链接上 */
+/* .storyclass a:active {color: #0000FF}选定的链接 */
+.storybegin {
+	display: table;
+	height: 100%;
 	text-overflow: ellipsis;
-	padding: 10px 15px 10px 15px; margin-bottom:-9999px；padding-bottom:9999px;
-}
-.storybegin a:link {color: #000000}/* 未访问的链接 */
-.storybegin a:hover {color: #434343} /* 鼠标移动到链接上 */
-
-.storycenter{	
-	display:table-cell; vertical-align:middle; margin-bottom:-9999px；padding-bottom:9999px;
+	padding: 10px 15px 10px 15px;
+	margin-bottom: -9999px；padding-bottom:9999px;
 }
 
-.everychpt{
+.storybegin a:link {
+	color: #000000
+} /* 未访问的链接 */
+.storybegin a:hover {
+	color: #434343
+} /* 鼠标移动到链接上 */
+.storycenter {
+	display: table-cell;
+	vertical-align: middle;
+	margin-bottom: -9999px；padding-bottom:9999px;
+}
+
+.everychpt {
 	margin: 10px 15px 10px 15px;
-	font-family:SimHei;
-	font-size:14px;
+	font-family: SimHei;
+	font-size: 14px;
 }
 
-.chptbox{
-	margin-bottom:15px;
-	margin-top:15px;
-	padding:10px 10px 0px 10px;
-	background:#ffffff;
-	border-radius:5px;
-	filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=3);/*ie*/
-	-moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-	-webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
-	box-shadow:2px 2px 10px #909090;/*opera或ie9*/
+.chptbox {
+	margin-bottom: 15px;
+	margin-top: 15px;
+	padding: 10px 10px 0px 10px;
+	background: #ffffff;
+	border-radius: 5px;
+	filter: progid:DXImageTransform.Microsoft.Shadow(color=#909090,
+		direction=120, strength=3); /*ie*/
+	-moz-box-shadow: 2px 2px 10px #909090; /*firefox*/
+	-webkit-box-shadow: 2px 2px 10px #909090; /*safari或chrome*/
+	box-shadow: 2px 2px 10px #909090; /*opera或ie9*/
 }
 
-
-.user{
-	margin-left:20px;
-	padding-top:5px;
-	float:left;
-	width:auto;
-	color:#666666;
-	font-size:12px;
-}
-.user a:link {color: #666666}/* 未访问的链接 */
-.user a:hover {color: #434343} /* 鼠标移动到链接上 */
-
-.functs{
-	float:right;
-	width:auto;
-	display:inline;
-	padding-bottom:5px;
+.user {
+	margin-left: 20px;
+	padding-top: 5px;
+	float: left;
+	width: auto;
+	color: #666666;
+	font-size: 12px;
 }
 
-
-.chptbtn{
-	color:#ff0033;
+.user a:link {
+	color: #666666
+} /* 未访问的链接 */
+.user a:hover {
+	color: #434343
+} /* 鼠标移动到链接上 */
+.functs {
+	float: right;
+	width: auto;
+	display: inline;
+	padding-bottom: 5px;
 }
 
-.chptbox .chptlabel{
-	border-radius:10px;
+.chptbtn {
+	color: #ff0033;
+}
+
+.chptbox .chptlabel {
+	border-radius: 10px;
 }
 
 /************************usercenter.html**********************************/
-.check{
-	margin-right:20px; font-size:12px;
+.check {
+	margin-right: 20px;
+	font-size: 12px;
 }
 
-.root_1l{
-	cursor:pointer;width:100px; height:50px;margin-bottom:10px;text-align:center; background-color:#fff;filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=90,strength=3);/*ie*/
-	-moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-	-webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
-	box-shadow:2px 2px 10px #909090;/*opera或ie9*/;border-radius:3px; display:table;font-family:SimHei;
-}
-.root_1lc{
-	background-color:#eeeeee;
+.root_1l {
+	cursor: pointer;
+	width: 100px;
+	height: 50px;
+	margin-bottom: 10px;
+	text-align: center;
+	background-color: #fff;
+	filter: progid:DXImageTransform.Microsoft.Shadow(color=#909090,
+		direction=90, strength=3); /*ie*/
+	-moz-box-shadow: 2px 2px 10px #909090; /*firefox*/
+	-webkit-box-shadow: 2px 2px 10px #909090; /*safari或chrome*/
+	box-shadow: 2px 2px 10px #909090; /*opera或ie9*/;
+	border-radius: 3px;
+	display: table;
+	font-family: SimHei;
 }
 
-
-.root_2l{
-	cursor:pointer;width:100px; height:50px;margin-bottom:10px;text-align:center; background-color:#fff;border-radius:3px; display:table;font-family:SimHei;
-	filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=0,strength=3);/*ie*/
-	-moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-	-webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
-	box-shadow:2px 2px 10px #909090;/*opera或ie9*/;
+.root_1lc {
+	background-color: #eeeeee;
 }
-.root_2lc{
-	background-color:#eeeeee;
+
+.root_2l {
+	cursor: pointer;
+	width: 100px;
+	height: 50px;
+	margin-bottom: 10px;
+	text-align: center;
+	background-color: #fff;
+	border-radius: 3px;
+	display: table;
+	font-family: SimHei;
+	filter: progid:DXImageTransform.Microsoft.Shadow(color=#909090,
+		direction=0, strength=3); /*ie*/
+	-moz-box-shadow: 2px 2px 10px #909090; /*firefox*/
+	-webkit-box-shadow: 2px 2px 10px #909090; /*safari或chrome*/
+	box-shadow: 2px 2px 10px #909090; /*opera或ie9*/;
+}
+
+.root_2lc {
+	background-color: #eeeeee;
 }
 
 /********************************为左侧导航栏修改*************************************/
-		.sidebar-menu{
-			margin-top:10px;
-		}
-		/*一级菜单*/
-		.menu-first{
-			height:45px;
-			width:262px;
-			line-height:45px;
-			background-color: 	#C5C1AA;
-			border-top: 1px solid #efefef;
-			border-bottom: 1px solid #e1e1e1;
-			padding: 0;
-			font-size: 14px;
-			font-weight: normal;
-			text-align: center;
-		}
-		/*一级菜单鼠标划过状态*/
-		.menu-first:hover{
-			text-decoration: none;
-			background-color: 	#BDB76B;
-			border-top: 1px solid #b7b7b7;
-			border-bottom: 1px solid #acacac;
-		}
-		/*二级菜单*/
-		.menu-second li a{
-			border-top: 1px solid #efefef;
-			border-bottom: 1px solid #efefef;
-			font-size: 12px;
-			text-align:center;
-		}
-		/*二级菜单鼠标划过样式*/
-		.menu-second li a:hover {
-			text-decoration: none;
-			background-color: #66c3ec;
-			border-top: 1px solid #83ceed;
-			border-bottom: 1px solid #83ceed;
-			border-right: 3px solid #f8881c;
-			border-left: 3px solid #66c3ec;
-		}
-		/*二级菜单选中状态*/
-		.menu-second-selected {
-			background-color: #66c3ec;
-			height:31px;
-			line-height:31px;
-			border-top: 1px solid #83ceed;
-			border-bottom: 1px solid #83ceed;
-			border-right: 3px solid #f8881c;
-			border-left: 3px solid #66c3ec;
-			text-align:center;
-		}
-		/*覆盖bootstrap的样式*/
-		.nav-list,.nav-list li a{
-			padding: 0px;
-			margin: 0px;
-		}
+.sidebar-menu {
+	margin-top: 10px;
+}
+/*一级菜单*/
+.menu-first {
+	height: 45px;
+	width: 262px;
+	line-height: 45px;
+	background-color: #C5C1AA;
+	border-top: 1px solid #efefef;
+	border-bottom: 1px solid #e1e1e1;
+	padding: 0;
+	font-size: 14px;
+	font-weight: normal;
+	text-align: center;
+}
+/*一级菜单鼠标划过状态*/
+.menu-first:hover {
+	text-decoration: none;
+	background-color: #BDB76B;
+	border-top: 1px solid #b7b7b7;
+	border-bottom: 1px solid #acacac;
+}
+/*二级菜单*/
+.menu-second li a {
+	border-top: 1px solid #efefef;
+	border-bottom: 1px solid #efefef;
+	font-size: 12px;
+	text-align: center;
+}
+/*二级菜单鼠标划过样式*/
+.menu-second li a:hover {
+	text-decoration: none;
+	background-color: #66c3ec;
+	border-top: 1px solid #83ceed;
+	border-bottom: 1px solid #83ceed;
+	border-right: 3px solid #f8881c;
+	border-left: 3px solid #66c3ec;
+}
+/*二级菜单选中状态*/
+.menu-second-selected {
+	background-color: #66c3ec;
+	height: 31px;
+	line-height: 31px;
+	border-top: 1px solid #83ceed;
+	border-bottom: 1px solid #83ceed;
+	border-right: 3px solid #f8881c;
+	border-left: 3px solid #66c3ec;
+	text-align: center;
+}
+/*覆盖bootstrap的样式*/
+.nav-list, .nav-list li a {
+	padding: 0px;
+	margin: 0px;
+}
