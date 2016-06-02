@@ -301,12 +301,18 @@ public class UserAction extends ActionSupport {
 			ArrayList<Chapter> store=(ArrayList<Chapter>) rm.getStoreChapter(user.getId());
 			session.setAttribute("store", store);
 			Relations relation=rm.findByUserId(user.getId());
+			String[] i2uArray=new String[1];
+			String[] u2iArray=new String[1];
+			if(relation==null){
+				i2uArray[0]="无";
+				u2iArray[0]="无";
+			}else{
 			String i2u=relation.getI2u();
 			String u2i=relation.getU2i();
 			String[] i2uId=i2u.split("#");
 			String[] u2iId=u2i.split("#");
-			String[] i2uArray=new String[i2uId.length];
-			String[] u2iArray=new String[u2iId.length];
+			i2uArray=new String[i2uId.length];
+			u2iArray=new String[u2iId.length];
 			for(int i=0;i<i2uId.length;i++){
 				if(i2uId[i].equals(""))
 					i2uArray[i]="无";
@@ -318,7 +324,7 @@ public class UserAction extends ActionSupport {
 					u2iArray[i]="无";
 				else
 					u2iArray[i]=um.find(Integer.parseInt(u2iId[i])).getName();
-			}
+			}}
 			session.setAttribute("i2uArray", i2uArray);
 			session.setAttribute("u2iArray", u2iArray);
 
@@ -349,12 +355,19 @@ public class UserAction extends ActionSupport {
 			ArrayList<Chapter> store=(ArrayList<Chapter>) rm.getStoreChapter(person.getId());
 			session.setAttribute("store", store);
 			Relations relation=rm.findByUserId(person.getId());
+			String i2uDArray[][],u2iDArray[][];
+			if(relation==null){
+				i2uDArray=new String[2][2];
+				u2iDArray=new String[2][2];
+				i2uDArray[0][0]="无";
+				u2iDArray[0][0]="无";
+			}else{
 			String i2u=relation.getI2u();
 			String u2i=relation.getU2i();
 			String[] i2uArray=i2u.split("#");
 			String[] u2iArray=u2i.split("#");
-			String i2uDArray[][]=new String[i2uArray.length][4];
-			String u2iDArray[][]=new String[u2iArray.length][4];
+			i2uDArray=new String[i2uArray.length][4];
+			u2iDArray=new String[u2iArray.length][4];
 			for(int i=0;i<i2uArray.length;i++){
 				if(i2uArray[i].equals("")){
 					i2uDArray[i][0]="无";
@@ -392,7 +405,7 @@ public class UserAction extends ActionSupport {
 					}
 					u2iDArray[i][3]="10";
 				}
-			}
+			}}
 			session.setAttribute("i2uDArray", i2uDArray);
 			session.setAttribute("u2iDArray", u2iDArray);
 

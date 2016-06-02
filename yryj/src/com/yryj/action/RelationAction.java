@@ -188,14 +188,14 @@ public class RelationAction extends ActionSupport {
 					//新用户，还没有建立关系
 					if(relation==null){
 						relation=new Relations();
-						relation.setI2u(i2uId);
+						relation.setI2u("");
 						relation.setuId(user.getId());
 						relationManager.save(relation);
 						
 					}
 					if(relation1==null){
 						relation1=new Relations();
-						relation1.setU2i(String.valueOf(user.getId()));
+						relation1.setU2i("");
 						relation1.setuId(Integer.parseInt(i2uId));
 						relationManager.save(relation1);
 						

@@ -366,7 +366,8 @@ window.onload = function() {
 				<div class="panel-heading">我关注的人</div>
 					<ul class="list-group">
 						<%for(int i=0;i<i2uArray.length;i++){ %>
-						<li class="list-group-item"><a href="viewPerson.action?name=<%=i2uArray[i]%>"><%=i2uArray[i] %></a></li><%} %>
+						<li class="list-group-item"><a href="viewPerson.action?name=<%=i2uArray[i]%>"><%=i2uArray[i] %></a></li>
+						<%} %>
 					</ul>
 				</div>
 		</div>

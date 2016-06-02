@@ -99,21 +99,21 @@ text-decoration: none;
 					<%} %>
 				</li>
 			</ul>
-			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.html"><span class="glyphicon glyphicon-plus" />添加故事</a></p>
+			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事</a></p>
 		</div>
 	</nav>
 	
 	<div class="container">
 		<div class="col-lg-2" style="margin-top:20px;">
 		<ul class="nav nav-pills nav-stacked">
-			<li class="active na"><a href="#" id="info"><%=person.getName() %></a>
-			<a href=setAttention.action?id=<%=person.getId() %>><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a>
-			</li>
+			<li class="active na"><a href="#" id="info"><%=person.getName() %></a></li>
 			<li class="na" ><a href="#" id="mychpts">作品&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=chs.size() %></span></a></li>
 			<li class="na"><a href="#" id="mycol">收藏&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=store.size() %></span></a></li>
 			<li class="na"><a href="#" id="myfol">关注&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(i2uDArray[0][0].equals("无"))%>0<%else %><%=i2uDArray.length %></span></a></li>
 			<li class="na"><a href="#" id="myfans">粉丝&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(u2iDArray[0][0].equals("无"))%>0<%else %><%=u2iDArray.length %></span></a></li>
 		</ul>
+		<br/>
+		<button onclick="location='setAttention.action?id=<%=person.getId()%>' " class="btn btn-info" > 关注TA </button>
 		</div>
 		<div class="col-lg-10" style="margin-top:20px;">
 		<div id="basicInfo"> <!--   个人主页放置个人积分、点赞数多的chpts、点赞数多的收藏的作品   -->
@@ -268,15 +268,18 @@ text-decoration: none;
 			<div class="panel panel-default">
 				<div class="panel-heading">我关注的人</div>
 					<ul class="list-group">
-						<li class="list-group-item" ">
+						
 							<%if(i2uDArray[0][0].equals("无")) {%>
+							<li class="list-group-item" ">
 							<table>
 							<tr>
 							<td style="width:100px;"><b>无</b></td>
 							</tr>
 							</table>
+							</li>
 							<%}else{ %>
 							<%for(int i=0;i<i2uDArray.length;i++){ %>
+							<li class="list-group-item" ">
 							<table>
 							<tr>
 							<td style="width:100px;"><a href="viewPerson.action?name=<%=i2uDArray[i][1]%>"><b><%=i2uDArray[i][1] %></b></a></td>
@@ -284,8 +287,10 @@ text-decoration: none;
 							</tr>
 							</table>
 							<a href=setAttention.action?id=<%=i2uDArray[i][0] %>><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a>
-							<%} }%>
-						</li>
+							<%}%>
+							</li>
+							<%}%>
+						
 					</ul>
 				</div>
 		</div>
@@ -293,15 +298,18 @@ text-decoration: none;
 			<div class="panel panel-default">
 				<div class="panel-heading">关注我的人</div>
 					<ul class="list-group">
-						<li class="list-group-item" ">
+						
 							<%if(u2iDArray[0][0].equals("无")) {%>
+							<li class="list-group-item" ">
 							<table>
 							<tr>
 							<td style="width:100px;"><b>无</b></td>
 							</tr>
 							</table>
+							</li>
 							<%}else{ %>
 							<%for(int i=0;i<u2iDArray.length;i++){ %>
+							<li class="list-group-item" ">
 							<table>
 							<tr>
 							<td style="width:100px;"><a href="viewPerson.action?name=<%=u2iDArray[i][1]%>"><b><%=u2iDArray[i][1] %></b></a></td>
@@ -309,8 +317,10 @@ text-decoration: none;
 							</tr>
 							</table>
 							<a href=setAttention.action?id=<%=u2iDArray[i][0] %>><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a>
-							<%} }%>
-						</li>
+							<%}%> 
+							</li>
+							<%}%>
+						
 					</ul>
 				</div>
 		</div>
