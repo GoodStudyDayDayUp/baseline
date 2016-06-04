@@ -37,20 +37,40 @@ public class Format {
 	
 	public static String getFromArray(String[] rs,String is){
 		 int i=0;
+		 int index=0;
 		 isFind=false;
 		 String rs2String="";
 		 
-		for(;i<rs.length;i++){
+		/*for(;i<rs.length;i++){
 			if(rs[i].equals(is)){
 				isFind=true;
 				i++;
 				continue;
 			}
 			rs2String+=(rs[i]+"#");
+		}*/
+		for(;i<rs.length;i++){    //获取相同字符串所在的位置
+			if(rs[i].equals(is)){
+				isFind=true;
+				index=i;
+			}
 		}
-		rs2String=rs2String.substring(0,rs2String.length()-1);
-		if(!isFind)
-			rs2String+=("#"+is);
+		if(isFind){
+			for(int j=0;j<rs.length;j++){
+				if(j!=index){
+					rs2String+=(rs[j]+"#");
+				}
+			}
+			rs2String=rs2String.substring(0,rs2String.length()-1);
+		}
+		
+		if(!isFind){
+			for(int k=0;k<rs.length;k++){
+				rs2String+=(rs[k]+"#");
+			}
+			rs2String+=is;
+		}
+			
 		return rs2String;
 	}
 	

@@ -56,8 +56,8 @@ dfs=(List<Draft>)session.getAttribute("drafts");
 
 List<Chapter> chs=(List<Chapter>)session.getAttribute("chapters");
 List<Chapter> store=(List<Chapter>)session.getAttribute("store");
-String[] i2uArray=(String[])session.getAttribute("i2uArray");
-String[] u2iArray=(String[])session.getAttribute("u2iArray");
+String[][] i2uArray=(String[][])session.getAttribute("i2uArray");
+String[][] u2iArray=(String[][])session.getAttribute("u2iArray");
 Relations relation=null;
 if(user!=null){
 	//获得所有的关系
@@ -106,10 +106,10 @@ window.onload = function() {
 	<div class="col-lg-2" style="margin-top:20px;">
 	<ul class="nav nav-pills nav-stacked">
 	<li class="active na"><a href="#" id="info">基本信息</a></li>
-	<li class="na"><a href="#" id="mychpts">我的作品</a></li>
-	<li class="na"><a href="#" id="mycol">我的收藏</a></li>
-	<li class="na"><a href="#" id="myfol">关注</a></li>
-	<li class="na"><a href="#" id="myfans">粉丝</a></li>
+	<li class="na"><a href="#" id="mychpts">我的作品&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=chs.size() %></span></a></li>
+	<li class="na"><a href="#" id="mycol">我的收藏&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=store.size()%></span></a></li>
+	<li class="na"><a href="#" id="myfol">关注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(i2uArray[0][0].equals("无"))%>0<%else %><%=i2uArray.length %></span></a></li>
+	<li class="na"><a href="#" id="myfans">粉丝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(u2iArray[0][0].equals("无"))%>0<%else %><%=u2iArray.length %></span></a></li>
 	<li class="na"><a href="#" id="mypoints">积分</a></li>
 	</ul>
 	</div>
@@ -365,9 +365,13 @@ window.onload = function() {
 			<div class="panel panel-default">
 				<div class="panel-heading">我关注的人</div>
 					<ul class="list-group">
+						<%if(i2uArray[0][0].equals("无")){ %>
+						<li class="list-group-item">无</a></li><%} 
+						else {%>
 						<%for(int i=0;i<i2uArray.length;i++){ %>
-						<li class="list-group-item"><a href="viewPerson.action?name=<%=i2uArray[i]%>"><%=i2uArray[i] %></a></li>
-						<%} %>
+						<li class="list-group-item"><a href="viewPerson.action?name=<%=i2uArray[i][0]%>"><%=i2uArray[i][0] %></a>
+						<a href="setAttention.action?id=<%=i2uArray[i][1] %>&mood=1"><button class="btn btn-info" style="float:right;margin-top:-7px;"> 取消关注 </button></a></li>
+						<%}} %>
 					</ul>
 				</div>
 		</div>
@@ -375,8 +379,11 @@ window.onload = function() {
 			<div class="panel panel-default">
 				<div class="panel-heading">关注我的人</div>
 					<ul class="list-group">
+						<%if(u2iArray[0][0].equals("无")){ %>
+						<li class="list-group-item">无</a></li><%} 
+						else {%>
 						<%for(int i=0;i<u2iArray.length;i++){ %>
-						<li class="list-group-item"><a href="viewPerson.action?name=<%=u2iArray[i]%>"><%=u2iArray[i] %></a></li><%} %>
+						<li class="list-group-item"><a href="viewPerson.action?name=<%=u2iArray[i][0]%>"><%=u2iArray[i][0] %></a></li><%}} %>
 					</ul>
 				</div>
 		</div>

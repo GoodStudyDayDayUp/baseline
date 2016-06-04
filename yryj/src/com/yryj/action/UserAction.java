@@ -288,6 +288,8 @@ public class UserAction extends ActionSupport {
 			//获取用户草稿箱
 			HttpSession session=ServletActionContext.getRequest().getSession();
 			user=(User) session.getAttribute("user");
+			if(user==null)
+				return Format.NF;
 			List<Draft> dfs=new DraftML().findByUserId(user.getId());
 			session.setAttribute("drafts", dfs);
 
@@ -301,29 +303,31 @@ public class UserAction extends ActionSupport {
 			ArrayList<Chapter> store=(ArrayList<Chapter>) rm.getStoreChapter(user.getId());
 			session.setAttribute("store", store);
 			Relations relation=rm.findByUserId(user.getId());
-			String[] i2uArray=new String[1];
-			String[] u2iArray=new String[1];
+			String[][] i2uArray=new String[1][2];
+			String[][] u2iArray=new String[1][2];
 			if(relation==null){
-				i2uArray[0]="无";
-				u2iArray[0]="无";
+				i2uArray[0][0]="无";
+				u2iArray[0][0]="无";
 			}else{
 			String i2u=relation.getI2u();
 			String u2i=relation.getU2i();
 			String[] i2uId=i2u.split("#");
 			String[] u2iId=u2i.split("#");
-			i2uArray=new String[i2uId.length];
-			u2iArray=new String[u2iId.length];
+			i2uArray=new String[i2uId.length][2];
+			u2iArray=new String[u2iId.length][2];
 			for(int i=0;i<i2uId.length;i++){
 				if(i2uId[i].equals(""))
-					i2uArray[i]="无";
-				else
-					i2uArray[i]=um.find(Integer.parseInt(i2uId[i])).getName();
+					i2uArray[i][0]="无";
+				else{
+					i2uArray[i][0]=um.find(Integer.parseInt(i2uId[i])).getName();
+					i2uArray[i][1]=i2uId[i];}
 			}
 			for(int i=0;i<u2iId.length;i++){
 				if(u2iId[i].equals(""))
-					u2iArray[i]="无";
-				else
-					u2iArray[i]=um.find(Integer.parseInt(u2iId[i])).getName();
+					u2iArray[i][0]="无";
+				else{
+					u2iArray[i][0]=um.find(Integer.parseInt(u2iId[i])).getName();
+					u2iArray[i][1]=u2iId[i];}
 			}}
 			session.setAttribute("i2uArray", i2uArray);
 			session.setAttribute("u2iArray", u2iArray);
@@ -339,10 +343,36 @@ public class UserAction extends ActionSupport {
 		try {
 			//获取用户草稿箱
 			HttpSession session=ServletActionContext.getRequest().getSession();
+			User onlineUser=(User)session.getAttribute("user"); 
 			userManager=new UserML();
+			RelationsManager rm=new RelationsML();
+			UserManager um=new UserML();
+			String index="";
 			user=this.getUser();
 			User person=userManager.checkLogin(user);
-
+			if(onlineUser==null){
+				session.setAttribute("msg", "请先登录");
+				return Format.LOGIN;
+			}
+			if(person.getId()==onlineUser.getId())
+				index="0";
+			else{
+				Relations userRelation1=rm.findByUserId(onlineUser.getId());
+				if(userRelation1==null){
+					index="2";
+				}
+				else if(userRelation1.getI2u()==null){
+					index="2";
+				}
+				else{
+				String[] array1=userRelation1.getI2u().split("#");
+				if(Format.findInArray(array1,String.valueOf(person.getId()))==true)
+					index="1";
+				else
+					index="2";
+				}
+			}
+			
 			//作品信息
 			List<Chapter> chs=new ChapterML().getChapterByUName(person.getName());
 			session.setAttribute("chapters", chs);
@@ -350,8 +380,6 @@ public class UserAction extends ActionSupport {
 			session.setAttribute("person", person);
 
 			//获得所有的关系
-			RelationsManager rm=new RelationsML();
-			UserManager um=new UserML();
 			ArrayList<Chapter> store=(ArrayList<Chapter>) rm.getStoreChapter(person.getId());
 			session.setAttribute("store", store);
 			Relations relation=rm.findByUserId(person.getId());
@@ -366,8 +394,8 @@ public class UserAction extends ActionSupport {
 			String u2i=relation.getU2i();
 			String[] i2uArray=i2u.split("#");
 			String[] u2iArray=u2i.split("#");
-			i2uDArray=new String[i2uArray.length][4];
-			u2iDArray=new String[u2iArray.length][4];
+			i2uDArray=new String[i2uArray.length][5];       //最后一列值为0,1,2,分别代表与当前在线用户相同、已被当前用户关注、未被当前用户关注
+			u2iDArray=new String[u2iArray.length][5];		//最后一列值为0,1,2,分别代表与当前在线用户相同、已被当前用户关注、未被当前用户关注
 			for(int i=0;i<i2uArray.length;i++){
 				if(i2uArray[i].equals("")){
 					i2uDArray[i][0]="无";
@@ -385,6 +413,25 @@ public class UserAction extends ActionSupport {
 						i2uDArray[i][2]=String.valueOf(rm.findByUserId(Integer.parseInt(i2uArray[i])).getU2i().split("#").length);   //粉丝数
 					}
 					i2uDArray[i][3]="10";
+					if(i2uArray[i].equals(String.valueOf(onlineUser.getId()))){
+						i2uDArray[i][4]="0";
+					}
+					else{
+						Relations userRelation=rm.findByUserId(onlineUser.getId());
+						if(userRelation==null){
+							i2uDArray[i][4]="2";
+						}
+						else if(userRelation.getI2u()==null){
+							i2uDArray[i][4]="2";
+						}
+						else{
+						String[] array=userRelation.getI2u().split("#");
+						if(Format.findInArray(array, i2uArray[i])==true)
+							i2uDArray[i][4]="1";
+						else
+							i2uDArray[i][4]="2";
+						}
+					}
 				}
 			}
 			for(int i=0;i<u2iArray.length;i++){
@@ -398,16 +445,36 @@ public class UserAction extends ActionSupport {
 					u2iDArray[i][0]=u2iArray[i];
 					u2iDArray[i][1]=um.find(Integer.parseInt(u2iArray[i])).getName();   //姓名	
 					if(rm.findByUserId(Integer.parseInt(u2iArray[i])).getU2i().equals("")){
-						u2iDArray[i][2]="";
+						u2iDArray[i][2]="0";
 					}
 					else{
 						u2iDArray[i][2]=String.valueOf(rm.findByUserId(Integer.parseInt(u2iArray[i])).getU2i().split("#").length);   //粉丝数
 					}
 					u2iDArray[i][3]="10";
+					if(u2iArray[i].equals(String.valueOf(onlineUser.getId()))){
+						u2iDArray[i][4]="0";
+					}
+					else{
+						Relations userRelation=rm.findByUserId(onlineUser.getId());
+						if(userRelation==null){
+							u2iDArray[i][4]="2";
+						}
+						else if(userRelation.getI2u()==null){
+							u2iDArray[i][4]="2";
+						}
+						else{
+						String[] array=userRelation.getI2u().split("#");
+						if(Format.findInArray(array, u2iArray[i])==true)
+							u2iDArray[i][4]="1";
+						else
+							u2iDArray[i][4]="2";
+						}
+					}
 				}
 			}}
 			session.setAttribute("i2uDArray", i2uDArray);
 			session.setAttribute("u2iDArray", u2iDArray);
+			session.setAttribute("index", index);
 
 			return SUCCESS;
 		} catch (Exception e) {

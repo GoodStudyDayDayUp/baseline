@@ -43,6 +43,7 @@ text-decoration: none;
 <%
 	User user=(User)session.getAttribute("user"); 
 	User person=(User)session.getAttribute("person");
+	String index=(String)session.getAttribute("index");
 	List<Chapter> chs=(List<Chapter>)session.getAttribute("chapters");
 	List<Chapter>  store=(List<Chapter>)session.getAttribute("store");
 	String[][] i2uDArray=(String[][])session.getAttribute("i2uDArray");       //我关注的用户列表，id字符串
@@ -57,13 +58,12 @@ text-decoration: none;
 		session.setAttribute("relation", relation);
 	}
 	
-	if(i2uDArray==null){
+		if(i2uDArray==null){
 		i2uDArray=new String[0][0];
 	}
 	if(u2iDArray==null){
 		u2iDArray=new String[0][0];
 	}
-	
 %>
 <body >
 <script type="text/javascript">
@@ -113,7 +113,11 @@ text-decoration: none;
 			<li class="na"><a href="#" id="myfans">粉丝&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(u2iDArray[0][0].equals("无"))%>0<%else %><%=u2iDArray.length %></span></a></li>
 		</ul>
 		<br/>
-		<button onclick="location='setAttention.action?id=<%=person.getId()%>' " class="btn btn-info" > 关注TA </button>
+		<%if(index.equals("2")){ %>
+			<button onclick="location='setAttention.action?id=<%=person.getId()%>' " class="btn btn-info" > 关注TA </button>
+	    <%}if(index.equals("1")){ %>
+			<button onclick="location='setAttention.action?id=<%=person.getId()%>' " class="btn btn-info" > 取消关注 </button>
+		<%} %>
 		</div>
 		<div class="col-lg-10" style="margin-top:20px;">
 		<div id="basicInfo"> <!--   个人主页放置个人积分、点赞数多的chpts、点赞数多的收藏的作品   -->
@@ -286,7 +290,10 @@ text-decoration: none;
 							<td><p style="font-size:12px;padding-bottom:-10px;margin-bottom:-10px;">粉丝数：<span><%=i2uDArray[i][2] %></span>&nbsp;&nbsp;&nbsp;&nbsp;章节数：<span><%=i2uDArray[i][3] %></span></p></td>
 							</tr>
 							</table>
-							<a href=setAttention.action?id=<%=i2uDArray[i][0] %>><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a>
+							<%if(i2uDArray[i][4].equals("1")){ %>
+							<a href="setAttention.action?id=<%=i2uDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 取消关注 </button></a><%} %>
+							<%if(i2uDArray[i][4].equals("2")){ %>
+							<a href="setAttention.action?id=<%=i2uDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a><%} %>
 							<%}%>
 							</li>
 							<%}%>
@@ -316,8 +323,11 @@ text-decoration: none;
 							<td><p style="font-size:12px;padding-bottom:-10px;margin-bottom:-10px;">粉丝数：<span><%=u2iDArray[i][2] %></span>&nbsp;&nbsp;&nbsp;&nbsp;章节数：<span><%=u2iDArray[i][3] %></span></p></td>
 							</tr>
 							</table>
-							<a href=setAttention.action?id=<%=u2iDArray[i][0] %>><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a>
-							<%}%> 
+							<%if(u2iDArray[i][4].equals("1")){ %>
+							<a href="setAttention.action?id=<%=u2iDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 取消关注 </button></a><%} %>
+							<%if(u2iDArray[i][4].equals("2")){ %>
+							<a href="setAttention.action?id=<%=u2iDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注 TA</button></a><%} %>
+							<%}%>
 							</li>
 							<%}%>
 						
