@@ -93,8 +93,8 @@ if(webUser==null){
 						</div>
 
 						<div class="form-group row">
-							<button type="submit" class="btn btn-primary col-lg-offset-5">注册</button>
-							<a href="beforelogin.action" class="col-lg-offset-1">已经有账号</a>
+							<center><button type="submit" class="btn btn-primary col-lg-offset-5">注册</button>
+							<a href="beforelogin.action" class="col-lg-offset-1">已经有账号</a></center>
 						</div>
 
 					</form>

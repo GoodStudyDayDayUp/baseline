@@ -60,9 +60,9 @@
 						</div>
 						
                			<div class="form-group ">
-							<p class="col-lg-offset-1"/>
-                       		<input type="checkbox" name="rememberme" class="col-lg-offset-1"/>记住我
-							<button type="submit" class="btn btn-primary col-lg-offset-3">登录</button>
+							<center>
+                       		<input type="checkbox" name="rememberme" class="col-lg-offset-1"/>记住我  
+							<button type="submit" class="btn btn-primary col-lg-offset-3">登录</button> </center>
                			</div>
 	             </form>
 	             </div> 

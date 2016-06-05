@@ -41,7 +41,7 @@ text-decoration: none;
 	ArrayList<ArrayList<Type>> types=(ArrayList<ArrayList<Type>>)session.getAttribute("types");
 	%>
 
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" margin:0px 0px 0px 0px;">
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#ededed; margin:0px 0px 0px 0px;">
 		<div class="navbar-header">
       <a class="navbar-brand" href="readStart.action" style="font-family:SimHei;">一人一句</a>
    </div>

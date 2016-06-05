@@ -104,7 +104,7 @@ text-decoration: none;
 	</nav>
 	
 	<div class="container">
-		<div class="col-lg-2" style="margin-top:20px;">
+		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-2" style="margin-top:20px;">
 		<ul class="nav nav-pills nav-stacked">
 			<li class="active na"><a href="#" id="info"><%=person.getName() %></a></li>
 			<li class="na" ><a href="#" id="mychpts">作品&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=chs.size() %></span></a></li>
@@ -119,7 +119,7 @@ text-decoration: none;
 			<button onclick="location='setAttention.action?id=<%=person.getId()%>' " class="btn btn-info" > 取消关注 </button>
 		<%} %>
 		</div>
-		<div class="col-lg-10" style="margin-top:20px;">
+		<div class="col-lg-10 col-md-10 col-sm-9 col-xs-10" style="margin-top:20px;">
 		<div id="basicInfo"> <!--   个人主页放置个人积分、点赞数多的chpts、点赞数多的收藏的作品   -->
 			<div class="panel panel-default">
 				<div class="panel-heading">

@@ -74,7 +74,7 @@ $(function(){
 	ChapterManager cm=new ChapterML();
 	%>
 <body >
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" margin:0px 0px 0px 0px;">
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#ededed; margin:0px 0px 0px 0px;">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="readStart.action">首页 /</a>
 			<a class="navbar-brand" style="padding-left:0px;" href="#"><%=story.get(0).getFormat()%> /</a>
@@ -116,9 +116,9 @@ $(function(){
 	</nav>
 	
 	
-	<div style="position:fixed; left:0px; top:50px; width:100%; height:100%">
+	<!--<div style="position:fixed; left:0px; top:50px; width:100%; height:100%">
 		<img src="pics\back.jpg" width=100% height="100%"/>
-	</div>
+	</div> -->
 
 
 	
@@ -127,7 +127,7 @@ $(function(){
 		<div class="row " > <!--onmouseover="DivShow()" onmouseout="DivHide()" -->
 
 			<!-- 根章节 -->
-			<div class="col-lg-8 col-lg-offset-2  chptbox" >
+			<div class="col-lg-8 col-lg-offset-2  col-sm-8 col-sm-offset-2  col-md-8 col-md-offset-2 chptbox" >
 				<div style="display:inline;">
 				<%String a=story.get(0).getKey();
 				  String keys[];					  
@@ -197,12 +197,12 @@ $(function(){
 			long left=story.get(i).getLeftStory();
 		%>
 		<div class="row " id="contents" > <!--onmouseover="DivShow()" onmouseout="DivHide()" -->
-			<div class="col-lg-1 col-lg-offset-1" style="display:table;position:relative;">
+			<div class="col-lg-1 col-lg-offset-1 col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1" style="display:table;position:relative;">
 				<div style="margin-top:50px;display:table-cell;vertical-align:middle; position:absolute;height:100%; top:0px;bottom:0px;right:10px;">
 					<a href="turnStory.action?mood=0&index=<%=i %>" id=<%="ToLeft"+story.get(i).getId()%> onclick="LeftChpt();" title="可以查看<%=left %> 条内容"> <span class="glyphicon glyphicon-chevron-left"/></a>
 				</div>
 			</div>
-			<div class="col-lg-8  chptbox" >
+			<div class="col-lg-8 col-md-8  col-sm-8 chptbox" >
 			<div style="display:inline;">
 				<%a=story.get(i).getKey();
 				String ks[];
@@ -272,7 +272,7 @@ $(function(){
 		    long total=siblings.size();
 		    long right=total-left-1;
 			%>
-			<div class="col-lg-1" style="display:table;position:relative;">
+			<div class="col-lg-1 col-md-1 col-sm-1" style="display:table;position:relative;">
 				<div style="margin-top:50px;display:table-cell;vertical-align:middle; position:absolute;height:100%; top:0px;bottom:0px;left:10px;">
 					<a href="turnStory.action?mood=1&index=<%=i %>" id=<%="ToRight"+story.get(i).getId()%> title="还可以查看<%=right %>条内容" > <span class="glyphicon glyphicon-chevron-right"/></a>
 				</div>

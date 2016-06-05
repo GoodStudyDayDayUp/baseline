@@ -51,7 +51,7 @@ text-decoration: none;
 	}
 	</script>
 
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" margin:0px 0px 0px 0px;">
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" background-color:#ededed; margin:0px 0px 0px 0px;">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="read.jsp" style="padding-top:17px;"><img src="pics\go_back.png"/></a>
 			<a class="navbar-brand" href="read.jsp" style="padding-left:0px">返回</a>
@@ -81,9 +81,9 @@ text-decoration: none;
 		</div>
 	</nav>
 	
-	<div style="position:fixed; left:0px; top:50px; width:100%; height:100%">
+	<!--<div style="position:fixed; left:0px; top:50px; width:100%; height:100%">
 		<img src="pics\back.jpg" width=100% height="100%"/>
-	</div>
+	</div>-->
 	
 	<div class="container" style=" margin-top:50px;">
 		

@@ -74,7 +74,7 @@ window.onload = function() {
 </script>
 
 <%session.setAttribute("msg", ""); %>
-<nav class="navbar navbar-default" role="navigation" style=" margin:0px 0px 0px 0px;">
+<nav class="navbar navbar-default" role="navigation" style="background-color:#ededed; margin:0px 0px 0px 0px;">
 	<div class="navbar-header">
       <a class="navbar-brand" href="readStart.action" style="font-family:SimHei;">一人一句</a>
    </div>
@@ -103,7 +103,7 @@ window.onload = function() {
 	</nav>
 
 	<div class="container">
-	<div class="col-lg-2" style="margin-top:20px;">
+	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-top:20px;">
 	<ul class="nav nav-pills nav-stacked">
 	<li class="active na"><a href="#" id="info">基本信息</a></li>
 	<li class="na"><a href="#" id="mychpts">我的作品&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=chs.size() %></span></a></li>
@@ -113,7 +113,7 @@ window.onload = function() {
 	<li class="na"><a href="#" id="mypoints">积分</a></li>
 	</ul>
 	</div>
-	<div class="col-lg-10" style="margin-top:20px;">
+	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="margin-top:20px;">
 		<div id="basicInfo">
 			<div class="panel panel-default">
 				<div class="panel-heading">
