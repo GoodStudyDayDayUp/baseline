@@ -92,8 +92,8 @@ private UserDao userDao=null;
 
 		message.setSentDate(Calendar.getInstance().getTime());
 		message.setSubject( Format.subject);
-		message.setContent( Format.messageText,  Format.messageType);
-		
+		String messageText=Format.messageStart+"?id="+user.getId()+Format.messageEnd;
+		message.setContent(messageText,  Format.messageType);
 		
 		Transport transport = mailSession.getTransport("smtp");
 		transport.connect(Format.smtpHost,Format.fromName,Format.fromUserPassword);

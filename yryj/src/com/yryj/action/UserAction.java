@@ -309,7 +309,9 @@ public class UserAction extends ActionSupport {
 	 * °ïÖúÓÃ»§ÕÒ»ØÃÜÂë
 	 * @return
 	 */
-	public String findPassword(){
+	public String sendEmail(){
+		userManager=new UserML();
+		
 		return null;
 	}
 

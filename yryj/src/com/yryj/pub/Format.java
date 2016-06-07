@@ -22,7 +22,8 @@ public class Format {
 	public static String from="1470545610@qq.com";
 	public static String fromUserPassword="vebmkjyfnfgejhag";
 	public static String subject="一人一句 找回密码";
-	public static String messageText="尊敬的一人一句用户：<br/> 找回密码请点击链接，<a href='www.baidu.com'> 找回密码</a>";
+	public static String messageEnd="'> 找回密码</a>";
+	public static String messageStart="尊敬的一人一句用户：<br/> 找回密码请点击链接，<a href='http://localhost:8080/yryj/findPwd.jsp";
 	public static String messageType="text/html;charset=gb2312";
 	public static String fromName="一人一句";
 	public static String hostPort="587";
