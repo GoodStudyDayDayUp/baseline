@@ -125,7 +125,10 @@ public class UserAction extends ActionSupport {
 		}
 	}
 
-	//在跳转到注册界面之前要进行的操作
+	/**
+	 * 在跳转到注册界面之前要进行的操作
+	 * @return
+	 */
 	public String beforeRegister(){
 		HttpSession session=ServletActionContext.getRequest().getSession();
 		session.setAttribute("regmsg", "");
@@ -134,6 +137,10 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	/**
+	 * 用户注册
+	 * @return
+	 */
 	public String registerUser()
 	{
 		HttpSession session=ServletActionContext.getRequest().getSession();
@@ -165,6 +172,10 @@ public class UserAction extends ActionSupport {
 		}
 	}
 
+	/**
+	 * 登陆之前先清楚上一个用户的登陆信息
+	 * @return
+	 */
 	public String beforeLogin(){
 		HttpSession session=ServletActionContext.getRequest().getSession();
 		session.setAttribute("msg", "");
@@ -172,6 +183,10 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	/**
+	 * 登陆
+	 * @return
+	 */
 	public String loginUser()
 	{
 		try {
@@ -207,6 +222,10 @@ public class UserAction extends ActionSupport {
 		}
 	}
 
+	/**
+	 * 注销，注销之前要清楚系统缓存数据
+	 * @return
+	 */
 	public String logout(){
 		try {
 			HttpSession session=ServletActionContext.getRequest().getSession();
@@ -228,7 +247,11 @@ public class UserAction extends ActionSupport {
 		}
 	}
 
-	//webUser看作为修改前的user，而user为修改后的user
+	/**
+	 * 更新用户信息
+	 * webUser看作为修改前的user，而user为修改后的user
+	 * @return
+	 */
 	public String updateUser(){
 		try {
 			HttpSession session=ServletActionContext.getRequest().getSession();
@@ -281,8 +304,19 @@ public class UserAction extends ActionSupport {
 		}
 
 	}
+	
+	/**
+	 * 帮助用户找回密码
+	 * @return
+	 */
+	public String findPassword(){
+		return null;
+	}
 
-	//再跳转到用户中心之前，获取用户的所有信息
+	/**
+	 * 再跳转到用户中心之前，获取用户的所有信息
+	 * @return
+	 */
 	public String getAllUserData(){
 		try {
 			//获取用户草稿箱
@@ -339,6 +373,10 @@ public class UserAction extends ActionSupport {
 		}
 	}
 
+	/**
+	 * 查看其他人的信息
+	 * @return
+	 */
 	public String viewOthers(){
 		try {
 			//获取用户草稿箱
