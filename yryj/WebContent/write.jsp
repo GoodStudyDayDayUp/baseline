@@ -81,9 +81,9 @@ text-decoration: none;
 		</div>
 	</nav>
 	
-	<!--<div style="position:fixed; left:0px; top:50px; width:100%; height:100%">
+	<div style="position:fixed; left:0px; top:50px; width:100%; height:100%">
 		<img src="pics\back.jpg" width=100% height="100%"/>
-	</div>-->
+	</div>
 	
 	<div class="container" style=" margin-top:50px;">
 		

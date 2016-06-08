@@ -115,7 +115,7 @@ text-decoration: none;
 				<%for(int i=0;i<types.get(0).size();i++){ 
 					Type a=types.get(0).get(i);
 				%>
-				<div class="col-lg-2" ><div class=" <%=i%> root_1l "><p style="display:table-cell; vertical-align:middle;"><%=a.getContent() %></p></div></div>
+				<div class="col-lg-2 col-md-2 col-xs-2" ><div class=" <%=i%> root_1l "><p style="display:table-cell; vertical-align:middle;"><%=a.getContent() %></p></div></div>
 				<%} %>
 				</div>
 			</div></a>
@@ -125,7 +125,7 @@ text-decoration: none;
 			
 			<div class="row" >
 			<%for(int i=0;i<types.get(1).size();i++){ %>
-			<div class="col-lg-2" ><div class=" <%=types.get(0).size()+i %> root_2l " style=""><p style="display:table-cell; vertical-align:middle;"><%=types.get(1).get(i).getContent() %></p></div></div>
+			<div class="col-lg-2 col-md-2 col-xs-2" ><div class=" <%=types.get(0).size()+i %> root_2l " style=""><p style="display:table-cell; vertical-align:middle;"><%=types.get(1).get(i).getContent() %></p></div></div>
 			<%} %>	
 			</div>
 				
