@@ -50,7 +50,7 @@
                          	<%}else{ %>
                          	<input type="password"  id="password" name="password" class="form-control" placeholder="密码" onchange="changemsg(this)"/></div>
                          	<%} %>
-								<a href="beforeregister.action" class="display:block">忘记密码</a>
+								<a href="forget_step1.jsp" class="display:block">忘记密码</a>
                			</div>
 
 						<div class="form-group row">

@@ -69,14 +69,13 @@ private UserDao userDao=null;
 	}
 
 	@Override
-	public void findPassword(User user) {
+	public void sendEmail(User user) {
 		// TODO Auto-generated method stub
 		Properties props = new Properties();
 		props.put("mail.smtp.host", Format.smtpHost);
 		props.put("mail.smtp.starttls.enable","true");//使用 STARTTLS安全连接
 		props.put("mail.transport.protocol", "smtp");// 发送邮件的协议
 		props.put("mail.smtp.port", Format.hostPort);			 //google使用465或587端口
-		//props.setProperty("mail.smtp.socketFactory.port", "25");
 		props.put("mail.smtp.auth", "true");		// 使用验证
 		props.put("mail.debug", "true");
 		javax.mail.Session mailSession = javax.mail.Session.getInstance(props,new MyAuthenticator( Format.from, Format.fromUserPassword));

@@ -293,6 +293,15 @@ public class UserAction extends ActionSupport {
 					return SUCCESS;
 				}
 				break;
+			case 3:
+				//修改密码
+				String id=request.getParameter("id");
+				int userId=Integer.valueOf(id);
+				user=userManager.find(userId);
+				user.setPassword(password2);
+				userManager.update(user);
+				session.setAttribute("user", user);
+				return "mainPage";
 			}
 
 
@@ -312,7 +321,23 @@ public class UserAction extends ActionSupport {
 	public String sendEmail(){
 		userManager=new UserML();
 		
-		return null;
+		User user=new User();
+		user.setName(name);
+		user=userManager.checkLogin(user);
+		
+		HttpSession session=ServletActionContext.getRequest().getSession();
+		if(user!=null){
+			if(user.getEmail().equals(email)){
+				userManager.sendEmail(user);
+				session.setAttribute("msgs", "信息发送成功，请登录邮箱验证！");
+				return SUCCESS;
+			}else{
+				session.setAttribute("msgs", "用户名和邮箱不一致！");
+				return SUCCESS;
+			}
+		}
+		session.setAttribute("msgs", "用户名不存在！");
+		return SUCCESS;
 	}
 
 	/**

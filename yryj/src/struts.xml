@@ -37,12 +37,17 @@
 			<action name="updateUser" class="com.yryj.action.UserAction" method="updateUser">
 			    <result name="success">/usercenter.jsp</result>
 			    <result name="error">/usercenter.jsp</result>
+			    <result name="mainPage">/main.jsp</result>
 			</action>
 			<action name="getInfo" class="com.yryj.action.UserAction" method="getAllUserData">
 			    <result name="success">/usercenter.jsp</result>
 			</action>
 			<action name="viewPerson" class="com.yryj.action.UserAction" method="viewOthers">
 			    <result name="success">/people.jsp</result>
+			</action>
+			
+			<action name="sendEmail" class="com.yryj.action.UserAction" method="sendEmail">
+			    <result name="success">/forget_step1.jsp</result>
 			</action>
 			
 			

@@ -140,9 +140,13 @@ window.onload = function() {
 						</form>
 						<!--                !!!!!!!!!这里是新的验证手机号的form !!!!!!!!    -->
 						<form id="changePhone" action="updateUser.action?mood=1" method="post">
-							<div class="form-group"><input type="text" class="form-control" name="phone"  placeholder="11位手机号码"/></div>
-							<button type="submit" class="btn btn-default" style="margin-top:-10px;">更新联系方式</button>
-						</form> -->
+						 <%if(phone==null||phone=="") {%>
+						 <div class="form-group"><input type="text" class="form-control" name="phone"  placeholder="11位手机号码"/></div>
+						 <%}else{ %>
+							<div class="form-group"><input type="text" class="form-control" name="phone" value="<%=user.getPhone()%>"  placeholder="11位手机号码"/></div>
+						<%} %>
+						<button type="submit" class="btn btn-default" style="margin-top:-10px;">更新联系方式</button>
+						</form>
 						</td>
 						</tr>
 						<!--               !!!!!!在此处添加了手机号码的验证 !!!!!!!!!            -->
@@ -191,9 +195,10 @@ window.onload = function() {
 					</form>
 				<!--             !!!!!! 下面是新的修改密码的form！！！！！！    -->
 				<form id="changePwd" action="updateUser.action?mood=2" method="post">
-					<p>原有密码</p><div class="form-group" style="margin-top:-10px;"><input type="text" class="form-control"  name="oldpwd"  placeholder="原密码"/></div>
-					<p>新密码</p><div class="form-group" style="margin-top:-10px;"><input type="password"  class="form-control" name="newpwd"  placeholder="3-10位" /></div>
-					<p>确认新密码</p><div class="form-group" style="margin-top:-10px;"><input type="password"  class="form-control" name="confirmpwd" placeholder="3-10位"/></div>
+					<p>原有密码</p><div class="form-group" style="margin-top:-10px;"><input type="text" class="form-control"  name="oldpwd"  placeholder="原密码" onchange="checkPass(this)" /></div>
+					<p style="font-size:10px;color:red;display:none;"  id="oldpwd_wrong">密码错误</p>
+					<p>新密码</p><div class="form-group" style="margin-top:-10px;"><input type="password"  class="form-control" name="password"  placeholder="3-10位" /></div>
+					<p>确认新密码</p><div class="form-group" style="margin-top:-10px;"><input type="password"  class="form-control" name="password2" placeholder="3-10位"/></div>
 					<button type="button" class="btn btn-default" style="">更新密码</button>
 				</form> 
 				
@@ -222,7 +227,7 @@ window.onload = function() {
 												},
 											}
 										},
-										newpwd:{
+										password:{
 											validators:{
 												stringLength: {
 													min: 3,
@@ -234,7 +239,7 @@ window.onload = function() {
 												},
 											},
 										},
-										confirmpwd:{
+										password2:{
 											validators:{
 												stringLength: {
 													min: 3,

@@ -17,5 +17,5 @@ public interface UserManager {
 	
 	public User findUserByPhone(User user);
 	
-	public void findPassword(User user);
+	public void sendEmail(User user);
 }
