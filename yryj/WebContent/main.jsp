@@ -172,6 +172,7 @@ function goTopEx() {
 		if(i%2==0){
 		
 		%>
+<<<<<<< HEAD
 			<div class="col-lg-8 col-lg-offset-2 storyofmain">
 				<div class="col-lg-4 storyclass storycenter"
 					style="background-color: #191970">
@@ -210,6 +211,27 @@ function goTopEx() {
 					<h5>
 						<a href="main-tree.jsp" style="color: #ffffff"><%=length %></a>
 					</h5>
+=======
+			<div class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 storyofmain" >
+				<div class="col-lg-4 col-md-4 col-sm-4 storyclass storycenter" style="background-color:#191970" >
+					<h3 ><a href="main-tree.jsp" style="color:#ffffff"><%=ch.getFormat() %></a></h3>
+					<h4 ><a href="main-tree.jsp" style="color:#ffffff"><%=ch.getStyle() %></a></h4>
+					<h5 ><a href="main-tree.jsp" style="color:#ffffff"><%=length %></a></h5>
+				</div>
+				<div class="col-lg-8  col-md-8 col-sm-8 storybegin"><p class="storycenter">
+					<a href="readStory.action?index=<%=ch.getId() %>"><%=ch.getContent() %></a>
+				</p></div>
+			</div>
+	<%}else{ %>		
+			<div class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12  storyofmain" >
+				<div class="col-lg-8  col-md-8 col-sm-8 storybegin"><p class="storycenter">
+					<a href="readStory.action?index=<%=ch.getId() %>" style="color:#000000"><%=ch.getContent() %></a>
+				</p></div>
+				<div class="col-lg-4  col-md-4 col-sm-4  storyclass storycenter"style="background-color:#DC143C" >
+					<h3 ><a href="main-tree.jsp" style="color:#ffffff"><%=ch.getFormat() %></a></h3>
+					<h4 ><a href="main-tree.jsp" style="color:#ffffff"><%=ch.getStyle() %></a></h4>
+					<h5 ><a href="main-tree.jsp" style="color:#ffffff"><%=length %></a></h5>
+>>>>>>> origin/develop
 				</div>
 			</div>
 			<%} }%>

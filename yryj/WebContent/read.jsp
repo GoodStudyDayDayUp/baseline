@@ -72,49 +72,52 @@ $(function(){
 	}
 	ChapterManager cm=new ChapterML();
 	%>
-<body>
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
-		style=" margin:0px 0px 0px 0px;">
-	<div class="navbar-header">
-		<a class="navbar-brand" href="readStart.action">首页 /</a> <a
-			class="navbar-brand" style="padding-left: 0px;" href="#"><%=story.get(0).getFormat()%>
-			/</a> <a class="navbar-brand" style="padding-left: 0px;" href="#"><%=story.get(0).getStyle()%>
-			/</a>
-		<%String length="短篇";
+<body >
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#ededed; margin:0px 0px 0px 0px;">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="readStart.action">首页 /</a>
+			<a class="navbar-brand" style="padding-left:0px;" href="#"><%=story.get(0).getFormat()%> /</a>
+			<a class="navbar-brand" style="padding-left:0px;" href="#"><%=story.get(0).getStyle()%> /</a>
+			<%String length="短篇";
 			  if(story.get(0).getLength()==1)
 				  length="中篇";
 			  if(story.get(0).getLength()==2)
 				  length="长篇";
 			%>
-		<a class="navbar-brand" style="padding-left: 0px;" href="#"><%=length %></a>
-	</div>
-	<div>
-		<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
-			<li class="dropdown"
-				style="margin: 0px 0px 0px 0px; font-family: SimHei;">
-				<%if(user!=null){ %> <a href="#" class="dropdown-toggle"
-				data-toggle="dropdown"> <%=user.getName() %><b class="caret"></b>
-			</a>
-				<ul class="dropdown-menu">
-					<li><a href="getInfo.action">个人主页</a></li>
-					<li><a href="logout.action">注销</a></li>
-				</ul> <%}else{ %> <a href="beforelogin.action"> 登录 </a> <%} %>
-			</li>
-		</ul>
-
-		<%if(user!=null){ %>
-		<p class="navbar-text navbar-right" style="font-family: SimHei;">
-			<a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事</a>
-		</p>
-		<%} %>
-	</div>
+			<a class="navbar-brand" style="padding-left:0px;" href="#"><%=length %></a>
+		</div>
+		<div>
+			<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
+				<li class="dropdown" style="margin:0px 0px 0px 0px;font-family: SimHei  ;">
+				<%if(user!=null){ %>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+					<%=user.getName() %><b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="getInfo.action">个人主页</a></li>
+						<%if(user.getName().equals(Format.managerName)){ %>
+						<li><a href="manage.jsp">管理</a></li>
+						<%} %>
+						<li><a href="logout.action">注销</a></li>
+					</ul>
+					<%}else{ %>
+					<a href="beforelogin.action">
+					登录
+					</a>
+					<%} %>
+				</li>
+			</ul>
+			
+			<%if(user!=null){ %>
+			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事</a></p>
+			<%} %>
+		</div>
 	</nav>
-
-
-	<div
-		style="position: fixed; left: 0px; top: 50px; width: 100%; height: 100%">
-		<img src="pics\back.jpg" width=100% height="100%" />
-	</div>
+	
+	
+	<div style="position:fixed; left:0px; top:50px; width:100%; height:100%">
+		<img src="pics\back.jpg" width=100% height="100%"/>
+	</div> 
 
 
 
@@ -124,9 +127,9 @@ $(function(){
 			<!--onmouseover="DivShow()" onmouseout="DivHide()" -->
 
 			<!-- 根章节 -->
-			<div class="col-lg-8 col-lg-offset-2  chptbox">
-				<div style="display: inline;">
-					<%String a=story.get(0).getKey();
+			<div class="col-lg-8 col-lg-offset-2  col-sm-8 col-sm-offset-2  col-md-8 col-md-offset-2 chptbox" >
+				<div style="display:inline;">
+				<%String a=story.get(0).getKey();
 				  String keys[];					  
 				  if(a.indexOf("#")!=-1){
 					  keys=a.split("#");
@@ -214,21 +217,15 @@ $(function(){
 		<%for(int i=1;i<story.size();i++){ 
 			long left=story.get(i).getLeftStory();
 		%>
-		<div class="row " id="contents">
-			<!--onmouseover="DivShow()" onmouseout="DivHide()" -->
-			<div class="col-lg-1 col-lg-offset-1"
-				style="display: table; position: relative;">
-				<div
-					style="margin-top: 50px; display: table-cell; vertical-align: middle; position: absolute; height: 100%; top: 0px; bottom: 0px; right: 10px;">
-					<a href="turnStory.action?mood=0&index=<%=i %>"
-						id=<%="ToLeft"+story.get(i).getId()%> onclick="LeftChpt();"
-						title="可以查看<%=left %> 条内容"> <span
-						class="glyphicon glyphicon-chevron-left" /></a>
+		<div class="row " id="contents" > <!--onmouseover="DivShow()" onmouseout="DivHide()" -->
+			<div class="col-lg-1 col-lg-offset-1 col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1" style="display:table;position:relative;">
+				<div style="margin-top:50px;display:table-cell;vertical-align:middle; position:absolute;height:100%; top:0px;bottom:0px;right:10px;">
+					<a href="turnStory.action?mood=0&index=<%=i %>" id=<%="ToLeft"+story.get(i).getId()%> onclick="LeftChpt();" title="可以查看<%=left %> 条内容"> <span class="glyphicon glyphicon-chevron-left"/></a>
 				</div>
 			</div>
-			<div class="col-lg-8  chptbox">
-				<div style="display: inline;">
-					<%a=story.get(i).getKey();
+			<div class="col-lg-8 col-md-8  col-sm-8 chptbox" >
+			<div style="display:inline;">
+				<%a=story.get(i).getKey();
 				String ks[];
 				  if(a.indexOf("#")!=-1){
 					  ks=a.split("#");
@@ -317,13 +314,9 @@ $(function(){
 		    long total=siblings.size();
 		    long right=total-left-1;
 			%>
-			<div class="col-lg-1" style="display: table; position: relative;">
-				<div
-					style="margin-top: 50px; display: table-cell; vertical-align: middle; position: absolute; height: 100%; top: 0px; bottom: 0px; left: 10px;">
-					<a href="turnStory.action?mood=1&index=<%=i %>"
-						id=<%="ToRight"+story.get(i).getId()%> title="还可以查看<%=right %>条内容">
-						<span class="glyphicon glyphicon-chevron-right" />
-					</a>
+			<div class="col-lg-1 col-md-1 col-sm-1" style="display:table;position:relative;">
+				<div style="margin-top:50px;display:table-cell;vertical-align:middle; position:absolute;height:100%; top:0px;bottom:0px;left:10px;">
+					<a href="turnStory.action?mood=1&index=<%=i %>" id=<%="ToRight"+story.get(i).getId()%> title="还可以查看<%=right %>条内容" > <span class="glyphicon glyphicon-chevron-right"/></a>
 				</div>
 			</div>
 		</div>

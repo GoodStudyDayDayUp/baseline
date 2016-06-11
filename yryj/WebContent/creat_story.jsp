@@ -42,8 +42,8 @@ a:active {
 	ArrayList<ArrayList<Type>> types=(ArrayList<ArrayList<Type>>)session.getAttribute("types");
 	%>
 
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
-		style="margin: 0px 0px 0px 0px;">
+
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#ededed; margin:0px 0px 0px 0px;">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="readStart.action"
 				style="font-family: SimHei;">一人一句</a>
@@ -129,13 +129,18 @@ a:active {
 					<%for(int i=0;i<types.get(0).size();i++){ 
 					Type a=types.get(0).get(i);
 				%>
-					<div class="col-lg-2">
-						<div class=" <%=i%> root_1l ">
-							<p style="display: table-cell; vertical-align: middle;"><%=a.getContent() %></p>
-						</div>
-					</div>
-					<%} %>
+				<div class="col-lg-2 col-md-2 col-xs-2" ><div class=" <%=i%> root_1l "><p style="display:table-cell; vertical-align:middle;"><%=a.getContent() %></p></div></div>
+				<%} %>
 				</div>
+			</div></a>
+			
+			<div class="col-lg-8 col-lg-offset-2 2level" style="background-color:#fff;display:none;">
+			<p style="margin-top:10px; font-family:SimHei;">请选择二级分类</p>
+			
+			<div class="row" >
+			<%for(int i=0;i<types.get(1).size();i++){ %>
+			<div class="col-lg-2 col-md-2 col-xs-2" ><div class=" <%=types.get(0).size()+i %> root_2l " style=""><p style="display:table-cell; vertical-align:middle;"><%=types.get(1).get(i).getContent() %></p></div></div>
+			<%} %>	
 			</div>
 			</a>
 

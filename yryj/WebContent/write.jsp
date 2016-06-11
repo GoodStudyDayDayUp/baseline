@@ -50,25 +50,29 @@ a:active {
 		<%}%>
 	}
 	</script>
-
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
-		style=" margin:0px 0px 0px 0px;">
-	<div class="navbar-header">
-		<a class="navbar-brand" href="read.jsp" style="padding-top: 17px;"><img
-			src="pics\go_back.png" /></a> <a class="navbar-brand" href="read.jsp"
-			style="padding-left: 0px">返回</a>
-	</div>
-	<div>
-		<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
-			<li class="dropdown"
-				style="margin: 0px 0px 0px 0px; font-family: SimHei;">
-				<%if(user!=null){ %> <a href="#" class="dropdown-toggle"
-				data-toggle="dropdown"> <%=user.getName() %><b class="caret"></b>
-			</a>
-				<ul class="dropdown-menu">
-					<li><a href="usercenter.jsp">个人主页</a></li>
-					<%if(user.getName().equals(Format.managerName)){ %>
-					<li><a href="manage.jsp">管理</a></li>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" background-color:#ededed; margin:0px 0px 0px 0px;">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="read.jsp" style="padding-top:17px;"><img src="pics\go_back.png"/></a>
+			<a class="navbar-brand" href="read.jsp" style="padding-left:0px">返回</a>
+		</div>
+		<div>
+			<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
+				<li class="dropdown" style="margin:0px 0px 0px 0px;font-family: SimHei  ;">
+				<%if(user!=null){ %>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+					<%=user.getName() %><b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="usercenter.jsp">个人主页</a></li>
+						<%if(user.getName().equals(Format.managerName)){ %>
+						<li><a href="manage.jsp">管理</a></li>
+						<%} %>
+						<li><a href="logout.action">注销</a></li>
+					</ul>
+					<%}else{ %>
+					<a href="beforelogin.action"  >
+					登录
+					</a>
 					<%} %>
 					<li><a href="logout.action">注销</a></li>
 				</ul> <%}else{ %> <a href="beforelogin.action"> 登录 </a> <%} %>

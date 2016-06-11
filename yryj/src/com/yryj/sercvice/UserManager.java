@@ -16,4 +16,6 @@ public interface UserManager {
 	public User findUserByEmail(User user);
 	
 	public User findUserByPhone(User user);
+	
+	public void sendEmail(User user);
 }

@@ -125,7 +125,10 @@ public class UserAction extends ActionSupport {
 		}
 	}
 
-	//在跳转到注册界面之前要进行的操作
+	/**
+	 * 在跳转到注册界面之前要进行的操作
+	 * @return
+	 */
 	public String beforeRegister(){
 		HttpSession session=ServletActionContext.getRequest().getSession();
 		session.setAttribute("regmsg", "");
@@ -134,6 +137,10 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	/**
+	 * 用户注册
+	 * @return
+	 */
 	public String registerUser()
 	{
 		HttpSession session=ServletActionContext.getRequest().getSession();
@@ -165,6 +172,10 @@ public class UserAction extends ActionSupport {
 		}
 	}
 
+	/**
+	 * 登陆之前先清楚上一个用户的登陆信息
+	 * @return
+	 */
 	public String beforeLogin(){
 		HttpSession session=ServletActionContext.getRequest().getSession();
 		session.setAttribute("msg", "");
@@ -172,6 +183,10 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	/**
+	 * 登陆
+	 * @return
+	 */
 	public String loginUser()
 	{
 		try {
@@ -207,6 +222,10 @@ public class UserAction extends ActionSupport {
 		}
 	}
 
+	/**
+	 * 注销，注销之前要清楚系统缓存数据
+	 * @return
+	 */
 	public String logout(){
 		try {
 			HttpSession session=ServletActionContext.getRequest().getSession();
@@ -228,7 +247,11 @@ public class UserAction extends ActionSupport {
 		}
 	}
 
-	//webUser看作为修改前的user，而user为修改后的user
+	/**
+	 * 更新用户信息
+	 * webUser看作为修改前的user，而user为修改后的user
+	 * @return
+	 */
 	public String updateUser(){
 		try {
 			HttpSession session=ServletActionContext.getRequest().getSession();
@@ -270,6 +293,15 @@ public class UserAction extends ActionSupport {
 					return SUCCESS;
 				}
 				break;
+			case 3:
+				//修改密码
+				String id=request.getParameter("id");
+				int userId=Integer.valueOf(id);
+				user=userManager.find(userId);
+				user.setPassword(password2);
+				userManager.update(user);
+				session.setAttribute("user", user);
+				return "mainPage";
 			}
 
 
@@ -281,13 +313,44 @@ public class UserAction extends ActionSupport {
 		}
 
 	}
+	
+	/**
+	 * 帮助用户找回密码
+	 * @return
+	 */
+	public String sendEmail(){
+		userManager=new UserML();
+		
+		User user=new User();
+		user.setName(name);
+		user=userManager.checkLogin(user);
+		
+		HttpSession session=ServletActionContext.getRequest().getSession();
+		if(user!=null){
+			if(user.getEmail().equals(email)){
+				userManager.sendEmail(user);
+				session.setAttribute("msgs", "信息发送成功，请登录邮箱验证！");
+				return SUCCESS;
+			}else{
+				session.setAttribute("msgs", "用户名和邮箱不一致！");
+				return SUCCESS;
+			}
+		}
+		session.setAttribute("msgs", "用户名不存在！");
+		return SUCCESS;
+	}
 
-	//再跳转到用户中心之前，获取用户的所有信息
+	/**
+	 * 再跳转到用户中心之前，获取用户的所有信息
+	 * @return
+	 */
 	public String getAllUserData(){
 		try {
 			//获取用户草稿箱
 			HttpSession session=ServletActionContext.getRequest().getSession();
 			user=(User) session.getAttribute("user");
+			if(user==null)
+				return Format.NF;
 			List<Draft> dfs=new DraftML().findByUserId(user.getId());
 			session.setAttribute("drafts", dfs);
 
@@ -301,24 +364,32 @@ public class UserAction extends ActionSupport {
 			ArrayList<Chapter> store=(ArrayList<Chapter>) rm.getStoreChapter(user.getId());
 			session.setAttribute("store", store);
 			Relations relation=rm.findByUserId(user.getId());
+			String[][] i2uArray=new String[1][2];
+			String[][] u2iArray=new String[1][2];
+			if(relation==null){
+				i2uArray[0][0]="无";
+				u2iArray[0][0]="无";
+			}else{
 			String i2u=relation.getI2u();
 			String u2i=relation.getU2i();
 			String[] i2uId=i2u.split("#");
 			String[] u2iId=u2i.split("#");
-			String[] i2uArray=new String[i2uId.length];
-			String[] u2iArray=new String[u2iId.length];
+			i2uArray=new String[i2uId.length][2];
+			u2iArray=new String[u2iId.length][2];
 			for(int i=0;i<i2uId.length;i++){
 				if(i2uId[i].equals(""))
-					i2uArray[i]="无";
-				else
-					i2uArray[i]=um.find(Integer.parseInt(i2uId[i])).getName();
+					i2uArray[i][0]="无";
+				else{
+					i2uArray[i][0]=um.find(Integer.parseInt(i2uId[i])).getName();
+					i2uArray[i][1]=i2uId[i];}
 			}
 			for(int i=0;i<u2iId.length;i++){
 				if(u2iId[i].equals(""))
-					u2iArray[i]="无";
-				else
-					u2iArray[i]=um.find(Integer.parseInt(u2iId[i])).getName();
-			}
+					u2iArray[i][0]="无";
+				else{
+					u2iArray[i][0]=um.find(Integer.parseInt(u2iId[i])).getName();
+					u2iArray[i][1]=u2iId[i];}
+			}}
 			session.setAttribute("i2uArray", i2uArray);
 			session.setAttribute("u2iArray", u2iArray);
 
@@ -329,14 +400,44 @@ public class UserAction extends ActionSupport {
 		}
 	}
 
+	/**
+	 * 查看其他人的信息
+	 * @return
+	 */
 	public String viewOthers(){
 		try {
 			//获取用户草稿箱
 			HttpSession session=ServletActionContext.getRequest().getSession();
+			User onlineUser=(User)session.getAttribute("user"); 
 			userManager=new UserML();
+			RelationsManager rm=new RelationsML();
+			UserManager um=new UserML();
+			String index="";
 			user=this.getUser();
 			User person=userManager.checkLogin(user);
-
+			if(onlineUser==null){
+				session.setAttribute("msg", "请先登录");
+				return Format.LOGIN;
+			}
+			if(person.getId()==onlineUser.getId())
+				index="0";
+			else{
+				Relations userRelation1=rm.findByUserId(onlineUser.getId());
+				if(userRelation1==null){
+					index="2";
+				}
+				else if(userRelation1.getI2u()==null){
+					index="2";
+				}
+				else{
+				String[] array1=userRelation1.getI2u().split("#");
+				if(Format.findInArray(array1,String.valueOf(person.getId()))==true)
+					index="1";
+				else
+					index="2";
+				}
+			}
+			
 			//作品信息
 			List<Chapter> chs=new ChapterML().getChapterByUName(person.getName());
 			session.setAttribute("chapters", chs);
@@ -344,17 +445,22 @@ public class UserAction extends ActionSupport {
 			session.setAttribute("person", person);
 
 			//获得所有的关系
-			RelationsManager rm=new RelationsML();
-			UserManager um=new UserML();
 			ArrayList<Chapter> store=(ArrayList<Chapter>) rm.getStoreChapter(person.getId());
 			session.setAttribute("store", store);
 			Relations relation=rm.findByUserId(person.getId());
+			String i2uDArray[][],u2iDArray[][];
+			if(relation==null){
+				i2uDArray=new String[2][2];
+				u2iDArray=new String[2][2];
+				i2uDArray[0][0]="无";
+				u2iDArray[0][0]="无";
+			}else{
 			String i2u=relation.getI2u();
 			String u2i=relation.getU2i();
 			String[] i2uArray=i2u.split("#");
 			String[] u2iArray=u2i.split("#");
-			String i2uDArray[][]=new String[i2uArray.length][4];
-			String u2iDArray[][]=new String[u2iArray.length][4];
+			i2uDArray=new String[i2uArray.length][5];       //最后一列值为0,1,2,分别代表与当前在线用户相同、已被当前用户关注、未被当前用户关注
+			u2iDArray=new String[u2iArray.length][5];		//最后一列值为0,1,2,分别代表与当前在线用户相同、已被当前用户关注、未被当前用户关注
 			for(int i=0;i<i2uArray.length;i++){
 				if(i2uArray[i].equals("")){
 					i2uDArray[i][0]="无";
@@ -372,6 +478,25 @@ public class UserAction extends ActionSupport {
 						i2uDArray[i][2]=String.valueOf(rm.findByUserId(Integer.parseInt(i2uArray[i])).getU2i().split("#").length);   //粉丝数
 					}
 					i2uDArray[i][3]="10";
+					if(i2uArray[i].equals(String.valueOf(onlineUser.getId()))){
+						i2uDArray[i][4]="0";
+					}
+					else{
+						Relations userRelation=rm.findByUserId(onlineUser.getId());
+						if(userRelation==null){
+							i2uDArray[i][4]="2";
+						}
+						else if(userRelation.getI2u()==null){
+							i2uDArray[i][4]="2";
+						}
+						else{
+						String[] array=userRelation.getI2u().split("#");
+						if(Format.findInArray(array, i2uArray[i])==true)
+							i2uDArray[i][4]="1";
+						else
+							i2uDArray[i][4]="2";
+						}
+					}
 				}
 			}
 			for(int i=0;i<u2iArray.length;i++){
@@ -385,16 +510,36 @@ public class UserAction extends ActionSupport {
 					u2iDArray[i][0]=u2iArray[i];
 					u2iDArray[i][1]=um.find(Integer.parseInt(u2iArray[i])).getName();   //姓名	
 					if(rm.findByUserId(Integer.parseInt(u2iArray[i])).getU2i().equals("")){
-						u2iDArray[i][2]="";
+						u2iDArray[i][2]="0";
 					}
 					else{
 						u2iDArray[i][2]=String.valueOf(rm.findByUserId(Integer.parseInt(u2iArray[i])).getU2i().split("#").length);   //粉丝数
 					}
 					u2iDArray[i][3]="10";
+					if(u2iArray[i].equals(String.valueOf(onlineUser.getId()))){
+						u2iDArray[i][4]="0";
+					}
+					else{
+						Relations userRelation=rm.findByUserId(onlineUser.getId());
+						if(userRelation==null){
+							u2iDArray[i][4]="2";
+						}
+						else if(userRelation.getI2u()==null){
+							u2iDArray[i][4]="2";
+						}
+						else{
+						String[] array=userRelation.getI2u().split("#");
+						if(Format.findInArray(array, u2iArray[i])==true)
+							u2iDArray[i][4]="1";
+						else
+							u2iDArray[i][4]="2";
+						}
+					}
 				}
-			}
+			}}
 			session.setAttribute("i2uDArray", i2uDArray);
 			session.setAttribute("u2iDArray", u2iDArray);
+			session.setAttribute("index", index);
 
 			return SUCCESS;
 		} catch (Exception e) {

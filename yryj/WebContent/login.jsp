@@ -49,38 +49,33 @@
 					<%} %>
 					<a href="beforeregister.action">还没有账号？</a>
 			</div>
+                    	<div class="form-group row">
+                         	<div class="col-lg-8 col-lg-offset-1"> 
+                         	<%if(webUser.getPassword()!=null&&webUser.getPassword()!="") {%>
+                         	<input type="password" value=<%=webUser.getPassword() %>  id="password" name="password" class="form-control"  onchange="changemsg(this)"/></div>
+                         	<%}else{ %>
+                         	<input type="password"  id="password" name="password" class="form-control" placeholder="密码" onchange="changemsg(this)"/></div>
+                         	<%} %>
+								<a href="forget_step1.jsp" class="display:block">忘记密码</a>
+               			</div>
 
-			<div class="form-group row">
-				<div class="col-lg-8 col-lg-offset-1">
-					<%if(webUser.getPassword()!=null&&webUser.getPassword()!="") {%>
-					<input type="password" value=<%=webUser.getPassword() %>
-						id="password" name="password" class="form-control"
-						onchange="changemsg(this)" />
-				</div>
-				<%}else{ %>
-				<input type="password" id="password" name="password"
-					class="form-control" placeholder="密码" onchange="changemsg(this)" />
-			</div>
-			<%} %> <a href="beforeregister.action" class="display:block">忘记密码</a>
-		</div>
-
-		<div class="form-group row">
-			<div class="col-lg-8 col-lg-offset-1">
-				<h5 style="color: red;" id="msgs"><%=msg %></h5>
-			</div>
-		</div>
-
-		<div class="form-group ">
-			<p class="col-lg-offset-1" />
-			<input type="checkbox" name="rememberme" class="col-lg-offset-1" />记住我
-			<button type="submit" class="btn btn-primary col-lg-offset-3">登录</button>
-		</div>
-		</form>
-	</div>
-	</section>
-	</div>
-	</div>
-
+						<div class="form-group row">
+						<div class="col-lg-8 col-lg-offset-1"> 
+						<h5 style="color:red;" id="msgs"><%=msg %></h5>
+						</div>
+						</div>
+						
+               			<div class="form-group ">
+							<center>
+                       		<input type="checkbox" name="rememberme" class="col-lg-offset-1"/>记住我  
+							<button type="submit" class="btn btn-primary col-lg-offset-3">登录</button> </center>
+               			</div>
+	             </form>
+	             </div> 
+             </section> 
+           </div> 
+	    </div> 
+	
 	<script type="text/javascript">
 	function changemsg(obj){
 		$("#msgs").html(" ");

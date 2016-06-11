@@ -130,7 +130,7 @@ a:active {
 	<div class="container" style="margin-top: 50px;">
 		<div class="row">
 
-			<div class="col-lg-3">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" >
 				<div class="sidebar-menu">
 					<a href="startTree.action"><div class="menu-first"
 							style="background: #EEE685">
@@ -175,7 +175,7 @@ a:active {
 						</script>
 
 			<!--右侧故事开头-->
-			<div class="col-lg-9" id="maincontent">
+			<div class="col-lg-9 col-md-9 col-xs-9" id="maincontent">
 
 
 				<%for(int i=0;i<storys.size();i++ ){%>
@@ -195,43 +195,38 @@ a:active {
 				<div class="row storyofmain" style="padding-left: 10px;">
 
 					<%if((i%4)==0){ %>
-					<div class="col-lg-4 storyclass storycenter"
+					<div class="col-lg-4 col-md-4 col-xs-4 storyclass storycenter"
 						style="background-color: #191970">
 						<%} 
 					if((i%4)==1){
 					%>
-						<div class="col-lg-4 storyclass storycenter"
-							style="background-color: #DC143C">
-							<%} 
+					<div class="col-lg-4 col-md-4 col-xs-4 storyclass storycenter"
+						style="background-color: #DC143C">
+					<%} 
 					if((i%4)==2){
 					%>
-							<div class="col-lg-4 storyclass storycenter"
-								style="background-color: #EEC900">
-								<%} 
+					<div class="col-lg-4 col-md-4 col-xs-4 storyclass storycenter"
+						style="background-color: #EEC900">
+					<%} 
 					if((i%4)==3){
 					%>
-								<div class="col-lg-4 storyclass storycenter"
-									style="background-color: #458B74">
-									<%} %>
-									<h3>
-										<a href="#" style="color: #ffffff"><%=ch.getFormat() %></a>
-									</h3>
-									<h4>
-										<a href="#" style="color: #ffffff"><%=ch.getStyle() %></a>
-									</h4>
-									<h5>
-										<a href="#" style="color: #ffffff"><%=length %></a>
-									</h5>
-								</div>
-								<div class="col-lg-8 storybegin">
-									<p class="storycenter">
-										<a href="readStory.action?index=<%=ch.getId() %>"
-											style="color: #000000"><%=ch.getContent() %></a>
-									</p>
-								</div>
-							</div>
-							<%} %>
-						</div>
+					<div class="col-lg-4 col-md-4 col-xs-4 storyclass storycenter"
+						style="background-color: #458B74">
+					<%} %>
+						<h3>
+							<a href="#" style="color:#ffffff"><%=ch.getFormat() %></a>
+						</h3>
+						<h4>
+							<a href="#" style="color:#ffffff"><%=ch.getStyle() %></a>
+						</h4>
+						<h5>
+							<a href="#" style="color:#ffffff"><%=length %></a>
+						</h5>
+					</div>
+					<div class="col-lg-8 col-md-8 col-xs-8 storybegin">
+						<p class="storycenter">
+							<a href="readStory.action?index=<%=ch.getId() %>" style="color:#000000" ><%=ch.getContent() %></a>
+						</p>
 					</div>
 				</div>
 

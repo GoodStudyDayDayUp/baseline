@@ -176,6 +176,7 @@ public class RelationAction extends ActionSupport {
 					//获取要关注的用户的id
 					HttpServletRequest request=ServletActionContext.getRequest();
 					String i2uId=request.getParameter("id");
+					String mood=request.getParameter("mood");
 					
 					String relations="";	// 当前用户关注列表
 					String relations1="";	//被关注的用户的粉丝列表
@@ -188,14 +189,14 @@ public class RelationAction extends ActionSupport {
 					//新用户，还没有建立关系
 					if(relation==null){
 						relation=new Relations();
-						relation.setI2u(i2uId);
+						relation.setI2u("");
 						relation.setuId(user.getId());
 						relationManager.save(relation);
 						
 					}
 					if(relation1==null){
 						relation1=new Relations();
-						relation1.setU2i(String.valueOf(user.getId()));
+						relation1.setU2i("");
 						relation1.setuId(Integer.parseInt(i2uId));
 						relationManager.save(relation1);
 						
@@ -205,12 +206,13 @@ public class RelationAction extends ActionSupport {
 					relations=relation.getI2u();
 					relations1=relation1.getU2i();
 
+					//已经建立关系
 					if(relations!=""){
 						//已经用#连接起来了，至少两个
 						if(relations.indexOf("#")!=-1){
 							String [] rs=relations.split("#");
 							String rs2String = Format.getFromArray(rs,i2uId);
-							relation.setU2cStore(rs2String);
+							relation.setI2u(rs2String);
 
 						}else{
 							if(relation.getI2u().equals(i2uId))
@@ -232,7 +234,7 @@ public class RelationAction extends ActionSupport {
 						if(relations1.indexOf("#")!=-1){
 							String [] rs=relations1.split("#");
 							String rs2String = Format.getFromArray(rs,String.valueOf(user.getId()));
-							relation1.setU2cStore(rs2String);
+							relation1.setU2i(rs2String);
 
 						}else{
 							if(relation1.getU2i().equals(String.valueOf(user.getId())))
@@ -252,8 +254,10 @@ public class RelationAction extends ActionSupport {
 					relationManager.update(relation);
 					relationManager.update(relation1);
 
-				
-					return "success";			
+					
+					if(mood!=null)
+						return "usercenter";
+					return "people";
 				} catch (Exception e) {
 					e.printStackTrace();
 					return Format.WRONG;
