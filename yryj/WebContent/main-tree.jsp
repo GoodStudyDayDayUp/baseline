@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	import="com.yryj.pub.*" import="com.yryj.model.*" import="java.util.*"%>
+import="com.yryj.pub.*"
+	import="com.yryj.model.*" import="java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -84,7 +85,7 @@ a:active {
 %>
 <body>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 	window.onload =function onload(){
 		var a=<%=types.size() %>;
 		if(a==0){
@@ -112,7 +113,7 @@ a:active {
 				<ul class="dropdown-menu">
 					<li><a href="getInfo.action">个人主页</a></li>
 					<%if(user.getName().equals(Format.managerName)){ %>
-					<li><a href="manage.jsp">管理</a></li>
+						<li><a href="manage.jsp">管理</a></li>
 					<%} %>
 					<li><a href="logout.action">注销</a></li>
 				</ul> <%
@@ -132,38 +133,24 @@ a:active {
 
 			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" >
 				<div class="sidebar-menu">
-					<a href="startTree.action"><div class="menu-first"
-							style="background: #EEE685">
-							<b>热门</b>
-						</div></a> <a href="startTree.action?mood=0"><div class="menu-first"
-							style="background: #EEE685">
-							<b>短篇</b>
-						</div></a> <a href="startTree.action?mood=1"><div class="menu-first"
-							style="background: #EEE685">
-							<b>中篇</b>
-						</div></a> <a href="startTree.action?mood=2"><div class="menu-first"
-							style="background: #EEE685">
-							<b>长篇</b>
-						</div></a>
-					<%
+				<a href="startTree.action"  ><div class="menu-first" style="background:#EEE685"><b>热门</b></div></a>
+				<a href="startTree.action?mood=0"><div class="menu-first" style="background:#EEE685"><b>短篇</b></div></a>
+				<a href="startTree.action?mood=1" ><div class="menu-first" style="background:#EEE685"><b>中篇</b></div></a>
+				<a href="startTree.action?mood=2"><div class="menu-first" style="background:#EEE685"><b>长篇</b></div></a>
+				<%
 				if(types.size()>0){
 				for(int i=0;i<types.get(0).size();i++){ 
 					Type t1=types.get(0).get(i);
 				%>
-					<a href=<%="#"+t1.getId() %> id="xiaoshuo"
-						class="nav-header collapsed" data-toggle="collapse"><div
-							class="menu-first">
-							<b><%=t1.getContent() %></b>
-						</div></a>
-					<ul id=<%=t1.getId() %> class="nav nav-list collapse menu-second">
+						<a href=<%="#"+t1.getId() %> id="xiaoshuo" class="nav-header collapsed"  data-toggle="collapse"><div class="menu-first"><b><%=t1.getContent() %></b></div></a>
+						<ul id=<%=t1.getId() %> class="nav nav-list collapse menu-second">
 						<%for(int j=0;j<types.get(1).size();j++){ 
 							Type t2=types.get(1).get(j);
 						%>
-						<li><a href="#"
-							id="getStart.action?formatId=<%=i %>&styleId=<%=j %>"><%=t2.getContent() %></a></li>
-						<%} %>
-					</ul>
-					<%}} %>
+							<li><a href="#" id="getStart.action?formatId=<%=i %>&styleId=<%=j %>"><%=t2.getContent() %></a></li>
+							<%} %>							
+						</ul>
+				<%}} %>
 				</div>
 			</div>
 			<script type=text/javascript>
@@ -173,7 +160,7 @@ a:active {
 								$("#maincontent").load(h);
 							});
 						</script>
-
+			
 			<!--右侧故事开头-->
 			<div class="col-lg-9 col-md-9 col-xs-9" id="maincontent">
 
@@ -197,7 +184,7 @@ a:active {
 					<%if((i%4)==0){ %>
 					<div class="col-lg-4 col-md-4 col-xs-4 storyclass storycenter"
 						style="background-color: #191970">
-						<%} 
+					<%} 
 					if((i%4)==1){
 					%>
 					<div class="col-lg-4 col-md-4 col-xs-4 storyclass storycenter"
@@ -229,15 +216,20 @@ a:active {
 						</p>
 					</div>
 				</div>
+				<%} %>
+			</div>
+		</div>
+	</div>
 
-				<!--返回顶部的图片-->
-				<div
-					style="display: none; POSITION: fixed; LINE-HEIGHT: 30px; BOTTOM: 35px; CURSOR: pointer; RIGHT: 10px; _position: absolute; _right: auto"
-					id="goTopBtn">
-					<img src="pics\top.gif" />
-				</div>
-				<script type=text/javascript>
+	<!--返回顶部的图片-->
+	<div
+		style="display: none; POSITION: fixed; LINE-HEIGHT: 30px; BOTTOM: 35px; CURSOR: pointer; RIGHT: 10px; _position: absolute; _right: auto"
+		id="goTopBtn">
+		<img src="pics\top.gif" />
+	</div>
+	<script type=text/javascript>
 		goTopEx();
 	</script>
+
 </body>
 </html>
