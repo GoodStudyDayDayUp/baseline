@@ -1,33 +1,21 @@
 package com.yryj.action;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yryj.daoImpl.ChapterDL;
-import com.yryj.model.Activity;
 import com.yryj.model.Chapter;
 import com.yryj.model.Draft;
 import com.yryj.model.Type;
 import com.yryj.model.User;
 import com.yryj.pub.Format;
-import com.yryj.sercvice.ActivityManager;
 import com.yryj.sercvice.ChapterManager;
 import com.yryj.sercvice.TypeManager;
-import com.yryj.serviceImpl.ActivityML;
 import com.yryj.serviceImpl.ChapterML;
 import com.yryj.serviceImpl.DraftML;
 import com.yryj.serviceImpl.TypeML;

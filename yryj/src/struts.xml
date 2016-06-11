@@ -9,7 +9,38 @@
 			<result name="404">404error.jsp</result>
 			<result name="wrong">othererror.jsp</result>
 		</global-results>
-
+		
+		<action name="manage" class="com.yryj.action.ManageAction">
+			<result name="success">/manage.jsp</result>
+			<result name="error">/main.jsp</result>
+		</action>
+		<action name="addNewClass" class="com.yryj.action.ManageAction" method="addNewClass">
+			<result name="success">/manage.jsp</result>
+			<result name="error">/manage.jsp</result>
+			<result name="input">/manage.jsp</result>
+		</action>
+		<action name="updateClass" class="com.yryj.action.ManageAction" method="updateClass">
+			<result name="success">/manage.jsp</result>
+			<result name="error">/manage.jsp</result>
+			<result name="input">/manage.jsp</result>
+		</action>
+		
+		<action name="updateActivity" class="com.yryj.action.ManageAction" method="updateActivity">
+			<result name="success">/manage.jsp</result>
+			<result name="error">/manage.jsp</result>
+			<result name="input">/manage.jsp</result>
+		</action>
+		<action name="updateUserMg" class="com.yryj.action.ManageAction" method="updateUserMg">
+			<result name="success">/manage.jsp</result>
+			<result name="error">/manage.jsp</result>
+			<result name="input">/manage.jsp</result>
+		</action>
+		<action name="deleteUserMg" class="com.yryj.action.ManageAction" method="deleteUserMg">
+			<result name="success">/manage.jsp</result>
+			<result name="error">/manage.jsp</result>
+			<result name="input">/manage.jsp</result>
+		</action>
+		
 		<action name="beforeregister" class="com.yryj.action.UserAction"
 			method="beforeRegister">
 			<result name="success">/register.jsp</result>

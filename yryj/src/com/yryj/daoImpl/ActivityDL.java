@@ -122,6 +122,17 @@ public class ActivityDL implements ActivityDao{
 
 		return null;
 	}
+	public List<Activity> getAll(){
+		try {
+			Morphia mor=new Morphia();
+			Mongo mongo=new Mongo();
+			Datastore ds=mor.createDatastore(mongo, dbs);
+			return ds.find(Activity.class).asList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
+		return null;
+	}
 	
 }

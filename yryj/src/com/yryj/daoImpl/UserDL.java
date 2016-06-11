@@ -9,6 +9,7 @@ import com.google.code.morphia.query.UpdateOperations;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 import com.yryj.dao.UserDao;
+import com.yryj.model.Activity;
 import com.yryj.model.Chapter;
 import com.yryj.model.User;
 import com.yryj.pub.Format;
@@ -139,6 +140,19 @@ public class UserDL implements UserDao{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	@Override
+	public List<User> getAll(){
+		try {
+			Morphia mor=new Morphia();
+			Mongo mongo=new Mongo();
+			Datastore ds=mor.createDatastore(mongo, dbs);
+			return ds.find(User.class).asList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 }

@@ -1,5 +1,7 @@
 package com.yryj.dao;
 
+import java.util.List;
+
 import com.yryj.model.User;
 
 public interface UserDao {
@@ -16,4 +18,6 @@ public interface UserDao {
 	public User findByEmail(String email);
 
 	public User findByPhone(String phone);
+
+	List<User> getAll();
 }
