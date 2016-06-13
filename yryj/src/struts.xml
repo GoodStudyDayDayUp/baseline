@@ -41,117 +41,103 @@
 			<result name="input">/manage.jsp</result>
 		</action>
 		
-		<action name="beforeregister" class="com.yryj.action.UserAction"
-			method="beforeRegister">
-			<result name="success">/register.jsp</result>
-		</action>
-		<action name="register" class="com.yryj.action.UserAction"
-			method="registerUser">
-			<result name="input">/register.jsp</result>
-			<result name="success">/login.jsp</result>
-			<result name="error">/register.jsp</result>
-		</action>
-		<action name="beforelogin" class="com.yryj.action.UserAction"
-			method="beforeLogin">
-			<result name="success">/login.jsp</result>
-		</action>
-		<action name="login" class="com.yryj.action.UserAction" method="loginUser">
-			<result name="input">/login.jsp</result>
-			<result name="success" type="chain">readStart</result>
-			<result name="error">/login.jsp</result>
-		</action>
-		<action name="update" class="com.yryj.action.UserAction"
-			method="updateUser">
-			<result name="success">/main.jsp</result>
-			<result name="error">/login.jsp</result>
-		</action>
-		<action name="logout" class="com.yryj.action.UserAction"
-			method="logout">
-			<result name="success">/login.jsp</result>
-			<result name="error">/login.jsp</result>
-		</action>
-		<action name="updateUser" class="com.yryj.action.UserAction"
-			method="updateUser">
-			<result name="success">/usercenter.jsp</result>
-			<result name="error">/usercenter.jsp</result>
-		</action>
-		<action name="getInfo" class="com.yryj.action.UserAction"
-			method="getAllUserData">
-			<result name="success">/usercenter.jsp</result>
-		</action>
-		<action name="viewPerson" class="com.yryj.action.UserAction"
-			method="viewOthers">
-			<result name="success">/people.jsp</result>
-		</action>
 
-
-
-		<action name="draft" class="com.yryj.action.DraftAction"
-			method="saveDraft">
-			<result name="success" type="chain">getInfo</result>
-			<result name="error">/login.jsp</result>
-		</action>
-		<action name="deleteDraft" class="com.yryj.action.DraftAction"
-			method="deleteDraft">
-			<result name="success">/main-tree.jsp</result>
-			<result name="error">/login.jsp</result>
-		</action>
-		<action name="readDraft" class="com.yryj.action.DraftAction"
-			method="readDraft">
-			<result name="create">/creat_story.jsp</result>
-			<result name="success">/write.jsp</result>
-			<result name="error">/login.jsp</result>
-		</action>
-
-
-		<action name="write" class="com.yryj.action.ChapterAction"
-			method="write">
-			<result name="success" type="chain">readStory</result>
-			<result name="main" type="chain">readStart</result>
-			<result name="login">/login.jsp</result>
-		</action>
-		<action name="readStart" class="com.yryj.action.ChapterAction"
-			method="readStart">
-			<result name="success">/main.jsp</result>
-		</action>
-		<action name="startTree" class="com.yryj.action.ChapterAction"
-			method="readStart">
-			<result name="success">/main-tree.jsp</result>
-		</action>
-		<action name="getStart" class="com.yryj.action.ChapterAction"
-			method="getStarts">
-			<result name="success">/storys.jsp</result>
-		</action>
-		<action name="readStory" class="com.yryj.action.ChapterAction"
-			method="readStory">
-			<result name="success">/read.jsp</result>
-		</action>
-		<action name="prepareWrite" class="com.yryj.action.ChapterAction"
-			method="prepareWrite">
-			<result name="success">/write.jsp</result>
-		</action>
-		<action name="turnStory" class="com.yryj.action.ChapterAction"
-			method="getLeftOrRight">
-			<result name="success">/read.jsp</result>
-		</action>
-
-
-		<action name="setLove" class="com.yryj.action.RelationAction"
-			method="setLove">
-			<result name="login">/login.jsp</result>
-		</action>
-
-		<action name="setStore" class="com.yryj.action.RelationAction"
-			method="setStore">
-			<result name="login">/login.jsp</result>
-		</action>
-
-		<action name="setAttention" class="com.yryj.action.RelationAction"
-			method="setAttention">
-			<result name="login">/login.jsp</result>
-			<result name="success" type="chain">getInfo</result>
-		</action>
-
+		    <action name="beforeregister" class="com.yryj.action.UserAction" method="beforeRegister">
+				<result name="success">/register.jsp</result>
+			</action>
+			<action name="register" class="com.yryj.action.UserAction" method="registerUser">
+				<result name="input">/register.jsp</result>
+				<result name="success">/login.jsp</result>
+				<result name="error">/register.jsp</result>
+			</action>
+			<action name="beforelogin" class="com.yryj.action.UserAction" method="beforeLogin">
+				<result name="success">/login.jsp</result>
+			</action>
+			<action name="login" class="com.yryj.action.UserAction" method="loginUser">
+				<result name="input">/login.jsp</result>
+				<result name="success" type="chain">readStart</result>
+				<result name="error">/login.jsp</result>
+			</action>
+				<action name="update" class="com.yryj.action.UserAction" method="updateUser">
+				<result name="success">/main.jsp</result>
+				<result name="error">/login.jsp</result>
+			</action>
+			<action name="logout" class="com.yryj.action.UserAction" method="logout">
+				<result name="success">/login.jsp</result>
+				<result name="error">/login.jsp</result>
+			</action>
+			<action name="updateUser" class="com.yryj.action.UserAction" method="updateUser">
+			    <result name="success">/usercenter.jsp</result>
+			    <result name="error">/usercenter.jsp</result>
+			    <result name="mainPage">/main.jsp</result>
+			</action>
+			<action name="getInfo" class="com.yryj.action.UserAction" method="getAllUserData">
+			    <result name="success">/usercenter.jsp</result>
+			</action>
+			<action name="viewPerson" class="com.yryj.action.UserAction" method="viewOthers">
+			    <result name="success">/people.jsp</result>
+			    <result name="login">/login.jsp</result>
+			</action>
+			
+			<action name="sendEmail" class="com.yryj.action.UserAction" method="sendEmail">
+			    <result name="success">/forget_step1.jsp</result>
+			</action>
+			
+			
+			
+			<action name="draft" class="com.yryj.action.DraftAction" method="saveDraft">
+			    <result name="success" type="chain">getInfo</result>
+				<result name="error">/login.jsp</result>
+			</action>
+			<action name="deleteDraft" class="com.yryj.action.DraftAction" method="deleteDraft">
+			    <result name="success">/main-tree.jsp</result>
+				<result name="error">/login.jsp</result>
+			</action>
+			<action name="readDraft" class="com.yryj.action.DraftAction" method="readDraft">
+			    <result name="create">/creat_story.jsp</result>
+			    <result name="success">/write.jsp</result>
+				<result name="error">/login.jsp</result>
+			</action>
+			
+			
+			<action name="write" class="com.yryj.action.ChapterAction" method="write">
+				<result name="success" type="chain">readStory</result>
+				<result name="main" type="chain">readStart</result>
+				<result name="login">/login.jsp</result>
+			</action>
+			<action name="readStart" class="com.yryj.action.ChapterAction" method="readStart">
+				<result name="success">/main.jsp</result>
+			</action>	
+			<action name="startTree"  class="com.yryj.action.ChapterAction" method="readStart">
+				<result name="success">/main-tree.jsp</result>
+			</action>	
+			<action name="getStart" class="com.yryj.action.ChapterAction" method="getStarts">
+				<result name="success">/storys.jsp</result>
+			</action>			
+			<action name="readStory" class="com.yryj.action.ChapterAction" method="readStory">
+				<result name="success">/read.jsp</result>
+			</action>
+			<action name="prepareWrite" class="com.yryj.action.ChapterAction" method="prepareWrite">
+				<result name="success">/write.jsp</result>
+			</action>
+			<action name="turnStory" class="com.yryj.action.ChapterAction" method="getLeftOrRight">
+				<result name="success">/read.jsp</result>
+			</action>
+			
+			
+			<action name="setLove" class="com.yryj.action.RelationAction" method="setLove">
+			    <result name="login">/login.jsp</result>
+			</action>
+			
+			<action name="setStore" class="com.yryj.action.RelationAction" method="setStore">
+			    <result name="login">/login.jsp</result>
+			</action>
+			
+			<action name="setAttention" class="com.yryj.action.RelationAction" method="setAttention">
+			    <result name="login">/login.jsp</result>
+			    <result name="usercenter" type="chain">getInfo</result>
+			    <result name="people" type="chain">viewPerson</result>
+			</action>
 	</package>
 
 </struts>

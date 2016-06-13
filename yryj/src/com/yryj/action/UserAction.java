@@ -419,7 +419,7 @@ public class UserAction extends ActionSupport {
 				session.setAttribute("msg", "ÇëÏÈµÇÂ¼");
 				return Format.LOGIN;
 			}
-			if(person.getId()==onlineUser.getId())
+			if(person!=null&&person.getId()==onlineUser.getId())
 				index="0";
 			else{
 				Relations userRelation1=rm.findByUserId(onlineUser.getId());
@@ -431,7 +431,7 @@ public class UserAction extends ActionSupport {
 				}
 				else{
 				String[] array1=userRelation1.getI2u().split("#");
-				if(Format.findInArray(array1,String.valueOf(person.getId()))==true)
+				if(person!=null&&Format.findInArray(array1,String.valueOf(person.getId()))==true)
 					index="1";
 				else
 					index="2";

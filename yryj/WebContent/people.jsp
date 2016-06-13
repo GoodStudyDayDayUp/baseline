@@ -95,46 +95,11 @@ a:active {
 					</ul> <%}else{ %> <a href="beforelogin.action"> 登录 </a> <%} %>
 				</li>
 			</ul>
-<<<<<<< HEAD
-			<p class="navbar-text navbar-right" style="font-family: SimHei;">
-				<a href="creat_story.html"><span
-					class="glyphicon glyphicon-plus" />添加故事</a>
-			</p>
-=======
 			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事</a></p>
->>>>>>> origin/develop
 		</div>
 	</nav>
 
 	<div class="container">
-<<<<<<< HEAD
-		<div class="col-lg-2" style="margin-top: 20px;">
-			<ul class="nav nav-pills nav-stacked">
-				<li class="active na"><a href="#" id="info"><%=person.getName() %></a>
-					<a href=setAttention.action?id= <%=person.getId() %>><button
-							class="btn btn-info" style="float: right; margin-top: -25px;">
-							关注TA</button></a></li>
-				<li class="na"><a href="#" id="mychpts">作品&nbsp;&nbsp;&nbsp;<span
-						class="label label-default"><%=chs.size() %></span></a></li>
-				<li class="na"><a href="#" id="mycol">收藏&nbsp;&nbsp;&nbsp;<span
-						class="label label-default"><%=store.size() %></span></a></li>
-				<li class="na"><a href="#" id="myfol">关注&nbsp;&nbsp;&nbsp;<span
-						class="label label-default">
-							<%if(i2uDArray[0][0].equals("无"))%>0<%else %><%=i2uDArray.length %></span></a></li>
-				<li class="na"><a href="#" id="myfans">粉丝&nbsp;&nbsp;&nbsp;<span
-						class="label label-default">
-							<%if(u2iDArray[0][0].equals("无"))%>0<%else %><%=u2iDArray.length %></span></a></li>
-			</ul>
-		</div>
-		<div class="col-lg-10" style="margin-top: 20px;">
-			<div id="basicInfo">
-				<!--   个人主页放置个人积分、点赞数多的chpts、点赞数多的收藏的作品   -->
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						积分：<span class="label label-default"><%=person.getPoint() %></span>
-					</div>
-
-=======
 		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-2" style="margin-top:20px;">
 		<ul class="nav nav-pills nav-stacked">
 			<li class="active na"><a href="#" id="info"><%=person.getName() %></a></li>
@@ -145,9 +110,9 @@ a:active {
 		</ul>
 		<br/>
 		<%if(index.equals("2")){ %>
-			<button onclick="location='setAttention.action?id=<%=person.getId()%>' " class="btn btn-info" > 关注TA </button>
+			<button onclick="location='setAttention.action?id=<%=person.getId()%>&mood=1' " class="btn btn-info" > 关注TA </button>
 	    <%}if(index.equals("1")){ %>
-			<button onclick="location='setAttention.action?id=<%=person.getId()%>' " class="btn btn-info" > 取消关注 </button>
+			<button onclick="location='setAttention.action?id=<%=person.getId()%>&mood=1' " class="btn btn-info" > 取消关注 </button>
 		<%} %>
 		</div>
 		<div class="col-lg-10 col-md-10 col-sm-9 col-xs-10" style="margin-top:20px;">
@@ -155,7 +120,6 @@ a:active {
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					积分：<span class="label label-default"><%=person.getPoint() %></span>
->>>>>>> origin/develop
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -314,7 +278,6 @@ a:active {
 					<div class="panel-heading">我关注的人</div>
 					<ul class="list-group">
 						
->>>>>>> origin/develop
 							<%if(i2uDArray[0][0].equals("无")) {%>
 							<li class="list-group-item" ">
 							<table>
@@ -333,9 +296,9 @@ a:active {
 							</tr>
 							</table>
 							<%if(i2uDArray[i][4].equals("1")){ %>
-							<a href="setAttention.action?id=<%=i2uDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 取消关注 </button></a><%} %>
+							<a href="setAttention.action?id=<%=i2uDArray[i][0] %>&mood=1"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 取消关注 </button></a><%} %>
 							<%if(i2uDArray[i][4].equals("2")){ %>
-							<a href="setAttention.action?id=<%=i2uDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a><%} %>
+							<a href="setAttention.action?id=<%=i2uDArray[i][0] %>&mood=1"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a><%} %>
 							<%}%>
 							</li>
 							<%}%>
@@ -364,9 +327,9 @@ a:active {
 							</tr>
 							</table>
 							<%if(u2iDArray[i][4].equals("1")){ %>
-							<a href="setAttention.action?id=<%=u2iDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 取消关注 </button></a><%} %>
+							<a href="setAttention.action?id=<%=u2iDArray[i][0] %>&mood=1"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 取消关注 </button></a><%} %>
 							<%if(u2iDArray[i][4].equals("2")){ %>
-							<a href="setAttention.action?id=<%=u2iDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注 TA</button></a><%} %>
+							<a href="setAttention.action?id=<%=u2iDArray[i][0] %>&mood=1"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注 TA</button></a><%} %>
 							<%}%>
 							</li>
 							<%}%>
