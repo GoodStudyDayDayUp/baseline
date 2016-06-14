@@ -56,21 +56,15 @@ td {
 	color: #d9d9d9;
 }
 
-.singleClass {
-	text-align: center;
-	position: relative;
-	height: 64px;
-	padding: 10px 0;
-	margin-left: 15px;
-	margin-right: 15px;
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-	border-radius: 0px;
-	-webkit-box-shadow: #666 0px 0px 3px;
-	-moz-box-shadow: #666 0px 0px 3px;
-	box-shadow: #666 0px 0px 3px;
-	background: #ffffff;
-	behavior: url(/PIE.htc);
+.singleClass{
+text-align:center;height:64px;   margin-left:15px; margin-right:15px; margin-bottom:15px;
+-webkit-border-radius: 0px;
+-moz-border-radius: 0px;
+border-radius: 0px;
+-webkit-box-shadow: #666 0px 0px 3px;
+-moz-box-shadow: #666 0px 0px 3px;
+box-shadow: #666 0px 0px 3px;
+background: #ffffff;behavior: url(/PIE.htc);
 }
 </style>
 </head>
@@ -102,7 +96,7 @@ td {
 					<%
 						if(user.getName().equals(Format.managerName)){
 					%>
-					<li><a href="manage.jsp">管理</a></li>
+					<li><a href="manage.action">管理</a></li>
 					<%
 						}
 					%>
@@ -121,7 +115,7 @@ td {
 	</nav>
 
 	<div class="container">
-		<div class="col-lg-2" style="margin-top: 20px;">
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-top: 20px;">
 			<ul class="nav nav-pills nav-stacked">
 				<li class="active ma"><a href="#" id="category">管理分类</a></li>
 				<li class="ma"><a href="#" id="activity">管理活动</a></li>
@@ -129,7 +123,7 @@ td {
 			</ul>
 		</div>
 
-		<div class="col-lg-10" style="margin-top: 20px;">
+		<div class="col-lg-10  col-md-10 col-sm-10 col-xs-10" style="margin-top: 20px;">
 			<!--一级分类，二级分类-->
 			<div id="categoryShow">
 				<div>
@@ -146,16 +140,16 @@ td {
 						ArrayList<Type> types2 =(ArrayList<Type>)session.getAttribute("types2");
 						for(int i=0;i<types1.size();i++) {
 						%>
-						<div class="col-lg-2 singleClass" id="1_<%=i%>">
-							<a href="javascript:;" class="1lClass" style="font-size: 20px;"><%=types1.get(i).getContent()%></a>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 singleClass" id="1_<%=i%>">
+							<a href="javascript:;" class="1lClass" style="font-size: 20px;"><p style="margin-top:17px"><%=types1.get(i).getContent()%></p></a>
 						</div>
 						<%
 							}
 						%>
-						<div class="col-lg-2 singleClass" id="add1lCategory">
-							<a href="javascript:;" id="add1lCategoryFunc"><span
+						<div class="col-lg-2  col-md-2 col-sm-2 col-xs-2  singleClass" id="add1lCategory">
+							<a href="javascript:;" id="add1lCategoryFunc"><p style="margin-top:20px"><span
 								class="glyphicon glyphicon-plus" style="color: #a4c2f4"></span>
-								添加一级分类</a>
+								添加分类</p></a>
 						</div>
 					</div>
 				</div>
@@ -170,16 +164,16 @@ td {
 						<%
 							for(int i=0;i<types2.size();i++) {
 						%>
-						<div class="col-lg-2 singleClass" id="2_<%=i%>">
-							<a href="javascript:;" class="1lClass" style="font-size: 20px;"><%=types2.get(i).getContent()%></a>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 singleClass" id="2_<%=i%>">
+							<a href="javascript:;" class="1lClass" style="font-size: 20px;"><p style="margin-top:17px"><%=types2.get(i).getContent()%></p></a>
 						</div>
 						<%
 							}
 						%>
-						<div class="col-lg-2 singleClass" id="add2lCategory">
-							<a href="javascript:;" id="add2lCategoryFunc"><span
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 singleClass" id="add2lCategory">
+							<a href="javascript:;" id="add2lCategoryFunc"><p style="margin-top:17px"><span
 								class="glyphicon glyphicon-plus" style="color: #a4c2f4"></span>
-								添加二级分类</a>
+								添加分类</p></a>
 						</div>
 					</div>
 				</div>
@@ -193,24 +187,17 @@ td {
 					}
 					return true;
 				}
+				
 				// 添加一级分类
-				$(document)
-						.on(
-								"click",
-								"#add1lCategoryFunc",
-								function() {
-									if ($("#newClass").length == 0) {
-										$(this)
-												.parent()
-												.html(
-														'<input type="text" style="border-top:none;border-left:none; border-right:none; outline:none;" size="10"  id="newClass" name="newClass" placeholder="新分类"/>'
-																+ '<div style="margin-bottom:-10px; margin-top:-15px;">'
-																+ '<a href="javascript:;" id="confirm1lCategory"><span class="glyphicon glyphicon-ok-circle" style="font-size:20px;margin-right:20px;"/></a>'
-																+ '<a href="javascript:;" id="cancel1lCategory" ><span class="glyphicon glyphicon-remove-circle" style="font-size:20px;margin-top:20px;" /></a></div>');
-									} else {
-										alert("请先保存当前修改！");
-									}
-								});
+				$(document).on("click","#add1lCategoryFunc",function(){
+							if($("#newClass").length==0){
+							$(this).parent().html('<input type="text" style="border-top:none;border-left:none; border-right:none; outline:none;margin-top:12px;" size="7"  id="newClass" placeholder="新分类"/>'+
+								'<div style="margin-bottom:-10px; margin-top:-20px;">'+ 
+								'<a href="javascript:;" id="confirm1lCategory"><span class="glyphicon glyphicon-ok-circle" style="font-size:20px;margin-right:20px;"/></a>'+
+								'<a href="javascript:;" id="cancel1lCategory" ><span class="glyphicon glyphicon-remove-circle" style="font-size:20px;margin-top:20px;" /></a></div>');
+							}
+							else{alert("请先保存当前修改！");}
+							});
 
 				// 确认新的一级分类信息
 				$(document)
@@ -222,25 +209,9 @@ td {
 									var numofcategory = $(".singleClass").length;
 									var newClassName = $('#newClass').val();
 									if (checkEmpty()) {
-										if (numofcategory % 5 == 0) {// 添加分类的div新起一行
-											$(this)
-													.parent()
-													.parent()
-													.parent()
-													.parent()
-													.append(
-															'<div class="row" style="margin-bottom:15px"><div class="col-lg-2 singleClass" id="add1lCategory">'
-																	+ '<a href="javascript:;" id="add1lCategoryFunc" ><span class="glyphicon glyphicon-plus" style="color:#a4c2f4"></span>   添加一级分类</a>'
-																	+ '</div></div>');
-										} else {// 添加分类的div就跟在后面
-											$(this)
-													.parent()
-													.parent()
-													.parent()
-													.append(
-															'<div class="col-lg-2 singleClass" id="add1lCategory" > '
-																	+ '<a href="javascript:;" id="add1lCategoryFunc" ><span class="glyphicon glyphicon-plus" style="color:#a4c2f4"></span>添加一级分类</a></div>');
-										}
+										$(this).parent().parent().before('<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 singleClass" > <a href="javascript:;" class="1lClass" style="font-size:20px;" ><p style="margin-top:17px">'+$("#newClass").val()+'</p></a></div>');
+										$(this).parent().parent().html('<a href="javascript:;" id="add1lCategoryFunc" ><p style="margin-top:20px"><span class="glyphicon glyphicon-plus" style="color:#a4c2f4"></span>添加分类</p></a>');
+										
 										$.ajax({
 											type : "post",
 											url : "addNewClass.action",//WebAjaxForMe.aspx为目标文件，GetValueAjax为目标文件中的方法
@@ -266,26 +237,14 @@ td {
 						            		type.setContent(request.getParameter("className"));
 						            		typeDao.update(type);
 										}
-									}%> --%>
-				$(this).parent().parent().html(
-												'<a href="javascript:;" class="1lClass" style="font-size:20px;" >'
-														+ $("#newClass").val()
-														+ '</a>');
-									}
+									}%> --%>	
+									}									
 								});
 
 				// 取消添加一级分类
-				$(document)
-						.on(
-								"click",
-								"#cancel1lCategory",
-								function() {
-									$(this)
-											.parent()
-											.parent()
-											.html(
-													'<a href="javascript:;" ><span class="glyphicon glyphicon-plus" style="color:#a4c2f4"></span>   添加一级分类</a>');
-								});
+				$(document).on("click","#cancel1lCategory",function(){
+							$(this).parent().parent().html('<a href="javascript:;" id="add1lCategoryFunc"><p style="margin-top:20px"><span class="glyphicon glyphicon-plus" style="color:#a4c2f4"></span>添加分类</p></a>');	
+						});
 
 				var oldName = "";
 				$("#categoryShow .col-lg-2")
@@ -295,7 +254,7 @@ td {
 										if ($("#newClass").length == 0) {
 											$(this)
 													.append(
-															'<div id="div_'+$(this).attr("id")+'" style="z-index:1;background-color:#666666;position:absolute;top:0px;bottom:0px;left:0px;right:0px;display:block;padding-top:20px;"><a href="javascript:;" id="modifyClass"><b>修改名称</b></a></div>');
+															'<div id="div_'+$(this).attr("id")+'" style="z-index:1;background-color:#666666;position:absolute;top:0px;bottom:0px;left:0px;right:0px;display:block;padding-top:18px;"><a href="javascript:;" id="modifyClass"><b>修改名称</b></a></div>');
 											oldName = $(this).children(
 													".1lClass").text();
 										}
@@ -322,8 +281,8 @@ td {
 												.parent()
 												.parent()
 												.html(
-														'<input type="text" style="border-top:none;border-left:none; border-right:none; outline:none;"  size="10" id="newClass" placeholder="新名字"/>'
-																+ '<div style="margin-bottom:-10px; margin-top:-15px;">'
+														'<input type="text" style="border-top:none;border-left:none; border-right:none; outline:none;margin-top:12px;"  size="10" id="newClass" placeholder="新名字"/>'
+																+ '<div style="margin-bottom:-10px; margin-top:-20px;">'
 																+ '<a href="javascript:;" id="confirmMod"><span class="glyphicon glyphicon-ok-circle" style="font-size:20px;margin-right:20px;"/></a>'
 																+ '<a href="javascript:;" id="cancelMod"><span class="glyphicon glyphicon-remove-circle" style="font-size:20px;margin-top:20px;"/></a></div>');
 									} else {
@@ -341,9 +300,9 @@ td {
 							if (checkEmpty()) {
 								$(this).parent().parent()
 										.html(
-												'<a href="javascript:;" class="1lClass" style="font-size:20px;" >'
+												'<a href="javascript:;" class="1lClass" style="font-size:20px;" ><p style="margin-top:17px">'
 														+ $("#newClass").val()
-														+ '</a>');
+														+ '</p></a>');
 							}
 							$.ajax({
 								type : "post",
@@ -363,8 +322,8 @@ td {
 						"#cancelMod",
 						function() {
 							$(this).parent().parent().html(
-									'<a href="javascript:;" class="1lClass" style="font-size:20px;" >'
-											+ oldName + '</a>');
+									'<a href="javascript:;" class="1lClass" style="font-size:20px;" ><p style="margin-top:17px">'
+											+ oldName + '</p></a>');
 						});
 				// 添加二级分类
 				$(document)
@@ -376,10 +335,10 @@ td {
 										$(this)
 												.parent()
 												.html(
-														'<input type="text" style="border-top:none;border-left:none; border-right:none; outline:none;" size="10"  id="newClass" name="newClass" placeholder="新分类"/>'
-																+ '<div style="margin-bottom:-10px; margin-top:-15px;">'
-																+ '<a href="javascript:;" id="confirm2lCategory"><span class="glyphicon glyphicon-ok-circle" style="font-size:20px;margin-right:20px;"/></a>'
-																+ '<a href="javascript:;" id="cancel2lCategory" ><span class="glyphicon glyphicon-remove-circle" style="font-size:20px;margin-top:20px;" /></a></div>');
+														'<input type="text" style="border-top:none;border-left:none; border-right:none; outline:none;margin-top:12px;" size="7"  id="newClass" placeholder="新分类"/>'+
+														'<div style="margin-bottom:-10px; margin-top:-20px;">'+ 
+														'<a href="javascript:;" id="confirm1lCategory"><span class="glyphicon glyphicon-ok-circle" style="font-size:20px;margin-right:20px;"/></a>'+
+														'<a href="javascript:;" id="cancel1lCategory" ><span class="glyphicon glyphicon-remove-circle" style="font-size:20px;margin-top:20px;" /></a></div>');
 									} else {
 										alert("请先保存当前修改！");
 									}
@@ -395,25 +354,8 @@ td {
 									var numofcategory = $(".singleClass").length;
 									var newClassName = $('#newClass').val();
 									if (checkEmpty()) {
-										if (numofcategory % 5 == 0) {// 添加分类的div新起一行
-											$(this)
-													.parent()
-													.parent()
-													.parent()
-													.parent()
-													.append(
-															'<div class="row" style="margin-bottom:15px"><div class="col-lg-2 singleClass" id="add1lCategory">'
-																	+ '<a href="javascript:;" id="add2lCategoryFunc" ><span class="glyphicon glyphicon-plus" style="color:#a4c2f4"></span>   添加二级分类</a>'
-																	+ '</div></div>');
-										} else {// 添加分类的div就跟在后面
-											$(this)
-													.parent()
-													.parent()
-													.parent()
-													.append(
-															'<div class="col-lg-2 singleClass" id="add2lCategory" > '
-																	+ '<a href="javascript:;" id="add2lCategoryFunc" ><span class="glyphicon glyphicon-plus" style="color:#a4c2f4"></span>添加二级分类</a></div>');
-										}
+										$(this).parent().parent().before('<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 singleClass" > <a href="javascript:;" class="1lClass" style="font-size:20px;" ><p style="margin-top:17px">'+$("#newClass").val()+'</p></a></div>');
+										$(this).parent().parent().html('<a href="javascript:;" id="add2lCategoryFunc" ><p style="margin-top:20px"><span class="glyphicon glyphicon-plus" style="color:#a4c2f4"></span>添加分类</p></a>');
 										$.ajax({
 											type : "post",
 											url : "addNewClass.action",//WebAjaxForMe.aspx为目标文件，GetValueAjax为目标文件中的方法
@@ -425,11 +367,6 @@ td {
 												alert("添加成功");//result.d为后台返回的参数'
 											}
 										})
-		
-				$(this).parent().parent().html(
-												'<a href="javascript:;" class="1lClass" style="font-size:20px;" >'
-														+ $("#newClass").val()
-														+ '</a>');
 									}
 								});
 
@@ -443,7 +380,7 @@ td {
 											.parent()
 											.parent()
 											.html(
-													'<a href="javascript:;" ><span class="glyphicon glyphicon-plus" style="color:#a4c2f4"></span>   添加二级分类</a>');
+													'<a href="javascript:;"  id="add2lCategoryFunc" ><p style="margin-top:20px"><span class="glyphicon glyphicon-plus" style="color:#a4c2f4"></span>   添加二级分类</p></a>');
 								});
 
 				var oldName = "";
@@ -508,9 +445,6 @@ td {
 								<th scope="col">邮箱</th>
 								<th>手机号码</th>
 								<th>管理操作</th>
-							</tr>
-							<tr class="warning no-result">
-								<td colspan="6"><i class="fa fa-warning"></i> No result</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -581,7 +515,6 @@ td {
 										"id" : id
 									},
 									success : function(result) {
-										alert("修改成功");//result.d为后台返回的参数
 									}
 								})
 								var n = '';
