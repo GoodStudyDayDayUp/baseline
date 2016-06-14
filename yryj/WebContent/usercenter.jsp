@@ -86,7 +86,7 @@ window.onload = function() {
 					</a>
 					<ul class="dropdown-menu">
 						<%if(user.getName().equals(Format.managerName)){ %>
-						<li><a href="manage.jsp">管理</a></li>
+						<li><a href="manage.action">管理</a></li>
 						<%} %>
 						<li><a href="logout.action">注销</a></li>
 					</ul> <%}else{ %> <a href="beforelogin.action"> 登录 </a> <%} %>
@@ -108,7 +108,7 @@ window.onload = function() {
 	<li class="na"><a href="#" id="mycol">我的收藏&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=store.size()%></span></a></li>
 	<li class="na"><a href="#" id="myfol">关注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(i2uArray[0][0].equals("无"))%>0<%else %><%=i2uArray.length %></span></a></li>
 	<li class="na"><a href="#" id="myfans">粉丝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(u2iArray[0][0].equals("无"))%>0<%else %><%=u2iArray.length %></span></a></li>
-	<li class="na"><a href="#" id="mypoints">积分</a></li>
+	<!--<li class="na"><a href="#" id="mypoints">积分</a></li>-->
 	</ul>
 	</div>
 	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="margin-top:20px;">
@@ -388,6 +388,8 @@ window.onload = function() {
 					</ul>
 				</div>
 			</div>
+			<!-- 积分界面 -->
+			<!--  
 			<div id="points" style="display: none">
 				<div class="panel panel-default">
 					<div class="panel-heading">积分</div>
@@ -408,6 +410,7 @@ window.onload = function() {
 					</table>
 				</div>
 			</div>
+			-->
 		</div>
 </body>
 <script type="text/javascript">

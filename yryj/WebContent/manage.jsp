@@ -102,7 +102,7 @@ td {
 					<%
 						if(user.getName().equals(Format.managerName)){
 					%>
-					<li><a href="manage.jsp">管理</a></li>
+					<li><a href="manage.action">管理</a></li>
 					<%
 						}
 					%>

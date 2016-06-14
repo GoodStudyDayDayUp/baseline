@@ -65,7 +65,7 @@ a:active {
 					<ul class="dropdown-menu">
 						<li><a href="usercenter.jsp">个人主页</a></li>
 						<%if(user.getName().equals(Format.managerName)){ %>
-						<li><a href="manage.jsp">管理</a></li>
+						<li><a href="manage.action">管理</a></li>
 						<%} %>
 						<li><a href="logout.action">注销</a></li>
 					</ul>
@@ -99,7 +99,7 @@ a:active {
 				</p>
 				<div class="row">
 					<div class="user" id="chptuser">
-						<a href="x.jsp"><%=parent.getUserName() %></a> <span><%=Format.sdf.format(new Date(parent.getDate())) %></span>
+						<a href="viewPerson.action?name=<%=parent.getUserName() %>"><%=parent.getUserName() %></a> <span><%=Format.sdf.format(new Date(parent.getDate())) %></span>
 						<span>点赞数：<%=parent.getZan() %></span>
 					</div>
 
