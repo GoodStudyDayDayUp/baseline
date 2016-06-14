@@ -10,7 +10,6 @@ public class Format {
 	public static String NF="404";
 	public static String PICSTORE="Photo";
 	public static String managerName="000";
-	public static String managerPass="000";
 	
 	//initPage为登录后要跳转的界面，为0的时候跳转到主界面，
 	//为1的时候跳转到write.jsp

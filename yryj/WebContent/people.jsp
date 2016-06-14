@@ -1,43 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	import="com.yryj.model.*" import="java.util.*" import="com.yryj.pub.*"
-	import="java.util.Date" import="com.yryj.serviceImpl.*"%>
+import="com.yryj.model.*"
+import="java.util.*"
+import="com.yryj.pub.*"
+import="java.util.Date"
+import="com.yryj.serviceImpl.*"
+%>
 <html>
 <head>
-<title>个人中心</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/bootstrap.css" />
-<link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/bootstrapValidator.min.css" />
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/bootstrapValidator.min.js"></script>
-<script src="js/bootstrapValidator_zh_CN.js"></script>
-<script type="text/javascript">
+		<title>个人中心</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/bootstrap.css"/>
+		<link rel="stylesheet" href="css/style.css"/>
+		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/bootstrapValidator.min.css"/>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/bootstrapValidator.min.js"></script>
+		<script src="js/bootstrapValidator_zh_CN.js"></script>
+		<script type="text/javascript">
         $(document).ready(function () {
             $('.dropdown-toggle').dropdown();
         });
 		</script>
 <style>
 a:link {
-	text-decoration: none;
-	color: #666666;
+text-decoration: none;
+color: #666666;
 }
-
 a:visited {
-	text-decoration: none;
+text-decoration: none;
 }
-
 a:hover {
-	text-decoration: none;
+text-decoration: none;
 }
-
 a:active {
-	text-decoration: none;
+text-decoration: none;
 }
-</style>
+		</style>
 </head>
 <%
 	User user=(User)session.getAttribute("user"); 
@@ -64,8 +65,8 @@ a:active {
 		u2iDArray=new String[0][0];
 	}
 %>
-<body>
-	<script type="text/javascript">
+<body >
+<script type="text/javascript">
 	window.onload =function onload(){
 		var a=<%=person %>;
 		if(a==null){
@@ -73,32 +74,35 @@ a:active {
 		}
 	}
 	</script>
-	<nav class="navbar navbar-default" role="navigation"
-		style="margin: 0px 0px 0px 0px;">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="readStart.action"
-				style="font-family: SimHei;">一人一句</a>
-		</div>
+	<nav class="navbar navbar-default" role="navigation" style=" margin:0px 0px 0px 0px;">
+	<div class="navbar-header">
+      <a class="navbar-brand" href="readStart.action" style="font-family:SimHei;">一人一句</a>
+   </div>
 		<div>
 			<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
-				<li class="dropdown"
-					style="margin: 0px 0px 0px 0px; font-family: SimHei;">
-					<%if(user!=null){ %> <a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <%=user.getName() %><b class="caret"></b>
-				</a>
+				<li class="dropdown" style="margin:0px 0px 0px 0px;font-family: SimHei  ;">
+				<%if(user!=null){ %>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+					<%=user.getName() %><b class="caret"></b>
+					</a>
 					<ul class="dropdown-menu">
 						<li><a href="getInfo.action">个人主页</a></li>
 						<%if(user.getName().equals(Format.managerName)){ %>
-						<li><a href="manage.jsp">管理</a></li>
+						<li><a href="manage.action">管理</a></li>
 						<%} %>
 						<li><a href="logout.action">注销</a></li>
-					</ul> <%}else{ %> <a href="beforelogin.action"> 登录 </a> <%} %>
+					</ul>
+					<%}else{ %>
+					<a href="beforelogin.action"  >
+					登录
+					</a>
+					<%} %>
 				</li>
 			</ul>
 			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事</a></p>
 		</div>
 	</nav>
-
+	
 	<div class="container">
 		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-2" style="margin-top:20px;">
 		<ul class="nav nav-pills nav-stacked">
@@ -110,9 +114,9 @@ a:active {
 		</ul>
 		<br/>
 		<%if(index.equals("2")){ %>
-			<button onclick="location='setAttention.action?id=<%=person.getId()%>&mood=1' " class="btn btn-info" > 关注TA </button>
+			<button onclick="location='setAttention.action?id=<%=person.getId()%>' " class="btn btn-info" > 关注TA </button>
 	    <%}if(index.equals("1")){ %>
-			<button onclick="location='setAttention.action?id=<%=person.getId()%>&mood=1' " class="btn btn-info" > 取消关注 </button>
+			<button onclick="location='setAttention.action?id=<%=person.getId()%>' " class="btn btn-info" > 取消关注 </button>
 		<%} %>
 		</div>
 		<div class="col-lg-10 col-md-10 col-sm-9 col-xs-10" style="margin-top:20px;">
@@ -121,134 +125,131 @@ a:active {
 				<div class="panel-heading">
 					积分：<span class="label label-default"><%=person.getPoint() %></span>
 				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">精选作品</h3>
-					</div>
+				
+			</div>
+			<div class="panel panel-default" >
+				<div class="panel-heading" >
+					<h3 class="panel-title">精选作品</h3>
 				</div>
-				<% for(int i=0;i<chs.size();i++){ 
+			</div>
+			<% for(int i=0;i<chs.size();i++){ 
 				if(i==2) break;
 					String a[]=chs.get(i).getKey().split("#"); %>
-				<div class="panel panel-default" style="margin-top: -25px;">
-					<div class="panel-body">
-						<div style="display: inline;">
-							<%for(String s:a){ %>
-							<span class="label label-primary chptlabel"><%=s%></span>
+					<div class="panel panel-default" style="margin-top:-25px;">
+								<div class="panel-body">
+								<div style="display:inline;">
+								<%for(String s:a){ %>
+									<span class="label label-primary chptlabel" ><%=s%></span>
+									<%} %>
+								</div>
+								<p class="everychpt"><%=chs.get(i).getContent() %></p>
+								<div class="row" >
+									<div class="user" >
+										<span><%=Format.sdf.format(new Date(chs.get(i).getDate())) %></span>
+										<span>浏览数：<%=chs.get(i).getViewNum() %></span>
+									</div>
+									<div class="functs check">
+										<a href="readStory.action?index=<%=chs.get(i).getId()%>">查看前后文</a>
+									</div>
+								</div>
+								</div>
+							</div>
 							<%} %>
-						</div>
-						<p class="everychpt"><%=chs.get(i).getContent() %></p>
-						<div class="row">
-							<div class="user">
-								<span><%=Format.sdf.format(new Date(chs.get(i).getDate())) %></span>
-								<span>浏览数：<%=chs.get(i).getViewNum() %></span>
-							</div>
-							<div class="functs check">
-								<a href="readStory.action?index=<%=chs.get(i).getId()%>">查看前后文</a>
-							</div>
-						</div>
-					</div>
+			
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">精选收藏</h3>
 				</div>
-				<%} %>
-
-
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">精选收藏</h3>
-					</div>
-				</div>
-				<% for(int i=0;i<store.size();i++){ 
+			</div>
+					<% for(int i=0;i<store.size();i++){ 
 				if(i==2) break;
 					String a[]=store.get(i).getKey().split("#"); %>
-				<div class="panel panel-default" style="margin-top: -25px;">
-					<div class="panel-body">
-						<div style="display: inline;">
-							<%for(String s:a){ %>
-							<span class="label label-primary chptlabel"><%=s%></span>
+					<div class="panel panel-default" style="margin-top:-25px;">
+								<div class="panel-body">
+								<div style="display:inline;">
+								<%for(String s:a){ %>
+									<span class="label label-primary chptlabel" ><%=s%></span>
+									<%} %>
+								</div>
+								<p class="everychpt"><%=store.get(i).getContent() %></p>
+								<div class="row" >
+									<div class="user" >
+										<span><%=Format.sdf.format(new Date(store.get(i).getDate())) %></span>
+										<span>浏览数：<%=store.get(i).getViewNum() %></span>
+									</div>
+									<div class="functs check">
+										<a href="readStory.action?index=<%=store.get(i).getId()%>">查看前后文</a>
+									</div>
+								</div>
+								</div>
+							</div>
 							<%} %>
-						</div>
-						<p class="everychpt"><%=store.get(i).getContent() %></p>
-						<div class="row">
-							<div class="user">
-								<span><%=Format.sdf.format(new Date(store.get(i).getDate())) %></span>
-								<span>浏览数：<%=store.get(i).getViewNum() %></span>
-							</div>
-							<div class="functs check">
-								<a href="readStory.action?index=<%=store.get(i).getId()%>">查看前后文</a>
-							</div>
-						</div>
-					</div>
+		</div>
+		<div id="chpts" style="display:none;"><!--作品-->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					排序方式：&nbsp;&nbsp;<a href="#" id="test.html">赞同数</a>&nbsp;&nbsp;<span style="width:1px; height:30px; ">|</span>&nbsp;&nbsp;<a href="#">发布时间</a>
 				</div>
-				<%} %>
-			</div>
-			<div id="chpts" style="display: none;">
-				<!--作品-->
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						排序方式：&nbsp;&nbsp;<a href="#" id="test.html">赞同数</a>&nbsp;&nbsp;<span
-							style="width: 1px; height: 30px;">|</span>&nbsp;&nbsp;<a href="#">发布时间</a>
-					</div>
-					<script type=text/javascript>
+				<script type=text/javascript>
 							$(".panel-heading a").click(function(){
 								$("#maincontent").load($(this).attr("id"));
 							});
 				</script>
-				</div>
-
-				<div id="maincontent">
-					<% for(int i=0;i<chs.size();i++){ %>
-					<%String a[]=chs.get(i).getKey().split("#"); %>
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<div style="display: inline;">
-								<%for(String s:a){ %>
-								<span class="label label-primary chptlabel"><%=s%></span>
-								<%} %>
-							</div>
-							<p class="everychpt"><%=chs.get(i).getContent() %></p>
-							<div class="row">
-								<div class="user">
-									<span><%=Format.sdf.format(new Date(chs.get(i).getDate())) %></span>
-									<span>浏览数：<%=chs.get(i).getViewNum() %></span>
-								</div>
-								<div class="functs check">
-									<a href="readStory.action?index=<%=chs.get(i).getId()%>">查看前后文</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<%} %>
-				</div>
-
 			</div>
-
-
-			<div id="collects" style="display: none;">
-				<!--收藏-->
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						排序方式：&nbsp;&nbsp;<a href="#">赞同数</a>&nbsp;&nbsp;<span
-							style="width: 1px; height: 30px;">|</span>&nbsp;&nbsp;<a href="#">发布时间</a>
-					</div>
-				</div>
-				<% for(int i=0;i<store.size();i++){ %>
-				<%String a[]=store.get(i).getKey().split("#"); %>
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div style="display: inline;">
-							<%for(String s:a){ %>
-							<span class="label label-primary chptlabel"><%=s%></span>
-							<%} %>
-						</div>
-						<p class="everychpt"><%=store.get(i).getContent() %></p>
-						<div class="row">
-							<div class="user">
-								<a
-									href="viewPerson.action?name=<%=store.get(i).getUserName() %>"><%=store.get(i).getUserName() %></a>
-								<span><%=Format.sdf.format(new Date(store.get(i).getDate())) %></span>
-								<span>点赞数：<%=store.get(i).getZan() %></span>
+			
+			<div id="maincontent">
+			<% for(int i=0;i<chs.size();i++){ %>	
+						<%String a[]=chs.get(i).getKey().split("#"); %>
+					<div class="panel panel-default">
+								<div class="panel-body">
+								<div style="display:inline;">
+								<%for(String s:a){ %>
+									<span class="label label-primary chptlabel" ><%=s%></span>
+									<%} %>
+								</div>
+								<p class="everychpt"><%=chs.get(i).getContent() %></p>
+								<div class="row" >
+									<div class="user" >
+										<span><%=Format.sdf.format(new Date(chs.get(i).getDate())) %></span>
+										<span>浏览数：<%=chs.get(i).getViewNum() %></span>
+									</div>
+									<div class="functs check">
+										<a href="readStory.action?index=<%=chs.get(i).getId()%>">查看前后文</a>
+									</div>
+								</div>
+								</div>
 							</div>
-							<div class="functs check">
-								<%
+							<%} %>
+			</div>
+							
+		</div>
+		
+		
+		<div id="collects" style="display:none;">   <!--收藏-->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					排序方式：&nbsp;&nbsp;<a href="#">赞同数</a>&nbsp;&nbsp;<span style="width:1px; height:30px; ">|</span>&nbsp;&nbsp;<a href="#">发布时间</a>
+				</div>
+			</div>
+			<% for(int i=0;i<store.size();i++){ %>	
+		<%String a[]=store.get(i).getKey().split("#"); %>
+			<div class="panel panel-default">
+								<div class="panel-body">
+								<div style="display:inline;">
+								<%for(String s:a){ %>
+									<span class="label label-primary chptlabel" ><%=s%></span>
+									<%} %>
+								</div>
+								<p class="everychpt"><%=store.get(i).getContent() %></p>
+								<div class="row" >
+									<div class="user" >
+										<a href="viewPerson.action?name=<%=store.get(i).getUserName() %>"><%=store.get(i).getUserName() %></a>
+										<span><%=Format.sdf.format(new Date(store.get(i).getDate())) %></span>
+										<span>点赞数：<%=store.get(i).getZan() %></span>
+									</div>
+									<div class="functs check">
+										<%
 					boolean isFind=false;
 					if(relation!=null){
 						String love=relation.getU2cZan();
@@ -256,26 +257,20 @@ a:active {
 					}
 					if(isFind){
 					%>
-								<button id=<%="zan"+store.get(i).getId()%> type="button"
-									class="btn btn-default chptbtn glyphicon glyphicon-heart"
-									style="border: none; padding: 3px 7px 2px 7px; color: red"
-									value="1" onclick="LoveShow(this)"></button>
-								<%} else{%>
-								<button id=<%="zan"+store.get(i).getId()%> type="button"
-									class="btn btn-default chptbtn glyphicon glyphicon-heart"
-									style="border: none; padding: 3px 7px 2px 7px;" value="0"
-									onclick="LoveShow(this)"></button>
-								<%}%>
-								<a href="readStory.action?index=<%=store.get(i).getId()%>">查看前后文</a>
+						<button id=<%="zan"+store.get(i).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;color:red"  value="1" onclick="LoveShow(this)"></button>
+					<%} else{%>
+						<button id=<%="zan"+store.get(i).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="LoveShow(this)"></button>
+					<%}%>
+										<a href="readStory.action?index=<%=store.get(i).getId()%>">查看前后文</a>
+									</div>
+								</div>
+								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-				<%} %>
-			</div>
-			<div id="follow" style="display: none">
-				<div class="panel panel-default">
-					<div class="panel-heading">我关注的人</div>
+		<%} %>
+		</div>
+		<div id="follow" style="display:none">
+			<div class="panel panel-default">
+				<div class="panel-heading">我关注的人</div>
 					<ul class="list-group">
 						
 							<%if(i2uDArray[0][0].equals("无")) {%>
@@ -296,19 +291,21 @@ a:active {
 							</tr>
 							</table>
 							<%if(i2uDArray[i][4].equals("1")){ %>
-							<a href="setAttention.action?id=<%=i2uDArray[i][0] %>&mood=1"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 取消关注 </button></a><%} %>
+							<a href="setAttention.action?id=<%=i2uDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 取消关注 </button></a><%} %>
 							<%if(i2uDArray[i][4].equals("2")){ %>
-							<a href="setAttention.action?id=<%=i2uDArray[i][0] %>&mood=1"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a><%} %>
+							<a href="setAttention.action?id=<%=i2uDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a><%} %>
 							<%}%>
 							</li>
 							<%}%>
+						
 					</ul>
 				</div>
-			</div>
-			<div id="fans" style="display: none">
-				<div class="panel panel-default">
-					<div class="panel-heading">关注我的人</div>
+		</div>
+		<div id="fans" style="display:none">
+			<div class="panel panel-default">
+				<div class="panel-heading">关注我的人</div>
 					<ul class="list-group">
+						
 							<%if(u2iDArray[0][0].equals("无")) {%>
 							<li class="list-group-item" ">
 							<table>
@@ -327,18 +324,19 @@ a:active {
 							</tr>
 							</table>
 							<%if(u2iDArray[i][4].equals("1")){ %>
-							<a href="setAttention.action?id=<%=u2iDArray[i][0] %>&mood=1"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 取消关注 </button></a><%} %>
+							<a href="setAttention.action?id=<%=u2iDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 取消关注 </button></a><%} %>
 							<%if(u2iDArray[i][4].equals("2")){ %>
-							<a href="setAttention.action?id=<%=u2iDArray[i][0] %>&mood=1"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注 TA</button></a><%} %>
+							<a href="setAttention.action?id=<%=u2iDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注 TA</button></a><%} %>
 							<%}%>
 							</li>
 							<%}%>
+						
 					</ul>
 				</div>
-			</div>
 		</div>
 	</div>
-
+	</div>
+	
 </body>
 <script type="text/javascript">
 	$(function(){

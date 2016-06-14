@@ -113,7 +113,7 @@ a:active {
 				<ul class="dropdown-menu">
 					<li><a href="getInfo.action">个人主页</a></li>
 					<%if(user.getName().equals(Format.managerName)){ %>
-						<li><a href="manage.jsp">管理</a></li>
+						<li><a href="manage.action">管理</a></li>
 					<%} %>
 					<li><a href="logout.action">注销</a></li>
 				</ul> <%
@@ -209,7 +209,7 @@ a:active {
 						<h5>
 							<a href="#" style="color:#ffffff"><%=length %></a>
 						</h5>
-					</div>
+					</div></div></div></div>
 					<div class="col-lg-8 col-md-8 col-xs-8 storybegin">
 						<p class="storycenter">
 							<a href="readStory.action?index=<%=ch.getId() %>" style="color:#000000" ><%=ch.getContent() %></a>
