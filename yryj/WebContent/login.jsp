@@ -26,12 +26,48 @@
 <body style="background-color: #EDEDED">
 	<div class="container">
 		<div class="row">
-			<p style="text-align: center; margin: auto">
-				<a href="readStart.action"><img src="pics\logopic.png" /></a>
-			</p>
+			<p style="text-align: center; margin: auto"> <a href="readStart.action"><img src="pics\logopic.png" /></a>	</p>
 
 			<section>
-			<div class="col-lg-6 col-lg-offset-3">
+				<div class="col-lg-6 col-lg-offset-3" >
+					<form id="defaultForm" method="post" action="login.action">
+                        <div class="row">
+							<div class="col-lg-8 col-lg-offset-2 col-md-4 col-md-offset-4  col-sm-6 col-sm-offset-3">
+								<div class="form-group row" > 
+									<%if(webUser.getName()!=null&&webUser.getName()!="") {%>
+									<input type="text" value=<%=webUser.getName() %> id="name" name="name" class="form-control col-lg-5" onchange="changemsg(this)" />
+									<%}else{ %>
+									<input type="text" id="name" name="name" class="form-control col-lg-5" placeholder="用户名" onchange="changemsg(this)"/>
+									<%} %>
+								</div>
+							</div>
+						</div>
+							
+						<div class="row">
+							<div class="col-lg-8 col-lg-offset-2 col-md-4 col-md-offset-4  col-sm-6 col-sm-offset-3">
+								<div class="form-group row">
+									<%if(webUser.getPassword()!=null&&webUser.getPassword()!="") {%>
+									<input type="password" value=<%=webUser.getPassword() %>  id="password" name="password" class="form-control"  onchange="changemsg(this)"/>
+									<%}else{ %>
+									<input type="password" id="password" name="password" class="form-control" placeholder="密码"/>
+									<%} %>
+								</div>
+                            </div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-8 col-lg-offset-2 col-md-4 col-md-offset-4  col-sm-6 col-sm-offset-3">
+								<a href="forget_step1.jsp" style="margin-top:-8px;margin-left:-14px;">忘记密码</a>
+								<div style="float:right; margin-top:-8px; margin-right:-14px;" ><div class="form-group"><button type="submit" class="btn btn-primary ">登录</button></center></div></div>
+								<div style="float:right;margin-right:10px;"><a href="beforeregister.action" class="display:block">我是新用户</a></div>
+							</div>
+						</div>
+					</form>
+				</div>
+			 </section> 
+		</div>	
+	</div>		
+				<!--<div class="col-lg-6 col-lg-offset-3">
 				<form id="defaultForm" method="post" action="login.action">
 
 					<div class="form-group row">
@@ -71,10 +107,10 @@
 							<button type="submit" class="btn btn-primary col-lg-offset-3">登录</button> </center>
                			</div>
 	             </form>
-	             </div> 
-             </section> 
-           </div> 
-	    </div> 
+	             -->
+            
+		
+	    
 	
 	<script type="text/javascript">
 	function changemsg(obj){

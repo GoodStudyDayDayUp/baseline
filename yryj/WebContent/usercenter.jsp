@@ -101,17 +101,17 @@ window.onload = function() {
 	</nav>
 
 	<div class="container">
-	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-top:20px;">
-	<ul class="nav nav-pills nav-stacked">
-	<li class="active na"><a href="#" id="info">基本信息</a></li>
-	<li class="na"><a href="#" id="mychpts">我的作品&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=chs.size() %></span></a></li>
-	<li class="na"><a href="#" id="mycol">我的收藏&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=store.size()%></span></a></li>
-	<li class="na"><a href="#" id="myfol">关注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(i2uArray[0][0].equals("无"))%>0<%else %><%=i2uArray.length %></span></a></li>
-	<li class="na"><a href="#" id="myfans">粉丝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(u2iArray[0][0].equals("无"))%>0<%else %><%=u2iArray.length %></span></a></li>
-	<!--<li class="na"><a href="#" id="mypoints">积分</a></li>-->
-	</ul>
+	<div class="col-lg-2 col-md-2 col-sm-3 col-xs-2" style="margin-top:20px;">
+		<ul class="nav nav-pills nav-stacked">
+			<li class="active na"><a href="#" id="info">基本信息</a></li>
+			<li class="na"><a href="#" id="mychpts">我的作品&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=chs.size() %></span></a></li>
+			<li class="na"><a href="#" id="mycol">我的收藏&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=store.size()%></span></a></li>
+			<li class="na"><a href="#" id="myfol">关注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(i2uArray[0][0].equals("无"))%>0<%else %><%=i2uArray.length %></span></a></li>
+			<li class="na"><a href="#" id="myfans">粉丝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(u2iArray[0][0].equals("无"))%>0<%else %><%=u2iArray.length %></span></a></li>
+		<!--<li class="na"><a href="#" id="mypoints">积分</a></li>-->
+		</ul>
 	</div>
-	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="margin-top:20px;">
+	<div class="col-lg-10 col-md-10 col-sm-9 col-xs-10" style="margin-top:20px;">
 		<div id="basicInfo">
 			<div class="panel panel-default">
 				<div class="panel-heading">

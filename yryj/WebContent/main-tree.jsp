@@ -209,7 +209,7 @@ a:active {
 						<h5>
 							<a href="#" style="color:#ffffff"><%=length %></a>
 						</h5>
-					</div>
+					</div></div></div></div>
 					<div class="col-lg-8 col-md-8 col-xs-8 storybegin">
 						<p class="storycenter">
 							<a href="readStory.action?index=<%=ch.getId() %>" style="color:#000000" ><%=ch.getContent() %></a>

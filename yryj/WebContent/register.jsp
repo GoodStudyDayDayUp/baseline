@@ -29,67 +29,73 @@ if(webUser==null){
 	<div class="container">
 		<div class="row">
 
-			<p style="text-align: center; margin: auto">
-				<a href="readStart.action"><img src="pics\logopic.png" /></a>
-			</p>
+			<p style="text-align: center; margin: auto"><a href="readStart.action"><img src="pics\logopic.png" /></a></p>
 
 			<section>
 				<div class="col-lg-6 col-lg-offset-3" style="margin-top: -50px">
 					<form id="defaultForm" method="post" action="register.action">
 
-						<div class="form-group row">
-							<div class="col-lg-8 col-lg-offset-2">
-								<%if(webUser.getName()!=null&&webUser.getName()!="") {%>
-								<input type="text" id="name" name="name"
-									onchange="changemsg(this)" value=<%=webUser.getName() %>
-									class="form-control col-lg-5" />
-								<%}else{ %>
-								<input type="text" id="name" name="name"
-									onchange="changemsg(this)" class="form-control col-lg-5"
-									placeholder="用户名" />
-								<%} %>
+						<div class="row">
+							<div class="col-lg-8 col-lg-offset-2 col-md-4 col-md-offset-4  col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3 "> 
+								<div class="form-group row" >
+									<%if(webUser.getName()!=null&&webUser.getName()!="") {%>
+									<input type="text" id="name" name="name"
+										onchange="changemsg(this)" value=<%=webUser.getName() %>
+										class="form-control col-lg-5" />
+									<%}else{ %>
+									<input type="text" id="name" name="name"
+										onchange="changemsg(this)" class="form-control col-lg-5"
+										placeholder="用户名" />
+									<%} %>
+								</div>
 							</div>
 						</div>
 
-						<div class="form-group row">
-							<div class="col-lg-8 col-lg-offset-2">
-								<%if(webUser.getEmail()!=null&&webUser.getEmail()!="") {%>
-								<input type="text" id="email" name="email"
-									onchange="changemsg(this)" value=<%=webUser.getEmail() %>
-									class="form-control col-lg-5" placeholder="邮箱" />
-								<%}else{ %>
-								<input type="text" id="email" name="email"
-									onchange="changemsg(this)" class="form-control col-lg-5"
-									placeholder="邮箱" />
-								<%} %>
+						<div class="row">
+							<div class="col-lg-8 col-lg-offset-2 col-md-4 col-md-offset-4  col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3 "> 
+								<div class="form-group row" >
+									<%if(webUser.getEmail()!=null&&webUser.getEmail()!="") {%>
+									<input type="text" id="email" name="email"
+										onchange="changemsg(this)" value=<%=webUser.getEmail() %>
+										class="form-control col-lg-5" placeholder="邮箱" />
+									<%}else{ %>
+									<input type="text" id="email" name="email"
+										onchange="changemsg(this)" class="form-control col-lg-5"
+										placeholder="邮箱" />
+									<%} %>
+								</div>
 							</div>
 						</div>
 
-						<div class="form-group row">
-							<div class="col-lg-8 col-lg-offset-2">
-								<%if(webUser.getPassword()!=null&&webUser.getPassword()!="") {%>
-								<input type="password" id="password" name="password"
-									onchange="changemsg(this)" value=<%=webUser.getPassword() %>
-									class="form-control" placeholder="密码" />
-								<%}else{ %>
-								<input type="password" id="password" name="password"
-									onchange="changemsg(this)" class="form-control"
-									placeholder="密码" />
-								<%} %>
+						<div class="row">
+							<div class="col-lg-8 col-lg-offset-2 col-md-4 col-md-offset-4  col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3 "> 
+								<div class="form-group row" >
+									<%if(webUser.getPassword()!=null&&webUser.getPassword()!="") {%>
+									<input type="password" id="password" name="password"
+										onchange="changemsg(this)" value=<%=webUser.getPassword() %>
+										class="form-control" placeholder="密码" />
+									<%}else{ %>
+									<input type="password" id="password" name="password"
+										onchange="changemsg(this)" class="form-control"
+										placeholder="密码" />
+									<%} %>
+								</div>
 							</div>
 						</div>
 
-						<div class="form-group row">
-							<div class="col-lg-8 col-lg-offset-2">
-								<%if(pass2!=null&&pass2!="") {%>
-								<input type="password" id="repassword" name="password2"
-									onchange="changemsg(this)" value=<%=pass2%>
-									class="form-control" placeholder="确认密码" />
-								<%}else{ %>
-								<input type="password" id="repassword" name="password2"
-									onchange="changemsg(this)" class="form-control"
-									placeholder="确认密码" />
-								<%} %>
+						<div class="row">
+							<div class="col-lg-8 col-lg-offset-2 col-md-4 col-md-offset-4  col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3 "> 
+								<div class="form-group row" >
+									<%if(pass2!=null&&pass2!="") {%>
+									<input type="password" id="repassword" name="password2"
+										onchange="changemsg(this)" value=<%=pass2%>
+										class="form-control" placeholder="确认密码" />
+									<%}else{ %>
+									<input type="password" id="repassword" name="password2"
+										onchange="changemsg(this)" class="form-control"
+										placeholder="确认密码" />
+									<%} %>
+								</div>
 							</div>
 						</div>
 
@@ -99,11 +105,19 @@ if(webUser==null){
 							</div>
 						</div>
 
-						<div class="form-group row">
+						<!--<div class="form-group row">
 							<center><button type="submit" class="btn btn-primary col-lg-offset-5">注册</button>
 							<a href="beforelogin.action" class="col-lg-offset-1">已经有账号</a></center>
+						</div>-->
+						
+						<div class="row">
+							<div class="col-lg-8 col-lg-offset-2 col-md-4 col-md-offset-4  col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+								<div style="float:right; margin-top:-8px; margin-right:-14px;" ><div class="form-group"><button type="submit" class="btn btn-primary">注册</button>	</center></div></div>
+								<div style="float:right;margin-right:10px;"><a href="beforelogin.action" >我是老用户</a></div>
+							</div>
 						</div>
-
+							
+							
 					</form>
 				</div>
 			</section>
