@@ -31,7 +31,7 @@ public class ActivityAction extends ActionSupport {
 		//GridFSDBFile
 //		List<Map<String,Object>> activities=new ArrayList<Map<String,Object>>();
 		ActivityManager am=new ActivityML();
-		List<Activity> acts=am.getAll();  
+		List<Activity> acts=am.getAllLiveAct();  
 		HttpSession session=ServletActionContext.getRequest().getSession();
 		session.setAttribute("acts", acts);
 		return SUCCESS;

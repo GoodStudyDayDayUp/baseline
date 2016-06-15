@@ -51,4 +51,11 @@ public class ActivityML implements ActivityManager{
 		am=new ActivityDL();
 		return am.writePicFileByPicName(pic);
 	}
+
+	@Override
+	public List<Activity> getAllLiveAct() {
+		// TODO Auto-generated method stub
+		am=new ActivityDL();
+		return am.getAllLiveAct();
+	}
 }

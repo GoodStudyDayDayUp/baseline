@@ -19,4 +19,6 @@ public interface ActivityManager {
 	public List<Activity> getAll();
 	
 	public GridFSDBFile writePicFileByPicName(String pic);
+	
+	public List<Activity> getAllLiveAct();
 }

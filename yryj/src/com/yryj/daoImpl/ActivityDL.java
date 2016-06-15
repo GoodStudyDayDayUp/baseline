@@ -156,5 +156,20 @@ public class ActivityDL implements ActivityDao{
 
 		return null;
 	}
+
+	@Override
+	public List<Activity> getAllLiveAct() {
+		// TODO Auto-generated method stub
+		try {
+			Morphia mor=new Morphia();
+			Mongo mongo=new Mongo();
+			Datastore ds=mor.createDatastore(mongo, dbs);
+			return ds.find(Activity.class,"state",1).asList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 	
 }
