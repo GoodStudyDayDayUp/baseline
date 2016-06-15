@@ -17,6 +17,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yryj.model.Activity;
+import com.yryj.pub.Format;
 import com.yryj.sercvice.ActivityManager;
 import com.yryj.serviceImpl.ActivityML;
 
@@ -24,13 +25,15 @@ public class ActivityAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 	
+	@SuppressWarnings("deprecation")
 	public String getAllActivity(){
 		//GridFSDBFile
 //		List<Map<String,Object>> activities=new ArrayList<Map<String,Object>>();
 		ActivityManager am=new ActivityML();
 		List<Activity> acts=am.getAll();
+		HttpServletRequest request = ServletActionContext.getRequest();   
 		for(Activity a:acts){
-			am.find(a.getId());
+			am.writePicFileByPicName(a.getPic());
 //			activities.add(indexActivity);
 		}
 		HttpSession session=ServletActionContext.getRequest().getSession();
@@ -44,15 +47,8 @@ public class ActivityAction extends ActionSupport {
 		ServletOutputStream out = null;
 		FileInputStream ips=null;
 		
-		String id = request.getParameter("id");
-		
-		int actId=Integer.valueOf(id);
-		ActivityManager am=new ActivityML();
-		
-		Map<String,Object> oneAct=am.find(actId);
-		
-		Activity oneA=(Activity)oneAct.get("activity");
-		File oneFile=(File)oneAct.get("pic");
+		String path = request.getParameter("path");
+		File oneFile=new File(path);
 		
 		try {
 			ips = new FileInputStream(oneFile);

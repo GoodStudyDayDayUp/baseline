@@ -92,12 +92,12 @@ public class ManageAction extends ActionSupport {
 			String id = request.getParameter("id");
 			String status = request.getParameter("status");
 			if(status!=null){
-				Activity activity =  (Activity) activityDao.find(Long.parseLong(id)).get(0);
+				Activity activity = activityDao.find(Long.parseLong(id));
 				activity.setState(Integer.parseInt(status));
 				activityDao.update(activity);
 			}
 			else if(activityDao.find(Long.parseLong(id))!=null){
-				Activity activity =  (Activity) activityDao.find(Long.parseLong(id)).get(0);
+				Activity activity =  activityDao.find(Long.parseLong(id));
 				activity.setName(name);
 				activity.setOwner(host);
 				activity.setPic(pic);

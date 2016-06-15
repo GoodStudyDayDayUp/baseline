@@ -39,12 +39,7 @@ public class ActivityDL implements ActivityDao{
 			mongo = new Mongo();
 			Datastore ds=mor.createDatastore(mongo, dbs);
 			List<Activity> ts=ds.createQuery(Activity.class).order("-id").asList();
-			long id = 0;
-			if(ts.size()>0)
-				id=ts.get(ts.size()-1).getId()+1;
-			act.setId(id);
-
-			ds.save(act);
+			
 			
 			DB db=mongo.getDB(dbs);
 			File imageFile=new File(act.getPic());
@@ -52,6 +47,18 @@ public class ActivityDL implements ActivityDao{
 			GridFSInputFile gfsFile=gfsPhoto.createFile(imageFile);
 			gfsFile.setFilename(act.getPic());
 			gfsFile.save();
+			
+//			String fileName=act.getPic();
+//			String[] subName=fileName.split("\\\\");
+//			String picName=subName[subName.length-1];
+//			act.setPic(picName);
+			long id = 0;
+			if(ts.size()>0)
+				id=ts.get(ts.size()-1).getId()+1;
+			act.setId(id);
+
+			ds.save(act);
+			
 			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -99,41 +106,38 @@ public class ActivityDL implements ActivityDao{
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public void writePicFileByPicName(String pic){
+		
+		try {
+			Morphia mor=new Morphia();
+			Mongo mongo=new Mongo();
+			
+			DB db=mongo.getDB(dbs);
+			GridFS gfsPhoto=new GridFS(db,Format.PICSTORE);
+			GridFSDBFile iOutput=gfsPhoto.findOne(pic);
+			
+			File picFile = new File(pic);
+			iOutput.writeTo(picFile);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
 
 	@Override
-	public Map<String,Object> find(long id) {
+	public Activity find(long id) {
 		// TODO Auto-generated method stub
 		try {
 			Morphia mor=new Morphia();
 			Mongo mongo=new Mongo();
 			Datastore ds=mor.createDatastore(mongo, dbs);
 			Activity act=ds.find(Activity.class,"id",id).get();
-			
-			DB db=mongo.getDB(dbs);
-			GridFS gfsPhoto=new GridFS(db,Format.PICSTORE);
-			GridFSDBFile iOutput=gfsPhoto.findOne(act.getPic());
-			Map<String,Object> objects=new HashMap<String,Object>();
-			
-			
-//			if(iOutput != null){  
-//					System.out.println("filename:" + iOutput.getFilename());  
-//                    System.out.println("md5:" + iOutput.getMD5());  
-//                    System.out.println("length:" + iOutput.getLength());  
-//                    System.out.println("uploadDate:" + iOutput.getUploadDate());  
-//    
-//                    System.out.println("--------------------------------------");  
-//                    iOutput.writeTo(System.out);  
-//			}
-
-			String fileName=act.getPic();
-			String[] subName=fileName.split("\\\\");
-			
-			File picFile = new File(subName[subName.length-1]);
-			iOutput.writeTo(picFile);
-			objects.put("activity",act);
-			objects.put("pic",picFile);
-			
-			return objects;
+			return act;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -34,7 +34,7 @@ public class ActivityML implements ActivityManager{
 	}
 
 	@Override
-	public  Map<String,Object> find(long id) {
+	public  Activity find(long id) {
 		// TODO Auto-generated method stub
 		am=new ActivityDL();
 		return am.find(id);
@@ -44,5 +44,10 @@ public class ActivityML implements ActivityManager{
 	public List<Activity> getAll(){
 		am=new ActivityDL();
 		return am.getAll();
+	}
+	
+	public void writePicFileByPicName(String pic){
+		am=new ActivityDL();
+		am.writePicFileByPicName(pic);
 	}
 }

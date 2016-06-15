@@ -13,8 +13,9 @@ public interface ActivityManager {
 
 	public void update(Activity act);
 
-	public  Map<String,Object> find(long id);
+	public  Activity find(long id);
 	
 	public List<Activity> getAll();
 	
+	public void writePicFileByPicName(String pic);
 }
