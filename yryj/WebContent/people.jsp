@@ -114,9 +114,9 @@ text-decoration: none;
 		</ul>
 		<br/>
 		<%if(index.equals("2")){ %>
-			<button onclick="location='setAttention.action?id=<%=person.getId()%>' " class="btn btn-info" > 关注TA </button>
+			<button onclick="location='setAttention.action?id=<%=person.getId()%>'&mood=1 " class="btn btn-info" > 关注TA </button>
 	    <%}if(index.equals("1")){ %>
-			<button onclick="location='setAttention.action?id=<%=person.getId()%>' " class="btn btn-info" > 取消关注 </button>
+			<button onclick="location='setAttention.action?id=<%=person.getId()%>'&mood=1 " class="btn btn-info" > 取消关注 </button>
 		<%} %>
 		</div>
 		<div class="col-lg-10 col-md-10 col-sm-9 col-xs-10" style="margin-top:20px;">

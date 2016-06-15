@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
+	import="java.io.File"
 	import="com.yryj.model.*" import="java.util.*" import="com.yryj.pub.*"%>
+	<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+	
+	<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<base href="<%=basePath%>">
 <title>一人一句</title>
 <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,6 +72,10 @@ function goTopEx() {
 	if(types==null){
 		types=new ArrayList<ArrayList<Type>>();
 	}
+	
+	List<Activity> acts=(List<Activity>)session.getAttribute("acts");
+	if(acts==null)
+		acts=new ArrayList<Activity>();
 	%>
 <body>
 	<!--onLoad="scrollTo(0,500)-->
@@ -81,7 +93,7 @@ function goTopEx() {
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
 		style="background-color:#ededed; margin:0px 0px 0px 0px;">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="main.jsp" style="font-family: SimHei;">一人一句</a>
+		<a class="navbar-brand" href="readStart.action" style="font-family: SimHei;">一人一句</a>
 	</div>
 	<div>
 		<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
@@ -107,13 +119,26 @@ function goTopEx() {
 
 	<div id="myCarousel" class="carousel slide"
 		style="margin-top: 0px; padding-top: 50px; height: 100%; background-color: #ededed">
-		<!-- 轮播（Carousel）指标 -->
 		<ol class="carousel-indicators">
+		<%if(acts.size()==0){ %>
+		<!-- 轮播（Carousel）指标 -->
+		
 			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 			<li data-target="#myCarousel" data-slide-to="1"></li>
+		
+		<%}else{
+			int j=0;
+			for(;j<acts.size();j++){
+				if(j==0){
+			%>
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<%}else{ %>
+			<li data-target="#myCarousel" data-slide-to="<%=j%>"></li>
+		<%}} }%>
 		</ol>
 		<!-- 轮播（Carousel）项目 -->
 		<div class="carousel-inner">
+			<%if(acts.size()==0){ %>
 			<div class="item active">
 				<p style="text-align: center; margin: auto">
 					<img src="pics\logopic.png" height="100%" alt="First slide">
@@ -124,6 +149,26 @@ function goTopEx() {
 					<img src="pics\main_pic2.jpeg" height="100%" alt="Second slide">
 				</p>
 			</div>
+			<%}else{ %>
+			
+			<%for(int i=0;i<acts.size();i++){
+					Activity oneA=acts.get(i);
+					if(i==0){
+			%>
+			<div class="item active">
+				<p style="text-align: center; margin: auto">
+				<a href="//<%=oneA.getUrl() %>" title=<%=oneA.getString() %>><img src="getPic.action?path=<%=oneA.getPic()%>" height="100%" alt="Second slide"  /></a>
+				</p>
+			</div>
+			<%}else{ %>
+			<div class="item">
+				<p style="text-align: center; margin: auto">
+				<a href="//<%=oneA.getUrl() %>" title=<%=oneA.getString() %>><img src="getPic.action?path=<%=oneA.getPic()%>" height="100%" alt="Second slide"/></a>
+				</p>
+			</div>
+			<%}} %>
+			
+			<%}%>
 		</div>
 	</div>
 

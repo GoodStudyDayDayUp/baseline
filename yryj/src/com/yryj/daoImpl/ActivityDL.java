@@ -3,7 +3,9 @@ package com.yryj.daoImpl;
 import java.io.File;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Morphia;
@@ -37,12 +39,7 @@ public class ActivityDL implements ActivityDao{
 			mongo = new Mongo();
 			Datastore ds=mor.createDatastore(mongo, dbs);
 			List<Activity> ts=ds.createQuery(Activity.class).order("-id").asList();
-			long id = 0;
-			if(ts.size()>0)
-				id=ts.get(ts.size()-1).getId()+1;
-			act.setId(id);
-
-			ds.save(act);
+			
 			
 			DB db=mongo.getDB(dbs);
 			File imageFile=new File(act.getPic());
@@ -50,6 +47,14 @@ public class ActivityDL implements ActivityDao{
 			GridFSInputFile gfsFile=gfsPhoto.createFile(imageFile);
 			gfsFile.setFilename(act.getPic());
 			gfsFile.save();
+			
+			long id = 0;
+			if(ts.size()>0)
+				id=ts.get(ts.size()-1).getId()+1;
+			act.setId(id);
+
+			ds.save(act);
+			
 			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -97,37 +102,69 @@ public class ActivityDL implements ActivityDao{
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public GridFSDBFile writePicFileByPicName(String pic){
+		
+		try {
+			Morphia mor=new Morphia();
+			Mongo mongo=new Mongo();
+			
+			DB db=mongo.getDB(dbs);
+			GridFS gfsPhoto=new GridFS(db,Format.PICSTORE);
+			GridFSDBFile iOutput=gfsPhoto.findOne(pic);
+
+			return iOutput;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null; 
+		
+	}
+	
 
 	@Override
-	public List<Object> find(long id) {
+	public Activity find(long id) {
 		// TODO Auto-generated method stub
 		try {
 			Morphia mor=new Morphia();
 			Mongo mongo=new Mongo();
 			Datastore ds=mor.createDatastore(mongo, dbs);
 			Activity act=ds.find(Activity.class,"id",id).get();
-			
-			DB db=mongo.getDB(dbs);
-			GridFS gfsPhoto=new GridFS(db,Format.PICSTORE);
-			GridFSDBFile iOutput=gfsPhoto.findOne(act.getPic());
-			List<Object> objects=new ArrayList<Object>();
-			
-			objects.add(act);
-			objects.add(iOutput);
-			
-			return objects;
+			return act;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return null;
 	}
+	
+	
+	
+	
 	public List<Activity> getAll(){
 		try {
 			Morphia mor=new Morphia();
 			Mongo mongo=new Mongo();
 			Datastore ds=mor.createDatastore(mongo, dbs);
 			return ds.find(Activity.class).asList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	@Override
+	public List<Activity> getAllLiveAct() {
+		// TODO Auto-generated method stub
+		try {
+			Morphia mor=new Morphia();
+			Mongo mongo=new Mongo();
+			Datastore ds=mor.createDatastore(mongo, dbs);
+			return ds.find(Activity.class,"state",1).asList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

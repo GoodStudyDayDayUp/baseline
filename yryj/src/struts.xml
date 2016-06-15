@@ -58,6 +58,12 @@
 				<result name="success" type="chain">readStart</result>
 				<result name="error">/login.jsp</result>
 			</action>
+			<action name="getActivity" class="com.yryj.action.ActivityAction" method="getAllActivity">
+				<result name="success" >/main.jsp</result>
+			</action>
+			<action name="getPic" class="com.yryj.action.ActivityAction" method="getActivityPic">
+			</action>
+			
 				<action name="update" class="com.yryj.action.UserAction" method="updateUser">
 				<result name="success">/main.jsp</result>
 				<result name="error">/login.jsp</result>
@@ -106,7 +112,7 @@
 				<result name="login">/login.jsp</result>
 			</action>
 			<action name="readStart" class="com.yryj.action.ChapterAction" method="readStart">
-				<result name="success">/main.jsp</result>
+				<result name="success" type="chain">getActivity</result>
 			</action>	
 			<action name="startTree"  class="com.yryj.action.ChapterAction" method="readStart">
 				<result name="success">/main-tree.jsp</result>

@@ -21,6 +21,7 @@
 		webUser=new User();
 	}
 	String msg=(String)session.getAttribute("msg")==null?" ":(String)session.getAttribute("msg");
+	
 	%>
 
 <body style="background-color: #EDEDED">
