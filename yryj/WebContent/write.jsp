@@ -71,15 +71,11 @@ a:active {
 					</ul>
 					<%}else{ %>
 					<a href="beforelogin.action"  >
-					登录
-					</a>
-					<%} %>
-					<li><a href="logout.action">注销</a></li>
-				</ul> <%}else{ %> <a href="beforelogin.action"> 登录 </a> <%} %>
+					登录 </a> <%} %>
 			</li>
 		</ul>
 		<p class="navbar-text navbar-right" style="font-family: SimHei;">
-			<a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事开头</a>
+			<a href="createStory.action"><span class="glyphicon glyphicon-plus" />添加故事开头</a>
 		</p>
 	</div>
 	</nav>

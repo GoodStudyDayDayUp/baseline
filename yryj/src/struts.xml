@@ -129,6 +129,9 @@
 			<action name="turnStory" class="com.yryj.action.ChapterAction" method="getLeftOrRight">
 				<result name="success">/read.jsp</result>
 			</action>
+			<action name="createStory" class="com.yryj.action.ChapterAction" method="prepareWriteStart">
+				<result name="success">/creat_story.jsp</result>
+			</action>
 			
 			
 			<action name="setLove" class="com.yryj.action.RelationAction" method="setLove">

@@ -244,18 +244,6 @@ public class ChapterAction extends ActionSupport {
 				ArrayList<ArrayList<Type>> types = new ArrayList<ArrayList<Type>>();
 				ArrayList<Type> style=new ArrayList<Type>();
 				TypeManager typeManager=new TypeML();
-							
-				//			typeManager.save(new Type(0,1,"小说"));
-				//			typeManager.save(new Type(1,1,"散文"));
-				//			typeManager.save(new Type(2,1,"戏剧"));
-				//			typeManager.save(new Type(3,1,"诗歌"));
-				//			typeManager.save(new Type(4,1,"话剧"));
-				//			typeManager.save(new Type(5,2,"武侠"));
-				//			typeManager.save(new Type(6,2,"玄幻"));
-				//			typeManager.save(new Type(7,2,"神话"));
-				//			typeManager.save(new Type(8,2,"言情"));
-				//			typeManager.save(new Type(9,2,"现代"));
-
 
 				//加入一级和2级分类
 				style=(ArrayList<Type>) typeManager.getClassByMood(1);
@@ -263,17 +251,6 @@ public class ChapterAction extends ActionSupport {
 				style=(ArrayList<Type>) typeManager.getClassByMood(2);
 				types.add(style);
 				session.setAttribute("types", types);
-				
-				
-				//添加图片 测试
-//				Activity act=new Activity();
-//				act.setName("123");
-//				act.setOwner("abc");
-//				act.setPic("C:\Users\15871\Desktop\shenyeshitang\红香肠.jpg");
-//				act.setState(1);
-//				act.setUrl("www.baidu.com");
-//				ActivityManager am=new ActivityML();
-//				am.save(act);
 			}
 
 			return SUCCESS;
@@ -340,17 +317,27 @@ public class ChapterAction extends ActionSupport {
 				session.setAttribute("story", story);
 			}
 			
-//			HttpServletResponse response=ServletActionContext.getResponse();
-//			PrintWriter writer=response.getWriter();
-			
-//			writer.print(story);
-//			writer.close();
-			
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Format.WRONG;
 		}
+	}
+	
+	public String prepareWriteStart(){
+		HttpSession session=ServletActionContext.getRequest().getSession();	
+		//获取所有的类型
+		ArrayList<ArrayList<Type>> types = new ArrayList<ArrayList<Type>>();
+		ArrayList<Type> style=new ArrayList<Type>();
+		TypeManager typeManager=new TypeML();
+
+		//加入一级和2级分类
+		style=(ArrayList<Type>) typeManager.getClassByMood(1);
+		types.add(style);
+		style=(ArrayList<Type>) typeManager.getClassByMood(2);
+		types.add(style);
+		session.setAttribute("types", types);
+		return SUCCESS;
 	}
 
 }
