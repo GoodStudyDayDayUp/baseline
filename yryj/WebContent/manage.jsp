@@ -109,7 +109,7 @@ background: #ffffff;behavior: url(/PIE.htc);
 			</li>
 		</ul>
 		<p class="navbar-text navbar-right" style="font-family: SimHei;">
-			<a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事</a>
+			<a href="createStory.action"><span class="glyphicon glyphicon-plus" />添加故事</a>
 		</p>
 	</div>
 	</nav>

@@ -94,7 +94,7 @@ window.onload = function() {
 			</ul>
 			<p class="navbar-text navbar-right"
 				style="font-family: SimHei; margin-right: 20px;">
-				<a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事
+				<a href="createStory.action"><span class="glyphicon glyphicon-plus" />添加故事
 				</a>
 			</p>
 		</div>
