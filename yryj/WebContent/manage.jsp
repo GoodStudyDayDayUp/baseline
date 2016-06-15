@@ -337,8 +337,8 @@ background: #ffffff;behavior: url(/PIE.htc);
 												.html(
 														'<input type="text" style="border-top:none;border-left:none; border-right:none; outline:none;margin-top:12px;" size="7"  id="newClass" placeholder="新分类"/>'+
 														'<div style="margin-bottom:-10px; margin-top:-20px;">'+ 
-														'<a href="javascript:;" id="confirm1lCategory"><span class="glyphicon glyphicon-ok-circle" style="font-size:20px;margin-right:20px;"/></a>'+
-														'<a href="javascript:;" id="cancel1lCategory" ><span class="glyphicon glyphicon-remove-circle" style="font-size:20px;margin-top:20px;" /></a></div>');
+														'<a href="javascript:;" id="confirm2lCategory"><span class="glyphicon glyphicon-ok-circle" style="font-size:20px;margin-right:20px;"/></a>'+
+														'<a href="javascript:;" id="cancel2lCategory" ><span class="glyphicon glyphicon-remove-circle" style="font-size:20px;margin-top:20px;" /></a></div>');
 									} else {
 										alert("请先保存当前修改！");
 									}
