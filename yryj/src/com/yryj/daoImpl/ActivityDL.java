@@ -48,10 +48,6 @@ public class ActivityDL implements ActivityDao{
 			gfsFile.setFilename(act.getPic());
 			gfsFile.save();
 			
-//			String fileName=act.getPic();
-//			String[] subName=fileName.split("\\\\");
-//			String picName=subName[subName.length-1];
-//			act.setPic(picName);
 			long id = 0;
 			if(ts.size()>0)
 				id=ts.get(ts.size()-1).getId()+1;
@@ -108,7 +104,7 @@ public class ActivityDL implements ActivityDao{
 	}
 	
 	
-	public void writePicFileByPicName(String pic){
+	public GridFSDBFile writePicFileByPicName(String pic){
 		
 		try {
 			Morphia mor=new Morphia();
@@ -117,14 +113,14 @@ public class ActivityDL implements ActivityDao{
 			DB db=mongo.getDB(dbs);
 			GridFS gfsPhoto=new GridFS(db,Format.PICSTORE);
 			GridFSDBFile iOutput=gfsPhoto.findOne(pic);
-			
-			File picFile = new File(pic);
-			iOutput.writeTo(picFile);
+
+			return iOutput;
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
+		return null; 
 		
 	}
 	

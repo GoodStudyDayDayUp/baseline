@@ -3,6 +3,7 @@ package com.yryj.serviceImpl;
 import java.util.List;
 import java.util.Map;
 
+import com.mongodb.gridfs.GridFSDBFile;
 import com.yryj.dao.ActivityDao;
 import com.yryj.daoImpl.ActivityDL;
 import com.yryj.model.Activity;
@@ -46,8 +47,8 @@ public class ActivityML implements ActivityManager{
 		return am.getAll();
 	}
 	
-	public void writePicFileByPicName(String pic){
+	public GridFSDBFile writePicFileByPicName(String pic){
 		am=new ActivityDL();
-		am.writePicFileByPicName(pic);
+		return am.writePicFileByPicName(pic);
 	}
 }

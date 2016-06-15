@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.mongodb.gridfs.GridFSDBFile;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yryj.model.Activity;
 import com.yryj.pub.Format;
@@ -30,12 +31,7 @@ public class ActivityAction extends ActionSupport {
 		//GridFSDBFile
 //		List<Map<String,Object>> activities=new ArrayList<Map<String,Object>>();
 		ActivityManager am=new ActivityML();
-		List<Activity> acts=am.getAll();
-		HttpServletRequest request = ServletActionContext.getRequest();   
-		for(Activity a:acts){
-			am.writePicFileByPicName(a.getPic());
-//			activities.add(indexActivity);
-		}
+		List<Activity> acts=am.getAll();  
 		HttpSession session=ServletActionContext.getRequest().getSession();
 		session.setAttribute("acts", acts);
 		return SUCCESS;
@@ -44,24 +40,16 @@ public class ActivityAction extends ActionSupport {
 	public String getActivityPic(){
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response=ServletActionContext.getResponse(); 
-		ServletOutputStream out = null;
-		FileInputStream ips=null;
-		
+		ServletOutputStream out = null;		
 		String path = request.getParameter("path");
-		File oneFile=new File(path);
-		
+		ActivityManager am=new ActivityML();
+		GridFSDBFile gridFile=am.writePicFileByPicName(path);
 		try {
-			ips = new FileInputStream(oneFile);
-			response.setContentType("image/jpeg"); 
 			out=response.getOutputStream();
-			
-			int i=0;
-			byte[] buffer=new byte[4096];
-			while((i=ips.read(buffer))!=-1){
-				out.write(buffer,0,i);
-			}
+			response.reset();
+	        response.setContentType("image/jpg");//»ògif
+			gridFile.writeTo(out);
 			out.flush();
-			ips.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,16 +58,11 @@ public class ActivityAction extends ActionSupport {
 			if(out!=null){
 					out.close();
 			}
-			if(ips!=null){
-				ips.close();
-			}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		
-		
 		return null;
 	}
 }

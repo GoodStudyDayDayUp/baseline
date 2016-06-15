@@ -80,7 +80,7 @@ background: #ffffff;behavior: url(/PIE.htc);
 	<nav class="navbar navbar-default" role="navigation"
 		style=" margin:0px 0px 0px 0px;">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="main.jsp" style="font-family: SimHei;">一人一句</a>
+		<a class="navbar-brand" href="readStart.action" style="font-family: SimHei;">一人一句</a>
 	</div>
 	<div>
 		<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
@@ -409,9 +409,9 @@ background: #ffffff;behavior: url(/PIE.htc);
 						<tr>
 							<td><p id="id" ><%=activity.getId() %></p></td>
 							<td><p id="name"><%=activity.getName() %></p></td>
-							<td><a href="<%=activity.getPic() %>"><%=activity.getPic() %></a></td>
+							<td><a href="getPic.action?path=<%=activity.getPic()%>"><%=activity.getPic() %></a></td>
 							<td><p><%=activity.getOwner() %></p></td>
-							<td><a href="<%=activity.getUrl() %>" name="urlpath"><%=activity.getUrl() %></a></td>
+							<td><a href="//<%=activity.getUrl() %>" name="urlpath"><%=activity.getUrl() %></a></td>
 							<%if (activity.getState()==1){%>
 								<td><p id="status">进行中</p></td>
 							<%}else {%>

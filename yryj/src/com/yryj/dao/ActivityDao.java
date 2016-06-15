@@ -3,6 +3,7 @@ package com.yryj.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.mongodb.gridfs.GridFSDBFile;
 import com.yryj.model.Activity;
 import com.yryj.model.Type;
 
@@ -17,5 +18,5 @@ public interface ActivityDao {
 	
 	public List<Activity> getAll();
 	
-	public void writePicFileByPicName(String pic);
+	public GridFSDBFile writePicFileByPicName(String pic);
 }
