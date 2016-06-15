@@ -47,11 +47,7 @@
 						<div class="row">
 							<div class="col-lg-8 col-lg-offset-2 col-md-4 col-md-offset-4  col-sm-6 col-sm-offset-3">
 								<div class="form-group row">
-									<%if(webUser.getPassword()!=null&&webUser.getPassword()!="") {%>
-									<input type="password" value=<%=webUser.getPassword() %>  id="password" name="password" class="form-control"  onchange="changemsg(this)"/>
-									<%}else{ %>
 									<input type="password" id="password" name="password" class="form-control" placeholder="密码"/>
-									<%} %>
 								</div>
                             </div>
 						</div>

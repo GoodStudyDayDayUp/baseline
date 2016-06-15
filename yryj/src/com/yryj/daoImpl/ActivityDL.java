@@ -140,10 +140,6 @@ public class ActivityDL implements ActivityDao{
 
 		return null;
 	}
-	
-	
-	
-	
 	public List<Activity> getAll(){
 		try {
 			Morphia mor=new Morphia();

@@ -197,7 +197,7 @@ window.onload = function() {
 					<p style="font-size:10px;color:red"  id="oldpwd_wrong"></p>
 					<p>新密码</p><div class="form-group" style="margin-top:-10px;"><input type="password"  class="form-control" name="password"  placeholder="3-10位" /></div>
 					<p>确认新密码</p><div class="form-group" style="margin-top:-10px;"><input type="password"  class="form-control" name="password2" placeholder="3-10位"/></div>
-					<button type="button" class="btn btn-default" style="">更新密码</button>
+					<input type="submit" class="btn btn-default" style="" value="更新密码">
 				</form> 
 				
 				</div>

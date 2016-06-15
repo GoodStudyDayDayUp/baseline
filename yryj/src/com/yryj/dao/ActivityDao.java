@@ -17,6 +17,7 @@ public interface ActivityDao {
 	public Activity find(long id);
 	
 	public List<Activity> getAll();
+
 	
 	public GridFSDBFile writePicFileByPicName(String pic);
 	

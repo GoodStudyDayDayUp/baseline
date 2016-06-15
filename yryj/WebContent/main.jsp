@@ -125,7 +125,6 @@ function goTopEx() {
 		
 			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 			<li data-target="#myCarousel" data-slide-to="1"></li>
-		
 		<%}else{
 			int j=0;
 			for(;j<acts.size();j++){

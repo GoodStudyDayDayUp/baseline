@@ -18,6 +18,7 @@ import com.yryj.model.Draft;
 import com.yryj.model.Relations;
 import com.yryj.model.User;
 import com.yryj.pub.Format;
+import com.yryj.pub.MD5;
 import com.yryj.sercvice.ActivityManager;
 import com.yryj.sercvice.ChapterManager;
 import com.yryj.sercvice.RelationsManager;
@@ -57,7 +58,7 @@ public class UserAction extends ActionSupport {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = MD5.GetMD5Code(password);
 	}
 
 	public String getEmail() {
@@ -286,7 +287,7 @@ public class UserAction extends ActionSupport {
 				break;
 			case 2:
 				//ÐÞ¸ÄÃÜÂë
-				if(user.getPassword()!=password&&password!=null&&password!=""){
+				if(user.getPassword()!=MD5.GetMD5Code(password)&&password!=null&&password!=""){
 					user.setPassword(password);
 				}
 
@@ -304,7 +305,7 @@ public class UserAction extends ActionSupport {
 				String id=request.getParameter("id");
 				int userId=Integer.valueOf(id);
 				user=userManager.find(userId);
-				user.setPassword(password2);
+				user.setPassword(MD5.GetMD5Code(password2));
 				userManager.update(user);
 				session.setAttribute("user", user);
 				return "mainPage";
