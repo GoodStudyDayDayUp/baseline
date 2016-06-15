@@ -142,9 +142,9 @@ a:active {
 			<div class="col-lg-2 col-md-2 col-xs-2" ><div class=" <%=types.get(0).size()+i %> root_2l " style=""><p style="display:table-cell; vertical-align:middle;"><%=types.get(1).get(i).getContent() %></p></div></div>
 			<%} %>	
 			</div>
-			</a>
+			</div>
 
-			<div class="col-lg-8 col-lg-offset-2 2level"
+<!--		<div class="col-lg-8 col-lg-offset-2 2level"
 				style="background-color: #fff; display: none;">
 				<p style="margin-top: 10px; font-family: SimHei;">请选择二级分类</p>
 
@@ -158,7 +158,7 @@ a:active {
 					<%} %>
 				</div>
 
-			</div>
+			</div> -->
 
 			<div class="col-lg-8 col-lg-offset-2" style="background-color: #fff;">
 				<p style="margin-top: 10px; font-family: SimHei;">添加关键字</p>
