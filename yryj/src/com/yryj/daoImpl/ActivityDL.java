@@ -3,7 +3,9 @@ package com.yryj.daoImpl;
 import java.io.File;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Morphia;
@@ -99,7 +101,7 @@ public class ActivityDL implements ActivityDao{
 	}
 
 	@Override
-	public List<Object> find(long id) {
+	public Map<String,Object> find(long id) {
 		// TODO Auto-generated method stub
 		try {
 			Morphia mor=new Morphia();
@@ -110,10 +112,26 @@ public class ActivityDL implements ActivityDao{
 			DB db=mongo.getDB(dbs);
 			GridFS gfsPhoto=new GridFS(db,Format.PICSTORE);
 			GridFSDBFile iOutput=gfsPhoto.findOne(act.getPic());
-			List<Object> objects=new ArrayList<Object>();
+			Map<String,Object> objects=new HashMap<String,Object>();
 			
-			objects.add(act);
-			objects.add(iOutput);
+			
+//			if(iOutput != null){  
+//					System.out.println("filename:" + iOutput.getFilename());  
+//                    System.out.println("md5:" + iOutput.getMD5());  
+//                    System.out.println("length:" + iOutput.getLength());  
+//                    System.out.println("uploadDate:" + iOutput.getUploadDate());  
+//    
+//                    System.out.println("--------------------------------------");  
+//                    iOutput.writeTo(System.out);  
+//			}
+
+			String fileName=act.getPic();
+			String[] subName=fileName.split("\\\\");
+			
+			File picFile = new File(subName[subName.length-1]);
+			iOutput.writeTo(picFile);
+			objects.put("activity",act);
+			objects.put("pic",picFile);
 			
 			return objects;
 		} catch (Exception e) {
@@ -122,6 +140,10 @@ public class ActivityDL implements ActivityDao{
 
 		return null;
 	}
+	
+	
+	
+	
 	public List<Activity> getAll(){
 		try {
 			Morphia mor=new Morphia();

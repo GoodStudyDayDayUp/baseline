@@ -1,6 +1,7 @@
 package com.yryj.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yryj.dao.ActivityDao;
 import com.yryj.daoImpl.ActivityDL;
@@ -33,10 +34,15 @@ public class ActivityML implements ActivityManager{
 	}
 
 	@Override
-	public List<Object> find(long id) {
+	public  Map<String,Object> find(long id) {
 		// TODO Auto-generated method stub
 		am=new ActivityDL();
 		return am.find(id);
 	}
 
+	
+	public List<Activity> getAll(){
+		am=new ActivityDL();
+		return am.getAll();
+	}
 }

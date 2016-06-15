@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
+	import="java.io.File"
 	import="com.yryj.model.*" import="java.util.*" import="com.yryj.pub.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -64,6 +65,10 @@ function goTopEx() {
 	if(types==null){
 		types=new ArrayList<ArrayList<Type>>();
 	}
+	
+	List<Activity> acts=(List<Activity>)session.getAttribute("acts");
+	if(acts==null)
+		acts=new ArrayList<Activity>();
 	%>
 <body>
 	<!--onLoad="scrollTo(0,500)-->
@@ -114,6 +119,7 @@ function goTopEx() {
 		</ol>
 		<!-- 轮播（Carousel）项目 -->
 		<div class="carousel-inner">
+			<%if(acts.size()==0){ %>
 			<div class="item active">
 				<p style="text-align: center; margin: auto">
 					<img src="pics\logopic.png" height="100%" alt="First slide">
@@ -124,6 +130,15 @@ function goTopEx() {
 					<img src="pics\main_pic2.jpeg" height="100%" alt="Second slide">
 				</p>
 			</div>
+			<%}else{ 
+				for(Activity oneA:acts){
+			%>
+			<div class="item">
+				<p style="text-align: center; margin: auto">
+					<a href="<%=oneA.getUrl() %>"><img src='<%=oneA.getPic() %>' height="100%" alt="Second slide"></a>
+				</p>
+			</div>
+			<%} }%>
 		</div>
 	</div>
 

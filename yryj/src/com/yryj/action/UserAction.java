@@ -2,6 +2,7 @@ package com.yryj.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,14 +10,19 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yryj.dao.ActivityDao;
+import com.yryj.daoImpl.ActivityDL;
+import com.yryj.model.Activity;
 import com.yryj.model.Chapter;
 import com.yryj.model.Draft;
 import com.yryj.model.Relations;
 import com.yryj.model.User;
 import com.yryj.pub.Format;
+import com.yryj.sercvice.ActivityManager;
 import com.yryj.sercvice.ChapterManager;
 import com.yryj.sercvice.RelationsManager;
 import com.yryj.sercvice.UserManager;
+import com.yryj.serviceImpl.ActivityML;
 import com.yryj.serviceImpl.ChapterML;
 import com.yryj.serviceImpl.DraftML;
 import com.yryj.serviceImpl.RelationsML;
