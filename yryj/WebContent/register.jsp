@@ -72,7 +72,7 @@ if(webUser==null){
 								<div class="form-group row" >
 									<%if(webUser.getPassword()!=null&&webUser.getPassword()!="") {%>
 									<input type="password" id="password" name="password"
-										onchange="changemsg(this)" value=<%=webUser.getPassword() %>
+										onchange="changemsg(this)" value=<%=pass2 %>
 										class="form-control" placeholder="密码" />
 									<%}else{ %>
 									<input type="password" id="password" name="password"
@@ -100,15 +100,11 @@ if(webUser==null){
 						</div>
 
 						<div class="form-group row">
-							<div class="col-lg-8 col-lg-offset-2">
+							<div class="col-lg-8 col-lg-offset-2 col-md-4 col-md-offset-4  col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
 								<h5 style="color: red;" id="msgs"><%=msg%></h5>
 							</div>
 						</div>
 
-						<!--<div class="form-group row">
-							<center><button type="submit" class="btn btn-primary col-lg-offset-5">注册</button>
-							<a href="beforelogin.action" class="col-lg-offset-1">已经有账号</a></center>
-						</div>-->
 						
 						<div class="row">
 							<div class="col-lg-8 col-lg-offset-2 col-md-4 col-md-offset-4  col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">

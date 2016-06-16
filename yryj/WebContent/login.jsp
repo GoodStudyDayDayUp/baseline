@@ -52,6 +52,12 @@
                             </div>
 						</div>
 						
+						<div class="form-group row">
+						<div class="col-lg-8 col-lg-offset-1 col-lg-offset-2 col-md-4 col-md-offset-4  col-sm-6 col-sm-offset-3"> 
+						<h5 style="color:red;" id="msgs"><%=msg %></h5>
+						</div>
+						</div>
+						
 						<div class="row">
 							<div class="col-lg-8 col-lg-offset-2 col-md-4 col-md-offset-4  col-sm-6 col-sm-offset-3">
 								<a href="forget_step1.jsp" style="margin-top:-8px;margin-left:-14px;">忘记密码</a>
@@ -63,49 +69,7 @@
 				</div>
 			 </section> 
 		</div>	
-	</div>		
-				<!--<div class="col-lg-6 col-lg-offset-3">
-				<form id="defaultForm" method="post" action="login.action">
-
-					<div class="form-group row">
-						<div class="col-lg-8 col-lg-offset-1">
-							<%if(webUser.getName()!=null&&webUser.getName()!="") {%>
-							<input type="text" value=<%=webUser.getName() %> id="name"
-								name="name" class="form-control col-lg-5"
-								onchange="changemsg(this)" />
-						</div>
-						<%}else{ %>
-						<input type="text" id="name" name="name"
-							class="form-control col-lg-5" placeholder="用户名"
-							onchange="changemsg(this)" />
-					</div>
-					<%} %>
-					<a href="beforeregister.action">还没有账号？</a>
-			</div>
-                    	<div class="form-group row">
-                         	<div class="col-lg-8 col-lg-offset-1"> 
-                         	<%if(webUser.getPassword()!=null&&webUser.getPassword()!="") {%>
-                         	<input type="password" value=<%=webUser.getPassword() %>  id="password" name="password" class="form-control"  onchange="changemsg(this)"/></div>
-                         	<%}else{ %>
-                         	<input type="password"  id="password" name="password" class="form-control" placeholder="密码" onchange="changemsg(this)"/></div>
-                         	<%} %>
-								<a href="forget_step1.jsp" class="display:block">忘记密码</a>
-               			</div>
-
-						<div class="form-group row">
-						<div class="col-lg-8 col-lg-offset-1"> 
-						<h5 style="color:red;" id="msgs"><%=msg %></h5>
-						</div>
-						</div>
-						
-               			<div class="form-group ">
-							<center>
-                       		<input type="checkbox" name="rememberme" class="col-lg-offset-1"/>记住我  
-							<button type="submit" class="btn btn-primary col-lg-offset-3">登录</button> </center>
-               			</div>
-	             </form>
-	             -->
-            
+	</div>		          
 		
 	    
 	

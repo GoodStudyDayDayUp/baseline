@@ -77,6 +77,14 @@ background: #ffffff;behavior: url(/PIE.htc);
 		@SuppressWarnings("unchecked")
 		List<User> allUser = (List<User>) session.getAttribute("allUsers");
 	%>
+	
+	<script type="text/javascript">
+	window.onload =function onload(){
+		<%if(user==null){%>
+			window.location.href='login.jsp';
+		<%}%>
+	};
+	</script>
 	<nav class="navbar navbar-default" role="navigation"
 		style=" margin:0px 0px 0px 0px;">
 	<div class="navbar-header">
@@ -223,21 +231,6 @@ background: #ffffff;behavior: url(/PIE.htc);
 												alert("添加成功");//result.d为后台返回的参数'
 											}
 										})
-			<%-- <%if(request.getParameter("className")!=null){
-						            	String location = request.getParameter("location");
-						             	if(location==null){
-											Type type = new Type(); 
-									 		type.setContent(request.getParameter("className")); 
-									 		type.setMood(1); 
-									 		typeDao.save(type);
-						             	}
-										else{
-						            		String[] str = location.split("_");
-						            		Type type=typeDao.findByMoodAndIndex((long)1,2);
-						            		type.setContent(request.getParameter("className"));
-						            		typeDao.update(type);
-										}
-									}%> --%>	
 									}									
 								});
 

@@ -80,7 +80,7 @@ public class Activity implements java.io.Serializable {
 	}
 	
 	public String getString(){
-		return "活动主题："+this.name + "\n举办方："+this.owner+"\n活动链接："+this.url;
+		return "活动主题："+this.name + "\t举办方："+this.owner+"\t活动链接："+this.url;
 	}
 	
 	

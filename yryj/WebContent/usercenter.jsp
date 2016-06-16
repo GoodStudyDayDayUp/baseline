@@ -193,10 +193,10 @@ window.onload = function() {
 					</form>
 				<!--             !!!!!! 下面是新的修改密码的form！！！！！！    -->
 				<form id="changePwd" action="updateUser.action?mood=2" method="post">
-					<p>原有密码</p><div class="form-group" style="margin-top:-10px;"><input type="text" class="form-control"  name="oldpwd"  placeholder="原密码" onchange="checkPass(this)" /></div>
-					<p style="font-size:10px;color:red"  id="oldpwd_wrong"></p>
+					<p>原有密码</p><div class="form-group" style="margin-top:-10px;"><input type="password" class="form-control"  name="oldpwd"  placeholder="原密码" onchange="changemsg(this)" /></div>
 					<p>新密码</p><div class="form-group" style="margin-top:-10px;"><input type="password"  class="form-control" name="password"  placeholder="3-10位" /></div>
 					<p>确认新密码</p><div class="form-group" style="margin-top:-10px;"><input type="password"  class="form-control" name="password2" placeholder="3-10位"/></div>
+					<p style="font-size:10px;color:red"  id="oldpwd_wrong"><h5 style="color:red;" id="msgs"><%=msg %></h5></p>
 					<input type="submit" class="btn btn-default" style="" value="更新密码">
 				</form> 
 				
@@ -204,13 +204,11 @@ window.onload = function() {
 			</div>
 			
 			<script type="text/javascript">
-			function checkPass(obj){
-				var pass=obj.value;
-				if(pass!=<%=user.getPassword()%>){
-					$("#oldpwd_wrong").html("密码错误");
-				}else{
-					$("#oldpwd_wrong").html(" ");
-				}
+			function changemsg(obj){
+				$("#msgs").html(" ");
+			}
+			window.onload =function onload(){
+				$("#msgs").html('<%=msg %>');
 			}
 			</script>
 					<!--        ！！！！！！！在此处添加了密码验证 ！！！！！！！！！！！！                            -->

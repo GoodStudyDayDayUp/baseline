@@ -43,7 +43,16 @@ public class UserAction extends ActionSupport {
 	private String password2;
 	private UserManager userManager;
 	private User thisUser;
+	private String oldpwd;
 
+	
+	public String getOldpwd(){
+		return oldpwd;
+	}
+	
+	public void setOldpwd(String oldpwd){
+		this.oldpwd=oldpwd;
+	}
 
 	public String getName() {
 		return name;
@@ -286,6 +295,11 @@ public class UserAction extends ActionSupport {
 				}
 				break;
 			case 2:
+				String oldPass=MD5.GetMD5Code(oldpwd);
+				if(!oldPass.equals(user.getPassword())){
+					session.setAttribute("msg", "Ô­ÃÜÂëÊäÈë´íÎó");
+					return ERROR;
+				}
 				//ĞŞ¸ÄÃÜÂë
 				if(user.getPassword()!=MD5.GetMD5Code(password)&&password!=null&&password!=""){
 					user.setPassword(password);
