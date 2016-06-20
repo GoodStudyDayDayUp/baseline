@@ -219,6 +219,11 @@ public class UserAction extends ActionSupport {
 						session.setAttribute("user", theUser);
 						session.setAttribute("msg", "");
 						session.setAttribute("webuser", user);
+						
+						if(Format.initPage==1)
+							return "write";
+						if(Format.initPage==2)
+							return "head";
 						return SUCCESS;
 					}
 					else{

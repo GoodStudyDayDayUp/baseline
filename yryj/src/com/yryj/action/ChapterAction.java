@@ -127,13 +127,14 @@ public class ChapterAction extends ActionSupport {
 				if(parent!=null&&header==null){
 					df.setParentId(parent.getId());					
 					Format.initPage=1;
+				}else{
+					Format.initPage=2;
 				}
 				session.setAttribute("draft", df);
 				session.setAttribute("msg", "登录之后才能发表文章~");
-				Format.initPage=2;
 				return "login";
 			}
-
+			Format.initPage=0;
 			//如果是草稿箱里面的，从草稿箱中删除对应草稿
 			Draft df=(Draft) session.getAttribute("draft");
 			chapterManager=new ChapterML();

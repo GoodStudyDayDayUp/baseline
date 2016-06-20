@@ -227,7 +227,7 @@ window.onload = function() {
 												stringLength: {
 													min: 3,
 													max: 10,
-													message: '用户名不能短于3位长于10位'
+													message: '原密码不短于3位长于10位'
 												},
 												notEmpty: {
 													message: '号码不能为空'
@@ -239,7 +239,7 @@ window.onload = function() {
 												stringLength: {
 													min: 3,
 													max: 10,
-													message: '用户名不能短于3位长于10位'
+													message: '新密码不能短于3位长于10位'
 												},
 												notEmpty: {
 													message: '不能为空'
@@ -248,13 +248,8 @@ window.onload = function() {
 										},
 										password2:{
 											validators:{
-												stringLength: {
-													min: 3,
-													max: 10,
-													message: '用户名不能短于3位长于10位'
-												},
 												identical: {
-													field: 'newpwd',
+													field: 'password',
 													message: '两次密码不一致'
 												},
 											},

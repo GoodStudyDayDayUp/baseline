@@ -173,7 +173,7 @@ if(webUser==null){
 							stringLength: {
 		                        min: 3,
 		                        max: 10,
-		                        message: '用户名不能短于3位长于10位'
+		                        message: '密码不能短于3位长于10位'
 		                    }
 		                }
 		            },
