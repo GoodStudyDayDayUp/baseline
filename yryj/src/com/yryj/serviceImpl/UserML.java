@@ -1,6 +1,7 @@
 package com.yryj.serviceImpl;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Session;
@@ -15,6 +16,7 @@ import com.yryj.daoImpl.UserDL;
 import com.yryj.model.MyAuthenticator;
 import com.yryj.model.User;
 import com.yryj.pub.Format;
+import com.yryj.pub.MD5;
 import com.yryj.sercvice.UserManager;
 
 public class UserML implements UserManager{
@@ -78,6 +80,8 @@ private UserDao userDao=null;
 		props.put("mail.smtp.port", Format.hostPort);			 //google使用465或587端口
 		props.put("mail.smtp.auth", "true");		// 使用验证
 		props.put("mail.debug", "true");
+		String key=MD5.GetMD5Code((new Date()).toString());
+		Format.sendEmailTooken.put(key, user.getId());
 		javax.mail.Session mailSession = javax.mail.Session.getInstance(props,new MyAuthenticator( Format.from, Format.fromUserPassword));
 		
 		try {
@@ -91,7 +95,7 @@ private UserDao userDao=null;
 
 		message.setSentDate(Calendar.getInstance().getTime());
 		message.setSubject( Format.subject);
-		String messageText=Format.messageStart+"?id="+user.getId()+Format.messageEnd;
+		String messageText=Format.messageStart+"?id="+key+Format.messageEnd;
 		message.setContent(messageText,  Format.messageType);
 		
 		Transport transport = mailSession.getTransport("smtp");

@@ -1,8 +1,10 @@
 package com.yryj.pub;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 
 public class Format {
+	public static HashMap<String,Object> sendEmailTooken=new HashMap<String,Object>();	
 	public static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	public static String WRONG="wrong";
 	public static String LOGIN="login";
@@ -107,5 +109,4 @@ public class Format {
 		}
 		return false;
 	}
-	
 }

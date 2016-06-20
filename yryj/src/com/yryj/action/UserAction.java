@@ -322,7 +322,9 @@ public class UserAction extends ActionSupport {
 			case 3:
 				//ĞŞ¸ÄÃÜÂë
 				String id=request.getParameter("id");
-				int userId=Integer.valueOf(id);
+				if(id==null)
+					return ERROR;
+				long userId=(long) Format.sendEmailTooken.get(id);
 				user=userManager.find(userId);
 				user.setPassword(MD5.GetMD5Code(password2));
 				userManager.update(user);
