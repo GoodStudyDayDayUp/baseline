@@ -88,7 +88,7 @@ text-decoration: none;
 					<ul class="dropdown-menu">
 						<li><a href="getInfo.action">个人主页</a></li>
 						<%if(user.getName().equals(Format.managerName)){ %>
-						<li><a href="manage.jsp">管理</a></li>
+						<li><a href="manage.action">管理</a></li>
 						<%} %>
 						<li><a href="logout.action">注销</a></li>
 					</ul>
@@ -99,7 +99,7 @@ text-decoration: none;
 					<%} %>
 				</li>
 			</ul>
-			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事</a></p>
+			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="createStory.action"><span class="glyphicon glyphicon-plus" />添加故事</a></p>
 		</div>
 	</nav>
 	
@@ -114,9 +114,9 @@ text-decoration: none;
 		</ul>
 		<br/>
 		<%if(index.equals("2")){ %>
-			<button onclick="location='setAttention.action?id=<%=person.getId()%>' " class="btn btn-info" > 关注TA </button>
+			<button onclick="location='setAttention.action?id=<%=person.getId()%>&mood=1' " class="btn btn-info" > 关注TA </button>
 	    <%}if(index.equals("1")){ %>
-			<button onclick="location='setAttention.action?id=<%=person.getId()%>' " class="btn btn-info" > 取消关注 </button>
+			<button onclick="location='setAttention.action?id=<%=person.getId()%>&mood=1' " class="btn btn-info" > 取消关注 </button>
 		<%} %>
 		</div>
 		<div class="col-lg-10 col-md-10 col-sm-9 col-xs-10" style="margin-top:20px;">
@@ -291,9 +291,9 @@ text-decoration: none;
 							</tr>
 							</table>
 							<%if(i2uDArray[i][4].equals("1")){ %>
-							<a href="setAttention.action?id=<%=i2uDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 取消关注 </button></a><%} %>
+							<a href="setAttention.action?id=<%=i2uDArray[i][0] %>&mood=1"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 取消关注 </button></a><%} %>
 							<%if(i2uDArray[i][4].equals("2")){ %>
-							<a href="setAttention.action?id=<%=i2uDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a><%} %>
+							<a href="setAttention.action?id=<%=i2uDArray[i][0] %>&mood=1"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注TA </button></a><%} %>
 							<%}%>
 							</li>
 							<%}%>
@@ -324,9 +324,9 @@ text-decoration: none;
 							</tr>
 							</table>
 							<%if(u2iDArray[i][4].equals("1")){ %>
-							<a href="setAttention.action?id=<%=u2iDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 取消关注 </button></a><%} %>
+							<a href="setAttention.action?id=<%=u2iDArray[i][0] %>&mood=1"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 取消关注 </button></a><%} %>
 							<%if(u2iDArray[i][4].equals("2")){ %>
-							<a href="setAttention.action?id=<%=u2iDArray[i][0] %>"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注 TA</button></a><%} %>
+							<a href="setAttention.action?id=<%=u2iDArray[i][0] %>&mood=1"><button class="btn btn-info" style="float:right;margin-top:-25px;"> 关注 TA</button></a><%} %>
 							<%}%>
 							</li>
 							<%}%>

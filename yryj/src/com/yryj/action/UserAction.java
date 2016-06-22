@@ -2,6 +2,7 @@ package com.yryj.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,14 +10,20 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yryj.dao.ActivityDao;
+import com.yryj.daoImpl.ActivityDL;
+import com.yryj.model.Activity;
 import com.yryj.model.Chapter;
 import com.yryj.model.Draft;
 import com.yryj.model.Relations;
 import com.yryj.model.User;
 import com.yryj.pub.Format;
+import com.yryj.pub.MD5;
+import com.yryj.sercvice.ActivityManager;
 import com.yryj.sercvice.ChapterManager;
 import com.yryj.sercvice.RelationsManager;
 import com.yryj.sercvice.UserManager;
+import com.yryj.serviceImpl.ActivityML;
 import com.yryj.serviceImpl.ChapterML;
 import com.yryj.serviceImpl.DraftML;
 import com.yryj.serviceImpl.RelationsML;
@@ -36,7 +43,16 @@ public class UserAction extends ActionSupport {
 	private String password2;
 	private UserManager userManager;
 	private User thisUser;
+	private String oldpwd;
 
+	
+	public String getOldpwd(){
+		return oldpwd;
+	}
+	
+	public void setOldpwd(String oldpwd){
+		this.oldpwd=oldpwd;
+	}
 
 	public String getName() {
 		return name;
@@ -51,7 +67,7 @@ public class UserAction extends ActionSupport {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = MD5.GetMD5Code(password);
 	}
 
 	public String getEmail() {
@@ -203,6 +219,11 @@ public class UserAction extends ActionSupport {
 						session.setAttribute("user", theUser);
 						session.setAttribute("msg", "");
 						session.setAttribute("webuser", user);
+						
+						if(Format.initPage==1)
+							return "write";
+						if(Format.initPage==2)
+							return "head";
 						return SUCCESS;
 					}
 					else{
@@ -279,8 +300,13 @@ public class UserAction extends ActionSupport {
 				}
 				break;
 			case 2:
+				String oldPass=MD5.GetMD5Code(oldpwd);
+				if(!oldPass.equals(user.getPassword())){
+					session.setAttribute("msg", "‘≠√‹¬Î ‰»Î¥ÌŒÛ");
+					return ERROR;
+				}
 				//–ﬁ∏ƒ√‹¬Î
-				if(user.getPassword()!=password&&password!=null&&password!=""){
+				if(user.getPassword()!=MD5.GetMD5Code(password)&&password!=null&&password!=""){
 					user.setPassword(password);
 				}
 
@@ -296,9 +322,11 @@ public class UserAction extends ActionSupport {
 			case 3:
 				//–ﬁ∏ƒ√‹¬Î
 				String id=request.getParameter("id");
-				int userId=Integer.valueOf(id);
+				if(id==null)
+					return ERROR;
+				long userId=(long) Format.sendEmailTooken.get(id);
 				user=userManager.find(userId);
-				user.setPassword(password2);
+				user.setPassword(MD5.GetMD5Code(password2));
 				userManager.update(user);
 				session.setAttribute("user", user);
 				return "mainPage";
@@ -419,7 +447,7 @@ public class UserAction extends ActionSupport {
 				session.setAttribute("msg", "«Îœ»µ«¬º");
 				return Format.LOGIN;
 			}
-			if(person.getId()==onlineUser.getId())
+			if(person!=null&&person.getId()==onlineUser.getId())
 				index="0";
 			else{
 				Relations userRelation1=rm.findByUserId(onlineUser.getId());
@@ -431,7 +459,7 @@ public class UserAction extends ActionSupport {
 				}
 				else{
 				String[] array1=userRelation1.getI2u().split("#");
-				if(Format.findInArray(array1,String.valueOf(person.getId()))==true)
+				if(person!=null&&Format.findInArray(array1,String.valueOf(person.getId()))==true)
 					index="1";
 				else
 					index="2";

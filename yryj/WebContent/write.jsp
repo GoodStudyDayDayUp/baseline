@@ -1,37 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" import="com.yryj.model.*"
-import="com.yryj.pub.*"
-import="java.util.Date"
-import="java.util.*"
-pageEncoding="utf-8"
-%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	import="com.yryj.model.*" import="com.yryj.pub.*"
+	import="java.util.Date" import="java.util.*" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-		<title>新加一段文字</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="css/bootstrap.css"/>
-		<link rel="stylesheet" href="css/style.css"/>
-		<link rel="stylesheet" href="css/bootstrap.min.css"/>
-		<link rel="stylesheet" href="dist/css/wangEditor.min.css"/>
+<title>新加一段文字</title>
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="dist/css/wangEditor.min.css" />
 		<script src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="dist/js/wangEditor.min.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<style>
-			a:link {
-text-decoration: none;
-color: #666666;
+a:link {
+	text-decoration: none;
+	color: #666666;
 }
+
 a:visited {
-text-decoration: none;
+	text-decoration: none;
 }
+
 a:hover {
-text-decoration: none;
+	text-decoration: none;
 }
+
 a:active {
-text-decoration: none;
+	text-decoration: none;
 }
-		</style>
+</style>
 </head>
 <%
 	User user=(User)session.getAttribute("user"); 
@@ -43,14 +43,13 @@ text-decoration: none;
 		parent=new Chapter();
 	%>
 <body>
-<script type="text/javascript">
+	<script type="text/javascript">
 	window.onload =function onload(){
 		<%if(parent.getContent()==""){%>
 			window.location.href='404error.jsp';
 		<%}%>
 	}
 	</script>
-
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" background-color:#ededed; margin:0px 0px 0px 0px;">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="read.jsp" style="padding-top:17px;"><img src="pics\go_back.png"/></a>
@@ -66,132 +65,161 @@ text-decoration: none;
 					<ul class="dropdown-menu">
 						<li><a href="usercenter.jsp">个人主页</a></li>
 						<%if(user.getName().equals(Format.managerName)){ %>
-						<li><a href="manage.jsp">管理</a></li>
+						<li><a href="manage.action">管理</a></li>
 						<%} %>
 						<li><a href="logout.action">注销</a></li>
 					</ul>
 					<%}else{ %>
 					<a href="beforelogin.action"  >
-					登录
-					</a>
-					<%} %>
-				</li>
-			</ul>
-			<p class="navbar-text navbar-right" style="font-family: SimHei  ;"><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事开头</a></p>
-		</div>
-	</nav>
-	
-	<div style="position:fixed; left:0px; top:50px; width:100%; height:100%">
-		<img src="pics\back.jpg" width=100% height="100%"/>
+					登录 </a> <%} %>
+			</li>
+		</ul>
+		<p class="navbar-text navbar-right" style="font-family: SimHei;">
+			<a href="createStory.action"><span class="glyphicon glyphicon-plus" />添加故事开头</a>
+		</p>
 	</div>
-	
-	<div class="container" style=" margin-top:50px;">
-		
-		<div class="row " > <!--onmouseover="DivShow()" onmouseout="DivHide()" -->
+	</nav>
 
-			<div class="col-lg-8 col-lg-offset-2  chptbox" >
-				<p class="everychpt"><%=parent.getContent() %> </p>
-				<div class="row" >
+	<div
+		style="position: fixed; left: 0px; top: 50px; width: 100%; height: 100%">
+		<img src="pics\back.jpg" width=100% height="100%" />
+	</div>
+
+	<div class="container" style="margin-top: 50px;">
+
+		<div class="row ">
+			<!--onmouseover="DivShow()" onmouseout="DivHide()" -->
+
+			<div class="col-lg-8 col-lg-offset-2  chptbox">
+				<p class="everychpt"><%=parent.getContent() %>
+				</p>
+				<div class="row">
 					<div class="user" id="chptuser">
-						<a href="x.jsp"><%=parent.getUserName() %></a>
-						<span><%=Format.sdf.format(new Date(parent.getDate())) %></span>
+						<a href="viewPerson.action?name=<%=parent.getUserName() %>"><%=parent.getUserName() %></a> <span><%=Format.sdf.format(new Date(parent.getDate())) %></span>
 						<span>点赞数：<%=parent.getZan() %></span>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2" id="newchpt" style="padding:0px 0px 0px 0px;">
+			<div class="col-lg-8 col-lg-offset-2" id="newchpt"
+				style="padding: 0px 0px 0px 0px;">
 				<form action="draft.action">
-				<div > <!--contenteditable=true-->
-				<%if(draft.getContent()==""||draft.getParentId()!=parent.getId()){%>
-					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;">请输入内容...</textarea>
-				<%}else{%>
-					<textarea class="form-control" id="newchptcont" name="content" resize="none" autoHeight="true" style="overflow:hidden; min-height:150px; border-radius:0px;"><%=draft.getContent() %></textarea>
-				<%} %>
-				</div>
-				<div style="float:right; margin-top:10px;">
-				<!--发布以后跳到一个新的界面上， 前面是他接的故事. 从此它上面的chapter的+号变成蓝色-->
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#publishModal" onclick="Publish()"/> 发布</button>
-					<!--
+					<div>
+						<!--contenteditable=true-->
+						<%if(draft.getContent()==""||draft.getParentId()!=parent.getId()){%>
+						<textarea class="form-control" id="newchptcont" name="content"
+							resize="none" autoHeight="true"
+							style="overflow: hidden; min-height: 150px; border-radius: 0px;">请输入内容...</textarea>
+						<%}else{%>
+						<textarea class="form-control" id="newchptcont" name="content"
+							resize="none" autoHeight="true"
+							style="overflow: hidden; min-height: 150px; border-radius: 0px;"><%=draft.getContent() %></textarea>
+						<%} %>
+					</div>
+					<div style="float: right; margin-top: 10px;">
+						<!--发布以后跳到一个新的界面上， 前面是他接的故事. 从此它上面的chapter的+号变成蓝色-->
+						<button type="button" class="btn btn-primary" data-toggle="modal"
+							data-target="#publishModal" onclick="Publish()" />
+						发布
+						</button>
+						<!--
 					<button class="btn btn-primary" onclick="Confirm()"/>确定内容</button>-->
-					<%if(user==null){ %>
-					<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#saveModal" />存草稿</button>
-					<%}else{ %>
-					<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#saveModal" onclick="SaveDraft()"/>存草稿</button>
-					<%} %>
-					
-			
-					<!--确认取消返回读文章的页面，取消取消留在本页面上-->
-					<button type="button" class="btn btn-default"  data-toggle="modal" data-target="#myModal"/> 取消</button>
-				</div>
-			</form>
+						<%if(user==null){ %>
+						<button type="submit" class="btn btn-primary" data-toggle="modal"
+							data-target="#saveModal" />
+						存草稿
+						</button>
+						<%}else{ %>
+						<button type="submit" class="btn btn-primary" data-toggle="modal"
+							data-target="#saveModal" onclick="SaveDraft()" />
+						存草稿
+						</button>
+						<%} %>
+
+
+						<!--确认取消返回读文章的页面，取消取消留在本页面上-->
+						<button type="button" class="btn btn-default" data-toggle="modal"
+							data-target="#myModal" />
+						取消
+						</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
-	
-	<div class="modal fade" id="publishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" class="close" 
-               data-dismiss="modal" aria-hidden="true">
-                  &times;
-            </button>
-            <h4 class="modal-title" id="myModalLabel">
-               添加关键字
-            </h4>
-         </div>
-         
-         <form action="write.action" onsubmit="return sub()">
-         <textarea name="content" hidden="hidden" id="ctt"></textarea>
-         <div class="modal-body">
-            <input type="text" name="key" class="form-control" id="newchptkey" placeholder="用#分割，例：#美人鱼#邓超" style="border-radius:0px; border-top-width:0px;"/>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-            </button>
-           <!--发布以后跳到一个新的界面上， 前面是他接的故事. 从此它上面的chapter的+号变成蓝色-->
-					
-					
-		<button class="btn btn-primary" id="publish" data-toggle="modal" data-target="#publishModal"  /> 发起</button>
-					
-         </div>
-         </form>
-      </div><!-- /.modal-content -->
-	</div><!-- /.modal -->
-</div>
+
+	<div class="modal fade" id="publishModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">添加关键字</h4>
+				</div>
+
+				<form action="write.action" onsubmit="return sub()">
+					<textarea name="content" hidden="hidden" id="ctt"></textarea>
+					<div class="modal-body">
+						<input type="text" name="key" class="form-control" id="newchptkey"
+							placeholder="用#分割，例：#美人鱼#邓超"
+							style="border-radius: 0px; border-top-width: 0px;" />
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+						</button>
+						<!--发布以后跳到一个新的界面上， 前面是他接的故事. 从此它上面的chapter的+号变成蓝色-->
 
 
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-body">
-            确认放弃文字？
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-default"  data-dismiss="modal" onclick="Cancel()">
-               取消
-            </button>
-  
-            <input type="button" onclick= "window.location.href= 'deleteDraft.action' " class="btn btn-primary" data-dismiss="modal" value="确认"/>
-         </div>
-      </div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-	
-	<div class="modal fade" id="saveModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-body">
-            保存成功！
-         </div>
-      </div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-	
+						<button class="btn btn-primary" id="publish" data-toggle="modal"
+							data-target="#publishModal" />
+						发起
+						</button>
+
+					</div>
+				</form>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+
+
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">确认放弃文字？</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						onclick="Cancel()">取消</button>
+
+					<input type="button"
+						onclick="window.location.href= 'deleteDraft.action' "
+						class="btn btn-primary" data-dismiss="modal" value="确认" />
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+	<div class="modal fade" id="saveModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">保存成功！</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
 </body>
 
 <!--这里引用jquery和wangEditor.js-->

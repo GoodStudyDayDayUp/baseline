@@ -113,7 +113,7 @@ a:active {
 				<ul class="dropdown-menu">
 					<li><a href="getInfo.action">个人主页</a></li>
 					<%if(user.getName().equals(Format.managerName)){ %>
-						<li><a href="manage.jsp">管理</a></li>
+						<li><a href="manage.action">管理</a></li>
 					<%} %>
 					<li><a href="logout.action">注销</a></li>
 				</ul> <%
@@ -124,7 +124,7 @@ a:active {
 			</li>
 		</ul>
 		<p class="navbar-text navbar-right" style="font-family: SimHei;">
-			<a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事</a>
+			<a href="createStory.action"><span class="glyphicon glyphicon-plus" />添加故事</a>
 		</p>
 	</div>
 	</nav>
@@ -184,32 +184,36 @@ a:active {
 					<%if((i%4)==0){ %>
 					<div class="col-lg-4 col-md-4 col-xs-4 storyclass storycenter"
 						style="background-color: #191970">
+<h3><a href="#" style="color:#ffffff"><%=ch.getFormat() %></a></h3>
+					<h4><a href="#" style="color:#ffffff"><%=ch.getStyle() %></a></h4>
+					<h5><a href="#" style="color:#ffffff"><%=length %></a></h5>
 					<%} 
 					if((i%4)==1){
 					%>
 					<div class="col-lg-4 col-md-4 col-xs-4 storyclass storycenter"
 						style="background-color: #DC143C">
+<h3><a href="#" style="color:#ffffff"><%=ch.getFormat() %></a></h3>
+					<h4><a href="#" style="color:#ffffff"><%=ch.getStyle() %></a></h4>
+					<h5><a href="#" style="color:#ffffff"><%=length %></a></h5>
 					<%} 
 					if((i%4)==2){
 					%>
 					<div class="col-lg-4 col-md-4 col-xs-4 storyclass storycenter"
 						style="background-color: #EEC900">
+<h3><a href="#" style="color:#ffffff"><%=ch.getFormat() %></a></h3>
+					<h4><a href="#" style="color:#ffffff"><%=ch.getStyle() %></a></h4>
+					<h5><a href="#" style="color:#ffffff"><%=length %></a></h5>
 					<%} 
 					if((i%4)==3){
 					%>
 					<div class="col-lg-4 col-md-4 col-xs-4 storyclass storycenter"
 						style="background-color: #458B74">
+<h3><a href="#" style="color:#ffffff"><%=ch.getFormat() %></a></h3>
+					<h4><a href="#" style="color:#ffffff"><%=ch.getStyle() %></a></h4>
+					<h5><a href="#" style="color:#ffffff"><%=length %></a></h5>
 					<%} %>
-						<h3>
-							<a href="#" style="color:#ffffff"><%=ch.getFormat() %></a>
-						</h3>
-						<h4>
-							<a href="#" style="color:#ffffff"><%=ch.getStyle() %></a>
-						</h4>
-						<h5>
-							<a href="#" style="color:#ffffff"><%=length %></a>
-						</h5>
 					</div>
+
 					<div class="col-lg-8 col-md-8 col-xs-8 storybegin">
 						<p class="storycenter">
 							<a href="readStory.action?index=<%=ch.getId() %>" style="color:#000000" ><%=ch.getContent() %></a>

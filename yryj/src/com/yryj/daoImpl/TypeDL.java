@@ -6,6 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 
 
+
+
+
+
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Morphia;
 import com.google.code.morphia.query.UpdateOperations;
@@ -63,6 +67,7 @@ public class TypeDL implements TypeDao{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Type type) {
 		// TODO Auto-generated method stub
@@ -71,10 +76,11 @@ public class TypeDL implements TypeDao{
 			Mongo mongo=new Mongo();
 			Datastore ds=mor.createDatastore(mongo, dbs);
 
-			UpdateOperations<Chapter> ch = ds.createUpdateOperations(Chapter.class);
+			@SuppressWarnings("rawtypes")
+			UpdateOperations ch = ds.createUpdateOperations(Type.class);
 			//修改内容
 			ch.set("content", type.getContent());
-			ds.update(ds.find(Chapter.class, "id", type.getId()).getKey(), ch);
+			ds.update(ds.find(Type.class, "id", type.getId()).getKey(), ch);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,6 +105,7 @@ public class TypeDL implements TypeDao{
 		return null;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public List getClassByMood(long mood) {
 		// TODO Auto-generated method stub
@@ -112,6 +119,14 @@ public class TypeDL implements TypeDao{
 		}
 
 		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Type findByMoodAndIndex(long mood, int index) {
+		// TODO Auto-generated method stub
+		ArrayList<Type> types = (ArrayList<Type>) getClassByMood(mood);
+		return types.get(index);
 	}
 
 	

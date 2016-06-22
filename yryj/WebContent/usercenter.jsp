@@ -1,48 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-import="com.yryj.model.*"
-import="java.util.*"
-import="com.yryj.pub.*"
-import="java.util.Date"
-import="com.yryj.serviceImpl.*"
-%>
+	import="com.yryj.model.*" import="java.util.*" import="com.yryj.pub.*"
+	import="java.util.Date" import="com.yryj.serviceImpl.*"%>
 <!DOCTYPE html>
 <html>
 <head>
-		<title>个人中心</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="css/bootstrap.css"/>
-		<link rel="stylesheet" href="css/style.css"/>
-		<link rel="stylesheet" href="css/bootstrap.min.css"/>
-		<link rel="stylesheet" href="css/bootstrapValidator.min.css"/>
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/bootstrap.js"></script>
-		<script src="js/bootstrapValidator.min.js"></script>
-		<script src="js/bootstrapValidator_zh_CN.js"></script>
-		<script type="text/javascript">
+<title>个人中心</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/bootstrap.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/bootstrapValidator.min.css" />
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/bootstrapValidator.min.js"></script>
+<script src="js/bootstrapValidator_zh_CN.js"></script>
+<script type="text/javascript">
         $(document).ready(function () {
             $('.dropdown-toggle').dropdown();
         });
 		</script>
-		<style>
-			a:link {
-text-decoration: none;
-color: #666666;
+<style>
+a:link {
+	text-decoration: none;
+	color: #666666;
 }
+
 a:visited {
-text-decoration: none;
+	text-decoration: none;
 }
+
 a:hover {
-text-decoration: none;
+	text-decoration: none;
 }
+
 a:active {
-text-decoration: none;
+	text-decoration: none;
 }
-		</style>
+</style>
 </head>
 <body>
-<%
+	<%
 //获取用户信息
 User user=(User)session.getAttribute("user");
 if(user==null)
@@ -65,7 +64,7 @@ if(user!=null){
 	session.setAttribute("relation", relation);
 }
 %>
-<script type="text/javascript">
+	<script type="text/javascript">
 window.onload = function() {
 	var m="<%=msg%>";
 	if(m!="")
@@ -87,33 +86,32 @@ window.onload = function() {
 					</a>
 					<ul class="dropdown-menu">
 						<%if(user.getName().equals(Format.managerName)){ %>
-						<li><a href="manage.jsp">管理</a></li>
+						<li><a href="manage.action">管理</a></li>
 						<%} %>
 						<li><a href="logout.action">注销</a></li>
-					</ul>
-					<%}else{ %>
-					<a href="beforelogin.action"  >
-					登录
-					</a>
-					<%} %>
+					</ul> <%}else{ %> <a href="beforelogin.action"> 登录 </a> <%} %>
 				</li>
 			</ul>
-			<p class="navbar-text navbar-right" style="font-family: SimHei;margin-right: 20px;" ><a href="creat_story.jsp"><span class="glyphicon glyphicon-plus" />添加故事 </a></p>
+			<p class="navbar-text navbar-right"
+				style="font-family: SimHei; margin-right: 20px;">
+				<a href="createStory.action"><span class="glyphicon glyphicon-plus" />添加故事
+				</a>
+			</p>
 		</div>
 	</nav>
 
 	<div class="container">
-	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-top:20px;">
-	<ul class="nav nav-pills nav-stacked">
-	<li class="active na"><a href="#" id="info">基本信息</a></li>
-	<li class="na"><a href="#" id="mychpts">我的作品&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=chs.size() %></span></a></li>
-	<li class="na"><a href="#" id="mycol">我的收藏&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=store.size()%></span></a></li>
-	<li class="na"><a href="#" id="myfol">关注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(i2uArray[0][0].equals("无"))%>0<%else %><%=i2uArray.length %></span></a></li>
-	<li class="na"><a href="#" id="myfans">粉丝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(u2iArray[0][0].equals("无"))%>0<%else %><%=u2iArray.length %></span></a></li>
-	<li class="na"><a href="#" id="mypoints">积分</a></li>
-	</ul>
+	<div class="col-lg-2 col-md-2 col-sm-3 col-xs-2" style="margin-top:20px;">
+		<ul class="nav nav-pills nav-stacked">
+			<li class="active na"><a href="#" id="info">基本信息</a></li>
+			<li class="na"><a href="#" id="mychpts">我的作品&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=chs.size() %></span></a></li>
+			<li class="na"><a href="#" id="mycol">我的收藏&nbsp;&nbsp;&nbsp;<span class="label label-default"><%=store.size()%></span></a></li>
+			<li class="na"><a href="#" id="myfol">关注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(i2uArray[0][0].equals("无"))%>0<%else %><%=i2uArray.length %></span></a></li>
+			<li class="na"><a href="#" id="myfans">粉丝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default"><%if(u2iArray[0][0].equals("无"))%>0<%else %><%=u2iArray.length %></span></a></li>
+		<!--<li class="na"><a href="#" id="mypoints">积分</a></li>-->
+		</ul>
 	</div>
-	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="margin-top:20px;">
+	<div class="col-lg-10 col-md-10 col-sm-9 col-xs-10" style="margin-top:20px;">
 		<div id="basicInfo">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -195,15 +193,24 @@ window.onload = function() {
 					</form>
 				<!--             !!!!!! 下面是新的修改密码的form！！！！！！    -->
 				<form id="changePwd" action="updateUser.action?mood=2" method="post">
-					<p>原有密码</p><div class="form-group" style="margin-top:-10px;"><input type="text" class="form-control"  name="oldpwd"  placeholder="原密码" onchange="checkPass(this)" /></div>
-					<p style="font-size:10px;color:red;display:none;"  id="oldpwd_wrong">密码错误</p>
+					<p>原有密码</p><div class="form-group" style="margin-top:-10px;"><input type="password" class="form-control"  name="oldpwd"  placeholder="原密码" onchange="changemsg(this)" /></div>
 					<p>新密码</p><div class="form-group" style="margin-top:-10px;"><input type="password"  class="form-control" name="password"  placeholder="3-10位" /></div>
 					<p>确认新密码</p><div class="form-group" style="margin-top:-10px;"><input type="password"  class="form-control" name="password2" placeholder="3-10位"/></div>
-					<button type="button" class="btn btn-default" style="">更新密码</button>
+					<p style="font-size:10px;color:red"  id="oldpwd_wrong"><h5 style="color:red;" id="msgs"><%=msg %></h5></p>
+					<input type="submit" class="btn btn-default" style="" value="更新密码">
 				</form> 
 				
 				</div>
 			</div>
+			
+			<script type="text/javascript">
+			function changemsg(obj){
+				$("#msgs").html(" ");
+			}
+			window.onload =function onload(){
+				$("#msgs").html('<%=msg %>');
+			}
+			</script>
 					<!--        ！！！！！！！在此处添加了密码验证 ！！！！！！！！！！！！                            -->
 					<script>
 							$(document).ready(function() {
@@ -220,7 +227,7 @@ window.onload = function() {
 												stringLength: {
 													min: 3,
 													max: 10,
-													message: '用户名不能短于3位长于10位'
+													message: '原密码不短于3位长于10位'
 												},
 												notEmpty: {
 													message: '号码不能为空'
@@ -232,7 +239,7 @@ window.onload = function() {
 												stringLength: {
 													min: 3,
 													max: 10,
-													message: '用户名不能短于3位长于10位'
+													message: '新密码不能短于3位长于10位'
 												},
 												notEmpty: {
 													message: '不能为空'
@@ -241,13 +248,8 @@ window.onload = function() {
 										},
 										password2:{
 											validators:{
-												stringLength: {
-													min: 3,
-													max: 10,
-													message: '用户名不能短于3位长于10位'
-												},
 												identical: {
-													field: 'newpwd',
+													field: 'password',
 													message: '两次密码不一致'
 												},
 											},
@@ -268,17 +270,18 @@ window.onload = function() {
 				<div class="tab-pane fade in active" id="pub">
 						<% for(int i=0;i<chs.size();i++){ %>	
 						<%String a[]=chs.get(i).getKey().split("#"); %>
-					<div class="panel panel-default">
-								<div class="panel-body">
-								<div style="display:inline;">
-								<%for(String s:a){ %>
-									<span class="label label-primary chptlabel" ><%=s%></span>
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div style="display: inline;">
+									<%for(String s:a){ %>
+									<span class="label label-primary chptlabel"><%=s%></span>
 									<%} %>
 								</div>
 								<p class="everychpt"><%=chs.get(i).getContent() %></p>
-								<div class="row" >
-									<div class="user" >
-									<a href="viewPerson.action?name=<%=chs.get(i).getUserName() %>"><%=chs.get(i).getUserName() %></a>
+								<div class="row">
+									<div class="user">
+										<a
+											href="viewPerson.action?name=<%=chs.get(i).getUserName() %>"><%=chs.get(i).getUserName() %></a>
 										<span><%=Format.sdf.format(new Date(chs.get(i).getDate())) %></span>
 										<span>点赞数：<%=chs.get(i).getZan() %></span>
 									</div>
@@ -286,42 +289,48 @@ window.onload = function() {
 										<a href="readStory.action?index=<%=chs.get(i).getId()%>">查看前后文</a>
 									</div>
 								</div>
-								</div>
 							</div>
-							<%} %>
-				</div>
-				
-				<div class="tab-pane fade" id="draft"> <!-- 草稿箱 --> 
-					<table class="table">
-					<%if(dfs.size()>0)
+						</div>
+						<%} %>
+					</div>
+
+					<div class="tab-pane fade" id="draft">
+						<!-- 草稿箱 -->
+						<table class="table">
+							<%if(dfs.size()>0)
 					for(int i=0;i<dfs.size();i++){ %>
-					<tr><td><%=dfs.get(i).getContent() %></td><td><a href="readDraft.action?index=<%=i%>"><button type="button" class="btn btn-default" style="float:right;">查看</button></a></td></tr>
-					<%} %>
-					</table>
+							<tr>
+								<td><%=dfs.get(i).getContent() %></td>
+								<td><a href="readDraft.action?index=<%=i%>"><button
+											type="button" class="btn btn-default" style="float: right;">查看</button></a></td>
+							</tr>
+							<%} %>
+						</table>
+					</div>
 				</div>
 			</div>
-		</div>
-		
-		
-		<div id="collects" style="display:none;">
-		<% for(int i=0;i<store.size();i++){ %>	
-		<%String a[]=store.get(i).getKey().split("#"); %>
-			<div class="panel panel-default">
-								<div class="panel-body">
-								<div style="display:inline;">
-								<%for(String s:a){ %>
-									<span class="label label-primary chptlabel" ><%=s%></span>
-									<%} %>
-								</div>
-								<p class="everychpt"><%=store.get(i).getContent() %></p>
-								<div class="row" >
-									<div class="user" >
-										<a href="viewPerson.action?name=<%=store.get(i).getUserName() %>"><%=store.get(i).getUserName() %></a>
-										<span><%=Format.sdf.format(new Date(store.get(i).getDate())) %></span>
-										<span>点赞数：<%=store.get(i).getZan() %></span>
-									</div>
-									<div class="functs check">
-										<%
+
+
+			<div id="collects" style="display: none;">
+				<% for(int i=0;i<store.size();i++){ %>
+				<%String a[]=store.get(i).getKey().split("#"); %>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div style="display: inline;">
+							<%for(String s:a){ %>
+							<span class="label label-primary chptlabel"><%=s%></span>
+							<%} %>
+						</div>
+						<p class="everychpt"><%=store.get(i).getContent() %></p>
+						<div class="row">
+							<div class="user">
+								<a
+									href="viewPerson.action?name=<%=store.get(i).getUserName() %>"><%=store.get(i).getUserName() %></a>
+								<span><%=Format.sdf.format(new Date(store.get(i).getDate())) %></span>
+								<span>点赞数：<%=store.get(i).getZan() %></span>
+							</div>
+							<div class="functs check">
+								<%
 					boolean isFind=false;
 					if(relation!=null){
 						String love=relation.getU2cZan();
@@ -329,20 +338,26 @@ window.onload = function() {
 					}
 					if(isFind){
 					%>
-						<button id=<%="zan"+store.get(i).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;color:red"  value="1" onclick="LoveShow(this)"></button>
-					<%} else{%>
-						<button id=<%="zan"+store.get(i).getId()%> type="button" class="btn btn-default chptbtn glyphicon glyphicon-heart" style="border:none;padding:3px 7px 2px 7px;"  value="0" onclick="LoveShow(this)"></button>
-					<%}%>
-										<a href="readStory.action?index=<%=store.get(i).getId()%>">查看前后文</a>
-									</div>
-								</div>
-								</div>
+								<button id=<%="zan"+store.get(i).getId()%> type="button"
+									class="btn btn-default chptbtn glyphicon glyphicon-heart"
+									style="border: none; padding: 3px 7px 2px 7px; color: red"
+									value="1" onclick="LoveShow(this)"></button>
+								<%} else{%>
+								<button id=<%="zan"+store.get(i).getId()%> type="button"
+									class="btn btn-default chptbtn glyphicon glyphicon-heart"
+									style="border: none; padding: 3px 7px 2px 7px;" value="0"
+									onclick="LoveShow(this)"></button>
+								<%}%>
+								<a href="readStory.action?index=<%=store.get(i).getId()%>">查看前后文</a>
 							</div>
-		<%} %>
-		</div>
-		<div id="follow" style="display:none">
-			<div class="panel panel-default">
-				<div class="panel-heading">我关注的人</div>
+						</div>
+					</div>
+				</div>
+				<%} %>
+			</div>
+			<div id="follow" style="display: none">
+				<div class="panel panel-default">
+					<div class="panel-heading">我关注的人</div>
 					<ul class="list-group">
 						<%if(i2uArray[0][0].equals("无")){ %>
 						<li class="list-group-item">无</a></li><%} 
@@ -353,10 +368,10 @@ window.onload = function() {
 						<%}} %>
 					</ul>
 				</div>
-		</div>
-		<div id="fans" style="display:none">
-			<div class="panel panel-default">
-				<div class="panel-heading">关注我的人</div>
+			</div>
+			<div id="fans" style="display: none">
+				<div class="panel panel-default">
+					<div class="panel-heading">关注我的人</div>
 					<ul class="list-group">
 						<%if(u2iArray[0][0].equals("无")){ %>
 						<li class="list-group-item">无</a></li><%} 
@@ -365,21 +380,31 @@ window.onload = function() {
 						<li class="list-group-item"><a href="viewPerson.action?name=<%=u2iArray[i][0]%>"><%=u2iArray[i][0] %></a></li><%}} %>
 					</ul>
 				</div>
-		</div>
-		<div id="points" style="display:none">
-			<div class="panel panel-default">
-				<div class="panel-heading">积分</div>
-				<div class="panel-body">
-					积分余额<span class="label label-default" style="margin-left:20px;"><%=user.getPoint() %></span>
-				</div>
-				<table class="table">
-					<th>时间</th><th>积分</th>
-					<tr><td>2016-04-12</td><td>200</td></tr>
-					<tr><td>2016-03-12</td><td>400</td></tr>
-				</table>
 			</div>
+			<!-- 积分界面 -->
+			<!--  
+			<div id="points" style="display: none">
+				<div class="panel panel-default">
+					<div class="panel-heading">积分</div>
+					<div class="panel-body">
+						积分余额<span class="label label-default" style="margin-left: 20px;"><%=user.getPoint() %></span>
+					</div>
+					<table class="table">
+						<th>时间</th>
+						<th>积分</th>
+						<tr>
+							<td>2016-04-12</td>
+							<td>200</td>
+						</tr>
+						<tr>
+							<td>2016-03-12</td>
+							<td>400</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			-->
 		</div>
-	</div>
 </body>
 <script type="text/javascript">
 	$(function(){

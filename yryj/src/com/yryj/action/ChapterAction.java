@@ -1,33 +1,21 @@
 package com.yryj.action;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yryj.daoImpl.ChapterDL;
-import com.yryj.model.Activity;
 import com.yryj.model.Chapter;
 import com.yryj.model.Draft;
 import com.yryj.model.Type;
 import com.yryj.model.User;
 import com.yryj.pub.Format;
-import com.yryj.sercvice.ActivityManager;
 import com.yryj.sercvice.ChapterManager;
 import com.yryj.sercvice.TypeManager;
-import com.yryj.serviceImpl.ActivityML;
 import com.yryj.serviceImpl.ChapterML;
 import com.yryj.serviceImpl.DraftML;
 import com.yryj.serviceImpl.TypeML;
@@ -139,13 +127,14 @@ public class ChapterAction extends ActionSupport {
 				if(parent!=null&&header==null){
 					df.setParentId(parent.getId());					
 					Format.initPage=1;
+				}else{
+					Format.initPage=2;
 				}
 				session.setAttribute("draft", df);
 				session.setAttribute("msg", "登录之后才能发表文章~");
-				Format.initPage=2;
 				return "login";
 			}
-
+			Format.initPage=0;
 			//如果是草稿箱里面的，从草稿箱中删除对应草稿
 			Draft df=(Draft) session.getAttribute("draft");
 			chapterManager=new ChapterML();
@@ -256,18 +245,6 @@ public class ChapterAction extends ActionSupport {
 				ArrayList<ArrayList<Type>> types = new ArrayList<ArrayList<Type>>();
 				ArrayList<Type> style=new ArrayList<Type>();
 				TypeManager typeManager=new TypeML();
-							
-				//			typeManager.save(new Type(0,1,"小说"));
-				//			typeManager.save(new Type(1,1,"散文"));
-				//			typeManager.save(new Type(2,1,"戏剧"));
-				//			typeManager.save(new Type(3,1,"诗歌"));
-				//			typeManager.save(new Type(4,1,"话剧"));
-				//			typeManager.save(new Type(5,2,"武侠"));
-				//			typeManager.save(new Type(6,2,"玄幻"));
-				//			typeManager.save(new Type(7,2,"神话"));
-				//			typeManager.save(new Type(8,2,"言情"));
-				//			typeManager.save(new Type(9,2,"现代"));
-
 
 				//加入一级和2级分类
 				style=(ArrayList<Type>) typeManager.getClassByMood(1);
@@ -275,17 +252,6 @@ public class ChapterAction extends ActionSupport {
 				style=(ArrayList<Type>) typeManager.getClassByMood(2);
 				types.add(style);
 				session.setAttribute("types", types);
-				
-				
-				//添加图片 测试
-//				Activity act=new Activity();
-//				act.setName("123");
-//				act.setOwner("abc");
-//				act.setPic("C:\Users\15871\Desktop\shenyeshitang\红香肠.jpg");
-//				act.setState(1);
-//				act.setUrl("www.baidu.com");
-//				ActivityManager am=new ActivityML();
-//				am.save(act);
 			}
 
 			return SUCCESS;
@@ -352,17 +318,27 @@ public class ChapterAction extends ActionSupport {
 				session.setAttribute("story", story);
 			}
 			
-//			HttpServletResponse response=ServletActionContext.getResponse();
-//			PrintWriter writer=response.getWriter();
-			
-//			writer.print(story);
-//			writer.close();
-			
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Format.WRONG;
 		}
+	}
+	
+	public String prepareWriteStart(){
+		HttpSession session=ServletActionContext.getRequest().getSession();	
+		//获取所有的类型
+		ArrayList<ArrayList<Type>> types = new ArrayList<ArrayList<Type>>();
+		ArrayList<Type> style=new ArrayList<Type>();
+		TypeManager typeManager=new TypeML();
+
+		//加入一级和2级分类
+		style=(ArrayList<Type>) typeManager.getClassByMood(1);
+		types.add(style);
+		style=(ArrayList<Type>) typeManager.getClassByMood(2);
+		types.add(style);
+		session.setAttribute("types", types);
+		return SUCCESS;
 	}
 
 }

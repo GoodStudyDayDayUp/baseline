@@ -21,7 +21,7 @@
 			#content{clear:both;height:300px;position:relative;margin:0 auto;background-color:#EDEDED;width:100%;padding:20px; display:table;}
 		</style>
 </head>
-<%String msg=(String)session.getAttribute("msgs")==null?" ":(String)session.getAttribute("msg"); %>
+<%String msg=(String)session.getAttribute("msgs")==null?" ":(String)session.getAttribute("msgs"); %>
 <body >
 <div id="floater">
 </div>
